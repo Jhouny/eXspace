@@ -21,4 +21,3 @@ void Inimigo::executar()
 {
 
 }
-
