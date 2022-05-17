@@ -3,7 +3,7 @@
 
 #include"../Auxiliares/stdafx.h"
 #include "Personagem.h"
-#include "Jogador.h"
+#include "Dinamicas/Jogador.h"
 
 class Inimigo: public Personagem{
     protected:
@@ -13,6 +13,8 @@ class Inimigo: public Personagem{
         Inimigo(Coordenada tam, Coordenada pos, int v = 100, int d = 20);
         ~Inimigo();
         void setJogador(Jogador*pJog);//colocar em um vetor de duas posicoes 
+
+        virtual void colisao()=0;
         void executar();
 };
 

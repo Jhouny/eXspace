@@ -3,9 +3,11 @@
 Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d):
     Entidade(tam,pos),
     vida(v),
-    dano(d)
+    dano(d),
+    jumping(false)
 {
 }
+
 Personagem::~Personagem(){
 }
 

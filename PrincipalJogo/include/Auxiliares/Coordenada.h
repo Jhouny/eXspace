@@ -2,7 +2,7 @@
 #define _COORDENADA_H_
 
 class Coordenada {
-    private:
+    public:
         float x;
         float y;
     public:

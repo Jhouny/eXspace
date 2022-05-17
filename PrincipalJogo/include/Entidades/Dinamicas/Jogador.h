@@ -1,7 +1,7 @@
 #ifndef _JOGADOR_H_
 #define _JOGADOR_H_
 
-#include"Personagem.h"
+#include"../Personagem.h"
 
 class Jogador: public Personagem {
     private:
@@ -12,6 +12,7 @@ class Jogador: public Personagem {
 
         void setVelocidade(float vx, float vy);
         void movimentar();
+        void colisao(Entidade* outraEntidade);
         void executar();
 };
 

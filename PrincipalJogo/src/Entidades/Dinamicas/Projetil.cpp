@@ -1,4 +1,4 @@
-#include"../../include/Entidades/Projetil.h"
+#include"../../../include/Entidades/Dinamicas/Projetil.h"
 
 Projetil::Projetil(Coordenada tam, Coordenada pos, float vx, float vy, int d):
     Entidade(tam, pos) {
@@ -22,6 +22,8 @@ void Projetil::setDano(int d) {
 
 void Projetil::executar() {  // Muda a posição da ENTIDADE
     Coordenada p = this->getPosicao();
+    Coordenada X(1,0);
+    Coordenada Y(0,1);
     p += X*velocidade[0];
     p += Y*velocidade[1];
 

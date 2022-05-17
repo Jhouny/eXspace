@@ -1,10 +1,12 @@
 #include "../../include/Entidades/Entidade.h"
 
 Entidade::Entidade(Coordenada tam, Coordenada pos):
-        Ente(),
-        tamanho(tam),
-        posicao(pos)
+    Ente(),
+    tamanho(tam),
+    posicao(pos),
+    shape(Vector2f(tam.getX(),tam.getY()))
 {
+    shape.setPosition(pos.x,pos.y);
 }
 
 Entidade::~Entidade() {

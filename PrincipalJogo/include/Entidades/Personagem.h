@@ -7,6 +7,7 @@ class Personagem:public Entidade {
     protected:
         int vida;
         int dano;
+        bool jumping;
     public:
         Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20);  //perguntar da construtora da classe que eh derivada
         ~Personagem();
@@ -18,7 +19,9 @@ class Personagem:public Entidade {
 
         void receberDano(int d);
 
-        virtual void movimentar();
+        virtual void colisao(Entidade* outraEntidade) = 0;
+
+        virtual void movimentar() = 0;
 
         virtual void executar() = 0;
 };
