@@ -1,6 +1,6 @@
-#include"Jogador.h"
+#include"../../include/Entidades/Jogador.h"
 
-Jogador::Jogador(Coordenada tam, Coordenada pos, int v = 100, int d = 20):
+Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d):
     Personagem(tam, pos, v, d) {
         velocidade[0] = 0;
         velocidade[1] = 0;

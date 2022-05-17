@@ -1,6 +1,6 @@
-#include"Projetil.h"
+#include"../../include/Entidades/Projetil.h"
 
-Projetil::Projetil(Coordenada tam, Coordenada pos, float vx = 30, float vy = 0, int d = 20):
+Projetil::Projetil(Coordenada tam, Coordenada pos, float vx, float vy, int d):
     Entidade(tam, pos) {
         velocidade[0] = vx;
         velocidade[1] = vy;

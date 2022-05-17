@@ -2,11 +2,11 @@
 #define _PROJETIL_H_
 
 #include"Entidade.h"
-#include"stdafx.h"
+#include"../Auxiliares/stdafx.h"
 
 class Projetil: public Entidade {
     private:
-        float velocidade[2]; //perguntar sobre representaçao uml 
+        float velocidade[2];  //perguntar sobre representaçao uml 
         int dano;
     public:
         Projetil(Coordenada tam, Coordenada pos, float vx = 30, float vy = 0, int d = 20);

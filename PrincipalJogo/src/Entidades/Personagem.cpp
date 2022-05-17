@@ -1,6 +1,6 @@
-#include "Personagem.h"
+#include "../../include/Entidades/Personagem.h"
 
-Personagem::Personagem(Coordenada tam, Coordenada pos, int v , int d):
+Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d):
     Entidade(tam,pos),
     vida(v),
     dano(d)

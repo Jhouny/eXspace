@@ -1,4 +1,4 @@
-#include "Coordenada.h"
+#include "../../include/Auxiliares/Coordenada.h"
 
 Coordenada::Coordenada(float xs, float ys):
     x(xs),

@@ -1,4 +1,4 @@
-#include "Entidade.h"
+#include "../../include/Entidades/Entidade.h"
 
 Entidade::Entidade(Coordenada tam, Coordenada pos):
         Ente(),

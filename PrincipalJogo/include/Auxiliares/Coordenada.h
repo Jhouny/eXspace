@@ -1,9 +1,7 @@
 #ifndef _COORDENADA_H_
 #define _COORDENADA_H_
 
-#include "stdafx.h"
-
-class Coordenada{
+class Coordenada {
     private:
         float x;
         float y;
@@ -22,5 +20,12 @@ class Coordenada{
         Coordenada operator * (float n);
         void print();
 };
+
+/*    
+        INCLUDE colocado depois da definição da classe 
+    pois será usado na implementação e evita dependência
+    circular.
+*/
+#include"stdafx.h"
 
 #endif
