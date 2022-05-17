@@ -20,9 +20,9 @@ class Entidade: public Ente {
         void setWindow(RenderWindow *win) { this->window = win; };
         void draw() { this->window->draw(shape); }
         
-        const Coordenada getPosicao() const {return posicao;}
+        const Coordenada getPosicao() {return posicao;}
 
-        const Coordenada getTamanho() const {return tamanho;}
+        const Coordenada getTamanho() {return tamanho;}
 
         virtual void executar() = 0; // movimentar? colisões?
 

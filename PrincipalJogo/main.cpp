@@ -14,14 +14,18 @@ int main() {
 
 int main()
 {
-    RenderWindow window(VideoMode(1000, 1000), "SFML works!");
+    Clock clock;
+    float lastTime = 0;
     
-    Plataforma base(Coordenada(1000, 50), Coordenada(0, 800));
+    RenderWindow window(VideoMode(1280, 1080), "Space Game!");
+    window.setFramerateLimit(60);
+    
+    Plataforma base(Coordenada(1000, 50), Coordenada(100, 800));
     base.setWindow(&window);
 
     Jogador jogador1(Coordenada(100.f, 100.f), Coordenada(100.f, 100.f));
     jogador1.setWindow(&window);
-    jogador1.setVelocidade(0.3, 0.3);
+    jogador1.setVelocidade(10, 0.3);
 
     while (window.isOpen())
     {
@@ -33,10 +37,12 @@ int main()
         }
 
         jogador1.executar();
-        jogador1.colisao(&base);
+        jogador1.colisao(static_cast<Entidade *>(&base));
         window.clear();
+
         jogador1.draw();
         base.draw();
+
         window.display();
     }
 

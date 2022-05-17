@@ -19,6 +19,9 @@ class Personagem:public Entidade {
 
         void receberDano(int d);
 
+        void setJump(bool state) { jumping = state; }
+        const bool getJump() const { return jumping; }
+
         virtual void colisao(Entidade* outraEntidade) = 0;
 
         virtual void movimentar() = 0;

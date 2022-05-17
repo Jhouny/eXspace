@@ -2,14 +2,31 @@
     "tasks": [
         {
             "type": "cppbuild",
-            "label": "C/C++: g++.exe générer le fichier actif",
-            "command": "C:\\Program Files\\CodeBlocks\\MinGW\\bin\\g++.exe",
+            "label": "Build Project",
+            "command": "C:\\mingw32\\bin\\g++.exe",
             "args": [
                 "-fdiagnostics-color=always",
-                "-g",
-                "${file}",
+                "${workspaceFolder}\\PrincipalJogo\\main.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Jogador.cpp ",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Ente.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Entidade.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Inimigo.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Personagem.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Projetil.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Auxiliares\\Coordenada.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Estaticas\\Plataforma.cpp",
                 "-o",
-                "${fileDirname}\\${fileBasenameNoExtension}.exe"
+                "${workspaceFolder}\\main.exe",
+                "-I\"C:\\SFML-2.5.1\\include\"",
+                "-L\"C:\\SFML-2.5.1\\lib\"",
+                "-lsfml-graphics-s",
+                "-lsfml-window-s",
+                "-lsfml-system-s",
+                "-lopengl32",
+                "-lfreetype",
+                "-lwinmm",
+                "-lgdi32",
+                "-DSFML_STATIC"
             ],
             "options": {
                 "cwd": "${fileDirname}"

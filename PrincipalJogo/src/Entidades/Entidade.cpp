@@ -15,6 +15,7 @@ Entidade::~Entidade() {
 
 void Entidade::setPosicao(Coordenada pos) {
     posicao = pos;
+    this->shape.setPosition(pos.x, pos.y);
 }
 
 void Entidade::setPosicao(float x, float y) {

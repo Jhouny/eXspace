@@ -10,5 +10,6 @@ using namespace sf;
 
 #include <stdlib.h>
 #include <math.h>
+#include<string.h>
 
 #endif
