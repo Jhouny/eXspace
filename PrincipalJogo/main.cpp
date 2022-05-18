@@ -19,11 +19,14 @@ int main()
     
     RenderWindow window(VideoMode(1280, 1080), "Space Game!");
     window.setFramerateLimit(60);
-    
-    Plataforma base(Coordenada(1000, 50), Coordenada(100, 800));
+
+    Plataforma base(Coordenada(1080, 50), Coordenada(200, 800));
     base.setWindow(&window);
 
-    Jogador jogador1(Coordenada(100.f, 100.f), Coordenada(100.f, 100.f));
+    Plataforma base2(Coordenada(1000, 100), Coordenada(800, 700));
+    base2.setWindow(&window);
+
+    Jogador jogador1(Coordenada(100.f, 100.f), Coordenada(600.f, 100.f));
     jogador1.setWindow(&window);
     jogador1.setVelocidade(10, 0.3);
 
@@ -38,10 +41,12 @@ int main()
 
         jogador1.executar();
         jogador1.colisao(static_cast<Entidade *>(&base));
+        jogador1.colisao(static_cast<Entidade *>(&base2));
         window.clear();
 
         jogador1.draw();
         base.draw();
+        base2.draw();
 
         window.display();
     }

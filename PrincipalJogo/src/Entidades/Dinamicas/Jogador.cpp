@@ -25,7 +25,7 @@ void Jogador::movimentar() {
     if (Keyboard::isKeyPressed(Keyboard::D)) {
         p += X*velocidade[0];  // Move com velocidade constante no eixo X
     }
-    if (Keyboard::isKeyPressed(Keyboard::A)) {
+    else if (Keyboard::isKeyPressed(Keyboard::A)) {
         p -= X*velocidade[0];  // Move com velocidade constante negativa no eixo X
     }
     if (Keyboard::isKeyPressed(Keyboard::W) && this->getJump() == false) {
@@ -66,12 +66,20 @@ void Jogador::colisao(Entidade* outraEntidade) {
     if (intersect.x < 0 && intersect.y < 0) {
 
         // Colisao com Plataforma
-        Coordenada p;
-        p.x = this->getPosicao().x;
-        p.y = outraEntidade->getPosicao().y - (this->getTamanho().y);
-        this->setAceleracao(0);
-        this->setPosicao(p);
-        this->setJump(false);
+        if(intersect.x <= intersect.y) {  //Se intersectou antes no x que no Y
+            Coordenada p;
+            p.x = this->getPosicao().x;
+            p.y = outraEntidade->getPosicao().y - (this->getTamanho().y);
+            this->setAceleracao(0);
+            this->setPosicao(p);
+            this->setJump(false);
+        } else {
+            if (this->getPosicao().x < outraEntidade->getPosicao().x)
+                this->setPosicao(this->getPosicao().x + intersect.x, this->getPosicao().y);
+            else
+                this->setPosicao(this->getPosicao().x - intersect.x, this->getPosicao().y);
+            this->setJump(true);
+        }
     }
 
 }
