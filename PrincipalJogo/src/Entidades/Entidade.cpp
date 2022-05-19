@@ -4,7 +4,7 @@ Entidade::Entidade(Coordenada tam, Coordenada pos):
     Ente(),
     tamanho(tam),
     posicao(pos),
-    shape(Vector2f(tam.getX(),tam.getY()))
+    shape(sf::Vector2f(tam.getX(),tam.getY()))
 {
     shape.setPosition(pos.x,pos.y);
 }
@@ -22,3 +22,4 @@ void Entidade::setPosicao(float x, float y) {
     posicao.setCoordenada(x, y);
 }
 
+void Entidade::colisao(Entidade* outraEntidade) { };

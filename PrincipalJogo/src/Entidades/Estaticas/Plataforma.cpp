@@ -2,7 +2,7 @@
 
 Plataforma::Plataforma(Coordenada tam,Coordenada pos):
     Entidade(tam, pos) {
-    shape.setFillColor(Color::Magenta);
+    shape.setFillColor(sf::Color::Magenta);
 }
 Plataforma::~Plataforma(){
 

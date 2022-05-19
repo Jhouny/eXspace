@@ -4,12 +4,15 @@
 #include "../Auxiliares/stdafx.h"
 #include "Ente.h"
 
+#define GRAVIDADE 3
+#define PULO_Y -40
+
 class Entidade: public Ente {
     protected:
         Coordenada posicao;
         Coordenada tamanho;
-        RectangleShape shape;
-        RenderWindow *window;
+        sf::RectangleShape shape;
+        sf::RenderWindow *window;
     public:
         Entidade(Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
         ~Entidade();
@@ -17,12 +20,15 @@ class Entidade: public Ente {
         void setPosicao(Coordenada pos);
         void setPosicao(float x, float y);
         
-        void setWindow(RenderWindow *win) { this->window = win; };
-        void draw() { this->window->draw(shape); }
+        void setWindow(sf::RenderWindow *win) { this->window = win; }
         
-        const Coordenada getPosicao() {return posicao;}
+        sf::RectangleShape* getShape(){ return &shape;}
+        
+        const Coordenada getPosicao() { return posicao;}
 
-        const Coordenada getTamanho() {return tamanho;}
+        const Coordenada getTamanho() { return tamanho;}
+
+        virtual void colisao(Entidade* outraEntidade);
 
         virtual void executar() = 0; // movimentar? colisões?
 

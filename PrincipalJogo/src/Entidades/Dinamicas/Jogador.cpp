@@ -2,7 +2,7 @@
 
 Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d):
     Personagem(tam, pos, v, d) {
-        shape.setFillColor(Color::Green);
+        shape.setFillColor(sf::Color::Green);
         setJump(true);
         velocidade[0] = 0;
         velocidade[1] = 0;
@@ -22,17 +22,17 @@ void Jogador::movimentar() {
     Coordenada X(1,0);
     Coordenada Y(0,1);    
 
-    if (Keyboard::isKeyPressed(Keyboard::D)) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         p += X*velocidade[0];  // Move com velocidade constante no eixo X
     }
-    else if (Keyboard::isKeyPressed(Keyboard::A)) {
+    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         p -= X*velocidade[0];  // Move com velocidade constante negativa no eixo X
     }
-    if (Keyboard::isKeyPressed(Keyboard::W) && this->getJump() == false) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getJump() == false) {
         // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
         float* v;
         v = this->getVelocidade();
-        v[1] = -40;
+        v[1] = PULO_Y;
         this->setVelocidade(v[0], v[1]);
         
         // PRECISA DISSO?
@@ -64,7 +64,6 @@ void Jogador::colisao(Entidade* outraEntidade) {
 
     // Se houver interseção em ambos os eixos, ocorre colisao
     if (intersect.x < 0 && intersect.y < 0) {
-
         // Colisao com Plataforma
         if(intersect.x <= intersect.y) {  //Se intersectou antes no x que no Y
             Coordenada p;
@@ -101,7 +100,7 @@ void Jogador::executar() {
 
     // Se estiver no ar, atualiza aceleração
     if(this->getJump()) {
-        this->setAceleracao(3);
+        this->setAceleracao(GRAVIDADE);
     }
 }
 

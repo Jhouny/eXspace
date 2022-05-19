@@ -9,6 +9,7 @@ class Plataforma: public Entidade {
         Plataforma(Coordenada tam,Coordenada pos);
         ~Plataforma();
         void executar();
+        
 };
 
 #endif

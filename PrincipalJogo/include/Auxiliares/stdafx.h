@@ -6,10 +6,9 @@
 using namespace std;
 
 #include "SFML/Graphics.hpp"
-using namespace sf;
 
 #include <stdlib.h>
 #include <math.h>
-#include<string.h>
+#include <string.h>
 
 #endif

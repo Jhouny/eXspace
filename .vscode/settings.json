@@ -3,6 +3,8 @@
         "*.tcc": "cpp",
         "cmath": "cpp",
         "iostream": "cpp",
-        "unordered_map": "cpp"
+        "unordered_map": "cpp",
+        "fstream": "cpp",
+        "ostream": "cpp"
     }
 }
