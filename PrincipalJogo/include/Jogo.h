@@ -1,19 +1,19 @@
-#ifndef _GAME_H_
-#define _GAME_H_
+#ifndef _JOGO_H_
+#define _JOGO_H_
 
 #include "Gerenciadores/Grafico.h"
 #include "Gerenciadores/ListaEntidades.h"
 
-class Game {
+class Jogo {
     private:
         Gerenciadores::Grafico* pGrafico;
         ListaEntidades lDinamicas;
         ListaEntidades lEstaticas;
         
     public:
-        Game();
+        Jogo();
 
-        ~Game();
+        ~Jogo();
 
         void exec();
 

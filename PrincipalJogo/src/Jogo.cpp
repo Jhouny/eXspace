@@ -1,20 +1,22 @@
-#include "../include/Game.h"
+#include "../include/Jogo.h"
 #include "../include/Entidades/Dinamicas/Jogador.h"
 #include "../include/Entidades/Estaticas/Plataforma.h"
 
-Game::Game():
+Jogo::Jogo():
 pGrafico(Gerenciadores::Grafico::getInstancia())
  { 
     exec();
  }
  
  
-Game::~Game() { }
+Jogo::~Jogo() {
+
+ }
 
 
-void Game::exec(){
+void Jogo::exec(){
     //inicializa entidades que serão usadas
-    Jogador jog(Coordenada(100, 100), Coordenada(300, 500));
+    Jogador jog(Coordenada(200, 100), Coordenada(300, 500));
     jog.setVelocidade(15, 0);
     Plataforma plat1(Coordenada(550, 50), Coordenada(  0, 600));
     Plataforma plat2(Coordenada(500, 50), Coordenada(600, 450));
@@ -52,6 +54,6 @@ void Game::exec(){
 }
 
 
-void Game::gameOver(){
+void Jogo::gameOver(){
     pGrafico->shutdown();
 }
