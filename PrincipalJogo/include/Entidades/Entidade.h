@@ -16,9 +16,9 @@ class Entidade: public Ente {
     public:
         Entidade(Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
         ~Entidade();
-
-        void setPosicao(Coordenada pos);
+        
         void setPosicao(float x, float y);
+        void setPosicao(Coordenada pos);
         
         void setWindow(sf::RenderWindow *win) { this->window = win; }
         

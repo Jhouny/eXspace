@@ -11,10 +11,13 @@ class Jogador: public Personagem {
         Jogador(Coordenada tam, Coordenada pos, int v = 100, int d = 20);
         ~Jogador();
         
+        void setVelocidade(float vx, float vy);
+        float *getVelocidade() {return velocidade;}
+
         void setAceleracao(float acel) {aceleracaoY=acel;}
         float getAceleracao(){return aceleracaoY;}
-        float *getVelocidade() {return velocidade;}
-        void setVelocidade(float vx, float vy);
+        
+        
         void movimentar();
         void colisao(Entidade* outraEntidade);
         void executar();

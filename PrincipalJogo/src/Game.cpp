@@ -13,20 +13,19 @@ Game::~Game() { }
 
 
 void Game::exec(){
+    //inicializa entidades que serão usadas
     Jogador jog(Coordenada(100, 100), Coordenada(300, 500));
     jog.setVelocidade(15, 0);
     Plataforma plat1(Coordenada(550, 50), Coordenada(  0, 600));
     Plataforma plat2(Coordenada(500, 50), Coordenada(600, 450));
-    Plataforma plat3(Coordenada(500, 50), Coordenada(  0, 400));
-    Plataforma plat4(Coordenada(500, 50), Coordenada(600, 250));
     
+    //insere na lista de Entidades Dinamicas
     lDinamicas.push(static_cast<Entidade*>(&jog));
 
+    //insere na lista de Entidades Estaticas
     lEstaticas.push(static_cast<Entidade*>(&plat1));
     lEstaticas.push(static_cast<Entidade*>(&plat2));
-    lEstaticas.push(static_cast<Entidade*>(&plat3));
-    lEstaticas.push(static_cast<Entidade*>(&plat4));
-
+    
     
     while(pGrafico->isOpened()) {
         
@@ -38,7 +37,7 @@ void Game::exec(){
         pGrafico->clear();
         
         Copia<Entidade> *itrD, *itrE;
-
+        //verifica colisao entre Entidades Dinamicas e Estaticas
         for(itrD = lDinamicas.le.getInicial(); itrD != NULL; itrD = itrD->getProx()) {
             pGrafico->draw(itrD->getCopia()->getShape());
             itrD->getCopia()->executar();
