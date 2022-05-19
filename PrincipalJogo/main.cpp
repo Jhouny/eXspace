@@ -1,6 +1,6 @@
-#include "include/Game.h"
+#include "include/Jogo.h"
 
 int main() {   
-    Game myGame;
+    Jogo MeuJogo;
     return 0;
 }
