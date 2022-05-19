@@ -7,7 +7,7 @@ template <class LT> class Lista{
     private:
         Copia<LT> *pPrimeiro;
         Copia<LT> *pUltimo;
-        Copia<LT> *iterador;
+        
     public:
         Lista();
         ~Lista();
@@ -15,8 +15,7 @@ template <class LT> class Lista{
         void push(LT* cop);
         void pop();
         
-        Copia<LT>* getItr() { return iterador;}
-        void setInicial();
+        Copia<LT>* getInicial(){return pPrimeiro;}    
 };
 
 //construtora
@@ -24,16 +23,19 @@ template<class LT>
 inline Lista<LT>::Lista(){
     pPrimeiro=NULL;
     pUltimo=NULL;
-    iterador=NULL;
 }
 
 //destrutora
 template<class LT>
 inline Lista<LT>::~Lista(){
+    Copia<LT>*tmp;
+    while(pUltimo!=NULL){
+        tmp=pPrimeiro->getProx();
+        delete(pPrimeiro);
+        pPrimeiro=tmp;
+    }
     pPrimeiro=NULL;
     pUltimo=NULL;
-    iterador=NULL;
-    //destruir a lista
 }
 
 //insere na lista:
@@ -45,7 +47,6 @@ inline void Lista<LT>:: push(LT* cop) {
         if(pPrimeiro==NULL){
             pPrimeiro = tmp;
             pUltimo = tmp;
-            iterador=pPrimeiro;
         }
         else{
             tmp->setAnte(pUltimo);
@@ -74,11 +75,6 @@ inline void Lista<LT>::pop() {
 
 
  //
- template<class LT>
- inline void Lista<LT>::setInicial(){
-     if(pPrimeiro)
-        iterador=pPrimeiro;
- }
 
 
 #endif
