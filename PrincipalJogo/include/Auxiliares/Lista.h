@@ -1,12 +1,30 @@
 #ifndef _LISTA_H_
 #define _LISTA_H_
-#include "Copia.h"
 #include "stdafx.h"
 
 template <class LT> class Lista{
     private:
-        Copia<LT> *pPrimeiro;
-        Copia<LT> *pUltimo;
+        template<class EL> class Elemento{
+        private:
+            Elemento<EL> *pProx;
+            Elemento<EL> *pAnte;
+            EL* copia;
+        public:
+            Copia();
+            ~Copia();
+            void setProx(Elemento<EL>*prox){pProx=prox;}
+            Elemento<EL>*getProx(){return pProx;}
+
+            void setAnte(Elemento<EL>*ante){pAnte=ante;}
+            Elemento<EL>*getAnte(){return pAnte;}
+
+            void setElemento(EL* cop){ copia=cop;}
+            EL* getElemento(){return copia;}
+            
+            
+    };
+        Elemento<LT> *pPrimeiro;
+        Elemento<LT> *pUltimo;
         
     public:
         Lista();
@@ -15,7 +33,7 @@ template <class LT> class Lista{
         void push(LT* cop);
         void pop();
         
-        Copia<LT>* getInicial(){return pPrimeiro;}    
+        Elemento<LT>* getInicial(){return pPrimeiro;}    
 };
 
 //construtora
@@ -28,7 +46,7 @@ inline Lista<LT>::Lista(){
 //destrutora
 template<class LT>
 inline Lista<LT>::~Lista(){
-    Copia<LT>*tmp;
+    Elemento<LT>*tmp;
     while(pUltimo!=NULL){
         tmp=pPrimeiro->getProx();
         delete(pPrimeiro);
@@ -42,7 +60,7 @@ inline Lista<LT>::~Lista(){
 template<class LT>
 inline void Lista<LT>:: push(LT* cop) {
     if(cop){
-        Copia<LT>* tmp = new Copia<LT>();
+        Elemento<LT>* tmp = new Elemento<LT>();
         tmp->setCopia(cop);
         if(pPrimeiro==NULL){
             pPrimeiro = tmp;
@@ -63,11 +81,12 @@ inline void Lista<LT>:: push(LT* cop) {
 //exclui da lista:
 template<class LT> 
 inline void Lista<LT>::pop() {
-    Copia<LT>* tmp;
+    Elemento<LT>* tmp;
     tmp=pUltimo;
     pUltimo=pUltimo->getAnte();
     if(tmp)
         delete (tmp);
+    tmp=NULL;
 }
 
 //exclui elemento especifico da lista

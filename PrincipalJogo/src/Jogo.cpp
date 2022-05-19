@@ -37,8 +37,8 @@ void Jogo::exec(){
         }
 
         pGrafico->clear();
-        
-        Copia<Entidade> *itrD, *itrE;
+        /**verificar como conseguir o iterador*/
+        /*Elemento<Entidade> *itrD, *itrE;
         //verifica colisao entre Entidades Dinamicas e Estaticas
         for(itrD = lDinamicas.le.getInicial(); itrD != NULL; itrD = itrD->getProx()) {
             pGrafico->draw(itrD->getCopia()->getShape());
@@ -47,7 +47,7 @@ void Jogo::exec(){
                 itrD->getCopia()->colisao(itrE->getCopia());
                 pGrafico->draw(itrE->getCopia()->getShape());
             }
-        }
+        }*/
 
         pGrafico->display();
     }

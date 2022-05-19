@@ -83,24 +83,27 @@ void Jogador::colisao(Entidade* outraEntidade) {
 
 }
 
-void Jogador::executar() {
-    // Checa as entradas do usuário e atualiza o movimento
-    movimentar();
-
-    // Aplica a aceleração na velocidade e a velocidade na posição
+void Jogador::aplicaAcel(){
     Coordenada p = this->getPosicao();
     float* v;
     v = this->getVelocidade();
     v[1] += this->getAceleracao();
     p.y += v[1];
-
-    // Atualiza velocidade e posição
     this->setVelocidade(v[0], v[1]);
     this->setPosicao(p);
+    atualizaAcel();
+}
 
-    // Se estiver no ar, atualiza aceleração
+void Jogador::atualizaAcel(){
     if(this->getJump()) {
         this->setAceleracao(GRAVIDADE);
     }
+}
+
+void Jogador::executar() {
+    // Checa as entradas do usuário e atualiza o movimento
+    movimentar();
+    // Aplica a aceleração na velocidade e a velocidade na posição 
+    aplicaAcel();  
 }
 
