@@ -3,16 +3,25 @@
 
 #include"../Auxiliares/stdafx.h"
 
+// Define a propriedade ID como uma referência à um indice 
+enum ID {
+    vazio = 0,
+    jogador,
+    projetil,
+    platforma,
+};
+
 class Ente {
     protected:
-        int id;
+        ID id;
     public:
         static int cont;
-        Ente();
+        Ente(ID id = vazio);
         ~Ente();
 
+        ID getID() const { return id; }
+
         virtual void executar() = 0;
-        void imprimirID();
 };
 
 #endif

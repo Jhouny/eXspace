@@ -8,7 +8,7 @@ class Jogador: public Personagem {
         float velocidade[2];
         float aceleracaoY;
     public:
-        Jogador(Coordenada tam, Coordenada pos, int v = 100, int d = 20);
+        Jogador(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = jogador);
         ~Jogador();
         
         void setVelocidade(float vx, float vy);

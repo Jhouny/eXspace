@@ -1,7 +1,7 @@
 #include"../../../include/Entidades/Dinamicas/Projetil.h"
 
-Projetil::Projetil(Coordenada tam, Coordenada pos, float vx, float vy, int d):
-    Entidade(tam, pos) {
+Projetil::Projetil(Coordenada tam, Coordenada pos, float vx, float vy, int d, ID id):
+    Entidade(id, tam, pos) {
         velocidade[0] = vx;
         velocidade[1] = vy;
         dano = d;

@@ -6,7 +6,7 @@
 class Plataforma: public Entidade {
     private:
     public:
-        Plataforma(Coordenada tam,Coordenada pos);
+        Plataforma(Coordenada tam, Coordenada pos, ID id = platforma);
         ~Plataforma();
         void executar();
         

@@ -7,7 +7,7 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Auxiliares\\Coordenada.cpp",
-                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Boss.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Chefe.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\InimigoTerrestre.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Jogador.cpp ",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Projetil.cpp",
@@ -21,7 +21,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Inimigo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Personagem.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Grafico.cpp",
-                "${workspaceFolder}\\PrincipalJogo\\src\\Game.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Jogo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\main.cpp",
                 "-o",
                 "${workspaceFolder}\\main.exe",

@@ -1,7 +1,7 @@
 #include"../../../include/Entidades/Dinamicas/Jogador.h"
 
-Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d):
-    Personagem(tam, pos, v, d) {
+Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):
+    Personagem(tam, pos, v, d, id) {
         shape.setFillColor(sf::Color::Green);
         setJump(true);
         velocidade[0] = 0;

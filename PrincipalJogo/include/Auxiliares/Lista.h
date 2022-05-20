@@ -4,25 +4,26 @@
 
 template <class LT> class Lista{
     private:
+        // Classe elemento para armazenar objetos sem referência direta
         template<class EL> class Elemento{
-        private:
-            Elemento<EL> *pProx;
-            Elemento<EL> *pAnte;
-            EL* copia;
-        public:
-            Copia();
-            ~Copia();
-            void setProx(Elemento<EL>*prox){pProx=prox;}
-            Elemento<EL>*getProx(){return pProx;}
+            private:
+                Elemento<EL> *pProx;
+                Elemento<EL> *pAnte;
+                EL* el;
 
-            void setAnte(Elemento<EL>*ante){pAnte=ante;}
-            Elemento<EL>*getAnte(){return pAnte;}
+            public:
+                Elemento() {};
+                ~Elemento() {};
+                void setProx(Elemento<EL>*prox) { pProx = prox;}
+                Elemento<EL>*getProx() { return pProx; }
 
-            void setElemento(EL* cop){ copia=cop;}
-            EL* getElemento(){return copia;}
-            
-            
-    };
+                void setAnte(Elemento<EL>*ante) { pAnte = ante; }
+                Elemento<EL>*getAnte() { return pAnte; }
+
+                void setElemento(EL* cop) { el = cop; }
+                EL* getElemento() { return el; } 
+        };
+        Elemento<LT> *itr;
         Elemento<LT> *pPrimeiro;
         Elemento<LT> *pUltimo;
         
@@ -33,7 +34,9 @@ template <class LT> class Lista{
         void push(LT* cop);
         void pop();
         
-        Elemento<LT>* getInicial(){return pPrimeiro;}    
+        Elemento<LT>* getIterador() { return itr; }
+
+        Elemento<LT>* getInicial() { return pPrimeiro; }    
 };
 
 //construtora
@@ -61,7 +64,7 @@ template<class LT>
 inline void Lista<LT>:: push(LT* cop) {
     if(cop){
         Elemento<LT>* tmp = new Elemento<LT>();
-        tmp->setCopia(cop);
+        tmp->setElemento(cop);
         if(pPrimeiro==NULL){
             pPrimeiro = tmp;
             pUltimo = tmp;

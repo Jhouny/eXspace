@@ -1,7 +1,7 @@
 #include "../../include/Entidades/Inimigo.h"
 
-Inimigo::Inimigo(Coordenada tam, Coordenada pos, int v, int d): 
-    Personagem(tam, pos, v, d)
+Inimigo::Inimigo(Coordenada tam, Coordenada pos, int v, int d, ID id): 
+    Personagem(tam, pos, v, d, id)
 {
     pJogador = NULL;
 }

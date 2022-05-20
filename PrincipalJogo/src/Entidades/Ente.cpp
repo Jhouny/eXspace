@@ -2,14 +2,10 @@
 
 int Ente::cont = 0;
 
-Ente::Ente() {
-    id = cont;
+Ente::Ente(ID id) {
+    this->id = id;
     cont++;
 }
 
 Ente::~Ente() {
-}
-
-void Ente::imprimirID() {
-    cout << "ID: " << id << endl;
 }

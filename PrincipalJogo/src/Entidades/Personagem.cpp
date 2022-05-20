@@ -1,7 +1,7 @@
 #include "../../include/Entidades/Personagem.h"
 
-Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d):
-    Entidade(tam,pos),
+Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d, ID id):
+    Entidade(id, tam,pos),
     vida(v),
     dano(d),
     jumping(true)

@@ -7,14 +7,16 @@
 #define GRAVIDADE 3
 #define PULO_Y -40
 
+
 class Entidade: public Ente {
     protected:
-        Coordenada posicao;
-        Coordenada tamanho;
+        Coordenada posicao;  // Posicao do canto superior esquerdo do elemento
+        Coordenada tamanho;  // (Comprimento, Altura) do objeto 
         sf::RectangleShape shape;
-        sf::RenderWindow *window;
+        sf::RenderWindow *window;  // Ponteiro para a janela da biblioteca gráfica
+
     public:
-        Entidade(Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
+        Entidade(ID id, Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
         ~Entidade();
         
         void setPosicao(float x, float y);
@@ -22,15 +24,15 @@ class Entidade: public Ente {
         
         void setWindow(sf::RenderWindow *win) { this->window = win; }
         
-        sf::RectangleShape* getShape(){ return &shape;}
+        sf::RectangleShape* getShape() { return &shape; }
         
-        const Coordenada getPosicao() { return posicao;}
+        Coordenada getPosicao() const { return posicao; }
 
-        const Coordenada getTamanho() { return tamanho;}
+        Coordenada getTamanho() const { return tamanho; }
 
         virtual void colisao(Entidade* outraEntidade);
 
-        virtual void executar() = 0; // movimentar? colisões?
+        virtual void executar() = 0;
 
         
 };

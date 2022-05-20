@@ -1,7 +1,7 @@
 #include "../../include/Entidades/Entidade.h"
 
-Entidade::Entidade(Coordenada tam, Coordenada pos):
-    Ente(),
+Entidade::Entidade(ID id, Coordenada tam, Coordenada pos):
+    Ente(id),
     tamanho(tam),
     posicao(pos),
     shape(sf::Vector2f(tam.getX(),tam.getY()))

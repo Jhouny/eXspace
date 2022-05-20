@@ -3,15 +3,15 @@
 #include "../include/Entidades/Estaticas/Plataforma.h"
 
 Jogo::Jogo():
-pGrafico(Gerenciadores::Grafico::getInstancia())
- { 
+    pGrafico(Gerenciadores::Grafico::getInstancia()) 
+    { 
     exec();
- }
+}
  
  
 Jogo::~Jogo() {
 
- }
+}
 
 
 void Jogo::exec(){
@@ -38,16 +38,18 @@ void Jogo::exec(){
 
         pGrafico->clear();
         /**verificar como conseguir o iterador*/
-        /*Elemento<Entidade> *itrD, *itrE;
+        auto *itrD = lDinamicas.getIterador();
+        auto *itrE = lEstaticas.getIterador();
+        
         //verifica colisao entre Entidades Dinamicas e Estaticas
         for(itrD = lDinamicas.le.getInicial(); itrD != NULL; itrD = itrD->getProx()) {
-            pGrafico->draw(itrD->getCopia()->getShape());
-            itrD->getCopia()->executar();
+            pGrafico->draw(itrD->getElemento()->getShape());
+            itrD->getElemento()->executar();
             for(itrE = lEstaticas.le.getInicial(); itrE != NULL; itrE = itrE->getProx()) {
-                itrD->getCopia()->colisao(itrE->getCopia());
-                pGrafico->draw(itrE->getCopia()->getShape());
+                itrD->getElemento()->colisao(itrE->getElemento());
+                pGrafico->draw(itrE->getElemento()->getShape());
             }
-        }*/
+        }
 
         pGrafico->display();
     }

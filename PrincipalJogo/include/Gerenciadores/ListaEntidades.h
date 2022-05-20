@@ -7,10 +7,14 @@
 class ListaEntidades{
     public:
         Lista<Entidade> le;
+      
+        auto getIterador() { return le.getIterador(); }
 
         void push(Entidade* ent) {
             le.push(ent);
         }
+
+
 };
 
 

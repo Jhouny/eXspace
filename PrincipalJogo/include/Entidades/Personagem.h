@@ -9,7 +9,7 @@ class Personagem:public Entidade {
         int dano;
         bool jumping;
     public:
-        Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20);  //perguntar da construtora da classe que eh derivada
+        Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);  //perguntar da construtora da classe que eh derivada
         ~Personagem();
 
         const int getVida() const { return vida; }

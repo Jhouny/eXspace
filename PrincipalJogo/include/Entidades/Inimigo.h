@@ -10,7 +10,7 @@ class Inimigo: public Personagem{
         Jogador* pJogador;// vetor de duas posicoes 
         // contador static int para vetor
     public:
-        Inimigo(Coordenada tam, Coordenada pos, int v = 100, int d = 20);
+        Inimigo(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);
         ~Inimigo();
         void setJogador(Jogador*pJog);//colocar em um vetor de duas posicoes 
 
