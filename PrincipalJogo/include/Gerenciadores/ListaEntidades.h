@@ -7,8 +7,12 @@
 class ListaEntidades{
     public:
         Lista<Entidade> le;
-      
-        auto getIterador() { return le.getIterador(); }
+
+        Entidade* operator[](int index) {
+            return le[index];
+        }
+
+        int getTamanho() { return le.getTamanho(); }
 
         void push(Entidade* ent) {
             le.push(ent);

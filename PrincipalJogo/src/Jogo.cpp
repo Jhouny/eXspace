@@ -37,19 +37,12 @@ void Jogo::exec(){
         }
 
         pGrafico->clear();
-        /**verificar como conseguir o iterador*/
-        auto *itrD = lDinamicas.getIterador();
-        auto *itrE = lEstaticas.getIterador();
-        
+
         //verifica colisao entre Entidades Dinamicas e Estaticas
-        for(itrD = lDinamicas.le.getInicial(); itrD != NULL; itrD = itrD->getProx()) {
-            pGrafico->draw(itrD->getElemento()->getShape());
-            itrD->getElemento()->executar();
-            for(itrE = lEstaticas.le.getInicial(); itrE != NULL; itrE = itrE->getProx()) {
-                itrD->getElemento()->colisao(itrE->getElemento());
-                pGrafico->draw(itrE->getElemento()->getShape());
-            }
-        }
+        
+        
+        
+        
 
         pGrafico->display();
     }

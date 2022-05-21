@@ -7,8 +7,6 @@
 class Jogo {
     private:
         Gerenciadores::Grafico* pGrafico;
-        ListaEntidades lDinamicas;
-        ListaEntidades lEstaticas;
         
     public:
         Jogo();

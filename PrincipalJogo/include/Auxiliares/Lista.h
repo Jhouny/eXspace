@@ -5,28 +5,28 @@
 template <class LT> class Lista{
     private:
         // Classe elemento para armazenar objetos sem referência direta
-        template<class EL> class Elemento{
+        template<class EL> class Elemento {
             private:
                 Elemento<EL> *pProx;
                 Elemento<EL> *pAnte;
                 EL* el;
-
             public:
                 Elemento() {};
                 ~Elemento() {};
-                void setProx(Elemento<EL>*prox) { pProx = prox;}
-                Elemento<EL>*getProx() { return pProx; }
 
-                void setAnte(Elemento<EL>*ante) { pAnte = ante; }
-                Elemento<EL>*getAnte() { return pAnte; }
+                void setProx(Elemento<EL> *prox) { pProx = prox;}
+                Elemento<EL> *getProx() { return pProx; }
 
-                void setElemento(EL* cop) { el = cop; }
-                EL* getElemento() { return el; } 
+                void setAnte(Elemento<EL> *ante) { pAnte = ante; }
+                Elemento<EL> *getAnte() { return pAnte; }
+
+                void setElemento(EL *cop) { el = cop; }
+                EL *getElemento() { return el; } 
         };
-        Elemento<LT> *itr;
+
         Elemento<LT> *pPrimeiro;
         Elemento<LT> *pUltimo;
-        
+        int tamanho;
     public:
         Lista();
         ~Lista();
@@ -34,16 +34,19 @@ template <class LT> class Lista{
         void push(LT* cop);
         void pop();
         
-        Elemento<LT>* getIterador() { return itr; }
+        int getTamanho() { return tamanho; }
 
-        Elemento<LT>* getInicial() { return pPrimeiro; }    
+        Elemento<LT>* getInicial() { return pPrimeiro; }
+
+        LT* operator[](int index);
 };
 
 //construtora
 template<class LT> 
 inline Lista<LT>::Lista(){
-    pPrimeiro=NULL;
-    pUltimo=NULL;
+    pPrimeiro = NULL;
+    pUltimo = NULL;
+    tamanho = 0;
 }
 
 //destrutora
@@ -55,28 +58,27 @@ inline Lista<LT>::~Lista(){
         delete(pPrimeiro);
         pPrimeiro=tmp;
     }
-    pPrimeiro=NULL;
-    pUltimo=NULL;
+    pPrimeiro = NULL;
+    pUltimo = NULL;
 }
 
 //insere na lista:
 template<class LT>
 inline void Lista<LT>:: push(LT* cop) {
-    if(cop){
+    if(cop != NULL) {  // Se o objeto passado for válido
+        tamanho++;
         Elemento<LT>* tmp = new Elemento<LT>();
         tmp->setElemento(cop);
-        if(pPrimeiro==NULL){
+        if(pPrimeiro == NULL) {  // Se a lista estiver vazia
             pPrimeiro = tmp;
             pUltimo = tmp;
-        }
-        else{
+        } else {
             tmp->setAnte(pUltimo);
             pUltimo->setProx(tmp);
-            pUltimo=tmp;
+            pUltimo = tmp;
         }
 
-    }
-    else{
+    } else {
         cout << "Ponteiro para copia esta nulo" << endl;
     }
 }
@@ -84,19 +86,38 @@ inline void Lista<LT>:: push(LT* cop) {
 //exclui da lista:
 template<class LT> 
 inline void Lista<LT>::pop() {
-    Elemento<LT>* tmp;
-    tmp=pUltimo;
-    pUltimo=pUltimo->getAnte();
-    if(tmp)
+    Elemento<LT>* tmp = pUltimo;
+    tamanho--;
+    if(tmp) {
+        pUltimo = pUltimo->getAnte();
         delete (tmp);
-    tmp=NULL;
+    }
+    tmp = NULL;
+}
+
+// Retorna um elemento específico
+template<class LT> 
+inline LT* Lista<LT>::operator[](int index) {
+    if(index >= 0 && index < tamanho) {
+        Elemento<LT> *pEl = pPrimeiro;
+        int i;
+
+        for(i = 0; i < index; i++) {  // Itera até o elemento do indice
+            pEl = pEl->getProx();
+        }
+
+        return pEl->getElemento();
+    } else {
+        return NULL;
+    }
+
 }
 
 //exclui elemento especifico da lista
 /* TERMINAR */
 
 
- //
+//
 
 
 #endif
