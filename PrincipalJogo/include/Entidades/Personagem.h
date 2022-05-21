@@ -22,7 +22,7 @@ class Personagem:public Entidade {
         void setJump(bool state) { jumping = state; }
         const bool getJump() const { return jumping; }
 
-        virtual void colisao(Entidade* outraEntidade) = 0;
+        virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
 
         virtual void movimentar() = 0;
 

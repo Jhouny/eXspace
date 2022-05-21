@@ -22,4 +22,4 @@ void Entidade::setPosicao(float x, float y) {
     posicao.setCoordenada(x, y);
 }
 
-void Entidade::colisao(Entidade* outraEntidade) { };
+void Entidade::colisao(Entidade* outraEntidade, Coordenada intersecao) { };

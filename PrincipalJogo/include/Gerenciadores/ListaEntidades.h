@@ -14,8 +14,14 @@ class ListaEntidades{
 
         int getTamanho() { return le.getTamanho(); }
 
+        // Adiciona um elemento
         void push(Entidade* ent) {
             le.push(ent);
+        }
+
+        // Remove o ultimo elemento
+        void pop() {
+            le.pop();
         }
 
 

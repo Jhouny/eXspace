@@ -30,7 +30,7 @@ class Entidade: public Ente {
 
         Coordenada getTamanho() const { return tamanho; }
 
-        virtual void colisao(Entidade* outraEntidade);
+        virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
         virtual void executar() = 0;
 

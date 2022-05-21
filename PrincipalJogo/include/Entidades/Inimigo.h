@@ -11,8 +11,9 @@ class Inimigo: public Personagem{
         // contador static int para vetor
     public:
         Inimigo(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);
+        
         ~Inimigo();
-        void setJogador(Jogador*pJog);//colocar em um vetor de duas posicoes 
+        void setJogador(Jogador*pJog); //colocar em um vetor de duas posicoes 
 
         virtual void colisao()=0;
         void executar();

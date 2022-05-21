@@ -16,11 +16,20 @@ namespace Gerenciadores {
     }
 
     Grafico::Grafico():
-    window(new sf::RenderWindow(sf::VideoMode(COMPRIMENTO, ALTURA), "NULL")),
-    event(new sf::Event)    
-        {
-            window->setFramerateLimit(FPS);
+        window(new sf::RenderWindow(sf::VideoMode(COMPRIMENTO, ALTURA), "NULL")),
+        event(new sf::Event),
+        cameraPrincipal(new sf::View),
+        cameraSecundaria(new sf::View)
+    {
+        // Limita a frequencia da janela
+        window->setFramerateLimit(FPS);
         
+        // Define a posição e tamanho iniciais da camera
+        cameraPrincipal->setCenter(sf::Vector2f(COMPRIMENTO / 2.f , ALTURA / 2.f));        
+        cameraPrincipal->setSize(sf::Vector2f(COMPRIMENTO, ALTURA));  
+        cameraSecundaria->setCenter(sf::Vector2f(COMPRIMENTO / 2.f , ALTURA / 2.f));        
+        cameraSecundaria->setSize(sf::Vector2f(COMPRIMENTO, ALTURA));        
+        window->setView(*cameraPrincipal);
     }
 
     Grafico::~Grafico() {
@@ -28,6 +37,9 @@ namespace Gerenciadores {
     }
 
     void Grafico::draw(sf::RectangleShape* shape) {
+        window->setView(*cameraPrincipal);
+        window->draw(*shape);
+        window->setView(*cameraSecundaria);
         window->draw(*shape);
     }
 
@@ -43,8 +55,23 @@ namespace Gerenciadores {
         return window->isOpen();
     }
 
-    void Grafico::shutdown() {
+    void Grafico::terminar() {
         window->close();
+    }
+
+    // Define a posição da janela principal
+    void Grafico::setCenter(Coordenada c1) {
+        cameraPrincipal->setViewport(sf::FloatRect(0.f, 0.f, 1.f, 1.f));
+        cameraPrincipal->setCenter(sf::Vector2f(c1.x, c1.y));
+    }
+
+    // Divide a tela e define a posição de cada janela
+    void Grafico::setCenter(Coordenada c1, Coordenada c2) {
+        cameraPrincipal->setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
+        cameraPrincipal->setCenter(sf::Vector2f(c1.x, c1.y));
+        
+        cameraSecundaria->setViewport(sf::FloatRect(0.5f, 0.f, 1.f, 1.f));
+        cameraSecundaria->setCenter(sf::Vector2f(c2.x, c2.y));
     }
 
     sf::Event* Grafico::getEvent() const {

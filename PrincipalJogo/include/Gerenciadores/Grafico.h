@@ -6,9 +6,10 @@
 namespace Gerenciadores {
     class Grafico {
         private:
-            sf::RenderWindow* window; // window.setFrameLimit(60);
+            sf::RenderWindow* window;
             sf::Event* event;
-            
+            sf::View *cameraPrincipal, *cameraSecundaria;
+
             /* Seguindo a sugestão do monitor Matheus Burda, usa-se o padrão Singleton */
             static Gerenciadores::Grafico* instancia;
             Grafico();
@@ -26,9 +27,13 @@ namespace Gerenciadores {
 
             bool isOpened() const;
 
-            void shutdown();
+            void terminar();
 
-            sf::Event* getEvent() const; 
+            void setCenter(Coordenada c1);
+
+            void setCenter(Coordenada c1, Coordenada c2);
+
+            sf::Event* getEvent() const;
 
             sf::RenderWindow* getWindow() const;
     };

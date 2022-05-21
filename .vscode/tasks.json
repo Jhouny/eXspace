@@ -21,6 +21,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Inimigo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Personagem.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Grafico.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Colisoes.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Jogo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\main.cpp",
                 "-o",

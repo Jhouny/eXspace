@@ -2,12 +2,15 @@
 #define _JOGO_H_
 
 #include "Gerenciadores/Grafico.h"
-#include "Gerenciadores/ListaEntidades.h"
+#include "Gerenciadores/Colisoes.h"
+#include "../include/Gerenciadores/ListaEntidades.h"
 
 class Jogo {
     private:
         Gerenciadores::Grafico* pGrafico;
-        
+        Gerenciadores::Colisor* pColisor;
+        ListaEntidades lDinamicas;
+        ListaEntidades lEstaticas;
     public:
         Jogo();
 

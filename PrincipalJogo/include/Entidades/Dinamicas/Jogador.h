@@ -19,7 +19,7 @@ class Jogador: public Personagem {
         
         
         void movimentar();
-        void colisao(Entidade* outraEntidade);
+        void colisao(Entidade* outraEntidade,Coordenada intersecao);
         void aplicaAcel();
         void atualizaAcel();
         void executar();

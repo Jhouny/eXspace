@@ -5,11 +5,18 @@ namespace Gerenciadores {
         private:
             ListaEntidades* lDinamicas;
             ListaEntidades* lEstaticas;
-
         public:
-            Colisor(ListaEntidades* lDin, ListaEntidades* lEst);
+            Colisor();
 
             ~Colisor();
+
+            void setEstatica(ListaEntidades* lEst) {
+                lEstaticas= lEst;
+            }
+
+            void setDinamicas(ListaEntidades* lDin) {
+                lDinamicas = lDin;
+            }
 
             void ChecarColisoes();
     };

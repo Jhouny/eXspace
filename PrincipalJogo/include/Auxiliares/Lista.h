@@ -107,10 +107,11 @@ inline LT* Lista<LT>::operator[](int index) {
         }
 
         return pEl->getElemento();
-    } else {
-        return NULL;
+    } 
+    else {
+        cout << "Indice: " << index << " fora da lista" << endl;
+        exit(1);
     }
-
 }
 
 //exclui elemento especifico da lista
