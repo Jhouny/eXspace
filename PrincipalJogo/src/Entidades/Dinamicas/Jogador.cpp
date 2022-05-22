@@ -1,5 +1,10 @@
 #include"../../../include/Entidades/Dinamicas/Jogador.h"
 
+
+#define GRAVIDADE 3
+#define PULO_Y -40
+#define ATRITO 0.7
+
 Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):
     Personagem(tam, pos, v, d, id) {
         shape.setFillColor(sf::Color::Green);
@@ -8,6 +13,7 @@ Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):
         velocidade[1] = 0;
         aceleracaoY = 10;
 }
+
 Jogador::~Jogador() {
     free(velocidade);
 }
@@ -17,16 +23,30 @@ void Jogador::setVelocidade(float vx, float vy) {
     velocidade[1] = vy;
 }
 
+void Jogador::estaVivo() {
+    Coordenada p = this->getPosicao();
+    if(p.y > ALTURA + 300) {
+        vivo = false;
+    }
+}
+
+
 void Jogador::movimentar() {
     Coordenada p = this->getPosicao();
     Coordenada X(1,0);
-    Coordenada Y(0,1);    
+    Coordenada Y(0,1);
+
+    if(p.y > ALTURA + 300) {
+        vivo = false;
+    }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         p += X*velocidade[0];  // Move com velocidade constante no eixo X
+        this->setAceleracao(GRAVIDADE);  // Redefine a gravidade se o jogador sair de cima da plataforma
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         p -= X*velocidade[0];  // Move com velocidade constante negativa no eixo X
+        this->setAceleracao(GRAVIDADE);  // Redefine a gravidade se o jogador sair de cima da plataforma
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getJump() == false) {
         // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
@@ -37,7 +57,8 @@ void Jogador::movimentar() {
         
         // PRECISA DISSO?
         p -= Y*(velocidade[1]);
-        this->setJump(true);    
+        this->setAceleracao(0);  // Precisa disso
+        this->setJump(true);
     }
 
     // Atualiza a posição do sprite e da instância
@@ -50,41 +71,32 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     /* Checar o tipo da entidade com que colidiu 
        (plataforma, inimigo, obstaculo, ...) 
     */
-    //Coordenada thisCenter, outroCenter, intersect;
-
-    // Calcula as coordenadas dos centros dos dois objetos
-    //thisCenter.x = this->getPosicao().x + (this->getTamanho().x / 2.0f);
-    //thisCenter.y = this->getPosicao().y + (this->getTamanho().y / 2.0f);
-    //outroCenter.x = outraEntidade->getPosicao().x + (outraEntidade->getTamanho().x / 2.0f);
-    //outroCenter.y = outraEntidade->getPosicao().y + (outraEntidade->getTamanho().y / 2.0f);
-    
-    // Calcula a distância entre os objetos e subtrai as suas dimensões
-    //intersect.x = fabs(thisCenter.x - outroCenter.x) - (this->getTamanho().x + outraEntidade->getTamanho().x) / 2.0f;
-    //intersect.y = fabs(thisCenter.y - outroCenter.y) - (this->getTamanho().y + outraEntidade->getTamanho().y) / 2.0f;
-
-    // Se houver interseção em ambos os eixos, ocorre colisao
-    //if (intersect.x < 0 && intersect.y < 0) {
-        // Colisao com Plataforma
-    if(intersecao.x <= intersecao.y) {  //Se intersectou antes no x que no Y
-        Coordenada p;
+    if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
+        Coordenada p = this->getPosicao();
         float* v = this->getVelocidade();
-        v[1] = 0;
-        this->setVelocidade(v[0], v[1]);
+        
+        if(this->getPosicao().y <= outraEntidade->getPosicao().y) {  // Se colidir em cima
+            v[1] = 0;  // Define a velocidade vertical para 0
+            p.y = outraEntidade->getPosicao().y - this->getTamanho().y;  // Define a posição em cima da plataforma
+            this->setAceleracao(0);
+            this->setJump(false);
 
-        p.x = this->getPosicao().x;
-        p.y = outraEntidade->getPosicao().y - (this->getTamanho().y);
-        this->setAceleracao(0);
+        } else {  // Se colidir embaixo
+            v[1] = -1 * v[1] * ATRITO;
+            p.y = outraEntidade->getPosicao().y + outraEntidade->getTamanho().y;  // Define a posição em cima da plataforma
+            this->setJump(true);
+        }
+
+        this->setVelocidade(v[0], v[1]);
         this->setPosicao(p);
-        this->setJump(false);
-    } else {
+
+    } else if(intersecao.y <= intersecao.x) {  // Se está do lado, não deixa atravessar o objeto
         if (this->getPosicao().x < outraEntidade->getPosicao().x)
             this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
         else
             this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
-        this->setJump(true);
+        //this->setJump(true);
     }
-   // }
-
 }
 
 void Jogador::aplicaAcel() {
@@ -95,6 +107,7 @@ void Jogador::aplicaAcel() {
     p.y += v[1];
     this->setVelocidade(v[0], v[1]);
     this->setPosicao(p);
+
     atualizaAcel();
 }
 
@@ -107,7 +120,16 @@ void Jogador::atualizaAcel() {
 void Jogador::executar() {
     // Checa as entradas do usuário e atualiza o movimento
     movimentar();
+    
     // Aplica a aceleração na velocidade e a velocidade na posição 
-    aplicaAcel();  
+    aplicaAcel();
+
+    // Checa se o jogador esta vivo e o atualiza
+    estaVivo();
+
+    //this->setAceleracao(GRAVIDADE);
+    // Se o jogador morrer
+    if(!vivo) 
+        pGrafico->terminar();  // Fecha a janela, mas no fim deveria dar um 'Game Over'
 }
 

@@ -8,6 +8,8 @@ class Personagem:public Entidade {
         int vida;
         int dano;
         bool jumping;
+        bool vivo;
+
     public:
         Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);  //perguntar da construtora da classe que eh derivada
         ~Personagem();
@@ -21,6 +23,8 @@ class Personagem:public Entidade {
 
         void setJump(bool state) { jumping = state; }
         const bool getJump() const { return jumping; }
+
+        virtual void estaVivo() = 0;
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
 

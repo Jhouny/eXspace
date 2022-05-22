@@ -1,9 +1,5 @@
 #include"../../include/Gerenciadores/Grafico.h"
 
-#define COMPRIMENTO 1280
-#define ALTURA 720
-#define FPS 60
-
 namespace Gerenciadores {
     Grafico* Grafico::instancia = nullptr;
 

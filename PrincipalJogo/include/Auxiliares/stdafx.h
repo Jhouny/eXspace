@@ -11,4 +11,8 @@ using namespace std;
 #include <math.h>
 #include <string.h>
 
+#define COMPRIMENTO 1280
+#define ALTURA 720
+#define FPS 60
+
 #endif
