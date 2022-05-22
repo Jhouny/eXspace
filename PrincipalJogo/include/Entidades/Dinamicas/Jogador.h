@@ -34,4 +34,5 @@ class Jogador: public Personagem {
         void executar();
 };
 
+
 #endif
