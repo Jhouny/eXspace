@@ -17,7 +17,3 @@ void Inimigo::setJogador(Jogador*pJog)
     else
         cout << "ponteiro nulo" << endl;
 }
-void Inimigo::executar()
-{
-
-}

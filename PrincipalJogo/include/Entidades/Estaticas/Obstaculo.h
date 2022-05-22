@@ -4,7 +4,7 @@
 #include "../Entidade.h"    
 
 class Obstaculo: public Entidade {
-    private:
+    protected:
         bool daDano;
         bool ultrapassavel;
     public:
@@ -13,7 +13,6 @@ class Obstaculo: public Entidade {
 
         bool Danoso() const { return daDano; }
         bool Ultrapassavel() const { return ultrapassavel; }
-
 };
 
 #endif

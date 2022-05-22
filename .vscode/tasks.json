@@ -11,6 +11,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\InimigoTerrestre.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Jogador.cpp ",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Dinamicas\\Projetil.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Estaticas\\Obstaculo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Estaticas\\Plataforma.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Estaticas\\gasToxico.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Entidades\\Estaticas\\InimigoVoador.cpp",

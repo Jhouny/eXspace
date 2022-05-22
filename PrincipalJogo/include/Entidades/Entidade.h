@@ -4,9 +4,6 @@
 #include "../Auxiliares/stdafx.h"
 #include "Ente.h"
 
-/*#define GRAVIDADE 3
-#define PULO_Y -40*/
-
 
 class Entidade: public Ente {
     protected:

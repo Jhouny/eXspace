@@ -3,12 +3,16 @@
 
 #include "Entidade.h"
 
+#define GRAVIDADE 3
+
 class Personagem:public Entidade {
     protected:
         int vida;
         int dano;
         bool jumping;
         bool vivo;
+        float aceleracaoY;
+        Coordenada velocidade;
 
     public:
         Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);  //perguntar da construtora da classe que eh derivada
@@ -18,6 +22,12 @@ class Personagem:public Entidade {
 
         void setDano(int d);
         const int getDano() const { return dano; }
+
+        void setVelocidade(Coordenada v) { velocidade = v; }
+        Coordenada getVelocidade() { return velocidade; }
+
+        void setAceleracao(float acel) { aceleracaoY=acel; }
+        float getAceleracao() { return aceleracaoY; }
 
         void receberDano(int d);
 

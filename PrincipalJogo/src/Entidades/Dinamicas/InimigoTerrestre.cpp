@@ -3,22 +3,21 @@
 #define VELOCIDADE 5
 #define RECUO 50
 
-InimigoTerrestre::InimigoTerrestre(Coordenada tam, Coordenada pos, int v,int d):
-    Inimigo(tam,pos,v,d),
+InimigoTerrestre::InimigoTerrestre(Coordenada tam, Coordenada pos, int v, int d, ID id):
+    Inimigo(tam,pos,v,d,id),
     velocidade(VELOCIDADE),
     jogTaPerto(false)
-{
+{   
+    this->setAceleracao(GRAVIDADE);
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
 }
 
 InimigoTerrestre::~InimigoTerrestre() { }
 
-void InimigoTerrestre::setVelocidade(float v) {
-    velocidade = v;
-}
+void InimigoTerrestre::estaVivo() {}
 
-void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao){
+void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma){
         // Fixa o inimigo em cima da plataforma
         Coordenada p;
@@ -26,11 +25,17 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao){
         p.y = outraEntidade->getPosicao().y - this->getTamanho().y;
         this->setPosicao(p);
         
+        this->setAceleracao(0);
+        Coordenada v = this->getVelocidade();
+        v.y = 0;
+        
         // Se estiver na borda da plataforma inverte a direção e para de seguir o jogador
         jogTaPerto = false;
         if((this->getPosicao().x <= outraEntidade->getPosicao().x) || (this->getPosicao().x + this->getTamanho().x >= outraEntidade->getPosicao().x + outraEntidade->getTamanho().x)) {
-            setVelocidade(-1.f * velocidade);
+            v.x *= -1;
         }
+        this->setVelocidade(v);
+
     } else if(intersecao.y <= intersecao.x && outraEntidade->getID() == ID::jogador) {
         Coordenada p = this->getPosicao();
         if(p.x < outraEntidade->getPosicao().x)
@@ -57,27 +62,31 @@ void InimigoTerrestre::alarmado() {
 
 // Movimenta o inimigo
 void InimigoTerrestre::movimentar() {
-    Coordenada coordJog, coordIni;
+    Coordenada coordJog, coordIni, v;
     coordIni = this->getPosicao();
     coordJog = pJogador->getPosicao();
     
+    v = this->getVelocidade();
+    v.y += this->getAceleracao();
+    coordIni.y += v.y;
+
     // Se jogador estiver proximo, siga-o
     if(jogTaPerto){
         if(coordIni.x < coordJog.x){
-            velocidade = VELOCIDADE * 2.f;
+            velocidade.x = VELOCIDADE * 2.f;
         }
         else{
-            velocidade = VELOCIDADE * (-2.f);
+            velocidade.x = VELOCIDADE * (-2.f);
         }
     }
     
-    coordIni.x += velocidade;
+    coordIni.x += velocidade.x;
     this->setPosicao(coordIni);
-
+    this->setVelocidade(v);
 }
 
-void InimigoTerrestre::executar(){
-    alarmado();
+void InimigoTerrestre::executar() {
+    //alarmado();
     movimentar();
 
 }

@@ -7,8 +7,6 @@
 
 class Jogador: public Personagem {
     private:
-        float velocidade[2];
-        float aceleracaoY;
         Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
 
     public:
@@ -16,12 +14,6 @@ class Jogador: public Personagem {
         ~Jogador();
         
         void setGerenciadorGrafico(Gerenciadores::Grafico *inst) { pGrafico = inst; }
-
-        void setVelocidade(float vx, float vy);
-        float *getVelocidade() {return velocidade;}
-
-        void setAceleracao(float acel) {aceleracaoY=acel;}
-        float getAceleracao(){return aceleracaoY;}
         
         void estaVivo();
 
@@ -33,6 +25,5 @@ class Jogador: public Personagem {
 
         void executar();
 };
-
 
 #endif

@@ -1,9 +1,9 @@
 #ifndef _PLATAFORMA_H_
 #define _PLATAFORMA_H_
 
-#include"../Entidade.h"
+#include "Obstaculo.h"
 
-class Plataforma: public Entidade {
+class Plataforma: public Obstaculo {
     private:
     public:
         Plataforma(Coordenada tam, Coordenada pos, ID id = platforma);

@@ -4,16 +4,16 @@
 
 class InimigoTerrestre: public Inimigo {
     private:
-        float velocidade;
+        Coordenada velocidade;
         bool jogTaPerto;
     public:
-        InimigoTerrestre(Coordenada tam, Coordenada pos, int v = 100, int d = 20);
+        InimigoTerrestre(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = inimigoTerrestre);
         
         ~InimigoTerrestre();
-
-        void setVelocidade(float v);
-        
+                
         void colisao(Entidade* outraEntidade, Coordenada intersecao);
+
+        void estaVivo();
 
         void alarmado();
 

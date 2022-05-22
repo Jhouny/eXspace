@@ -8,7 +8,8 @@ enum ID {
     vazio = 0,
     jogador,
     projetil,
-    platforma
+    platforma,
+    inimigoTerrestre
 };
 
 class Ente {
