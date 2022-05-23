@@ -1,8 +1,8 @@
 #ifndef _ENTIDADE_H_
 #define _ENTIDADE_H_
 
-#include "../Auxiliares/stdafx.h"
-#include "Ente.h"
+#include "../../Auxiliares/stdafx.h"
+#include "../Ente.h"
 
 
 class Entidade: public Ente {
@@ -26,7 +26,7 @@ class Entidade: public Ente {
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        virtual void executar() = 0;
+        virtual void executar() {};
 };
 
 #endif

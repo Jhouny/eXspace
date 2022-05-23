@@ -1,4 +1,4 @@
-#include"../../../include/Entidades/Dinamicas/Jogador.h"
+#include"../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
 #define PULO_Y -40
 #define ATRITO 0.7
@@ -98,7 +98,7 @@ void Jogador::executar() {
     
     // Aplica a aceleração na velocidade e a velocidade na posição 
     aplicaAcel();
-
+    
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
 

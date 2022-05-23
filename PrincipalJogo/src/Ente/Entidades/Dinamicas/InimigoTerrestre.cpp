@@ -1,9 +1,9 @@
-#include "../../../include/Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
 
 #define VELOCIDADE 2
 #define RECUO 100
 
-InimigoTerrestre::InimigoTerrestre(Coordenada tam, Coordenada pos, int v, int d, ID id):
+InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d, ID id):
     Inimigo(tam,pos,v,d,id),
     jogTaPerto(false)
 {   
@@ -11,6 +11,7 @@ InimigoTerrestre::InimigoTerrestre(Coordenada tam, Coordenada pos, int v, int d,
     this->setAceleracao(GRAVIDADE);
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
+    pPlataforma=NULL;
 }
 
 InimigoTerrestre::~InimigoTerrestre() { }
@@ -74,11 +75,13 @@ void InimigoTerrestre::movimentar() {
     coordIni.y += v.y;
     
     // Se estiver na borda da plataforma inverte a direção
-    if(this->getPosicao().x <= pPlataforma->getPosicao().x && v.x < 0)
-        v.x = VELOCIDADE;
-    else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && v.x > 0)
-        v.x = -1*VELOCIDADE;
-
+    if(pPlataforma) {
+        if(this->getPosicao().x <= pPlataforma->getPosicao().x && v.x < 0)
+            v.x = VELOCIDADE;
+        else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && v.x > 0)
+            v.x = -1*VELOCIDADE;
+    }
+    
     coordIni.x += v.x;
     
     // Se jogador estiver proximo, siga-o

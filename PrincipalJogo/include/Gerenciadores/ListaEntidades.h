@@ -2,7 +2,7 @@
 #define _LISTA_ENTIDADES_H_
 
 #include "../Auxiliares/Lista.h"
-#include "../Entidades/Entidade.h"
+#include "../Ente/Entidades/Entidade.h"
 
 class ListaEntidades{
     public:
@@ -16,12 +16,21 @@ class ListaEntidades{
 
         // Adiciona um elemento
         void push(Entidade* ent) {
-            le.push(ent);
+            if(ent)
+                le.push(ent);
         }
 
         // Remove o ultimo elemento
         void pop() {
             le.pop();
+        }
+
+        void print(){
+            int i;
+            for(i=0;i<le.getTamanho();i++){
+                cout << "ID: " << le[i]->getID() << endl;
+            }
+
         }
 
 

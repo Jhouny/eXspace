@@ -1,24 +1,17 @@
 #ifndef _JOGO_H_
 #define _JOGO_H_
 
-#include "Gerenciadores/Grafico.h"
-#include "Gerenciadores/Colisoes.h"
-#include "../include/Gerenciadores/ListaEntidades.h"
+#include "Ente/Fase/Fase.h"
 
 class Jogo {
     private:
-        Gerenciadores::Grafico* pGrafico;
-        Gerenciadores::Colisor* pColisor;
-        ListaEntidades lDinamicas;
-        ListaEntidades lEstaticas;
+        Fase fase1;
     public:
         Jogo();
 
         ~Jogo();
 
         void exec();
-
-        void gameOver();
 };
 
 

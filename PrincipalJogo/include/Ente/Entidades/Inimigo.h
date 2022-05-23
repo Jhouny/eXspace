@@ -1,7 +1,7 @@
 #ifndef _INIMIGO_H_
 #define _INIMIGO_H_
 
-#include"../Auxiliares/stdafx.h"
+#include"../../Auxiliares/stdafx.h"
 #include "Personagem.h"
 #include "Dinamicas/Jogador.h"
 

@@ -1,4 +1,4 @@
-#include"../../include/Entidades/Ente.h"
+#include"../../include/Ente/Ente.h"
 
 int Ente::cont = 0;
 

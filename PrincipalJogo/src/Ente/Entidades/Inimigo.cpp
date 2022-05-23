@@ -1,4 +1,4 @@
-#include "../../include/Entidades/Inimigo.h"
+#include "../../../include/Ente/Entidades/Inimigo.h"
 
 Inimigo::Inimigo(Coordenada tam, Coordenada pos, int v, int d, ID id): 
     Personagem(tam, pos, v, d, id)
@@ -10,8 +10,7 @@ Inimigo::Inimigo(Coordenada tam, Coordenada pos, int v, int d, ID id):
 Inimigo::~Inimigo(){
     pJogador = NULL;
 }
-void Inimigo::setJogador(Jogador*pJog)
-{
+void Inimigo::setJogador(Jogador*pJog) {
     if(pJog)
         pJogador = pJog;
     else

@@ -2,7 +2,7 @@
 #define _JOGADOR_H_
 
 #include"../Personagem.h"
-#include "../../Gerenciadores/Grafico.h"
+#include "../../../Gerenciadores/Grafico.h"
 
 
 class Jogador: public Personagem {

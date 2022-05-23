@@ -1,4 +1,4 @@
-#include "../../include/Entidades/Personagem.h"
+#include "../../../include/Ente/Entidades/Personagem.h"
 
 Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d, ID id):
     Entidade(id, tam,pos),

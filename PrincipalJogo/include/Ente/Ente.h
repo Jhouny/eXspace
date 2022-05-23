@@ -9,7 +9,8 @@ enum ID {
     jogador,
     projetil,
     platforma,
-    inimigoTerrestre
+    inimigoTerrestre,
+    fase
 };
 
 class Ente {
