@@ -28,8 +28,8 @@ void Jogo::exec(){
     ini1.setJogador(&jog);
     
     Plataforma plat1(Coordenada(1280, 50), Coordenada(  0, 600));
-    //Plataforma plat2(Coordenada(500, 50), Coordenada(600, 450));
-    //Plataforma plat3(Coordenada(300, 100), Coordenada(450, 200));
+    Plataforma plat2(Coordenada(500, 50), Coordenada(600, 450));
+    Plataforma plat3(Coordenada(300, 100), Coordenada(450, 200));
 
     // insere na lista de Entidades Dinamicas
     lDinamicas.push(static_cast<Entidade*>(&jog));
@@ -37,8 +37,8 @@ void Jogo::exec(){
 
     //insere na lista de Entidades Estaticas
     lEstaticas.push(static_cast<Entidade*>(&plat1));
-    //lEstaticas.push(static_cast<Entidade*>(&plat2));
-    //lEstaticas.push(static_cast<Entidade*>(&plat3));
+    lEstaticas.push(static_cast<Entidade*>(&plat2));
+    lEstaticas.push(static_cast<Entidade*>(&plat3));
     
     while(pGrafico->isOpened()) {
         
