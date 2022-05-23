@@ -5,6 +5,7 @@
 class InimigoTerrestre: public Inimigo {
     private:
         Coordenada velocidade;
+        Entidade* pPlataforma;
         bool jogTaPerto;
     public:
         InimigoTerrestre(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = inimigoTerrestre);

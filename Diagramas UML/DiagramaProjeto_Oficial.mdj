@@ -14618,9 +14618,9 @@
 										"$ref": "AAAAAAGA3sL5gcfjBVM="
 									},
 									"font": "Arial;13;0",
-									"left": 2034,
+									"left": 2033,
 									"top": 1370,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -14680,9 +14680,9 @@
 										"$ref": "AAAAAAGA3sL5gcfkFdA="
 									},
 									"font": "Arial;13;0",
-									"left": 2096,
+									"left": 2095,
 									"top": 637,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -15512,9 +15512,9 @@
 										"$ref": "AAAAAAGA3swLEQXHnwg="
 									},
 									"font": "Arial;13;0",
-									"left": 1370,
+									"left": 1369,
 									"top": 965,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -16002,9 +16002,9 @@
 										"$ref": "AAAAAAGA3upChG9bK+4="
 									},
 									"font": "Arial;16;0",
-									"left": 1880,
+									"left": 1879,
 									"top": 1406,
-									"width": 6.2265625,
+									"width": 8,
 									"height": 16,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -16278,9 +16278,9 @@
 										"$ref": "AAAAAAGA3vpvpZafXy4="
 									},
 									"font": "Arial;13;0",
-									"left": 1641,
+									"left": 1640,
 									"top": 1255,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -16554,9 +16554,9 @@
 										"$ref": "AAAAAAGA3v10xOMvYws="
 									},
 									"font": "Arial;13;0",
-									"left": 1953,
+									"left": 1952,
 									"top": 1408,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -17439,9 +17439,9 @@
 										"$ref": "AAAAAAGA3wHdcVko6VY="
 									},
 									"font": "Arial;13;0",
-									"left": 2169,
+									"left": 2168,
 									"top": 884,
-									"width": 5.05908203125,
+									"width": 6.5,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -17900,7 +17900,8 @@
 								"$ref": "lnmEeOvWxEGeGWwDLIc8QQAA"
 							},
 							"name": "lEstaticas:ListaEntidades",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [

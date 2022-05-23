@@ -1,13 +1,13 @@
 #include "../../../include/Entidades/Dinamicas/InimigoTerrestre.h"
 
-#define VELOCIDADE 5
-#define RECUO 50
+#define VELOCIDADE 2
+#define RECUO 100
 
 InimigoTerrestre::InimigoTerrestre(Coordenada tam, Coordenada pos, int v, int d, ID id):
     Inimigo(tam,pos,v,d,id),
-    velocidade(VELOCIDADE),
     jogTaPerto(false)
 {   
+    this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
@@ -19,21 +19,16 @@ void InimigoTerrestre::estaVivo() {}
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma){
+        pPlataforma = outraEntidade;
         // Fixa o inimigo em cima da plataforma
         Coordenada p;
         p.x = this->getPosicao().x;
         p.y = outraEntidade->getPosicao().y - this->getTamanho().y;
         this->setPosicao(p);
         
-        this->setAceleracao(0);
         Coordenada v = this->getVelocidade();
         v.y = 0;
         
-        // Se estiver na borda da plataforma inverte a direção e para de seguir o jogador
-        jogTaPerto = false;
-        if((this->getPosicao().x <= outraEntidade->getPosicao().x) || (this->getPosicao().x + this->getTamanho().x >= outraEntidade->getPosicao().x + outraEntidade->getTamanho().x)) {
-            v.x *= -1;
-        }
         this->setVelocidade(v);
 
     } else if(intersecao.y <= intersecao.x && outraEntidade->getID() == ID::jogador) {
@@ -48,16 +43,24 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
 
 // Verifica se o jogador esta perto do inimigo
 void InimigoTerrestre::alarmado() {
-    Coordenada coordJog, coordIni;
-    int diferenca;
-
-    coordJog = pJogador->getPosicao();
-    coordIni = this->getPosicao();
-
-    diferenca = coordJog.x - coordIni.x;
+    Coordenada centroIni,  centroJog, intersecao;
+    float diferenca;
     
-    if(fabs(diferenca)<=100)
+    centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
+    centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
+    
+    centroJog.x = pJogador->getPosicao().x + (pJogador->getTamanho().x)/2.f;
+    centroJog.y = pJogador->getPosicao().y + (pJogador->getTamanho().y)/2.f;;
+    
+    intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador->getTamanho().x)/2.f;
+    intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador->getTamanho().y)/2.f;
+
+    diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
+    
+    if(fabs(diferenca) <= 200)
         jogTaPerto = true;
+    else
+        jogTaPerto = false;
 }
 
 // Movimenta o inimigo
@@ -69,24 +72,31 @@ void InimigoTerrestre::movimentar() {
     v = this->getVelocidade();
     v.y += this->getAceleracao();
     coordIni.y += v.y;
+    
+    // Se estiver na borda da plataforma inverte a direção
+    if(this->getPosicao().x <= pPlataforma->getPosicao().x && v.x < 0)
+        v.x = VELOCIDADE;
+    else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && v.x > 0)
+        v.x = -1*VELOCIDADE;
 
+    coordIni.x += v.x;
+    
     // Se jogador estiver proximo, siga-o
-    if(jogTaPerto){
+    if(jogTaPerto) {
+
         if(coordIni.x < coordJog.x){
-            velocidade.x = VELOCIDADE * 2.f;
+            v.x = VELOCIDADE * 2;
         }
         else{
-            velocidade.x = VELOCIDADE * (-2.f);
+            v.x = VELOCIDADE * (-2);
         }
     }
-    
-    coordIni.x += velocidade.x;
+
     this->setPosicao(coordIni);
     this->setVelocidade(v);
 }
 
 void InimigoTerrestre::executar() {
-    //alarmado();
+    alarmado();
     movimentar();
-
 }
