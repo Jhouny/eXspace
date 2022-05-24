@@ -10,6 +10,7 @@ namespace Gerenciadores {
             sf::RenderWindow* window;
             sf::Event* event;
             sf::View view;
+            sf::View view2;
             sf::View minimap;
 
             /* Seguindo a sugestão do monitor Matheus Burda, usa-se o padrão Singleton */
@@ -38,7 +39,11 @@ namespace Gerenciadores {
             void setRotate();//nova
 
             void atualizaView(Jogador* player);//nova
+
+            void atualizaViewP2(Jogador* player);
                 
+            void setview1Point();
+            void setview2Point();
             
             void atualizaMinimap(Coordenada p);    //nova
 

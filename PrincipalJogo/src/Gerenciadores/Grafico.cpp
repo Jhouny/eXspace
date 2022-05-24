@@ -38,7 +38,8 @@ namespace Gerenciadores {
         //window->setView(view);
         window->setView(view);
         window->draw(*shape);
-        window->setView(minimap);
+        //window->setView(minimap);
+        window->setView(view2);
         window->draw(*shape);
         
 
@@ -52,7 +53,23 @@ namespace Gerenciadores {
     void Grafico::atualizaView(Jogador* player){
         Coordenada vetor;
         vetor = player->getPosicao();
-        view.setCenter(vetor.x,vetor.y);
+        view.setCenter(vetor.x,360.f);
+    }
+
+void Grafico::setview1Point(){
+    view.setViewport(sf::FloatRect(0.f, 0.f, 0.5f, 1.f));
+}
+
+
+
+void Grafico::setview2Point(){
+    view2.setViewport(sf::FloatRect(0.5f, 0.f, 0.5f, 1.f));
+}
+
+    void Grafico::atualizaViewP2(Jogador* player){
+        Coordenada vetor;
+        vetor = player->getPosicao();
+        view2.setCenter(vetor.x,360.f);
     }
 
     void Grafico::atualizaMinimap(Coordenada p){

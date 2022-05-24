@@ -71,12 +71,12 @@ void Fase::executar() {
     // incluir(&lDinamicas, static_cast<Entidade*>(inigs));
     //lDinamicas.print();
     int i;
-    /*InimigoTerrestre temp[10*nivel];
+    InimigoTerrestre temp[10*nivel];
     for(i = 0; i < 3*nivel; i++) {
         temp[i].setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
         temp[i].setJogador(&jogador1);
         lDinamicas.push(static_cast<Entidade*>(&temp[i]));
-    }*/
+    }
     
 
     //seta as plataformas:
@@ -103,10 +103,12 @@ void Fase::executar() {
     lEstaticas.push(static_cast<Entidade*>(&base11));
 
     //seta tamanho da view
-    pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
-    pGrafico->setMinimap(Coordenada (4000,ALTURA));
-    pGrafico->setMinimapViewport();
-    pGrafico->atualizaMinimap(Coordenada(2000,360));
+    //pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
+    //pGrafico->setMinimap(Coordenada (4000,ALTURA));
+    //pGrafico->setMinimapViewport();
+    //pGrafico->atualizaMinimap(Coordenada(2000,360));
+    pGrafico->setview1Point();
+    pGrafico->setview2Point();
 
     /*       */
     while(pGrafico->isOpened()) {
@@ -131,6 +133,7 @@ void Fase::executar() {
         }
         //Seta view
         pGrafico->atualizaView(&jogador1);
+        pGrafico->atualizaViewP2(&jogador1);
         //pGrafico->setRotate();//comentar se nao quiser ficar enjoadokkkkkk
 
         for(i = 0; i < lEstaticas.getTamanho(); i++) {
