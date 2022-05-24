@@ -1,6 +1,6 @@
 #include"../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
-#define PULO_Y -40
+#define PULO_Y -35
 #define ATRITO 0.7
 
 Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):

@@ -3,7 +3,7 @@
 
 #include "Entidade.h"
 
-#define GRAVIDADE 3
+#define GRAVIDADE 2.5
 
 class Personagem:public Entidade {
     protected:
