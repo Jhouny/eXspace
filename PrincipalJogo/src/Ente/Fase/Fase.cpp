@@ -131,7 +131,7 @@ void Fase::executar() {
         }
         //Seta view
         pGrafico->atualizaView(&jogador1);
-        //pGrafico->setRotate();//comentar se nao quiser ficar enjoadokkkkkk
+        //pGrafico->setRotate();  // Comentar se nao quiser ficar enjoadokkkkkk
 
         for(i = 0; i < lEstaticas.getTamanho(); i++) {
             ent = lEstaticas[i];

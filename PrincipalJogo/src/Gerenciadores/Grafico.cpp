@@ -35,14 +35,10 @@ namespace Gerenciadores {
 
 
     void Grafico::draw(sf::RectangleShape* shape) {
-        //window->setView(view);
         window->setView(view);
         window->draw(*shape);
         window->setView(minimap);
         window->draw(*shape);
-        
-
-        
     }
 
     void Grafico::setRotate(){
@@ -52,7 +48,7 @@ namespace Gerenciadores {
     void Grafico::atualizaView(Jogador* player){
         Coordenada vetor;
         vetor = player->getPosicao();
-        view.setCenter(vetor.x,vetor.y);
+        view.setCenter(vetor.x, ALTURA/2.f);  // Segue no X mas não no Y
     }
 
     void Grafico::atualizaMinimap(Coordenada p){
