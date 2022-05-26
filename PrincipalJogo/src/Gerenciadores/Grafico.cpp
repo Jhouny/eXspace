@@ -41,6 +41,13 @@ namespace Gerenciadores {
         window->draw(*shape);
     }
 
+    void Grafico::draw(sf::Sprite* sp) {
+        window->setView(view);
+        window->draw(*sp);
+        window->setView(minimap);
+        window->draw(*sp);
+    }
+
     void Grafico::setRotate(){
         view.rotate(0.5);
     }
@@ -75,6 +82,29 @@ namespace Gerenciadores {
 
     void Grafico::terminar() {
         window->close();
+    }
+
+    /* Returns a texture to be used by an entity. */
+    sf::Texture* Grafico::loadTexture(const char* path) {
+        /* Tries to find an existing texture linked by the path to it. */
+        std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
+        while (it != mapaTexturas.end()) {
+            if (!strcmp(it->first, path))
+                return it->second;
+            it++;
+        }
+
+        /* If not found, must load it. */
+        sf::Texture* tex = new sf::Texture();
+
+        if (!tex->loadFromFile(path)) {
+            std::cout << "ERROR loading file " << path << std::endl;
+            exit(1);
+        }
+
+        mapaTexturas.insert(std::pair<const char*, sf::Texture*>(path, tex));
+
+        return tex;
     }
 
     // Define a posição da janela principal

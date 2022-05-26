@@ -11,12 +11,10 @@ Fase::Fase(int ni, int num_jog):
 {
     if(nJog == 2) {
         jogador2.setVelocidade(Coordenada(15,0));
-        jogador2.setGerenciadorGrafico(pGrafico);
         lDinamicas.push(static_cast<Entidade*>(&jogador2));
     }
     
     jogador1.setVelocidade(Coordenada(10.5,0));
-    jogador1.setGerenciadorGrafico(pGrafico);
     lDinamicas.push(static_cast<Entidade*>(&jogador1));
 
     pColisor->setDinamicas(&lDinamicas);
@@ -126,7 +124,7 @@ void Fase::executar() {
         Entidade *ent;
         for(i = 0; i < lDinamicas.getTamanho(); i++) {
             ent = lDinamicas[i];
-            pGrafico->draw(ent->getShape());
+            pGrafico->draw(ent->getSprite());
             ent->executar();
         }
         //Seta view

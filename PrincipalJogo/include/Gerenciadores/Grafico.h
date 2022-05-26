@@ -12,6 +12,9 @@ namespace Gerenciadores {
             sf::View view;
             sf::View minimap;
 
+            // Mapeia o path das texturas aos elementos 
+            std::map<const char*, sf::Texture*> mapaTexturas;
+
             /* Seguindo a sugestão do monitor Matheus Burda, usa-se o padrão Singleton */
             static Gerenciadores::Grafico* instancia;
             Grafico();
@@ -23,7 +26,7 @@ namespace Gerenciadores {
 
             void draw(sf::RectangleShape* shape);
             
-            
+            void draw(sf::Sprite* sp);
 
             void setTamView(Coordenada t){//nova
                 view.setSize(t.x,t.y);
@@ -44,7 +47,6 @@ namespace Gerenciadores {
 
             void clear();
 
-
             void display();
 
             bool isOpened() const;
@@ -54,6 +56,8 @@ namespace Gerenciadores {
             void setCenter(Coordenada c1);
 
             void setCenter(Coordenada c1, Coordenada c2);
+
+            sf::Texture* loadTexture(const char* path);
 
             sf::Event* getEvent() const;
 

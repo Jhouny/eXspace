@@ -10,6 +10,7 @@ Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;
+        setTexture(JOGADOR);
 }
 
 Jogador::~Jogador() {
