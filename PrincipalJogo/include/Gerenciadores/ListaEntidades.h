@@ -8,10 +8,7 @@ class ListaEntidades{
     public:
         Lista<Entidade> le;
 
-        Entidade* operator[](int index) {
-            return le[index];
-        }
-
+        // Retorna o tamanho da lista de entidades
         int getTamanho() { return le.getTamanho(); }
 
         // Adiciona um elemento
@@ -23,6 +20,15 @@ class ListaEntidades{
         // Remove o ultimo elemento
         void pop() {
             le.pop();
+        }
+
+        // Remove um elemento específico
+        void removeIndice(int ind) {
+            le.removeIndice(ind);
+        }
+
+        Entidade* operator[](int index) {
+            return le[index];
         }
 
         void print(){

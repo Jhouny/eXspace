@@ -5,7 +5,8 @@ Entidade::Entidade(ID id, Coordenada tam, Coordenada pos):
     tamanho(tam),
     posicao(pos),
     shape(sf::Vector2f(tam.getX(),tam.getY())),
-    pGrafico(Gerenciadores::Grafico::getInstancia())
+    pGrafico(Gerenciadores::Grafico::getInstancia()),
+    ativo(true)
 {
     shape.setPosition(pos.x,pos.y);
     sprite.setPosition(pos.x, pos.y);

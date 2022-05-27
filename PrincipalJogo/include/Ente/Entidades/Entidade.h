@@ -13,6 +13,7 @@ class Entidade: public Ente {
         sf::RectangleShape shape;
         sf::Sprite sprite;
         Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
+        bool ativo;
 
     public:
         Entidade(ID id, Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
@@ -28,6 +29,8 @@ class Entidade: public Ente {
         
         Coordenada getPosicao() const { return posicao; }
         Coordenada getTamanho() const { return tamanho; }
+
+        bool getAtivo() const { return ativo; }
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 

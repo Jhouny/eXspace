@@ -106,7 +106,8 @@ void Jogador::executar() {
     estaVivo();
 
     // Se o jogador morrer
-    if(!vivo) 
+    if(!vivo) {
         pGrafico->terminar();  // Fecha a janela, mas no fim deveria dar um 'Game Over'
+    }
 }
 

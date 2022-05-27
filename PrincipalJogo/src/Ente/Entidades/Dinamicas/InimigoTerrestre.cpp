@@ -19,7 +19,12 @@ InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d,
 
 InimigoTerrestre::~InimigoTerrestre() { }
 
-void InimigoTerrestre::estaVivo() {}
+void InimigoTerrestre::estaVivo() {
+    Coordenada p = this->getPosicao();
+    if(p.y > ALTURA + 300) {
+        vivo = false;
+    }
+}
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma){
@@ -61,7 +66,7 @@ void InimigoTerrestre::alarmado() {
 
     diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
     
-    if(fabs(diferenca) <= 200)
+    if(fabs(diferenca) <= 300)
         jogTaPerto = true;
     else
         jogTaPerto = false;
@@ -77,8 +82,8 @@ void InimigoTerrestre::movimentar() {
     v.y += this->getAceleracao();
     coordIni.y += v.y;
     
-    // Se estiver na borda da plataforma inverte a direção
-    if(pPlataforma) {
+    // Se estiver na borda da plataforma e (jogador não esta perto ou jogador está acima do inimigo) inverte a direção
+    if(pPlataforma && (!jogTaPerto || coordJog.y < coordIni.y - 100)) {
         if(this->getPosicao().x <= pPlataforma->getPosicao().x && v.x < 0)
             v.x = VELOCIDADE;
         else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && v.x > 0)
@@ -105,4 +110,9 @@ void InimigoTerrestre::movimentar() {
 void InimigoTerrestre::executar() {
     alarmado();
     movimentar();
+    estaVivo();
+    
+    if(!vivo) {
+        this->ativo = false;
+    }
 }

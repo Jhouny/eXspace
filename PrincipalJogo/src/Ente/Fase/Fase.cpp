@@ -6,8 +6,8 @@ Fase::Fase(int ni, int num_jog):
     nJog(num_jog),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
     pColisor(new Gerenciadores::Colisor()),
-    jogador1(Coordenada(0,0)),
-    jogador2(Coordenada(100,0))
+    jogador1(Coordenada(100,0)),
+    jogador2(Coordenada(200,0))
 {
     setTexture(TEX_BACKGROUND);
 
@@ -103,17 +103,21 @@ void Fase::executar() {
             ent = lDinamicas[i];
             pGrafico->draw(ent->getSprite());
             ent->executar();
+            if(!ent->getAtivo())
+                lDinamicas.removeIndice(i);
         }
-        //Seta view
-        pGrafico->atualizaView(&jogador1);
-        atualizarBackground();
-        //pGrafico->setRotate();  // Comentar se nao quiser ficar enjoadokkkkkk
         
         for(i = 0; i < lEstaticas.getTamanho(); i++) {
             ent = lEstaticas[i];
             pGrafico->draw(ent->getSprite());
             ent->executar();
         }
+
+        //Seta view
+        pGrafico->atualizaView(&jogador1);
+        atualizarBackground();
+        //pGrafico->setRotate();  // Comentar se nao quiser ficar enjoadokkkkkk
+        
 
         pGrafico->display();
     }

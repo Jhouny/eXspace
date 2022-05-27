@@ -33,12 +33,13 @@ template <class LT> class Lista{
 
         void push(LT* cop);
         void pop();
+        void removeIndice(int ind);
         
         int getTamanho() { return tamanho; }
 
         Elemento<LT>* getInicial() { return pPrimeiro; }
 
-        LT* operator[](int index);
+        LT* operator[](int ind);
 };
 
 //construtora
@@ -97,28 +98,47 @@ inline void Lista<LT>::pop() {
 
 // Retorna um elemento específico
 template<class LT> 
-inline LT* Lista<LT>::operator[](int index) {
-    if(index >= 0 && index < tamanho) {
+inline LT* Lista<LT>::operator[](int ind) {
+    if(ind >= 0 && ind < tamanho) {
         Elemento<LT> *pEl = pPrimeiro;
         int i;
 
-        for(i = 0; i < index; i++) {  // Itera até o elemento do indice
+        for(i = 0; i < ind; i++) {  // Itera até o elemento do indice
             pEl = pEl->getProx();
         }
-
+        
         return pEl->getElemento();
     } 
     else {
-        cout << "Indice: " << index << " fora da lista" << endl;
+        cout << "Indice: " << ind << " fora da lista" << endl;
         exit(1);
     }
 }
 
-//exclui elemento especifico da lista
-/* TERMINAR */
+// Exclui um elemento especifico da lista
+template<class LT> 
+inline void Lista<LT>::removeIndice(int ind) {
+    if(ind >= 0 && ind < tamanho) {
+        Elemento<LT> *pEl = pPrimeiro;
+        int i;
 
+        for(i = 0; i < ind; i++) {  // Itera até o elemento do indice
+            pEl = pEl->getProx();
+        }
+        
+        // Se os elementos anterior e próximo existirem, conecta-os um ao outro
+        if(pEl->getAnte() != NULL)  
+            pEl->getAnte()->setProx(pEl->getProx());
+        if(pEl->getProx())
+            pEl->getProx()->setAnte(pEl->getAnte());
 
-//
-
+        delete pEl;
+        tamanho--;
+    } 
+    else {
+        cout << "Indice: " << ind << " fora da lista" << endl;
+        exit(1);
+    }
+}
 
 #endif
