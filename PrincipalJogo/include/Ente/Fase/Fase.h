@@ -12,6 +12,7 @@
 #include "../Entidades/Dinamicas/Projetil.h"
 #include "../Entidades/Estaticas/Plataforma.h"
 
+#define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
 class Fase: public Ente{
     private:
@@ -22,6 +23,7 @@ class Fase: public Ente{
         int nivel, nJog;
         Jogador jogador1;
         Jogador jogador2;
+        sf::Sprite backGround;
         
     public:
         Fase(int ni = 1, int num_jog = 1);
@@ -31,7 +33,11 @@ class Fase: public Ente{
         void geraObstaculos();
         Inimigo* geraInimigos();
         
+        void setTexture(const char* path);
+        
         void incluir(ListaEntidades* lista, Entidade* l);
+
+        void atualizarBackground();
 
         void gameOver();
 

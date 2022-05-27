@@ -3,12 +3,14 @@
 
 #include"../Personagem.h"
 
+#define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
+
 
 class Jogador: public Personagem {
     private:
 
     public:
-        Jogador(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = jogador);
+        Jogador(Coordenada pos, int v = 100, int d = 20, ID id = jogador);
         ~Jogador();
         
         void estaVivo();

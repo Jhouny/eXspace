@@ -21,10 +21,7 @@ class Entidade: public Ente {
         void setPosicao(float x, float y);
         void setPosicao(Coordenada pos);
         
-        void setTexture(const char* path) {
-            sf::Texture* temp = pGrafico->loadTexture(path);
-            sprite.setTexture(*temp);
-        }
+        void setTexture(const char* path, bool esticar = true);
 
         sf::Sprite* getSprite() { return &sprite; }
         sf::RectangleShape* getShape() { return &shape; }

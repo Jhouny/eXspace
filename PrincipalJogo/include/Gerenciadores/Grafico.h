@@ -12,7 +12,7 @@ namespace Gerenciadores {
             sf::View view;
             sf::View minimap;
 
-            // Mapeia o path das texturas aos elementos 
+            // Mapeia o path das texturas aos elementos
             std::map<const char*, sf::Texture*> mapaTexturas;
 
             /* Seguindo a sugestão do monitor Matheus Burda, usa-se o padrão Singleton */
@@ -24,25 +24,24 @@ namespace Gerenciadores {
 
             static Grafico* getInstancia();
 
-            void draw(sf::RectangleShape* shape);
+            void draw(sf::RectangleShape* shape, bool map = true);
             
-            void draw(sf::Sprite* sp);
+            void draw(sf::Sprite* sp, bool map = true);
 
-            void setTamView(Coordenada t){//nova
+            void setTamView(Coordenada t){ //nova
                 view.setSize(t.x,t.y);
             }
 
-            void setMinimap(Coordenada t){//nova
+            void setMinimap(Coordenada t){ //nova
                 minimap.setSize(t.x,t.y);
             }
-            void setMinimapViewport();//nova
+            void setMinimapViewport(); //nova
             //minimapView.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
 
             void setRotate();//nova
 
             void atualizaView(Jogador* player);//nova
                 
-            
             void atualizaMinimap(Coordenada p);    //nova
 
             void clear();

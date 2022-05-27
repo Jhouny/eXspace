@@ -1,5 +1,6 @@
 #include"../../include/Gerenciadores/Grafico.h"
 #include "../../include/Ente/Entidades/Dinamicas/Jogador.h"
+
 namespace Gerenciadores {
     Grafico* Grafico::instancia = nullptr;
 
@@ -34,18 +35,22 @@ namespace Gerenciadores {
 
 
 
-    void Grafico::draw(sf::RectangleShape* shape) {
+    void Grafico::draw(sf::RectangleShape* shape, bool map) {
         window->setView(view);
         window->draw(*shape);
-        window->setView(minimap);
-        window->draw(*shape);
+        if(map) {
+            window->setView(minimap);
+            window->draw(*shape);
+        }
     }
 
-    void Grafico::draw(sf::Sprite* sp) {
+    void Grafico::draw(sf::Sprite* sp, bool map) {
         window->setView(view);
         window->draw(*sp);
-        window->setView(minimap);
-        window->draw(*sp);
+        if(map){
+            window->setView(minimap);
+            window->draw(*sp);
+        }
     }
 
     void Grafico::setRotate(){

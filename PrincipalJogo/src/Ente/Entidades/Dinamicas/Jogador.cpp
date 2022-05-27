@@ -1,16 +1,18 @@
-#include"../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
 #define PULO_Y -35
 #define ATRITO 0.7
 
-Jogador::Jogador(Coordenada tam, Coordenada pos, int v, int d, ID id):
-    Personagem(tam, pos, v, d, id) {
+Jogador::Jogador(Coordenada pos, int v, int d, ID id):
+    Personagem(Coordenada(46, 64), pos, v, d, id) {
         shape.setFillColor(sf::Color::Green);
         setJump(true);
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;
-        setTexture(JOGADOR);
+
+        // Define a textura
+        setTexture(TEX_JOGADOR);
 }
 
 Jogador::~Jogador() {

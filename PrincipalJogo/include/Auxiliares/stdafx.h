@@ -15,6 +15,4 @@ using namespace std;
 #define ALTURA 720
 #define FPS 60
 
-#define JOGADOR "D:/USER/Documents/Jhony/UTFPR/2022_1/Tec Prog/Projeto-Tec-Prog/PrincipalJogo/assets/Texturas/1/Still.png"
-
 #endif

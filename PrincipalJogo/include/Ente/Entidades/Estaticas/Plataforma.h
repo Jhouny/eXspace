@@ -3,6 +3,9 @@
 
 #include "Obstaculo.h"
 
+#define TEX_PLATAFORMA "PrincipalJogo/assets/Texturas/Plataforma/1 Tiles/Tile_02.png"
+
+
 class Plataforma: public Obstaculo {
     private:
     public:

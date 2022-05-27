@@ -27,4 +27,21 @@ void Entidade::setPosicao(float x, float y) {
     this->sprite.setPosition(x, y);
 }
 
+void Entidade::setTexture(const char* path, bool esticar) {
+    sf::Texture* temp = pGrafico->loadTexture(path);
+    
+    sprite.setTexture(*temp);
+
+    if(!esticar) {
+        sprite.setTextureRect(sf::IntRect(0, 0, tamanho.x, temp->getSize().y));
+        temp->setRepeated(true);
+    } else {
+        // Define a textura e a escala de acordo com o o retangulo de shape
+        float sX = tamanho.x/temp->getSize().x;
+        float sY = tamanho.y/temp->getSize().y;
+        sprite.setScale(sX, sY);
+    }
+}
+
+
 void Entidade::colisao(Entidade* outraEntidade, Coordenada intersecao) { };

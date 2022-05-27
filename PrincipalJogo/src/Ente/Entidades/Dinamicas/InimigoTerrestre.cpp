@@ -9,9 +9,12 @@ InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d,
 {   
     this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
+    
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
     pPlataforma=NULL;
+
+    setTexture(TEX_INIMIGO_TERRESTRE);
 }
 
 InimigoTerrestre::~InimigoTerrestre() { }
