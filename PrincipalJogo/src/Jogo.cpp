@@ -3,13 +3,13 @@
 Jogo::Jogo():
     fase1(1,1)
 { 
-    exec();
+    executar();
 }
  
  
 Jogo::~Jogo() { }
 
 
-void Jogo::exec(){
+void Jogo::executar(){
     fase1.executar();    
 }

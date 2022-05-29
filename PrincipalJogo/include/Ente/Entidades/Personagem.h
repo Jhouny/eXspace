@@ -16,7 +16,7 @@ class Personagem: public Entidade {
         sf::Clock clock;
 
     public:
-        Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);  //perguntar da construtora da classe que eh derivada
+        Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);
         ~Personagem();
 
         const int getVida() const { return vida; }
@@ -25,7 +25,7 @@ class Personagem: public Entidade {
         const int getDano() const { return dano; }
 
         void setVelocidade(Coordenada v) { velocidade = v; }
-        Coordenada getVelocidade() { return velocidade; }
+        Coordenada getVelocidade() const{ return velocidade; }
 
         void setAceleracao(float acel) { aceleracaoY=acel; }
         float getAceleracao() { return aceleracaoY; }

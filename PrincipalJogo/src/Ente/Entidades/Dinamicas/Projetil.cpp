@@ -18,10 +18,6 @@ void Projetil::setVelocidade(float vx, float vy) {
     velocidade.y = vy;
 }
 
-void Projetil:: setDirecaoX(){
-    velocidade.x*=-1;
-}
-
 void Projetil::setDano(int d) {
     dano = d;
 }
@@ -40,7 +36,7 @@ void Projetil::movimentar() {
     this->setPosicao(p);
 }
 
-void Projetil::estaVivo() {
+void Projetil::estaAtivo() {
     if(this->getPosicao().x > COMPRIMENTO || this->getPosicao().x < 0 ||this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
         ativo = false;
     }
@@ -48,5 +44,5 @@ void Projetil::estaVivo() {
 
 void Projetil::executar() {  
     movimentar();
-    estaVivo();
+    estaAtivo();
 }

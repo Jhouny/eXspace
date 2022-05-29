@@ -6,8 +6,7 @@
 #define RECUO 100
 
 InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d, ID id):
-    Inimigo(tam,pos,v,d,id),
-    jogTaPerto(false)
+    Inimigo(tam,pos,v,d,id)
 {   
     this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
@@ -58,27 +57,6 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     }
 }
 
-// Verifica se o jogador esta perto do inimigo
-void InimigoTerrestre::alarmado() {
-    Coordenada centroIni,  centroJog, intersecao;
-    float diferenca;
-    
-    centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
-    centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
-    
-    centroJog.x = pJogador->getPosicao().x + (pJogador->getTamanho().x)/2.f;
-    centroJog.y = pJogador->getPosicao().y + (pJogador->getTamanho().y)/2.f;;
-    
-    intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador->getTamanho().x)/2.f;
-    intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador->getTamanho().y)/2.f;
-
-    diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
-    
-    if(fabs(diferenca) <= 300)
-        jogTaPerto = true;
-    else
-        jogTaPerto = false;
-}
 
 // Movimenta o inimigo
 void InimigoTerrestre::movimentar() {

@@ -27,16 +27,16 @@ Fase::~Fase() {}
 
 void Fase::setTexture(const char* path) {
     sf::Texture *temp = pGrafico->loadTexture(path);
-    backGround.setTexture(*temp);
+    fundo.setTexture(*temp);
     float sX = (float)COMPRIMENTO/temp->getSize().x;
     float sY = (float)ALTURA/temp->getSize().y;
-    backGround.setScale(2*sX, sY);
+    fundo.setScale(2*sX, sY);
 }
 
 void Fase::atualizarBackground() {
     // Simula o movimento relativo do background e jogador
     float pX = 0.85 * jogador1.getPosicao().x - COMPRIMENTO/2.f;
-    backGround.setPosition(pX, 0);
+    fundo.setPosition(pX, 0);
 }
 
 void Fase::gameOver() {
@@ -141,7 +141,7 @@ void Fase::executar() {
         pColisor->ChecarColisoes();
         
         // Draw shapes & executar
-        pGrafico->draw(&backGround, false);
+        pGrafico->draw(&fundo, false);
 
         Entidade *ent;
         for(i = 0; i < lDinamicas.getTamanho(); i++) {
@@ -161,11 +161,7 @@ void Fase::executar() {
 
         // VAI NO JOGADOR
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jogador1.getSegundos() > 0.5) {
-            Projetil *proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE
-            if(jogador1.getVelocidade().x<0){
-                proj->setDirecaoX();
-            }
-            
+            Projetil *proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
             this->incluir(static_cast<Entidade*>(proj));
             jogador1.reiniciarClock();
         }  

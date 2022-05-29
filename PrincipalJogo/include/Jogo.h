@@ -11,7 +11,7 @@ class Jogo {
 
         ~Jogo();
 
-        void exec();
+        void executar();
 };
 
 

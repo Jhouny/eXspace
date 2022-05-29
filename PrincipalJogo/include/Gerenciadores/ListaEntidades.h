@@ -8,8 +8,11 @@ class ListaEntidades{
     public:
         Lista<Entidade> le;
 
+        ListaEntidades(){}
+        ~ListaEntidades(){}
+
         // Retorna o tamanho da lista de entidades
-        int getTamanho() { return le.getTamanho(); }
+        const int getTamanho() { return le.getTamanho(); }
 
         // Adiciona um elemento
         void push(Entidade* ent) {
@@ -28,8 +31,8 @@ class ListaEntidades{
             le.removeIndice(ind);
         }
 
-        Entidade* operator[](int index) {
-            return le[index];
+        Entidade* operator[](int ind) {
+            return le[ind];
         }
 
         void print(){
@@ -37,10 +40,7 @@ class ListaEntidades{
             for(i=0;i<le.getTamanho();i++){
                 cout << "ID: " << le[i]->getID() << endl;
             }
-
         }
-
-
 };
 
 

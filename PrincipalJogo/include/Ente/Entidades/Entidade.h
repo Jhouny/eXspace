@@ -14,7 +14,6 @@ class Entidade: public Ente {
         sf::Sprite sprite;
         Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
         bool ativo;
-
     public:
         Entidade(ID id, Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
         ~Entidade();
@@ -24,7 +23,7 @@ class Entidade: public Ente {
         
         void setTexture(const char* path, bool esticar = true);
         void atualizaTexture(const char* path);
-        
+
         sf::Sprite* getSprite() { return &sprite; }
         sf::RectangleShape* getShape() { return &shape; }
         

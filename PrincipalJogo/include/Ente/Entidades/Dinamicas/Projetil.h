@@ -8,15 +8,14 @@
 
 class Projetil: public Entidade {
     private:
-        Coordenada velocidade;  //perguntar sobre representaçao uml 
+        Coordenada velocidade;  
         int dano;
     public:
         Projetil(Coordenada pos, float vx = 30, float vy = 0, int d = 20, ID id = projetil);
         ~Projetil();
 
         void setVelocidade(float vx, float vy);
-        const Coordenada getVelocidade() const { return velocidade; }  // const para ponteiro?
-        void setDirecaoX();
+        const Coordenada getVelocidade() const { return velocidade; } 
 
 
 
@@ -25,7 +24,7 @@ class Projetil: public Entidade {
 
         void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        void estaVivo();
+        void estaAtivo();
 
         void movimentar();
 

@@ -20,7 +20,7 @@ template <class LT> class Lista{
                 void setAnte(Elemento<EL> *ante) { pAnte = ante; }
                 Elemento<EL> *getAnte() { return pAnte; }
 
-                void setElemento(EL *cop) { el = cop; }
+                void setElemento(EL *ele) { el = ele; }
                 EL *getElemento() { return el; } 
         };
 
@@ -35,7 +35,7 @@ template <class LT> class Lista{
         void pop();
         void removeIndice(int ind);
         
-        int getTamanho() { return tamanho; }
+        const int getTamanho() { return tamanho; }
 
         Elemento<LT>* getInicial() { return pPrimeiro; }
 

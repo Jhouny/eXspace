@@ -23,15 +23,15 @@ class Fase: public Ente{
         int nivel, nJog;
         Jogador jogador1;
         Jogador jogador2;
-        sf::Sprite backGround;
+        sf::Sprite fundo;
         
     public:
         Fase(int ni = 1, int num_jog = 1);
         ~Fase();
         
-        void geraPlataformas();
-        void geraObstaculos();
-        Inimigo* geraInimigos();
+        void geraPlataformas(); //nao conseguimos implementar 
+        void geraObstaculos(); //nao conseguimos implementar 
+        Inimigo* geraInimigos(); //nao conseguimos implementar 
         
         void setTexture(const char* path);
         
