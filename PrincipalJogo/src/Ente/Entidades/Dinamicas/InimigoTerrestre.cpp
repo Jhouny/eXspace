@@ -116,6 +116,7 @@ void InimigoTerrestre::movimentar() {
 }
 
 void InimigoTerrestre::executar() {
+    atualizaTexture(TEX_INIMIGO_TERRESTRE);
     alarmado();
     movimentar();
     estaVivo();

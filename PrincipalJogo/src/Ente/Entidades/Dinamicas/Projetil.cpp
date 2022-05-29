@@ -18,6 +18,10 @@ void Projetil::setVelocidade(float vx, float vy) {
     velocidade.y = vy;
 }
 
+void Projetil:: setDirecaoX(){
+    velocidade.x*=-1;
+}
+
 void Projetil::setDano(int d) {
     dano = d;
 }

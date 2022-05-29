@@ -160,8 +160,12 @@ void Fase::executar() {
 
 
         // VAI NO JOGADOR
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) && jogador1.getSegundos() > 0.5) {
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jogador1.getSegundos() > 0.5) {
             Projetil *proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE
+            if(jogador1.getVelocidade().x<0){
+                proj->setDirecaoX();
+            }
+            
             this->incluir(static_cast<Entidade*>(proj));
             jogador1.reiniciarClock();
         }  

@@ -67,7 +67,7 @@ inline Lista<LT>::~Lista(){
 template<class LT>
 inline void Lista<LT>:: push(LT* cop) {
     if(cop != NULL) {  // Se o objeto passado for válido
-        cout << "ta: " << tamanho << endl;
+        // cout << "ta: " << tamanho << endl;
         tamanho++;
         Elemento<LT>* tmp = new Elemento<LT>();
         tmp->setElemento(cop);

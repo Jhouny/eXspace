@@ -23,7 +23,8 @@ class Entidade: public Ente {
         void setPosicao(Coordenada pos);
         
         void setTexture(const char* path, bool esticar = true);
-
+        void atualizaTexture(const char* path);
+        
         sf::Sprite* getSprite() { return &sprite; }
         sf::RectangleShape* getShape() { return &shape; }
         

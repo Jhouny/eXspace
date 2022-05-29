@@ -38,10 +38,17 @@ void Jogador::movimentar() {
     Coordenada p = this->getPosicao();
     
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        p += velocidade.x;  // Move com velocidade constante no eixo X
+        if(velocidade.x<0)
+            velocidade.x*=-1;
+        p += velocidade.x;  // Move com velocidade constante negativa no eixo X
+        setVelocidade(velocidade);
     }
     else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        p -= velocidade.x;  // Move com velocidade constante negativa no eixo X
+        if(velocidade.x>0)
+            velocidade.x*=-1;
+        p += velocidade.x;  // Move com velocidade constante negativa no eixo X
+        setVelocidade(velocidade);
+        
     }
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getJump() == false) {
         // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
@@ -118,6 +125,9 @@ void Jogador::atualizaAcel() {
 }
 
 void Jogador::executar() {
+    //seta as sprites
+    atualizaTexture(TEX_JOGADOR);
+
     // Checa as entradas do usuário e atualiza o movimento
     movimentar();
     
@@ -127,7 +137,9 @@ void Jogador::executar() {
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
 
-    atacar();
+
+
+    //atacar();
 
     // Se o jogador morrer
     if(!vivo) {
