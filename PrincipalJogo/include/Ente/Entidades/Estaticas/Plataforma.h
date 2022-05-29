@@ -9,7 +9,7 @@
 class Plataforma: public Obstaculo {
     private:
     public:
-        Plataforma(Coordenada tam, Coordenada pos, ID id = platforma);
+        Plataforma(Coordenada tam, Coordenada pos, ID id = plataforma);
         ~Plataforma();
         void executar();
         

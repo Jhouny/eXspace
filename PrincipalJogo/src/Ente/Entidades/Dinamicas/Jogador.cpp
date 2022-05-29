@@ -1,9 +1,12 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
+#include "../../../../include/Ente/Entidades/Inimigo.h"
+#include "../../../../include/Ente/Fase/Fase.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
 
 #define PULO_Y -35
 #define ATRITO 0.7
 
-Jogador::Jogador(Coordenada pos, int v, int d, ID id):
+Jogador::Jogador(Coordenada pos, Fase* pf, int v, int d, ID id):
     Personagem(Coordenada(46, 64), pos, v, d, id) {
         shape.setFillColor(sf::Color::Green);
         setJump(true);
@@ -15,16 +18,21 @@ Jogador::Jogador(Coordenada pos, int v, int d, ID id):
         setTexture(TEX_JOGADOR);
 }
 
-Jogador::~Jogador() {
-}
+Jogador::~Jogador() {}
 
 void Jogador::estaVivo() {
     Coordenada p = this->getPosicao();
-    if(p.y > ALTURA + 300) {
+    if(p.y > ALTURA + 300 || vida<=0) {
         vivo = false;
     }
 }
 
+void Jogador::atacar() {
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
+        Projetil *proj = new Projetil(Coordenada(this->getPosicao().x + 200, this->getPosicao().y));  // ADICIONAR VELOCIDADE
+        pFase->incluir(static_cast<Entidade*>(proj));
+    }
+}
 
 void Jogador::movimentar() {
     Coordenada p = this->getPosicao();
@@ -52,7 +60,7 @@ void Jogador::movimentar() {
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-    if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
+    if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
         Coordenada p = this->getPosicao();
         Coordenada v = this->getVelocidade();
         
@@ -69,12 +77,26 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         this->setVelocidade(v);
         this->setPosicao(p);
 
-    } else if(intersecao.y <= intersecao.x) {  // Se está do lado, não deixa atravessar o objeto
-        if (this->getPosicao().x < outraEntidade->getPosicao().x)
-            this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
-        else
-            this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
-        this->setJump(true);  // Para não poder pular se encostar lateralmente
+    } else if(intersecao.y <= intersecao.x) {
+
+        if(outraEntidade->getID() == ID::plataforma){ // Se está do lado, não deixa atravessar o objeto
+            if (this->getPosicao().x < outraEntidade->getPosicao().x) {
+                this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
+            } else {
+                this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
+            }
+        } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
+            Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
+            // Reduz a vida do jogador 
+            //this->receberDano(tmp->getDano());
+            //cout << "vida: " << vida << endl;
+            if (this->getPosicao().x < outraEntidade->getPosicao().x){
+                this->setPosicao(this->getPosicao().x, this->getPosicao().y);    
+            } else {
+                this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+            }                
+        }
+        this->setJump(true); // Para não poder pular se encostar lateralmente
     }
 }
 
@@ -104,6 +126,8 @@ void Jogador::executar() {
     
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
+
+    atacar();
 
     // Se o jogador morrer
     if(!vivo) {

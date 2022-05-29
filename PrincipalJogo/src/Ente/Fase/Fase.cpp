@@ -6,8 +6,8 @@ Fase::Fase(int ni, int num_jog):
     nJog(num_jog),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
     pColisor(new Gerenciadores::Colisor()),
-    jogador1(Coordenada(100,0)),
-    jogador2(Coordenada(200,0))
+    jogador1(Coordenada(100,0), this),
+    jogador2(Coordenada(200,0), this)
 {
     setTexture(TEX_BACKGROUND);
 
@@ -43,6 +43,50 @@ void Fase::gameOver() {
     pGrafico->terminar();
 }
 
+void Fase::incluir(Entidade* l) {
+    ID id = l->getID();
+    if(id == ID::jogador ||
+       id == ID::inimigoTerrestre ||
+       id == ID::projetil ||
+       id == ID::inimigoVoador ||
+       id == ID::chefe) {
+        lDinamicas.push(l);
+    } else
+        lEstaticas.push(l);
+       
+        /*// Lista de Entidades Dinamicas
+        case ID::jogador:
+            lDinamicas.push(l);
+            break;
+        case ID::inimigoTerrestre:
+            lDinamicas.push(l);
+            break;
+        case ID::projetil:
+            cout << "idIncl: " << l->getID() << endl;
+            lDinamicas.push(l);
+            break;
+        case ID::inimigoVoador:
+            lDinamicas.push(l);
+            break;
+        case ID::chefe:
+            lDinamicas.push(l);
+            break;
+        // Lista de Entidades Estaticas
+        case ID::plataforma:
+            lEstaticas.push(l);
+            break;
+        case ID::lava:
+            lEstaticas.push(l);
+            break;
+        case ID::gasToxico:
+            lEstaticas.push(l);
+            break;
+        case ID::rocha:
+            lEstaticas.push(l);
+            break;
+    }*/
+}
+
 
 void Fase::executar() {
     int i;
@@ -50,7 +94,7 @@ void Fase::executar() {
     for(i = 0; i < 3*nivel; i++) {
         temp[i].setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
         temp[i].setJogador(&jogador1);
-        lDinamicas.push(static_cast<Entidade*>(&temp[i]));
+        this->incluir(static_cast<Entidade*>(&temp[i]));
     }
     
 
@@ -76,6 +120,7 @@ void Fase::executar() {
     lEstaticas.push(static_cast<Entidade*>(&base9));
     lEstaticas.push(static_cast<Entidade*>(&base10));
     lEstaticas.push(static_cast<Entidade*>(&base11));
+
 
     //seta tamanho da view
     pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
@@ -113,10 +158,18 @@ void Fase::executar() {
             ent->executar();
         }
 
+
+        // VAI NO JOGADOR
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::G) && jogador1.getSegundos() > 0.5) {
+            Projetil *proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE
+            this->incluir(static_cast<Entidade*>(proj));
+            jogador1.reiniciarClock();
+        }  
+
+
         //Seta view
         pGrafico->atualizaView(&jogador1);
         atualizarBackground();
-        //pGrafico->setRotate();  // Comentar se nao quiser ficar enjoadokkkkkk
         
 
         pGrafico->display();

@@ -5,7 +5,7 @@
 
 #define GRAVIDADE 2.5
 
-class Personagem:public Entidade {
+class Personagem: public Entidade {
     protected:
         int vida;
         int dano;
@@ -13,6 +13,7 @@ class Personagem:public Entidade {
         bool vivo;
         float aceleracaoY;
         Coordenada velocidade;
+        sf::Clock clock;
 
     public:
         Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);  //perguntar da construtora da classe que eh derivada
@@ -33,6 +34,8 @@ class Personagem:public Entidade {
 
         void setJump(bool state) { jumping = state; }
         const bool getJump() const { return jumping; }
+
+        virtual void atacar() {};
 
         virtual void estaVivo() = 0;
 

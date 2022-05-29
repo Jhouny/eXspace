@@ -21,7 +21,7 @@ class InimigoTerrestre: public Inimigo {
         void alarmado();
 
         void movimentar();
-        
+
         void executar();
 };
 

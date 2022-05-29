@@ -3,9 +3,10 @@
 
 #include"../../Auxiliares/stdafx.h"
 #include "Personagem.h"
-#include "Dinamicas/Jogador.h"
 
-class Inimigo: public Personagem{
+class Jogador;
+
+class Inimigo: public Personagem {
     protected:
         Jogador* pJogador;// vetor de duas posicoes 
         // contador static int para vetor

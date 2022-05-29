@@ -13,8 +13,9 @@ class ListaEntidades{
 
         // Adiciona um elemento
         void push(Entidade* ent) {
-            if(ent)
+            if(ent) {
                 le.push(ent);
+            }
         }
 
         // Remove o ultimo elemento

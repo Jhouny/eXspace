@@ -67,6 +67,7 @@ inline Lista<LT>::~Lista(){
 template<class LT>
 inline void Lista<LT>:: push(LT* cop) {
     if(cop != NULL) {  // Se o objeto passado for válido
+        cout << "ta: " << tamanho << endl;
         tamanho++;
         Elemento<LT>* tmp = new Elemento<LT>();
         tmp->setElemento(cop);
@@ -75,7 +76,8 @@ inline void Lista<LT>:: push(LT* cop) {
             pUltimo = tmp;
         } else {
             tmp->setAnte(pUltimo);
-            pUltimo->setProx(tmp);
+            if(pUltimo)
+                pUltimo->setProx(tmp);
             pUltimo = tmp;
         }
 
@@ -125,17 +127,21 @@ inline void Lista<LT>::removeIndice(int ind) {
         for(i = 0; i < ind; i++) {  // Itera até o elemento do indice
             pEl = pEl->getProx();
         }
+
+        if(i == tamanho-1) {
+            pUltimo = pEl->getAnte();
+        }
         
         // Se os elementos anterior e próximo existirem, conecta-os um ao outro
         if(pEl->getAnte() != NULL)  
             pEl->getAnte()->setProx(pEl->getProx());
-        if(pEl->getProx())
+        if(pEl->getProx() != NULL)
             pEl->getProx()->setAnte(pEl->getAnte());
 
         delete pEl;
         tamanho--;
-    } 
-    else {
+        cout << "tam: " << tamanho << endl;
+    } else {
         cout << "Indice: " << ind << " fora da lista" << endl;
         exit(1);
     }

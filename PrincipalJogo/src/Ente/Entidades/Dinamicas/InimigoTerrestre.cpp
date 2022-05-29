@@ -1,4 +1,6 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
 #define VELOCIDADE 2
 #define RECUO 100
@@ -21,13 +23,13 @@ InimigoTerrestre::~InimigoTerrestre() { }
 
 void InimigoTerrestre::estaVivo() {
     Coordenada p = this->getPosicao();
-    if(p.y > ALTURA + 300) {
+    if(p.y > ALTURA + 300 || vida <= 0) {
         vivo = false;
     }
 }
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-    if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::platforma){
+    if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma){
         pPlataforma = outraEntidade;
         // Fixa o inimigo em cima da plataforma
         Coordenada p;
@@ -40,13 +42,19 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         
         this->setVelocidade(v);
 
-    } else if(intersecao.y <= intersecao.x && outraEntidade->getID() == ID::jogador) {
-        Coordenada p = this->getPosicao();
-        if(p.x < outraEntidade->getPosicao().x)
-            p.x -= RECUO;
-        else
-            p.x += RECUO;
-        this->setPosicao(p);
+    } else if(intersecao.y <= intersecao.x) {
+        if( outraEntidade->getID() == ID::jogador){
+            Coordenada p = this->getPosicao();
+            if(p.x < outraEntidade->getPosicao().x)
+                p.x -= RECUO;
+            else
+                p.x += RECUO;
+            this->setPosicao(p);
+        }
+        else if( outraEntidade->getID() == ID::projetil) {
+            Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+            this->receberDano(tmp->getDano());
+        }
     }
 }
 
@@ -113,6 +121,6 @@ void InimigoTerrestre::executar() {
     estaVivo();
     
     if(!vivo) {
-        this->ativo = false;
+        this->setAtivo(false);
     }
 }

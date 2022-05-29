@@ -31,6 +31,7 @@ class Entidade: public Ente {
         Coordenada getTamanho() const { return tamanho; }
 
         bool getAtivo() const { return ativo; }
+        void setAtivo(bool at) { ativo = at; }
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 

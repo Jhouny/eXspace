@@ -35,7 +35,7 @@ class Fase: public Ente{
         
         void setTexture(const char* path);
         
-        void incluir(ListaEntidades* lista, Entidade* l);
+        void incluir(Entidade* l);
 
         void atualizarBackground();
 

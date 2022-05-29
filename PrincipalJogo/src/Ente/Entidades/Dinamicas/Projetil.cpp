@@ -1,31 +1,48 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
-Projetil::Projetil(Coordenada tam, Coordenada pos, float vx, float vy, int d, ID id):
-    Entidade(id, tam, pos) {
-        velocidade[0] = vx;
-        velocidade[1] = vy;
+Projetil::Projetil(Coordenada pos, float vx, float vy, int d, ID id):
+    Entidade(id, Coordenada(10,5), pos)
+     {
+        velocidade.x = vx;
+        velocidade.y= vy;
         dano = d;
+        setTexture(TEX_PROJETIL);
 }
 
 Projetil::~Projetil() {
-    free(velocidade);
+    
 }
 
 void Projetil::setVelocidade(float vx, float vy) {
-    velocidade[0] = vx;
-    velocidade[1] = vy;
+    velocidade.x = vx;
+    velocidade.y = vy;
 }
 
 void Projetil::setDano(int d) {
     dano = d;
 }
 
-void Projetil::executar() {  // Muda a posição da ENTIDADE
+void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
+    this->setAtivo(false);
+}
+
+// Muda a posição da ENTIDADE
+void Projetil::movimentar() {
     Coordenada p = this->getPosicao();
-    Coordenada X(1,0);
-    Coordenada Y(0,1);
-    p += X*velocidade[0];
-    p += Y*velocidade[1];
+
+    p.x += velocidade.x;
+    p.y += velocidade.y;
 
     this->setPosicao(p);
+}
+
+void Projetil::estaVivo() {
+    if(this->getPosicao().x > COMPRIMENTO || this->getPosicao().x < 0 ||this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
+        ativo = false;
+    }
+}
+
+void Projetil::executar() {  
+    movimentar();
+    estaVivo();
 }
