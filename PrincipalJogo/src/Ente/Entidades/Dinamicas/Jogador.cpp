@@ -6,11 +6,9 @@
 #define PULO_Y -35
 #define ATRITO 0.7
 
-Jogador::Jogador(Coordenada pos, Fase* pf, int v, int d, ID id):
-    Personagem(Coordenada(46, 64), pos, v, d, id),
-    pFase(pf)
+Jogador::Jogador():
+    Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador)
     {
-        shape.setFillColor(sf::Color::Green);
         setJump(true);
         velocidade.x = 0.f;
         velocidade.y = 0.f;
@@ -58,7 +56,7 @@ void Jogador::movimentar() {
         setVelocidade(velocidade);
         
     }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getJump() == false) {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getPulo() == false) {
         // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
         Coordenada v = this->getVelocidade();
         v.y = PULO_Y;
@@ -127,7 +125,7 @@ void Jogador::aplicaAcel() {
 }
 
 void Jogador::atualizaAcel() {
-    if(this->getJump()) {
+    if(this->getPulo()) {
         this->setAceleracao(GRAVIDADE);
     }
 }

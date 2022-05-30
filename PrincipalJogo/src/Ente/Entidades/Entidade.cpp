@@ -2,10 +2,11 @@
 #include "../../../include/Ente/Entidades/Personagem.h"
 
 
-Entidade::Entidade(ID id, Coordenada tam, Coordenada pos):
+Entidade::Entidade(ID id, Coordenada tam, Coordenada pos, bool estat):
     Ente(id),
     tamanho(tam),
     posicao(pos),
+    estatico(estat),
     shape(sf::Vector2f(tam.getX(),tam.getY())),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
     ativo(true)

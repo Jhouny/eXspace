@@ -1,26 +1,21 @@
 #include "../../../include/Ente/Fase/Fase.h"
 
-Fase::Fase(int ni, int num_jog):
+Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
     Ente(ID::fase),
     nivel(ni),
-    nJog(num_jog),
+    jogador1(jog1),
+    jogador2(jog2),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
-    pColisor(new Gerenciadores::Colisor()),
-    jogador1(Coordenada(100,0), this),
-    jogador2(Coordenada(200,0), this)
+    Colisor()
 {
     setTexture(TEX_BACKGROUND);
-
     if(nJog == 2) {
-        jogador2.setVelocidade(Coordenada(15,0));
-        lDinamicas.push(static_cast<Entidade*>(&jogador2));
+        jogador2->setVelocidade(Coordenada(15,0));
+        incluir(static_cast<Entidade*>(jogador2));
     }
-    
-    jogador1.setVelocidade(Coordenada(10.5,0));
-    lDinamicas.push(static_cast<Entidade*>(&jogador1));
 
-    pColisor->setDinamicas(&lDinamicas);
-    pColisor->setEstatica(&lEstaticas);
+    jogador1->setVelocidade(Coordenada(10.5, 0));
+    incluir(static_cast<Entidade*>(jogador1));
 }
 
 Fase::~Fase() {}
@@ -35,7 +30,7 @@ void Fase::setTexture(const char* path) {
 
 void Fase::atualizarBackground() {
     // Simula o movimento relativo do background e jogador
-    float pX = 0.85 * jogador1.getPosicao().x - COMPRIMENTO/2.f;
+    float pX = 0.85 * jogador1->getPosicao().x - COMPRIMENTO/2.f;
     fundo.setPosition(pX, 0);
 }
 
@@ -45,72 +40,31 @@ void Fase::gameOver() {
 
 void Fase::incluir(Entidade* l) {
     ID id = l->getID();
-    if(id == ID::jogador ||
-       id == ID::inimigoTerrestre ||
-       id == ID::projetil ||
-       id == ID::inimigoVoador ||
-       id == ID::chefe) {
-        lDinamicas.push(l);
-    } else
-        lEstaticas.push(l);
-       
-        /*// Lista de Entidades Dinamicas
-        case ID::jogador:
-            lDinamicas.push(l);
-            break;
-        case ID::inimigoTerrestre:
-            lDinamicas.push(l);
-            break;
-        case ID::projetil:
-            cout << "idIncl: " << l->getID() << endl;
-            lDinamicas.push(l);
-            break;
-        case ID::inimigoVoador:
-            lDinamicas.push(l);
-            break;
-        case ID::chefe:
-            lDinamicas.push(l);
-            break;
-        // Lista de Entidades Estaticas
-        case ID::plataforma:
-            lEstaticas.push(l);
-            break;
-        case ID::lava:
-            lEstaticas.push(l);
-            break;
-        case ID::gasToxico:
-            lEstaticas.push(l);
-            break;
-        case ID::rocha:
-            lEstaticas.push(l);
-            break;
-    }*/
+    lEntidades.push(l);
+    Colisor.push(l);
 }
+
 void Fase::atualizaEntidades(){
     int i;
     Entidade *ent;
-    for(i = 0; i < lDinamicas.getTamanho(); i++) {
-        ent = lDinamicas[i];
+    for(i = 0; i < lEntidades.getTamanho(); i++) {
+        ent = lEntidades[i];
         pGrafico->draw(ent->getSprite());
         ent->executar();
         if(!ent->getAtivo())
-            lDinamicas.removeIndice(i);
-    }
-    
-    for(i = 0; i < lEstaticas.getTamanho(); i++) {
-        ent = lEstaticas[i];
-        pGrafico->draw(ent->getSprite());
-        ent->executar();
+            lEntidades.removeIndice(i);
     }
 }
 
 void Fase::executar() {
+    cout << "nivel: " << nivel << endl;
     int i;
     InimigoTerrestre temp[10*nivel];
+    cout << "AQUI" << endl;
     for(i = 0; i < 3*nivel; i++) {
         temp[i].setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
-        temp[i].setJogador(&jogador1);
-        this->incluir(static_cast<Entidade*>(&temp[i]));
+        temp[i].setJogador(jogador1);
+        incluir(static_cast<Entidade*>(&temp[i]));
     }
     
 
@@ -126,19 +80,19 @@ void Fase::executar() {
     Plataforma base10(Coordenada(150, 32), Coordenada(1800, ALTURA - 450.f));
     Plataforma base11(Coordenada(150, 32), Coordenada(2200, ALTURA -400.f));
     
-    lEstaticas.push(static_cast<Entidade*>(&base1));
-    lEstaticas.push(static_cast<Entidade*>(&base2));
-    lEstaticas.push(static_cast<Entidade*>(&base3));
-    lEstaticas.push(static_cast<Entidade*>(&base4));
-    lEstaticas.push(static_cast<Entidade*>(&base6));
-    lEstaticas.push(static_cast<Entidade*>(&base7));
-    lEstaticas.push(static_cast<Entidade*>(&base8));
-    lEstaticas.push(static_cast<Entidade*>(&base9));
-    lEstaticas.push(static_cast<Entidade*>(&base10));
-    lEstaticas.push(static_cast<Entidade*>(&base11));
+    incluir(static_cast<Entidade*>(&base1));
+    incluir(static_cast<Entidade*>(&base2));
+    incluir(static_cast<Entidade*>(&base3));
+    incluir(static_cast<Entidade*>(&base4));
+    incluir(static_cast<Entidade*>(&base6));
+    incluir(static_cast<Entidade*>(&base7));
+    incluir(static_cast<Entidade*>(&base8));
+    incluir(static_cast<Entidade*>(&base9));
+    incluir(static_cast<Entidade*>(&base10));
+    incluir(static_cast<Entidade*>(&base11));
 
 
-    //seta tamanho da view
+    // Seta tamanho da view
     pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
     pGrafico->setMinimap(Coordenada (4000,ALTURA));
     pGrafico->setMinimapViewport();
@@ -154,7 +108,7 @@ void Fase::executar() {
         
         pGrafico->clear();
         // Verifica colisao entre Entidades Dinamicas e Estaticas
-        pColisor->ChecarColisoes();
+        Colisor.ChecarColisoes();
         
         // Draw shapes & executar
         pGrafico->draw(&fundo, false);
@@ -162,22 +116,9 @@ void Fase::executar() {
         atualizaEntidades();
 
 
-        // VAI NO JOGADOR
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jogador1.getSegundos() > 0.5) {
-            Projetil *proj;
-            if(jogador1.getVelocidade().x>=0)
-                proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
-            else if(jogador1.getVelocidade().x<0){
-                proj = new Projetil(Coordenada(jogador1.getPosicao().x  - 20, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f),-20);
-            }
-            
-            this->incluir(static_cast<Entidade*>(proj));
-            jogador1.reiniciarClock();
-        }  
-
-
+        // VAI NO JOGA
         //Seta view
-        pGrafico->atualizaView(&jogador1);
+        pGrafico->atualizaView(jogador1);
         atualizarBackground();
         
 

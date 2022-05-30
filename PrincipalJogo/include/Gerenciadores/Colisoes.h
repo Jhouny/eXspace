@@ -1,22 +1,19 @@
-#include "ListaEntidades.h"
+#include "../Ente/Entidades/Entidade.h"
 
 namespace Gerenciadores {
     class Colisor {
         private:
-            ListaEntidades* lDinamicas;
-            ListaEntidades* lEstaticas;
+            std::vector<Entidade*> enteDinamicas;
+            std::list<Entidade*> enteEstaticas;
+            std::vector<Entidade*>::iterator itDinamicas;
+            std::list<Entidade*>::iterator itEstaticas;
+
         public:
             Colisor();
 
             ~Colisor();
 
-            void setEstatica(ListaEntidades* lEst) {
-                lEstaticas= lEst;
-            }
-
-            void setDinamicas(ListaEntidades* lDin) {
-                lDinamicas = lDin;
-            }
+            void push(Entidade* ente);
 
             void ChecarColisoes();
     };

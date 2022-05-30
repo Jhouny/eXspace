@@ -9,31 +9,30 @@ class Personagem: public Entidade {
     protected:
         int vida;
         int dano;
-        bool jumping;
+        bool pulando;
         bool vivo;
         float aceleracaoY;
         Coordenada velocidade;
         sf::Clock clock;
 
     public:
-        Personagem(Coordenada tam, Coordenada pos, int v = 100, int d = 20, ID id = vazio);
+        Personagem(Coordenada tam, Coordenada pos, bool estatico, int v = 100, int d = 20, ID id = vazio);
         ~Personagem();
 
         const int getVida() const { return vida; }
 
         void setDano(int d);
         const int getDano() const { return dano; }
-
-        void setVelocidade(Coordenada v) { velocidade = v; }
-        Coordenada getVelocidade() const{ return velocidade; }
-
-        void setAceleracao(float acel) { aceleracaoY=acel; }
-        float getAceleracao() { return aceleracaoY; }
-
         void receberDano(int d);
 
-        void setJump(bool state) { jumping = state; }
-        const bool getJump() const { return jumping; }
+        void setVelocidade(Coordenada v) { velocidade = v; }
+        Coordenada getVelocidade() const { return velocidade; }
+
+        void setAceleracao(float acel) { aceleracaoY = acel; }
+        float getAceleracao() { return aceleracaoY; }
+
+        void setJump(bool estado) { pulando = estado; }
+        const bool getPulo() const { return pulando; }
 
         virtual void atacar() {};
 

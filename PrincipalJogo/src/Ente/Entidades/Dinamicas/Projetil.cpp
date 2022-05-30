@@ -1,7 +1,7 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
 Projetil::Projetil(Coordenada pos, float vx, float vy, int d, ID id):
-    Entidade(id, Coordenada(10,5), pos)
+    Entidade(id,Coordenada(10,5), pos, false)
      {
         velocidade.x = vx;
         velocidade.y= vy;
@@ -37,7 +37,7 @@ void Projetil::movimentar() {
 }
 
 void Projetil::estaAtivo() {
-    if(this->getPosicao().x > 10000||this->getPosicao().x<0 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
+    if(this->getPosicao().x > 10000||this->getPosicao().x < 0 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
        setAtivo(false);
     }
 }

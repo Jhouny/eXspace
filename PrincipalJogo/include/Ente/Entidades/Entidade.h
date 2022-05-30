@@ -14,8 +14,9 @@ class Entidade: public Ente {
         sf::Sprite sprite;
         Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
         bool ativo;
+        bool estatico;
     public:
-        Entidade(ID id, Coordenada tam, Coordenada pos);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
+        Entidade(ID id, Coordenada tam, Coordenada pos, bool estat);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
         ~Entidade();
 
         void setPosicao(float x, float y);
@@ -32,6 +33,8 @@ class Entidade: public Ente {
 
         bool getAtivo() const { return ativo; }
         void setAtivo(bool at) { ativo = at; }
+
+        bool getEstatico() const { return estatico; }
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 

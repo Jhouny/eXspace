@@ -1,10 +1,10 @@
 #include "../../../include/Ente/Entidades/Personagem.h"
 
-Personagem::Personagem(Coordenada tam, Coordenada pos, int v, int d, ID id):
-    Entidade(id, tam,pos),
+Personagem::Personagem(Coordenada tam, Coordenada pos, bool est, int v, int d, ID id):
+    Entidade(id,tam,pos,est),
     vida(v),
     dano(d),
-    jumping(true),
+    pulando(true),
     vivo(true)
 {
 }

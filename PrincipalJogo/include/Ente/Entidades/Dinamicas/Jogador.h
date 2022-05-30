@@ -13,9 +13,14 @@ class Jogador: public Personagem {
         Projetil* proj;
 
     public:
-        Jogador(Coordenada pos, Fase* pf, int v = 100, int d = 20, ID id = jogador);
+        Jogador();
         ~Jogador();
         void estaVivo();
+
+        void setFase(Fase* fase){ 
+            if(fase)
+                pFase=fase;
+        }
         float getSegundos() {
             return clock.getElapsedTime().asSeconds();
         }

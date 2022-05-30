@@ -1,8 +1,9 @@
 #include "../include/Jogo.h"
 
 Jogo::Jogo():
-    fase1(1,1)
-{ 
+    jogador1(),
+    fase1(1, &jogador1 , &jogador2)
+{
     executar();
 }
  

@@ -16,23 +16,30 @@
 
 class Fase: public Ente{
     private:
-        ListaEntidades lEstaticas;
-        ListaEntidades lDinamicas;
+        ListaEntidades lEntidades;
+
         Gerenciadores::Grafico* pGrafico;  //pGrafico(Gerenciadores::Grafico::getInstancia())
-        Gerenciadores::Colisor* pColisor;
-        int nivel, nJog;
-        Jogador jogador1;
-        Jogador jogador2;
+        Gerenciadores::Colisor Colisor;
+
+        int nivel;
+        int nJog;
+
+        Jogador *jogador1;
+        Jogador *jogador2;
+        
         sf::Sprite fundo;
         
     public:
-        Fase(int ni = 1, int num_jog = 1);
+        Fase(int ni = 1, Jogador* jog1 = NULL, Jogador* jog2 = NULL);
+        
         ~Fase();
         
         void geraPlataformas(); //nao conseguimos implementar 
         void geraObstaculos(); //nao conseguimos implementar 
         Inimigo* geraInimigos(); //nao conseguimos implementar 
         
+        void setJogador1(Jogador *jog) { jogador1 = jog; }
+        void setJogador2(Jogador *jog) { jogador2 = jog; }
 
         void atualizaEntidades();
         void setTexture(const char* path);
