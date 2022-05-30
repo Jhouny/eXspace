@@ -58,10 +58,9 @@ void Fase::atualizaEntidades(){
 }
 
 void Fase::executar() {
-    cout << "nivel: " << nivel << endl;
     int i;
     InimigoTerrestre temp[10*nivel];
-    cout << "AQUI" << endl;
+    
     for(i = 0; i < 3*nivel; i++) {
         temp[i].setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
         temp[i].setJogador(jogador1);
@@ -116,8 +115,6 @@ void Fase::executar() {
 
         atualizaEntidades();
 
-
-        // VAI NO JOGA
         //Seta view
         pGrafico->atualizaView(jogador1);
         atualizarBackground();

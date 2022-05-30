@@ -15,6 +15,8 @@ namespace Gerenciadores {
 
             void push(Entidade* ente);
 
+            void inicioUm();
+
             void ChecarColisoes();
     };
 }

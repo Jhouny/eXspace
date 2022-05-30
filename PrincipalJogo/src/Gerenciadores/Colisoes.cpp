@@ -18,6 +18,11 @@ namespace Gerenciadores {
         }
     }
 
+    void Colisor::inicioUm(){
+        itDinamicas=enteDinamicas.begin();
+        itDinamicas++;
+    }
+
     void Colisor::ChecarColisoes() {
         Entidade *ent1, *ent2;
         Coordenada centroEnt1, centroEnt2, intersecao;
@@ -46,13 +51,12 @@ namespace Gerenciadores {
             }
         }
         std::vector<Entidade*>::iterator itDinamicas2;
-        itDinamicas2 = enteDinamicas.begin();
-        itDinamicas2++;
+        
         // Colisões de elementos Dinamicos com Dinamicos
-        for(itDinamicas=enteDinamicas.begin(); itDinamicas != enteDinamicas.end(); itDinamicas++) {
-            ent1 = *itDinamicas;
-            for(; itDinamicas2 != enteDinamicas.end(); itDinamicas2++) {
-                ent2 = *itDinamicas2;
+        for(int i = 0; i < enteDinamicas.size(); i++) {
+            ent1 = enteDinamicas[i];
+            for(int j = i + 1; j < enteDinamicas.size(); j++){
+                ent2 = enteDinamicas[j];
 
                 // Calcula as coordenadas dos centros dos dois objetos
                 centroEnt1.x = ent1->getPosicao().x + (ent1->getTamanho().x / 2.0f);
@@ -69,8 +73,8 @@ namespace Gerenciadores {
                 if(intersecao.x < 0 && intersecao.y < 0) {
                     ent1->colisao(ent2, intersecao);
                     ent2->colisao(ent1, intersecao);
-                
                 }
+                
             }
         }
     }
