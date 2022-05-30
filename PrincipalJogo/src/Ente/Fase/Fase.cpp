@@ -86,7 +86,23 @@ void Fase::incluir(Entidade* l) {
             break;
     }*/
 }
-
+void Fase::atualizaEntidades(){
+    int i;
+    Entidade *ent;
+    for(i = 0; i < lDinamicas.getTamanho(); i++) {
+        ent = lDinamicas[i];
+        pGrafico->draw(ent->getSprite());
+        ent->executar();
+        if(!ent->getAtivo())
+            lDinamicas.removeIndice(i);
+    }
+    
+    for(i = 0; i < lEstaticas.getTamanho(); i++) {
+        ent = lEstaticas[i];
+        pGrafico->draw(ent->getSprite());
+        ent->executar();
+    }
+}
 
 void Fase::executar() {
     int i;
@@ -143,25 +159,18 @@ void Fase::executar() {
         // Draw shapes & executar
         pGrafico->draw(&fundo, false);
 
-        Entidade *ent;
-        for(i = 0; i < lDinamicas.getTamanho(); i++) {
-            ent = lDinamicas[i];
-            pGrafico->draw(ent->getSprite());
-            ent->executar();
-            if(!ent->getAtivo())
-                lDinamicas.removeIndice(i);
-        }
-        
-        for(i = 0; i < lEstaticas.getTamanho(); i++) {
-            ent = lEstaticas[i];
-            pGrafico->draw(ent->getSprite());
-            ent->executar();
-        }
+        atualizaEntidades();
 
 
         // VAI NO JOGADOR
         if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && jogador1.getSegundos() > 0.5) {
-            Projetil *proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
+            Projetil *proj;
+            if(jogador1.getVelocidade().x>=0)
+                proj = new Projetil(Coordenada(jogador1.getPosicao().x + 60, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
+            else if(jogador1.getVelocidade().x<0){
+                proj = new Projetil(Coordenada(jogador1.getPosicao().x  - 20, jogador1.getPosicao().y + jogador1.getTamanho().y/2.f),-20);
+            }
+            
             this->incluir(static_cast<Entidade*>(proj));
             jogador1.reiniciarClock();
         }  

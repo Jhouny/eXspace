@@ -47,18 +47,36 @@ void Entidade::setTexture(const char* path, bool esticar) {
 }
 
 void Entidade::atualizaTexture(const char* path){
-     if(this->getID() == ID::jogador || this->getID() == ID::inimigoTerrestre){
-            sf::Texture* temp = pGrafico->loadTexture(path);
-            Personagem *psng= dynamic_cast<Personagem*>(this);
-            float sX;
-            if(psng->getVelocidade().x<0){
-                sX = -tamanho.x/temp->getSize().x;
-            } else {
-                sX = tamanho.x/temp->getSize().x;
-            }
-            float sY = tamanho.y/temp->getSize().y;
-            sprite.setScale(sX, sY);
+    if(this->getID() == ID::jogador || this->getID() == ID::inimigoTerrestre){
+        sf::Texture* temp = pGrafico->loadTexture(path);
+        Personagem *psng= dynamic_cast<Personagem*>(this);
+        float sX;
+
+        if(psng->getVelocidade().x<0){
+            sX = -tamanho.x/temp->getSize().x;
+            sprite.setOrigin(sf::Vector2f(23,0)); //seta outro eixo
+        } else {
+            sX = tamanho.x/temp->getSize().x;
+            sprite.setOrigin(sf::Vector2f(0,0));
         }
+        float sY = tamanho.y/temp->getSize().y;
+        sprite.setScale(sX, sY);
+    }
+    else if(this->getID() == ID::inimigoTerrestre){
+        sf::Texture* temp = pGrafico->loadTexture(path);
+        Personagem *psng= dynamic_cast<Personagem*>(this);
+        float sX;
+
+        if(psng->getVelocidade().x<0){
+            sX = -tamanho.x/temp->getSize().x;
+            sprite.setOrigin(sf::Vector2f(23,0)); //
+        } else {
+            sX = tamanho.x/temp->getSize().x;
+            sprite.setOrigin(sf::Vector2f(25,0));
+        }
+        float sY = tamanho.y/temp->getSize().y;
+        sprite.setScale(sX, sY);
+    }
 }
 
 

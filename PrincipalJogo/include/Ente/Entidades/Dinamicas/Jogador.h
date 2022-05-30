@@ -2,6 +2,8 @@
 #define _JOGADOR_H_
 
 #include "../Personagem.h"
+#include "Projetil.h"
+
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
 
 class Fase;
@@ -9,11 +11,11 @@ class Jogador: public Personagem {
     private:
         Fase* pFase;
         sf::Clock clock;
+        Projetil* proj;
 
     public:
         Jogador(Coordenada pos, Fase* pf, int v = 100, int d = 20, ID id = jogador);
         ~Jogador();
-        
         void estaVivo();
         float getSegundos() {
             return clock.getElapsedTime().asSeconds();

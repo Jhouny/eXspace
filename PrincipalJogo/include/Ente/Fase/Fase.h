@@ -33,6 +33,8 @@ class Fase: public Ente{
         void geraObstaculos(); //nao conseguimos implementar 
         Inimigo* geraInimigos(); //nao conseguimos implementar 
         
+
+        void atualizaEntidades();
         void setTexture(const char* path);
         
         void incluir(Entidade* l);

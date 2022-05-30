@@ -7,7 +7,9 @@
 #define ATRITO 0.7
 
 Jogador::Jogador(Coordenada pos, Fase* pf, int v, int d, ID id):
-    Personagem(Coordenada(46, 64), pos, v, d, id) {
+    Personagem(Coordenada(46, 64), pos, v, d, id),
+    pFase(pf)
+    {
         shape.setFillColor(sf::Color::Green);
         setJump(true);
         velocidade.x = 0.f;
@@ -28,10 +30,16 @@ void Jogador::estaVivo() {
 }
 
 void Jogador::atacar() {
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::F)) {
-        Projetil *proj = new Projetil(Coordenada(this->getPosicao().x + 200, this->getPosicao().y));  // ADICIONAR VELOCIDADE
-        pFase->incluir(static_cast<Entidade*>(proj));
-    }
+     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->getSegundos() > 0.2) {
+            if(this->getVelocidade().x>=0)
+                proj = new Projetil(Coordenada(this->getPosicao().x + 60, this->getPosicao().y + this->getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
+            else if(this->getVelocidade().x<0){
+                proj = new Projetil(Coordenada(this->getPosicao().x  - 20, this->getPosicao().y + this->getTamanho().y/2.f),-20);
+            }
+            
+            pFase->incluir(static_cast<Entidade*>(proj));
+            this->reiniciarClock();
+        }  
 }
 
 void Jogador::movimentar() {
@@ -93,7 +101,7 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
                 this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
             }
         } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
-            Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
+            //Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
             // Reduz a vida do jogador 
             //this->receberDano(tmp->getDano());
             //cout << "vida: " << vida << endl;
@@ -139,7 +147,7 @@ void Jogador::executar() {
 
 
 
-    //atacar();
+    atacar();
 
     // Se o jogador morrer
     if(!vivo) {

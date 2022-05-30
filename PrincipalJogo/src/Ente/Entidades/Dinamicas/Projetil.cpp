@@ -37,8 +37,8 @@ void Projetil::movimentar() {
 }
 
 void Projetil::estaAtivo() {
-    if(this->getPosicao().x > COMPRIMENTO || this->getPosicao().x < 0 ||this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
-        ativo = false;
+    if(this->getPosicao().x > 10000||this->getPosicao().x<0 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
+       setAtivo(false);
     }
 }
 
