@@ -8,7 +8,7 @@ class Jogo {
         Jogador jogador1;
         Jogador jogador2;
         Fase fase1;
-        Fase fase2;
+        //Fase fase2;
     public:
         Jogo();
 

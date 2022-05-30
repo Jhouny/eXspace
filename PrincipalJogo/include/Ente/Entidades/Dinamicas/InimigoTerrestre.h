@@ -9,7 +9,7 @@ class InimigoTerrestre: public Inimigo {
         Coordenada velocidade;
         Entidade* pPlataforma;
     public:
-        InimigoTerrestre(Coordenada pos = Coordenada(100,100), Coordenada tam = Coordenada(50, 50), int v = 100, int d = 20, ID id = inimigoTerrestre);
+        InimigoTerrestre(Coordenada pos = Coordenada(100,100), Coordenada tam = Coordenada(50, 50), int v = 100, int d = 20, ID id = inimigoTerrestre, bool est = false );
         ~InimigoTerrestre();
         
         

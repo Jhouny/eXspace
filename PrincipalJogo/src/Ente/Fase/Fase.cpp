@@ -6,15 +6,16 @@ Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
     jogador1(jog1),
     jogador2(jog2),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
-    Colisor()
+    colisor()
 {
     setTexture(TEX_BACKGROUND);
     if(nJog == 2) {
         jogador2->setVelocidade(Coordenada(15,0));
         incluir(static_cast<Entidade*>(jogador2));
     }
-
+    cout<<"aqui"<<endl;
     jogador1->setVelocidade(Coordenada(10.5, 0));
+    jogador1->setFase(this);
     incluir(static_cast<Entidade*>(jogador1));
 }
 
@@ -41,7 +42,7 @@ void Fase::gameOver() {
 void Fase::incluir(Entidade* l) {
     ID id = l->getID();
     lEntidades.push(l);
-    Colisor.push(l);
+    colisor.push(l);
 }
 
 void Fase::atualizaEntidades(){
@@ -108,7 +109,7 @@ void Fase::executar() {
         
         pGrafico->clear();
         // Verifica colisao entre Entidades Dinamicas e Estaticas
-        Colisor.ChecarColisoes();
+        colisor.ChecarColisoes();
         
         // Draw shapes & executar
         pGrafico->draw(&fundo, false);

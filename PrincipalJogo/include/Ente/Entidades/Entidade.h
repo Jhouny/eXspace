@@ -16,7 +16,7 @@ class Entidade: public Ente {
         bool ativo;
         bool estatico;
     public:
-        Entidade(ID id, Coordenada tam, Coordenada pos, bool estat);  // CHECAR CONSTRUTORA COM DERIVADA DA CLASSE ENTE
+        Entidade(ID id, Coordenada tam, Coordenada pos, bool estat); 
         ~Entidade();
 
         void setPosicao(float x, float y);
@@ -34,6 +34,7 @@ class Entidade: public Ente {
         bool getAtivo() const { return ativo; }
         void setAtivo(bool at) { ativo = at; }
 
+        void setEstatico(bool est);
         bool getEstatico() const { return estatico; }
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);

@@ -5,12 +5,12 @@
 #define VELOCIDADE 2
 #define RECUO 100
 
-InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d, ID id):
+InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d, ID id,bool est):
     Inimigo(tam,pos,v,d,id)
 {   
     this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
-    
+    this->setEstatico(est);
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
     pPlataforma=NULL;

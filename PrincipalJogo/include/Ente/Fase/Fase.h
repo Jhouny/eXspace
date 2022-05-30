@@ -19,7 +19,7 @@ class Fase: public Ente{
         ListaEntidades lEntidades;
 
         Gerenciadores::Grafico* pGrafico;  //pGrafico(Gerenciadores::Grafico::getInstancia())
-        Gerenciadores::Colisor Colisor;
+        Gerenciadores::Colisor colisor;
 
         int nivel;
         int nJog;
