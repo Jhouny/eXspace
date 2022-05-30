@@ -146,7 +146,7 @@ void Jogador::executar() {
     estaVivo();
 
 
-
+    // Checa se atirou
     atacar();
 
     // Se o jogador morrer

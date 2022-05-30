@@ -10,7 +10,6 @@ class Fase;
 class Jogador: public Personagem {
     private:
         Fase* pFase;
-        sf::Clock clock;
         Projetil* proj;
 
     public:
