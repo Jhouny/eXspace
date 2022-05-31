@@ -132,7 +132,7 @@ void Jogador::atualizaAcel() {
 
 void Jogador::executar() {
     //seta as sprites
-    atualizaTexture(TEX_JOGADOR);
+    atualizaTexture();
 
     // Checa as entradas do usuário e atualiza o movimento
     movimentar();

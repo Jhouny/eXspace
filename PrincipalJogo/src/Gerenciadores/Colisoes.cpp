@@ -77,8 +77,6 @@ namespace Gerenciadores {
 
                 // Se os elementos colidirem, chama a função apropriada
                 if(intersecao.x < 0 && intersecao.y < 0) {
-                    cout<<ent1->getID()<<endl;
-                    cout<<ent2->getID()<<endl;
                     ent2->colisao(ent1, intersecao);
                     ent1->colisao(ent2, intersecao);
                     

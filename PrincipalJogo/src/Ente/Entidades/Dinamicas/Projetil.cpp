@@ -1,7 +1,7 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
 Projetil::Projetil(Coordenada pos, float vx, float vy, int d, ID id):
-    Entidade(id,Coordenada(10,5), pos, false)
+    Entidade(id,Coordenada(12,4),pos,false)
      {
         velocidade.x = vx;
         velocidade.y= vy;
@@ -23,7 +23,6 @@ void Projetil::setDano(int d) {
 }
 
 void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
-    cout << "PROJETIL" << endl;
     this->setAtivo(false);
 }
 
@@ -43,7 +42,8 @@ void Projetil::estaAtivo() {
     }
 }
 
-void Projetil::executar() {  
+void Projetil::executar() {
     movimentar();
     estaAtivo();
+    atualizaTexture();
 }

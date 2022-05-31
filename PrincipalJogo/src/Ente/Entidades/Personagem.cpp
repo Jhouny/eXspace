@@ -22,7 +22,6 @@ void Personagem::receberDano(int d){
         vida -= d;
     else {
         cout << "\nPersonagem ja esta morto" << endl;
-        cout << "ID: " << this->getID() <<  endl;
     }
 
 }

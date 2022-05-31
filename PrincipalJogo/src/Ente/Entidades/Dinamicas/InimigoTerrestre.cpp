@@ -11,7 +11,7 @@ InimigoTerrestre::InimigoTerrestre():
     this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
     this->setEstatico(false);
-    shape.setFillColor(sf::Color::Red);
+
     pJogador=NULL;
     pPlataforma=NULL;
 
@@ -96,7 +96,7 @@ void InimigoTerrestre::movimentar() {
 }
 
 void InimigoTerrestre::executar() {
-    atualizaTexture(TEX_INIMIGO_TERRESTRE);
+    atualizaTexture();
     alarmado();
     movimentar();
     estaVivo();

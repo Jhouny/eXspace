@@ -1,5 +1,6 @@
 #include "../../../include/Ente/Entidades/Entidade.h"
 #include "../../../include/Ente/Entidades/Personagem.h"
+#include "../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
 
 Entidade::Entidade(ID id, Coordenada tam, Coordenada pos, bool estat):
@@ -12,6 +13,7 @@ Entidade::Entidade(ID id, Coordenada tam, Coordenada pos, bool estat):
     ativo(true)
 {
     shape.setPosition(pos.x,pos.y);
+    shape.setFillColor(sf::Color(255, 255, 255, 128));
     sprite.setPosition(pos.x, pos.y);
 }
 
@@ -22,18 +24,17 @@ Entidade::~Entidade() {
 void Entidade::setPosicao(Coordenada pos) {
     posicao = pos;
     this->shape.setPosition(pos.x, pos.y);
-    this->sprite.setPosition(pos.x, pos.y);
+    this->sprite.setPosition(pos.x  + getTamanho().x/2.f, pos.y);
 }
 
 void Entidade::setPosicao(float x, float y) {
     posicao.setCoordenada(x, y);
     this->shape.setPosition(x, y);
-    this->sprite.setPosition(x, y);
+    this->sprite.setPosition(x + getTamanho().x/2.f, y);
 }
 
 void Entidade::setTexture(const char* path, bool esticar) {
     sf::Texture* temp = pGrafico->loadTexture(path);
-    
     sprite.setTexture(*temp);
 
     if(!esticar) {
@@ -43,40 +44,33 @@ void Entidade::setTexture(const char* path, bool esticar) {
         // Define a textura e a escala de acordo com o o retangulo de shape
         float sX = tamanho.x/temp->getSize().x;
         float sY = tamanho.y/temp->getSize().y;
+        sprite.setOrigin(sf::Vector2f(getTamanho().x/4.f - sX,0));
         sprite.setScale(sX, sY);
     }
 }
 
-void Entidade::atualizaTexture(const char* path){
-    if(this->getID() == ID::jogador || this->getID() == ID::inimigoTerrestre){
-        sf::Texture* temp = pGrafico->loadTexture(path);
-        Personagem *psng= dynamic_cast<Personagem*>(this);
-        float sX;
-
-        if(psng->getVelocidade().x<0){
-            sX = -tamanho.x/temp->getSize().x;
-            sprite.setOrigin(sf::Vector2f(23,0)); //seta outro eixo
+void Entidade::atualizaTexture(){
+    if(this->getID() == ID::projetil) {
+        Projetil *proj= dynamic_cast<Projetil*>(this);
+        sf::Vector2f escala = sprite.getScale();
+        if(proj->getVelocidade().x < 0) {
+            escala.x = -1*fabs(escala.x);
         } else {
-            sX = tamanho.x/temp->getSize().x;
-            sprite.setOrigin(sf::Vector2f(0,0));
+            escala.x = fabs(escala.x);
         }
-        float sY = tamanho.y/temp->getSize().y;
-        sprite.setScale(sX, sY);
-    }
-    else if(this->getID() == ID::inimigoTerrestre){
-        sf::Texture* temp = pGrafico->loadTexture(path);
-        Personagem *psng= dynamic_cast<Personagem*>(this);
-        float sX;
 
-        if(psng->getVelocidade().x<0){
-            sX = -tamanho.x/temp->getSize().x;
-            sprite.setOrigin(sf::Vector2f(23,0)); //
+        sprite.setScale(escala);
+    } else if(this->getEstatico() == false) {
+        Personagem *psng= dynamic_cast<Personagem*>(this);
+
+        sf::Vector2f escala = sprite.getScale();
+        if(psng->getVelocidade().x < 0) {
+            escala.x = -1*fabs(escala.x);
         } else {
-            sX = tamanho.x/temp->getSize().x;
-            sprite.setOrigin(sf::Vector2f(25,0));
+            escala.x = fabs(escala.x);
         }
-        float sY = tamanho.y/temp->getSize().y;
-        sprite.setScale(sX, sY);
+
+        sprite.setScale(escala);
     }
 }
 

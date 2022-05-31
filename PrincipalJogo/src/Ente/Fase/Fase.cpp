@@ -13,7 +13,7 @@ Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
         jogador2->setVelocidade(Coordenada(15,0));
         incluir(static_cast<Entidade*>(jogador2));
     }
-    cout<<"aqui"<<endl;
+
     jogador1->setVelocidade(Coordenada(10.5, 0));
     jogador1->setFase(this);
     incluir(static_cast<Entidade*>(jogador1));
@@ -51,6 +51,7 @@ void Fase::atualizaEntidades(){
     for(i = 0; i < lEntidades.getTamanho(); i++) {
         ent = lEntidades[i];
         pGrafico->draw(ent->getSprite());
+        //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
         ent->executar();
         if(!ent->getAtivo()) {
             lEntidades.removeIndice(i);

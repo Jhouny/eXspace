@@ -103,7 +103,7 @@ namespace Gerenciadores {
         sf::Texture* tex = new sf::Texture();
 
         if (!tex->loadFromFile(path)) {
-            std::cout << "ERROR loading file " << path << std::endl;
+            cout << "ERROR loading file " << path << std::endl;
             exit(1);
         }
 

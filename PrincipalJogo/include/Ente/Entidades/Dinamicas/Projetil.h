@@ -16,8 +16,7 @@ class Projetil: public Entidade {
 
         void setVelocidade(float vx, float vy);
         const Coordenada getVelocidade() const { return velocidade; } 
-        void setDirecao(){ velocidade.x*=-1;}
-
+        void setDirecao(){ velocidade.x *= -1;}
 
         void setDano(int d);
         const int getDano() const { return dano; }
