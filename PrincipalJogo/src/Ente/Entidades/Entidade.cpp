@@ -84,5 +84,12 @@ void Entidade::atualizaTexture(const char* path){
 void Entidade::colisao(Entidade* outraEntidade, Coordenada intersecao) { };
 
 void Entidade::setEstatico(bool est){
-    estatico=est;
+    estatico = est;
+}
+
+bool Entidade::operator==(Entidade *ent) {
+    if(this->getRG() == ent->getRG())
+        return true;
+    else
+        return false;
 }

@@ -28,8 +28,8 @@ void Jogador::estaVivo() {
 }
 
 void Jogador::atacar() {
-     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->getSegundos() > 0.2) {
-            if(this->getVelocidade().x>=0)
+     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->getSegundos() > 1) {
+            if(this->getVelocidade().x >= 0)
                 proj = new Projetil(Coordenada(this->getPosicao().x + 60, this->getPosicao().y + this->getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
             else if(this->getVelocidade().x<0){
                 proj = new Projetil(Coordenada(this->getPosicao().x  - 20, this->getPosicao().y + this->getTamanho().y/2.f),-20);

@@ -40,6 +40,8 @@ class Entidade: public Ente {
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
         virtual void executar() {};
+
+        bool operator==(Entidade *ent);
 };
 
 #endif

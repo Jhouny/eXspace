@@ -21,13 +21,14 @@ enum ID {
 class Ente {
     protected:
         ID id;
+        int rg;
     public:
         static int cont;
         Ente(ID id = vazio);
         ~Ente();
 
         ID getID() const { return id; }
-
+        const int getRG() const { return rg; }
         virtual void executar() = 0;
 };
 

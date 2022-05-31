@@ -20,6 +20,9 @@ void Personagem::setDano(int d){
 void Personagem::receberDano(int d){
     if(vida > 0)
         vida -= d;
-    else 
+    else {
         cout << "\nPersonagem ja esta morto" << endl;
+        cout << "ID: " << this->getID() <<  endl;
+    }
+
 }

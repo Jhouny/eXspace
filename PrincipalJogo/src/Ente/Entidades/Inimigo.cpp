@@ -1,8 +1,8 @@
 #include "../../../include/Ente/Entidades/Inimigo.h"
 #include "../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
-Inimigo::Inimigo(Coordenada tam, Coordenada pos, int v, int d, ID id): 
-    Personagem(tam, pos, v, d, id),
+Inimigo::Inimigo(Coordenada tam, Coordenada pos, ID id, bool est, int v, int d): 
+    Personagem(tam, pos, est, v, d, id),
     jogTaPerto(false)
 {
     pJogador = NULL;

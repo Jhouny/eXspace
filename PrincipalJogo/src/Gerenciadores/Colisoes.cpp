@@ -18,10 +18,51 @@ namespace Gerenciadores {
         }
     }
 
-    void Colisor::inicioUm(){
-        itDinamicas=enteDinamicas.begin();
-        itDinamicas++;
+    /*void Colisor::remove( ) {
+            itEstaticas=enteEstaticas.begin();
+            for(int i = 0; i < enteEstaticas.size(); i++) {
+                if(!(*itEstaticas)->getAtivo()) {
+                    enteEstaticas.erase(itEstaticas);
+                    itEstaticas=enteEstaticas.begin();
+                    std::advance(itEstaticas, i);
+                }
+                itEstaticas++;
+            }
+            itDinamicas = enteDinamicas.begin();
+            for(int i = 0; i < enteDinamicas.size(); i++) {
+                if(!(*itDinamicas)->getAtivo()) {
+                    enteDinamicas.erase(itDinamicas);
+                    itDinamicas=enteDinamicas.begin();
+                    itDinamicas += i-1;
+                }
+                itDinamicas++;
+            }
+    }*/
+
+    
+    void Colisor::remove(Entidade* ente) {
+        if(ente->getEstatico()) {
+            itEstaticas = enteEstaticas.begin();
+            for(; itEstaticas != enteEstaticas.end(); itEstaticas++) {
+                if((*itEstaticas)->getRG() == ente->getRG()) {
+                    enteEstaticas.erase(itEstaticas);
+                    break;
+                }
+                itEstaticas++;
+            }
+        } else {
+            itDinamicas = enteDinamicas.begin();
+            for(; itDinamicas != enteDinamicas.end(); itDinamicas++) {
+                if((*itDinamicas)->getRG() == ente->getRG()) {
+                    enteDinamicas.erase(itDinamicas);
+                    break;
+                }
+                itDinamicas++;
+            }
+        }
+        
     }
+
 
     void Colisor::ChecarColisoes() {
         Entidade *ent1, *ent2;
@@ -31,8 +72,7 @@ namespace Gerenciadores {
         for(itDinamicas=enteDinamicas.begin(); itDinamicas != enteDinamicas.end(); itDinamicas++) {
             ent1 = *itDinamicas;
             for(itEstaticas = enteEstaticas.begin(); itEstaticas != enteEstaticas.end(); itEstaticas++) {
-                ent2 = *itEstaticas;
-
+                ent2 = *itEstaticas; 
                 // Calcula as coordenadas dos centros dos dois objetos
                 centroEnt1.x = ent1->getPosicao().x + (ent1->getTamanho().x / 2.0f);
                 centroEnt1.y = ent1->getPosicao().y + (ent1->getTamanho().y / 2.0f);
@@ -50,7 +90,6 @@ namespace Gerenciadores {
                 }
             }
         }
-        std::vector<Entidade*>::iterator itDinamicas2;
         
         // Colisões de elementos Dinamicos com Dinamicos
         for(int i = 0; i < enteDinamicas.size(); i++) {
@@ -74,7 +113,6 @@ namespace Gerenciadores {
                     ent1->colisao(ent2, intersecao);
                     ent2->colisao(ent1, intersecao);
                 }
-                
             }
         }
     }

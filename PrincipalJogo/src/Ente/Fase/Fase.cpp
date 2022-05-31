@@ -52,8 +52,10 @@ void Fase::atualizaEntidades(){
         ent = lEntidades[i];
         pGrafico->draw(ent->getSprite());
         ent->executar();
-        if(!ent->getAtivo())
+        if(!ent->getAtivo()) {
             lEntidades.removeIndice(i);
+            colisor.remove(ent);
+        }
     }
 }
 
@@ -112,13 +114,14 @@ void Fase::executar() {
         
         // Draw shapes & executar
         pGrafico->draw(&fundo, false);
-
+        
         atualizaEntidades();
 
         //Seta view
         pGrafico->atualizaView(jogador1);
         atualizarBackground();
-        
+
+        //colisor.remove(); 
 
         pGrafico->display();
     }

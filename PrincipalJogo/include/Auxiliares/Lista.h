@@ -133,14 +133,13 @@ inline void Lista<LT>::removeIndice(int ind) {
         }
         
         // Se os elementos anterior e próximo existirem, conecta-os um ao outro
-        if(pEl->getAnte() != NULL)  
+        if(pEl->getAnte() != NULL)
             pEl->getAnte()->setProx(pEl->getProx());
         if(pEl->getProx() != NULL)
             pEl->getProx()->setAnte(pEl->getAnte());
 
         delete pEl;
         tamanho--;
-        cout << "tam: " << tamanho << endl;
     } else {
         cout << "Indice: " << ind << " fora da lista" << endl;
         exit(1);

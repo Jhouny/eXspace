@@ -23,6 +23,7 @@ void Projetil::setDano(int d) {
 }
 
 void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
+    cout << "PROJETIL" << endl;
     this->setAtivo(false);
 }
 

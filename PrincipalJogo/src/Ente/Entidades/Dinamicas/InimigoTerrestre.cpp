@@ -5,12 +5,12 @@
 #define VELOCIDADE 2
 #define RECUO 100
 
-InimigoTerrestre::InimigoTerrestre(Coordenada pos, Coordenada tam, int v, int d, ID id,bool est):
-    Inimigo(tam,pos,v,d,id)
+InimigoTerrestre::InimigoTerrestre():
+    Inimigo(Coordenada(50,50),Coordenada(100,100),ID::inimigoTerrestre, false)
 {   
     this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
     this->setAceleracao(GRAVIDADE);
-    this->setEstatico(est);
+    this->setEstatico(false);
     shape.setFillColor(sf::Color::Red);
     pJogador=NULL;
     pPlataforma=NULL;
@@ -24,6 +24,7 @@ void InimigoTerrestre::estaVivo() {
     Coordenada p = this->getPosicao();
     if(p.y > ALTURA + 300 || vida <= 0) {
         vivo = false;
+        setAtivo(false);
     }
 }
 
@@ -51,7 +52,10 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
             this->setPosicao(p);
         }
         else if( outraEntidade->getID() == ID::projetil) {
+            cout << "INIMIGO" << endl;
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+            cout << "\tDano proj: " << tmp->getDano() << endl;
+            cout << "\tVida this: " << this->vida << endl;
             this->receberDano(tmp->getDano());
         }
     }
