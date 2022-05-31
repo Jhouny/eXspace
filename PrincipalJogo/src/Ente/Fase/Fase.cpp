@@ -54,7 +54,6 @@ void Fase::atualizaEntidades(){
         ent->executar();
         if(!ent->getAtivo()) {
             lEntidades.removeIndice(i);
-            colisor.remove(ent);
         }
     }
 }
@@ -63,7 +62,7 @@ void Fase::executar() {
     int i;
     InimigoTerrestre temp[10*nivel];
     
-    for(i = 0; i < 3*nivel; i++) {
+    for(i = 0; i < 2*nivel; i++) {
         temp[i].setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
         temp[i].setJogador(jogador1);
         incluir(static_cast<Entidade*>(&temp[i]));

@@ -14,8 +14,7 @@ namespace Gerenciadores {
             ~Colisor();
 
             void push(Entidade* ente);
-
-            void remove(Entidade* ente);
+            void remove();
 
             void ChecarColisoes();
     };

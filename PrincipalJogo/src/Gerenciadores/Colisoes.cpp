@@ -18,52 +18,19 @@ namespace Gerenciadores {
         }
     }
 
-    /*void Colisor::remove( ) {
-            itEstaticas=enteEstaticas.begin();
-            for(int i = 0; i < enteEstaticas.size(); i++) {
-                if(!(*itEstaticas)->getAtivo()) {
-                    enteEstaticas.erase(itEstaticas);
-                    itEstaticas=enteEstaticas.begin();
-                    std::advance(itEstaticas, i);
-                }
-                itEstaticas++;
-            }
+    void Colisor::remove() {
+        
             itDinamicas = enteDinamicas.begin();
             for(int i = 0; i < enteDinamicas.size(); i++) {
-                if(!(*itDinamicas)->getAtivo()) {
-                    enteDinamicas.erase(itDinamicas);
-                    itDinamicas=enteDinamicas.begin();
-                    itDinamicas += i-1;
+                if(!(*itDinamicas)->getAtivo()){
+                enteDinamicas.erase(itDinamicas);
                 }
                 itDinamicas++;
             }
-    }*/
-
-    
-    void Colisor::remove(Entidade* ente) {
-        if(ente->getEstatico()) {
-            itEstaticas = enteEstaticas.begin();
-            for(; itEstaticas != enteEstaticas.end(); itEstaticas++) {
-                if((*itEstaticas)->getRG() == ente->getRG()) {
-                    enteEstaticas.erase(itEstaticas);
-                    break;
-                }
-                itEstaticas++;
-            }
-        } else {
-            itDinamicas = enteDinamicas.begin();
-            for(; itDinamicas != enteDinamicas.end(); itDinamicas++) {
-                if((*itDinamicas)->getRG() == ente->getRG()) {
-                    enteDinamicas.erase(itDinamicas);
-                    break;
-                }
-                itDinamicas++;
-            }
-        }
-        
+            
     }
 
-
+    
     void Colisor::ChecarColisoes() {
         Entidade *ent1, *ent2;
         Coordenada centroEnt1, centroEnt2, intersecao;
@@ -110,10 +77,14 @@ namespace Gerenciadores {
 
                 // Se os elementos colidirem, chama a função apropriada
                 if(intersecao.x < 0 && intersecao.y < 0) {
-                    ent1->colisao(ent2, intersecao);
+                    cout<<ent1->getID()<<endl;
+                    cout<<ent2->getID()<<endl;
                     ent2->colisao(ent1, intersecao);
+                    ent1->colisao(ent2, intersecao);
+                    
                 }
             }
         }
+        remove();
     }
 }

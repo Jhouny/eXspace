@@ -29,6 +29,11 @@ void InimigoTerrestre::estaVivo() {
 }
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
+    if( outraEntidade->getID() == ID::projetil) {
+            Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+            this->receberDano(tmp->getDano());
+    }
+    
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma){
         pPlataforma = outraEntidade;
         // Fixa o inimigo em cima da plataforma
@@ -42,7 +47,7 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         
         this->setVelocidade(v);
 
-    } else if(intersecao.y <= intersecao.x) {
+    } else if(intersecao.y < intersecao.x && outraEntidade->getID()!=ID::plataforma) {
         if( outraEntidade->getID() == ID::jogador){
             Coordenada p = this->getPosicao();
             if(p.x < outraEntidade->getPosicao().x)
@@ -50,13 +55,6 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
             else
                 p.x += RECUO;
             this->setPosicao(p);
-        }
-        else if( outraEntidade->getID() == ID::projetil) {
-            cout << "INIMIGO" << endl;
-            Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            cout << "\tDano proj: " << tmp->getDano() << endl;
-            cout << "\tVida this: " << this->vida << endl;
-            this->receberDano(tmp->getDano());
         }
     }
 }
