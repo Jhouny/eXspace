@@ -30,9 +30,9 @@ void Jogador::estaVivo() {
 void Jogador::atacar() {
      if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->getSegundos() > 0.2) {
             if(this->getVelocidade().x >= 0)
-                proj = new Projetil(Coordenada(this->getPosicao().x + 60, this->getPosicao().y + this->getTamanho().y/2.f));  // ADICIONAR VELOCIDADE            
-            else if(this->getVelocidade().x<0){
-                proj = new Projetil(Coordenada(this->getPosicao().x  - 20, this->getPosicao().y + this->getTamanho().y/2.f),-20);
+                proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 9));  // ADICIONAR VELOCIDADE            
+            else if(this->getVelocidade().x < 0){
+                proj = new Projetil(Coordenada(this->getPosicao().x  - 1, this->getPosicao().y + this->getTamanho().y/2.f - 9), -20);
             }
             
             pFase->incluir(static_cast<Entidade*>(proj));
