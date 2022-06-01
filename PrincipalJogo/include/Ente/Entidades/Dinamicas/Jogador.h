@@ -30,10 +30,14 @@ class Jogador: public Personagem {
 
         // Fisica
         void atacar();
-        void movimentar();
+        void direita();
+        void esquerda();
+        void pular();
+
         void colisao(Entidade* outraEntidade,Coordenada intersecao);
         void aplicaAcel();
         void atualizaAcel();
+
 
         void executar();
 };

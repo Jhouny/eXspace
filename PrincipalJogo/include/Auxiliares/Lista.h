@@ -1,5 +1,6 @@
 #ifndef _LISTA_H_
 #define _LISTA_H_
+
 #include "stdafx.h"
 
 template <class LT> class Lista{
@@ -22,6 +23,7 @@ template <class LT> class Lista{
 
                 void setElemento(EL *ele) { el = ele; }
                 EL *getElemento() { return el; } 
+
         };
 
         Elemento<LT> *pPrimeiro;
@@ -40,6 +42,8 @@ template <class LT> class Lista{
         Elemento<LT>* getInicial() { return pPrimeiro; }
 
         LT* operator[](int ind);
+
+        void clear();
 };
 
 //construtora
@@ -65,11 +69,11 @@ inline Lista<LT>::~Lista(){
 
 //insere na lista:
 template<class LT>
-inline void Lista<LT>:: push(LT* cop) {
-    if(cop != NULL) {  // Se o objeto passado for válido
+inline void Lista<LT>::push(LT* ele) {
+    if(ele != NULL) {  // Se o objeto passado for válido
         tamanho++;
         Elemento<LT>* tmp = new Elemento<LT>();
-        tmp->setElemento(cop);
+        tmp->setElemento(ele);
         if(pPrimeiro == NULL) {  // Se a lista estiver vazia
             pPrimeiro = tmp;
             pUltimo = tmp;
@@ -144,5 +148,19 @@ inline void Lista<LT>::removeIndice(int ind) {
         exit(1);
     }
 }
+
+template<class LT> 
+inline void Lista<LT>::clear() {
+    for(int i = 0; i < tamanho; i++){
+        Elemento<LT> *tmp;
+        tmp=pPrimeiro->getProx();
+        delete (pPrimeiro);
+        pPrimeiro=tmp;
+    }
+}
+
+
+
+
 
 #endif

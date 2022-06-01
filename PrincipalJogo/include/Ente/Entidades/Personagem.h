@@ -40,7 +40,7 @@ class Personagem: public Entidade {
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
 
-        virtual void movimentar() = 0;
+        virtual void movimentar() {};
 
         virtual void executar() = 0;
 };

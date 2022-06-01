@@ -2,11 +2,11 @@
 #include "../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
 namespace Gerenciadores {
-    Grafico* Grafico::instancia = nullptr;
+    Grafico* Grafico::instancia = NULL;
 
     /* Returns a pointer to the Graphics. */
     Grafico* Grafico::getInstancia() {
-        if (instancia == nullptr) {
+        if (instancia == NULL) {
             instancia = new Grafico();
         }
         return instancia;

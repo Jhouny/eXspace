@@ -28,48 +28,69 @@ void Jogador::estaVivo() {
 }
 
 void Jogador::atacar() {
-     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space) && this->getSegundos() > 0.2) {
-            if(this->getVelocidade().x >= 0)
-                proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 9));  // ADICIONAR VELOCIDADE            
-            else if(this->getVelocidade().x < 0){
-                proj = new Projetil(Coordenada(this->getPosicao().x  - 1, this->getPosicao().y + this->getTamanho().y/2.f - 9), -20);
-            }
-            
-            pFase->incluir(static_cast<Entidade*>(proj));
-            this->reiniciarClock();
-        }  
+    if(this->getSegundos() > 0.3) {
+        if(this->getVelocidade().x >= 0)
+            proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 9));  // ADICIONAR VELOCIDADE            
+        else if(this->getVelocidade().x < 0)
+            proj = new Projetil(Coordenada(this->getPosicao().x  - 1, this->getPosicao().y + this->getTamanho().y/2.f - 9), -20);
+        
+        
+        pFase->incluir(static_cast<Entidade*>(proj));
+        this->reiniciarClock();
+    }
 }
 
-void Jogador::movimentar() {
+void Jogador::direita() {
+    cout << "DIREITA" << endl;
+    Coordenada p = this->getPosicao(); 
+
+    if(velocidade.x < 0)
+        velocidade.x *= -1;
+    p.x += velocidade.x;
+
+    this->setVelocidade(velocidade);
+    // Atualiza a posição do sprite e da instância
+    this->setPosicao(p);
+    cout << "setou" << endl;
+}
+
+void Jogador::esquerda(){ 
     Coordenada p = this->getPosicao();
-    
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        if(velocidade.x<0)
-            velocidade.x*=-1;
-        p += velocidade.x;  // Move com velocidade constante negativa no eixo X
-        setVelocidade(velocidade);
-    }
-    else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        if(velocidade.x>0)
-            velocidade.x*=-1;
-        p += velocidade.x;  // Move com velocidade constante negativa no eixo X
-        setVelocidade(velocidade);
-        
-    }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) && this->getPulo() == false) {
-        // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
-        Coordenada v = this->getVelocidade();
-        v.y = PULO_Y;
-        this->setVelocidade(v);
-        
-        p.y -= velocidade.y;
-        this->setAceleracao(0);  // PRECISA disso
-        this->setJump(true);
-    }
+
+    //verifica a velocidade
+    if(velocidade.x > 0)
+        velocidade.x *= -1;
+    p.x += velocidade.x;  // Move com velocidade constante negativa no eixo X
+
+    setVelocidade(velocidade);
 
     // Atualiza a posição do sprite e da instância
     this->setPosicao(p);
 }
+void Jogador::pular() { 
+    if(this->getPulo() == false) {
+        Coordenada p = this->getPosicao();
+
+        // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
+        Coordenada v = this->getVelocidade();
+        v.y = PULO_Y;
+        this->setVelocidade(v);  
+        p.y += velocidade.y;
+        
+        //impede de dar double jump
+        this->setAceleracao(0);  // PRECISA disso
+        this->setJump(true);
+
+        // Atualiza a posição do sprite e da instância
+        this->setPosicao(p);
+    }
+
+}
+
+
+
+
+
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
@@ -88,6 +109,7 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         }
 
         this->setVelocidade(v);
+        cout << "COL PLAT" << endl;
         this->setPosicao(p);
 
     } else if(intersecao.y <= intersecao.x) {
@@ -120,7 +142,7 @@ void Jogador::aplicaAcel() {
     p.y += v.y;
     this->setVelocidade(v);
     this->setPosicao(p);
-
+    cout << "AP ACEL" << endl;
     atualizaAcel();
 }
 
@@ -133,19 +155,12 @@ void Jogador::atualizaAcel() {
 void Jogador::executar() {
     //seta as sprites
     atualizaTexture();
-
-    // Checa as entradas do usuário e atualiza o movimento
-    movimentar();
     
     // Aplica a aceleração na velocidade e a velocidade na posição 
     aplicaAcel();
     
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
-
-
-    // Checa se atirou
-    atacar();
 
     // Se o jogador morrer
     if(!vivo) {

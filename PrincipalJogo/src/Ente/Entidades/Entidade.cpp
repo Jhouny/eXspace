@@ -23,6 +23,8 @@ Entidade::~Entidade() {
 
 void Entidade::setPosicao(Coordenada pos) {
     posicao = pos;
+    if(this->getID() == ID::jogador)
+        posicao.print();
     this->shape.setPosition(pos.x, pos.y);
     this->sprite.setPosition(pos.x  + getTamanho().x/2.f, pos.y);
 }

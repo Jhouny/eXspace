@@ -4,6 +4,7 @@
 #include "../../Gerenciadores/ListaEntidades.h"
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Gerenciadores/Colisoes.h"
+#include "../../Controle/ControleJogador.h"
 
 #include "../Ente.h"
 #include "../Entidades/Dinamicas/InimigoTerrestre.h"
@@ -20,12 +21,16 @@ class Fase: public Ente{
 
         Gerenciadores::Grafico* pGrafico;  //pGrafico(Gerenciadores::Grafico::getInstancia())
         Gerenciadores::Colisor colisor;
+        Controle::ControleJogador* pCtrlJog;
 
         int nivel;
         int nJog;
 
         Jogador *jogador1;
         Jogador *jogador2;
+
+        Plataforma* pBase;
+        InimigoTerrestre* pIni;
         
         sf::Sprite fundo;
         
@@ -36,7 +41,7 @@ class Fase: public Ente{
         
         void geraPlataformas(); //nao conseguimos implementar 
         void geraObstaculos(); //nao conseguimos implementar 
-        Inimigo* geraInimigos(); //nao conseguimos implementar 
+        void geraInimigos(); //nao conseguimos implementar 
         
         void setJogador1(Jogador *jog) { jogador1 = jog; }
         void setJogador2(Jogador *jog) { jogador2 = jog; }
@@ -47,6 +52,8 @@ class Fase: public Ente{
         void incluir(Entidade* l);
 
         void atualizarBackground();
+
+        void atualizar();
 
         void gameOver();
 

@@ -1,7 +1,7 @@
 #ifndef _STDAFX_H_
 #define _STDAFX_H_
 
-#include"Coordenada.h"
+#include "Coordenada.h"
 
 #include <iostream>
 #include <vector>
