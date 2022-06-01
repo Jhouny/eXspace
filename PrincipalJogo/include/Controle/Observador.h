@@ -17,7 +17,7 @@ namespace Controle {
 
             int getID() const { return id; }
 
-            virtual void compartilharTeclaPressionada() = 0;
+            virtual void compartilharTeclaPressionada(std::string tecla) = 0;
 
             virtual void compartilharTeclaLiberada(std::string tecla) = 0;
     };

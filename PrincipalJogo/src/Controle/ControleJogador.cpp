@@ -21,43 +21,28 @@ namespace Controle {
         pJogador = NULL;
     }
 
-    void ControleJogador::compartilharTeclaPressionada() {
+    void ControleJogador::compartilharTeclaPressionada(std::string tecla) {
         cout << "COMPARTILHAR" << endl;
         if(pJogador == NULL) {
             cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaPressionada()" << endl;
             exit(1);
         }
-        /*
+        
         if(tecla == pular) {
-            //teclasPressionadas[pular] = true;
+            teclasPressionadas[pular] = true;
             pJogador->pular();
         } 
+
         if(tecla == esquerda) {
-            //teclasPressionadas[esquerda] = true;
+            teclasPressionadas[esquerda] = true;
             pJogador->esquerda();
-        } 
-        if(tecla == direita) {
-            //teclasPressionadas[direita] = true;
+        } else if(tecla == direita) {
+            teclasPressionadas[direita] = true;
             pJogador->direita();
         } 
+
         if(tecla == atacar) {
-            //teclasPressionadas[atacar] = true;
-            pJogador->atacar();
-        }*/
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            //teclasPressionadas[pular] = true;
-            pJogador->pular();
-        } 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            //teclasPressionadas[esquerda] = true;
-            pJogador->esquerda();
-        } 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            //teclasPressionadas[direita] = true;
-            pJogador->direita();
-        } 
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-            //teclasPressionadas[atacar] = true;
+            teclasPressionadas[atacar] = true;
             pJogador->atacar();
         }
     }
@@ -69,13 +54,16 @@ namespace Controle {
         }
 
         if(tecla == pular) {
-            //teclasPressionadas[pular] = false;
-        } else if(tecla == esquerda) {
-            //teclasPressionadas[esquerda] = false;
-        } else if(tecla == direita) {
-            //teclasPressionadas[direita] = false;
-        } else if(tecla == atacar) {
-            //teclasPressionadas[atacar] = false;
+            teclasPressionadas[pular] = false;
+        } 
+        if(tecla == esquerda) {
+            teclasPressionadas[esquerda] = false;
+        } 
+        if(tecla == direita) {
+            teclasPressionadas[direita] = false;
+        } 
+        if(tecla == atacar) {
+            teclasPressionadas[atacar] = false;
         }
     }
 }

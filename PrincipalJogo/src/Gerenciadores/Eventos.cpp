@@ -13,7 +13,8 @@ namespace Gerenciadores {
     Eventos::Eventos(): 
         pEntrada(Gerenciadores::Entrada::getInstancia()),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        pWindow(pGrafico->getWindow())
+        pWindow(pGrafico->getWindow()),
+        evento(*pGrafico->getEvent())
     {
         
     }
@@ -28,8 +29,7 @@ namespace Gerenciadores {
                 pGrafico->terminar();
 
             if(evento.type == sf::Event::KeyPressed) {
-                cout << "EVENTOS" << endl;
-                pEntrada->teclaPressionada();
+                pEntrada->teclaPressionada(evento.key.code);
             }
 
             if(evento.type == sf::Event::KeyReleased)

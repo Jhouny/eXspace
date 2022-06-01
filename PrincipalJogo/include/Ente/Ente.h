@@ -29,7 +29,7 @@ class Ente {
 
         ID getID() const { return id; }
         const int getRG() const { return rg; }
-        virtual void executar() = 0;
+        virtual void executar(const float dt) = 0;
 };
 
 #endif

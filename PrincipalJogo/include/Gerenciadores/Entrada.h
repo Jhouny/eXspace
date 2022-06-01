@@ -24,7 +24,7 @@ namespace Gerenciadores {
 
             void remover(Controle::Observador* obs);
 
-            void teclaPressionada();
+            void teclaPressionada(sf::Keyboard::Key tecla);
 
             void teclaLiberada(sf::Keyboard::Key tecla);
 

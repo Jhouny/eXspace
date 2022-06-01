@@ -18,9 +18,6 @@ namespace Gerenciadores {
        // cameraPrincipal(new sf::View),
         //cameraSecundaria(new sf::View)
     {
-        // Limita a frequencia da janela
-        window->setFramerateLimit(FPS);
-        
         // Define a posição e tamanho iniciais da camera
         /*cameraPrincipal->setCenter(sf::Vector2f(COMPRIMENTO / 2.f , ALTURA / 2.f));        
         cameraPrincipal->setSize(sf::Vector2f(COMPRIMENTO, ALTURA));  

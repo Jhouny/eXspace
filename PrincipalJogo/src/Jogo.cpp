@@ -6,6 +6,9 @@ Jogo::Jogo():
     jogador1(),
     fase1(1, &jogador1)
 {
+    temporizador.restart();
+    dt = 0;
+
     executar();
 }
  
@@ -14,10 +17,22 @@ Jogo::~Jogo() { }
 
 
 void Jogo::executar() {
-    fase1.executar();
     while(pGrafico->isOpened()) {
         pEventos->checarEventos();
-        cout << "SEM TECLAS" << endl;
-        fase1.atualizar();
+        pGrafico->clear();
+
+        if (dt < TICK_RATE) {
+            dt += temporizador.getElapsedTime().asSeconds();
+            temporizador.restart();
+        } //
+        else {
+            fase1.atualizar(dt);
+            //updateCurrentState(0.01);
+            dt -= TICK_RATE;
+        }
+
+        fase1.renderizar();
+
+        pGrafico->display();
     }
 }

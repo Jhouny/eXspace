@@ -88,10 +88,10 @@ namespace Gerenciadores{
 
         lObservador.removeIndice(i);
     }
-    void Entrada::teclaPressionada(){
+    void Entrada::teclaPressionada(sf::Keyboard::Key tecla){
         for(int i = 0; i < lObservador.getTamanho(); i++){
             cout << "TECLA PRESSIONADA" << endl;
-            lObservador[i]->compartilharTeclaPressionada(); 
+            lObservador[i]->compartilharTeclaPressionada(teclaString(tecla)); 
         }
     }
 

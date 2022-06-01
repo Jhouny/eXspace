@@ -21,8 +21,8 @@ class Inimigo: public Personagem {
 
         virtual void estaVivo() {};
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
-        virtual void movimentar() = 0;
-        virtual void executar() = 0;
+        virtual void movimentar(const float dt) = 0;
+        virtual void executar(const float dt) = 0;
 };
 
 

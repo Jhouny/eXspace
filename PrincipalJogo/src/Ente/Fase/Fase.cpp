@@ -6,10 +6,12 @@ Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
     jogador1(jog1),
     jogador2(jog2),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
-    colisor(),
-    pCtrlJog(new Controle::ControleJogador(jog1))
+    colisor()
     {
+        // Define o plano de fundo
         setTexture(TEX_BACKGROUND);
+
+        // Inclui os jogadores
         if(nJog == 2) {
             jogador2->setVelocidade(Coordenada(15,0));
             incluir(static_cast<Entidade*>(jogador2));
@@ -18,6 +20,9 @@ Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
         jogador1->setVelocidade(Coordenada(10.5, 0));
         jogador1->setFase(this);
         incluir(static_cast<Entidade*>(jogador1));
+
+        // Cria todas as entidades
+        executar(0);
 }
 
 Fase::~Fase() {}
@@ -91,42 +96,51 @@ void Fase::incluir(Entidade* l) {
     colisor.push(l);
 }
 
-void Fase::atualizaEntidades(){
+void Fase::atualizaEntidades(const float dt){
     int i;
     Entidade *ent;
     for(i = 0; i < lEntidades.getTamanho(); i++) {
         ent = lEntidades[i];
-        pGrafico->draw(ent->getSprite());
-        pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
-        ent->executar();
+        ent->executar(dt);
         if(!ent->getAtivo()) {
             lEntidades.removeIndice(i);
         }
     }
 }
 
-void Fase::atualizar() {    
-    pGrafico->clear();
-
-    // Verifica colisao entre Entidades Dinamicas e Estaticas
-    colisor.ChecarColisoes();
-    
-    // Draw shapes & executar
+void Fase::renderizar() {
     pGrafico->draw(&fundo, false);
-    
-    atualizaEntidades();
 
-    //Seta view
-    pGrafico->atualizaView(jogador1);
-    
-    atualizarBackground();
-
-    //colisor.remove(); 
-
-    pGrafico->display();
+    int i;
+    Entidade *ent;
+    for(i = 0; i < lEntidades.getTamanho(); i++) {
+        ent = lEntidades[i];
+        pGrafico->draw(ent->getSprite());
+        pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+    } 
 }
 
-void Fase::executar() {
+void Fase::atualizar(const float dt) {    
+    // Verifica colisao entre Entidades Dinamicas e Estaticas
+    colisor.ChecarColisoes();    
+    
+    // Processa o executar das entidades e remove entidades inativas
+    atualizaEntidades(dt);
+
+    // Desenha na tela os elementos
+    renderizar();
+
+    // Atualiza a view para a posicao do jogador
+    pGrafico->atualizaView(jogador1);
+    
+    // Processa simulação de efeito Parallax
+    atualizarBackground();
+
+    // Remove as entidades inativas
+    colisor.remove(); 
+}
+
+void Fase::executar(const float dt) {
     geraInimigos();
     geraPlataformas();
 

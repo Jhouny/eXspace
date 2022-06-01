@@ -3,6 +3,7 @@
 
 #include "../Personagem.h"
 #include "Projetil.h"
+#include "../../../Controle/ControleJogador.h"
 
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
 
@@ -11,6 +12,8 @@ class Jogador: public Personagem {
     private:
         Fase* pFase;
         Projetil* proj;
+        Controle::ControleJogador pControle;
+        bool andando;
 
     public:
         Jogador();
@@ -21,9 +24,11 @@ class Jogador: public Personagem {
             if(fase)
                 pFase=fase;
         }
+
         float getSegundos() {
             return clock.getElapsedTime().asSeconds();
         }
+
         void reiniciarClock() {
             clock.restart();
         }
@@ -35,11 +40,11 @@ class Jogador: public Personagem {
         void pular();
 
         void colisao(Entidade* outraEntidade,Coordenada intersecao);
-        void aplicaAcel();
+        void atualiza(const float dt);
         void atualizaAcel();
 
 
-        void executar();
+        void executar(const float dt);
 };
 
 #endif

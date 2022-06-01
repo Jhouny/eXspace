@@ -17,9 +17,9 @@ class InimigoTerrestre: public Inimigo {
 
         void estaVivo();
 
-        void movimentar();
+        void movimentar(const float dt);
 
-        void executar();
+        void executar(const float dt);
 };
 
 

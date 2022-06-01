@@ -39,7 +39,7 @@ class Entidade: public Ente {
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        virtual void executar() {};
+        virtual void executar(const float dt) {};
 
         bool operator==(Entidade *ent);
 };

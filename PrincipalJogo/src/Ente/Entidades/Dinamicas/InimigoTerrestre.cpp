@@ -61,14 +61,14 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
 
 
 // Movimenta o inimigo
-void InimigoTerrestre::movimentar() {
+void InimigoTerrestre::movimentar(const float dt) {
     Coordenada coordJog, coordIni, v;
     coordIni = this->getPosicao();
     coordJog = pJogador->getPosicao();
     
     v = this->getVelocidade();
     v.y += this->getAceleracao();
-    coordIni.y += v.y;
+    coordIni.y += v.y * dt;
     
     // Se estiver na borda da plataforma e (jogador não esta perto ou jogador está acima do inimigo) inverte a direção
     if(pPlataforma && (!jogTaPerto || coordJog.y < coordIni.y - 100)) {
@@ -78,7 +78,7 @@ void InimigoTerrestre::movimentar() {
             v.x = -1*VELOCIDADE;
     }
     
-    coordIni.x += v.x;
+    coordIni.x += v.x * dt;
     
     // Se jogador estiver proximo, siga-o
     if(jogTaPerto) {
@@ -95,10 +95,10 @@ void InimigoTerrestre::movimentar() {
     this->setVelocidade(v);
 }
 
-void InimigoTerrestre::executar() {
+void InimigoTerrestre::executar(const float dt) {
     atualizaTexture();
     alarmado();
-    movimentar();
+    movimentar(dt);
     estaVivo();
     
     if(!vivo) {

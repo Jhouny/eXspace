@@ -27,11 +27,11 @@ void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
 }
 
 // Muda a posição da ENTIDADE
-void Projetil::movimentar() {
+void Projetil::movimentar(const float dt) {
     Coordenada p = this->getPosicao();
 
-    p.x += velocidade.x;
-    p.y += velocidade.y;
+    p.x += velocidade.x * dt;
+    p.y += velocidade.y * dt;
 
     this->setPosicao(p);
 }
@@ -42,8 +42,8 @@ void Projetil::estaAtivo() {
     }
 }
 
-void Projetil::executar() {
-    movimentar();
+void Projetil::executar(const float dt) {
+    movimentar(dt);
     estaAtivo();
     atualizaTexture();
 }

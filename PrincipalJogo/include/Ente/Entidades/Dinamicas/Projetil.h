@@ -25,9 +25,9 @@ class Projetil: public Entidade {
 
         void estaAtivo();
 
-        void movimentar();
+        void movimentar(const float dt);
 
-        void executar();
+        void executar(const float dt);
 };
 
 #endif

@@ -19,7 +19,7 @@ namespace Controle {
 
             ~ControleJogador();
 
-            void compartilharTeclaPressionada();
+            void compartilharTeclaPressionada(std::string tecla);
 
             void compartilharTeclaLiberada(std::string tecla);
 

@@ -40,9 +40,9 @@ class Personagem: public Entidade {
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
 
-        virtual void movimentar() {};
+        virtual void movimentar(const float dt) {};
 
-        virtual void executar() = 0;
+        virtual void executar(const float dt) = 0;
 };
 
 #endif

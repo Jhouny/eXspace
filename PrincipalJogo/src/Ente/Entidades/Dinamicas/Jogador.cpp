@@ -5,9 +5,12 @@
 
 #define PULO_Y -35
 #define ATRITO 0.7
+#define VELOCIDADE_JOGADOR 30
 
 Jogador::Jogador():
-    Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador)
+    Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
+    pControle(this),
+    andando(false)
     {
         setJump(true);
         velocidade.x = 0.f;
@@ -41,55 +44,23 @@ void Jogador::atacar() {
 }
 
 void Jogador::direita() {
-    cout << "DIREITA" << endl;
-    Coordenada p = this->getPosicao(); 
-
-    if(velocidade.x < 0)
-        velocidade.x *= -1;
-    p.x += velocidade.x;
-
-    this->setVelocidade(velocidade);
-    // Atualiza a posição do sprite e da instância
-    this->setPosicao(p);
-    cout << "setou" << endl;
+    andando = true;
+    velocidade.x = VELOCIDADE_JOGADOR;
 }
 
-void Jogador::esquerda(){ 
-    Coordenada p = this->getPosicao();
-
-    //verifica a velocidade
-    if(velocidade.x > 0)
-        velocidade.x *= -1;
-    p.x += velocidade.x;  // Move com velocidade constante negativa no eixo X
-
-    setVelocidade(velocidade);
-
-    // Atualiza a posição do sprite e da instância
-    this->setPosicao(p);
+void Jogador::esquerda() { 
+    andando = true;
+    velocidade.x = -1 * VELOCIDADE_JOGADOR;
 }
+
 void Jogador::pular() { 
-    if(this->getPulo() == false) {
-        Coordenada p = this->getPosicao();
-
-        // Adiciona um 'pulo' vertical - defini uma velocidade em Y negativa (para cima)
-        Coordenada v = this->getVelocidade();
-        v.y = PULO_Y;
-        this->setVelocidade(v);  
-        p.y += velocidade.y;
-        
+    if(pulando == false) {
         //impede de dar double jump
         this->setAceleracao(0);  // PRECISA disso
-        this->setJump(true);
-
-        // Atualiza a posição do sprite e da instância
-        this->setPosicao(p);
+        pulando = true;
     }
 
 }
-
-
-
-
 
 
 // Checa com que tipo de objeto colidiu
@@ -109,7 +80,6 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         }
 
         this->setVelocidade(v);
-        cout << "COL PLAT" << endl;
         this->setPosicao(p);
 
     } else if(intersecao.y <= intersecao.x) {
@@ -135,14 +105,21 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     }
 }
 
-void Jogador::aplicaAcel() {
+void Jogador::atualiza(const float dt) {
     Coordenada p = this->getPosicao();
     Coordenada v = this->getVelocidade();
-    v.y += this->getAceleracao();
-    p.y += v.y;
+
+    if(andando) {
+        p.x += v.x * dt;
+    }
+    if(pulando) {
+        v.y += this->getAceleracao();
+        p.y += v.y * dt;
+    }
+
     this->setVelocidade(v);
     this->setPosicao(p);
-    cout << "AP ACEL" << endl;
+
     atualizaAcel();
 }
 
@@ -152,15 +129,17 @@ void Jogador::atualizaAcel() {
     }
 }
 
-void Jogador::executar() {
+void Jogador::executar(const float dt) {
     //seta as sprites
     atualizaTexture();
     
     // Aplica a aceleração na velocidade e a velocidade na posição 
-    aplicaAcel();
+    atualiza(dt);
     
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
+
+    
 
     // Se o jogador morrer
     if(!vivo) {
