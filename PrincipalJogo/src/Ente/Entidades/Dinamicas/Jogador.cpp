@@ -3,16 +3,19 @@
 #include "../../../../include/Ente/Fase/Fase.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
 
-#define PULO_Y -35
+#define PULO_Y -256000 * TICK_RATE
 #define ATRITO 0.7
-#define VELOCIDADE_JOGADOR 30
+#define VELOCIDADE_JOGADOR 76800 * TICK_RATE 
 
 Jogador::Jogador():
     Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
-    pControle(this),
-    andando(false)
+    pControle(this)
     {
         setJump(true);
+        estaPulando = false;
+        estaAtirando = false;
+        viradoFrente = true;
+        
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;
@@ -31,11 +34,11 @@ void Jogador::estaVivo() {
 }
 
 void Jogador::atacar() {
-    if(this->getSegundos() > 0.3) {
-        if(this->getVelocidade().x >= 0)
-            proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 9));  // ADICIONAR VELOCIDADE            
-        else if(this->getVelocidade().x < 0)
-            proj = new Projetil(Coordenada(this->getPosicao().x  - 1, this->getPosicao().y + this->getTamanho().y/2.f - 9), -20);
+    if(this->getSegundos() > 0.15) {
+        if(viradoFrente)
+            proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 3), VELOCIDADE_JOGADOR*3);  // ADICIONAR VELOCIDADE            
+        else
+            proj = new Projetil(Coordenada(this->getPosicao().x  - 12.5, this->getPosicao().y + this->getTamanho().y/2.f - 3), -VELOCIDADE_JOGADOR*3);
         
         
         pFase->incluir(static_cast<Entidade*>(proj));
@@ -43,23 +46,35 @@ void Jogador::atacar() {
     }
 }
 
+void Jogador::ataque(bool estado) {
+    estaAtirando = estado;
+}
+
 void Jogador::direita() {
-    andando = true;
+    viradoFrente = true;
     velocidade.x = VELOCIDADE_JOGADOR;
 }
 
 void Jogador::esquerda() { 
-    andando = true;
+    viradoFrente = false;
     velocidade.x = -1 * VELOCIDADE_JOGADOR;
 }
 
 void Jogador::pular() { 
     if(pulando == false) {
         //impede de dar double jump
-        this->setAceleracao(0);  // PRECISA disso
+        posicao.y -= 1;
+        velocidade.y = PULO_Y;
         pulando = true;
     }
+}
 
+void Jogador::pulo(bool estado) {
+    estaPulando = estado;
+}
+
+void Jogador::parar() {
+    velocidade.x = 0;
 }
 
 
@@ -91,12 +106,13 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
                 this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
             }
         } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
-            //Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
+            Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
             // Reduz a vida do jogador 
-            //this->receberDano(tmp->getDano());
+            this->receberDano(tmp->getDano());
             //cout << "vida: " << vida << endl;
             if (this->getPosicao().x < outraEntidade->getPosicao().x){
-                this->setPosicao(this->getPosicao().x, this->getPosicao().y);    
+                this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+
             } else {
                 this->setPosicao(this->getPosicao().x, this->getPosicao().y);
             }                
@@ -109,16 +125,17 @@ void Jogador::atualiza(const float dt) {
     Coordenada p = this->getPosicao();
     Coordenada v = this->getVelocidade();
 
-    if(andando) {
-        p.x += v.x * dt;
-    }
-    if(pulando) {
-        v.y += this->getAceleracao();
-        p.y += v.y * dt;
-    }
+    p.x += v.x * dt;
+    v.y += this->getAceleracao();
+    p.y += v.y * dt; 
 
     this->setVelocidade(v);
     this->setPosicao(p);
+
+    if(estaPulando)
+        pular();
+    if(estaAtirando)
+        atacar();
 
     atualizaAcel();
 }
@@ -138,8 +155,6 @@ void Jogador::executar(const float dt) {
     
     // Checa se o jogador esta vivo e o atualiza
     estaVivo();
-
-    
 
     // Se o jogador morrer
     if(!vivo) {

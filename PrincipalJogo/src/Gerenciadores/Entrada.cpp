@@ -90,14 +90,12 @@ namespace Gerenciadores{
     }
     void Entrada::teclaPressionada(sf::Keyboard::Key tecla){
         for(int i = 0; i < lObservador.getTamanho(); i++){
-            cout << "TECLA PRESSIONADA" << endl;
             lObservador[i]->compartilharTeclaPressionada(teclaString(tecla)); 
         }
     }
 
     void Entrada::teclaLiberada(sf::Keyboard::Key tecla){
         for(int i = 0; i < lObservador.getTamanho(); i++){
-            cout << "tecla liberada: " << teclaString(tecla) << endl;
             lObservador[i]->compartilharTeclaLiberada(teclaString(tecla));
         }
     }

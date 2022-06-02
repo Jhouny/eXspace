@@ -7,8 +7,6 @@
 
 #include "Controle/ControleJogador.h"
 
-#define TICK_RATE 0.0078125
-
 class Jogo {
     private:
         Jogador jogador1;

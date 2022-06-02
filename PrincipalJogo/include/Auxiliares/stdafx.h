@@ -17,6 +17,10 @@ using namespace std;
 
 #define COMPRIMENTO 1280
 #define ALTURA 720
-#define FPS 60
+
+#define FPS 128
+#define TICK_RATE 1.f/FPS
+#define GRAVIDADE 6400 * TICK_RATE
+
 
 #endif

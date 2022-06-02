@@ -40,6 +40,8 @@ template <class LT> class Lista{
         const int getTamanho() { return tamanho; }
 
         Elemento<LT>* getInicial() { return pPrimeiro; }
+        Elemento<LT>* getUltimo(){ return pUltimo; }
+
 
         LT* operator[](int ind);
 

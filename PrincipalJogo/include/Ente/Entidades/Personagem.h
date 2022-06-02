@@ -3,8 +3,6 @@
 
 #include "Entidade.h"
 
-#define GRAVIDADE 2.5
-
 class Personagem: public Entidade {
     protected:
         int vida;

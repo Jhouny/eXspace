@@ -27,7 +27,6 @@ void Jogo::executar() {
         } //
         else {
             fase1.atualizar(dt);
-            //updateCurrentState(0.01);
             dt -= TICK_RATE;
         }
 

@@ -15,6 +15,7 @@ class Entidade: public Ente {
         Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
         bool ativo;
         bool estatico;
+
     public:
         Entidade(ID id, Coordenada tam, Coordenada pos, bool estat); 
         ~Entidade();

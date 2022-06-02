@@ -66,7 +66,7 @@ void Fase::geraObstaculos() {
 void Fase::geraInimigos() {    
     for(int i = 0; i < 4*nivel; i++) {
         pIni = new InimigoTerrestre();
-        pIni->setPosicao(Coordenada(rand() % COMPRIMENTO, 100));
+        pIni->setPosicao(Coordenada(rand() % 4400, 100));
         pIni->setJogador(jogador1);
         incluir(static_cast<Entidade*>(pIni));
     }
@@ -116,7 +116,7 @@ void Fase::renderizar() {
     for(i = 0; i < lEntidades.getTamanho(); i++) {
         ent = lEntidades[i];
         pGrafico->draw(ent->getSprite());
-        pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+        //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
     } 
 }
 

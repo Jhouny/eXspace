@@ -23,8 +23,6 @@ Entidade::~Entidade() {
 
 void Entidade::setPosicao(Coordenada pos) {
     posicao = pos;
-    if(this->getID() == ID::jogador)
-        posicao.print();
     this->shape.setPosition(pos.x, pos.y);
     this->sprite.setPosition(pos.x  + getTamanho().x/2.f, pos.y);
 }
@@ -68,7 +66,7 @@ void Entidade::atualizaTexture(){
         sf::Vector2f escala = sprite.getScale();
         if(psng->getVelocidade().x < 0) {
             escala.x = -1*fabs(escala.x);
-        } else {
+        } else if (psng->getVelocidade().x > 0){
             escala.x = fabs(escala.x);
         }
 

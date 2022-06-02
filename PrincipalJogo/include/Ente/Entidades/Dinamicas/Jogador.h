@@ -13,7 +13,9 @@ class Jogador: public Personagem {
         Fase* pFase;
         Projetil* proj;
         Controle::ControleJogador pControle;
-        bool andando;
+        bool viradoFrente;
+        bool estaPulando;
+        bool estaAtirando;
 
     public:
         Jogador();
@@ -38,6 +40,9 @@ class Jogador: public Personagem {
         void direita();
         void esquerda();
         void pular();
+        void parar();
+        void pulo(bool estado);
+        void ataque(bool estado);
 
         void colisao(Entidade* outraEntidade,Coordenada intersecao);
         void atualiza(const float dt);

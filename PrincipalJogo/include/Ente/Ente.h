@@ -15,7 +15,8 @@ enum ID {
     gasToxico,
     lava,
     rocha,
-    chefe
+    chefe,
+    menu
 };
 
 class Ente {

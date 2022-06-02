@@ -22,7 +22,6 @@ namespace Controle {
     }
 
     void ControleJogador::compartilharTeclaPressionada(std::string tecla) {
-        cout << "COMPARTILHAR" << endl;
         if(pJogador == NULL) {
             cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaPressionada()" << endl;
             exit(1);
@@ -31,12 +30,14 @@ namespace Controle {
         if(tecla == pular) {
             teclasPressionadas[pular] = true;
             pJogador->pular();
+            pJogador->pulo(true);
         } 
 
         if(tecla == esquerda) {
             teclasPressionadas[esquerda] = true;
             pJogador->esquerda();
-        } else if(tecla == direita) {
+        }
+        if(tecla == direita) {
             teclasPressionadas[direita] = true;
             pJogador->direita();
         } 
@@ -44,6 +45,7 @@ namespace Controle {
         if(tecla == atacar) {
             teclasPressionadas[atacar] = true;
             pJogador->atacar();
+            pJogador->ataque(true);
         }
     }
 
@@ -55,15 +57,25 @@ namespace Controle {
 
         if(tecla == pular) {
             teclasPressionadas[pular] = false;
+            pJogador->pulo(false);
         } 
         if(tecla == esquerda) {
             teclasPressionadas[esquerda] = false;
+            if(teclasPressionadas[direita])
+                pJogador->direita();
+            else
+                pJogador->parar();
         } 
         if(tecla == direita) {
             teclasPressionadas[direita] = false;
+            if(teclasPressionadas[esquerda])
+                pJogador->esquerda();
+            else
+                pJogador->parar();
         } 
         if(tecla == atacar) {
             teclasPressionadas[atacar] = false;
+            pJogador->ataque(false);
         }
     }
 }
