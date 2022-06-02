@@ -5,6 +5,7 @@
 #include "Gerenciadores/Grafico.h"
 #include "Gerenciadores/Eventos.h"
 #include "Ente/Menus/MenuAbertura.h"
+#include "Ente/Menus/MenuPontuacao.h"
 #include "Controle/ControleJogador.h"
 
 class Jogo {
@@ -21,6 +22,7 @@ class Jogo {
         Fase fase1;
 
         Menus::MenuAbertura menuAbertura;
+        Menus::MenuPontuacao menuPontuacao;
         //Fase fase2;
     public:
         Jogo();

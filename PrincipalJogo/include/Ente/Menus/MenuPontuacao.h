@@ -4,10 +4,19 @@
 #define TEX_PONTUACAO ""
 
 #include "Menu.h"
+#include "../../Auxiliares/Lista.h"
+namespace ElementosGraficos{
+    class Texto;
+}
 
 namespace Menus{
     class MenuPontuacao: public Menu{
         private:
+            Lista<ElementosGraficos::Texto> lTextos;
+            ElementosGraficos::Texto* pTexto;
+            int pontuacao[10];
+
+        
         public:
             MenuPontuacao();
 
@@ -15,7 +24,11 @@ namespace Menus{
 
             void criaBotoes();
 
+            void criaTextos();
+
             void atualizar(const float dt);
+
+            void incluir(ElementosGraficos::Texto *texto);
 
             void renderizar();
 
