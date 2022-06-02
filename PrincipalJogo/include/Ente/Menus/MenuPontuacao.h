@@ -13,8 +13,11 @@ namespace Menus{
 
             ~MenuPontuacao();
 
-
             void criaBotoes();
+
+            void atualizar(const float dt);
+
+            void renderizar();
 
             void executar(const float dt);
 

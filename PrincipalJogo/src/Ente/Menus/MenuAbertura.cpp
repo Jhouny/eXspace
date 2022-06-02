@@ -11,9 +11,7 @@ namespace Menus {
         executar(0);
     }
 
-    MenuAbertura::~MenuAbertura() {
-        pBotao = NULL;
-    }
+    MenuAbertura::~MenuAbertura() {}
 
     void MenuAbertura::criaBotoes() {
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350),"JOGAR");
