@@ -4,8 +4,8 @@
 #include "ElementoGrafico.h"
 #include "Texto.h"
 
-#define TEX_BOTAO_ATIVO "PrincipalJogo/assets/Texturas/Botoes/botao2.png"
-#define TEX_BOTAO_NEUTRO "PrincipalJogo/assets/Texturas/Botoes/botao1.png"
+#define TEX_BOTAO_ATIVO "PrincipalJogo/assets/Texturas/Botoes/botao3.png"
+#define TEX_BOTAO_NEUTRO "PrincipalJogo/assets/Texturas/Botoes/botao4.png"
 #define FONT_TEXTO "PrincipalJogo/assets/Fonts/Starjedi.ttf"
 
 namespace ElementosGraficos {
