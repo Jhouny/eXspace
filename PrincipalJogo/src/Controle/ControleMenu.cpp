@@ -6,10 +6,12 @@ namespace Controle{
         Observador(),
         pMenu(pM),
         subir("Up"),
-        descer("Down")
+        descer("Down"),
+        entrar("Enter")
     {
-        teclasPressionadas.insert(std::pair<std::string,bool>(subir,false));
-        teclasPressionadas.insert(std::pair<std::string,bool>(subir,true));
+        teclasPressionadas.insert(std::pair<std::string,bool>(subir, false));
+        teclasPressionadas.insert(std::pair<std::string,bool>(descer, false));
+        teclasPressionadas.insert(std::pair<std::string,bool>(entrar, false));
     }
 
     ControleMenu::~ControleMenu(){
@@ -20,11 +22,14 @@ namespace Controle{
         if(tecla == subir){
             teclasPressionadas[subir] = true;
             pMenu->subirSelecao();
-            
         }
         if(tecla == descer){
             teclasPressionadas[descer] = true;
             pMenu->descerSelecao();
+        }
+        if(tecla == entrar){
+            teclasPressionadas[entrar] = true;
+            pMenu->entrar();
         }
 
     }
@@ -32,13 +37,11 @@ namespace Controle{
     void ControleMenu::compartilharTeclaLiberada(std::string tecla){
          if(tecla == subir){
             teclasPressionadas[subir] = false;
-            
-            
         }
         if(tecla == descer){
             teclasPressionadas[descer] = false;
-            
         }
+
     }
 
     void ControleMenu::setMenu(Menus::Menu* menu){

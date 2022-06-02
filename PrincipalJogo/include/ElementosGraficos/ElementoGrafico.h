@@ -12,7 +12,7 @@ namespace ElementosGraficos {
     };
 
     class ElementoGrafico {
-        private:
+        protected:
             Coordenada posicao;
             Coordenada tamanho;
             sf::Sprite sprite;

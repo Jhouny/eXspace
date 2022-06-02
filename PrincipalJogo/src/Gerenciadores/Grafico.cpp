@@ -50,14 +50,16 @@ namespace Gerenciadores {
         }
     }
 
+    void Grafico::draw(sf::Text* texto){
+        window->draw(*texto);
+    }
+
     void Grafico::setRotate(){
         view.rotate(0.5);
     }
 
-    void Grafico::atualizaView(Jogador* player){
-        Coordenada vetor;
-        vetor = player->getPosicao();
-        view.setCenter(vetor.x, ALTURA/2.f);  // Segue no X mas não no Y
+    void Grafico::atualizaView(Coordenada pos){
+        view.setCenter(pos.x, ALTURA/2.f);  // Segue no X mas não no Y
     }
 
     void Grafico::atualizaMinimap(Coordenada p){
@@ -86,9 +88,9 @@ namespace Gerenciadores {
         window->close();
     }
 
-    /* Returns a texture to be used by an entity. */
+    
     sf::Texture* Grafico::loadTexture(const char* path) {
-        /* Tries to find an existing texture linked by the path to it. */
+        
         std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
         while (it != mapaTexturas.end()) {
             if (!strcmp(it->first, path))
@@ -96,7 +98,7 @@ namespace Gerenciadores {
             it++;
         }
 
-        /* If not found, must load it. */
+        
         sf::Texture* tex = new sf::Texture();
 
         if (!tex->loadFromFile(path)) {
@@ -109,9 +111,30 @@ namespace Gerenciadores {
         return tex;
     }
 
+    sf::Font* Grafico::carregaFonte(const char* path) {
+        std::map<const char*, sf::Font*>::iterator it = mapaFontes.begin();
+        while (it != mapaFontes.end()) {
+            if (!strcmp(it->first, path))
+                return it->second;
+            it++;
+        }
+
+        
+        sf::Font* fonte = new sf::Font();
+
+        if (!fonte->loadFromFile(path)) {
+            std::cout << "ERROR loading file " << path << std::endl;
+            exit(1);
+        }
+
+        mapaFontes.insert(std::pair<const char*, sf::Font*>(path, fonte));
+
+        return fonte;
+    }
+
     // Define a posição da janela principal
 
-    sf::Event* Grafico::getEvent() const {
+    sf::Event* Grafico::getEvent() {
         return event;
     }
 

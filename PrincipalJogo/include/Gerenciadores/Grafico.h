@@ -14,6 +14,8 @@ namespace Gerenciadores {
 
             // Mapeia o path das texturas aos elementos
             std::map<const char*, sf::Texture*> mapaTexturas;
+            // Mapeia o path das Fontes aos elementos
+            std::map<const char*, sf::Font*> mapaFontes;
 
             /* Seguindo a sugestão do monitor Matheus Burda, usa-se o padrão Singleton */
             static Gerenciadores::Grafico* instancia;
@@ -28,6 +30,8 @@ namespace Gerenciadores {
             
             void draw(sf::Sprite* sp, bool map = true);
 
+            void draw(sf::Text* texto);
+
             void setTamView(Coordenada t){ //nova
                 view.setSize(t.x,t.y);
             }
@@ -40,7 +44,7 @@ namespace Gerenciadores {
 
             void setRotate();//nova
 
-            void atualizaView(Jogador* player);//nova
+            void atualizaView(Coordenada pos);//nova
                 
             void atualizaMinimap(Coordenada p);    //nova
 
@@ -58,7 +62,9 @@ namespace Gerenciadores {
 
             sf::Texture* loadTexture(const char* path);
 
-            sf::Event* getEvent() const;
+            sf::Font* carregaFonte(const char* path);
+
+            sf::Event* getEvent();
 
             sf::RenderWindow* getWindow() const;
     };

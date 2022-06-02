@@ -4,7 +4,7 @@
 #include "Ente/Fase/Fase.h"
 #include "Gerenciadores/Grafico.h"
 #include "Gerenciadores/Eventos.h"
-
+#include "Ente/Menus/MenuAbertura.h"
 #include "Controle/ControleJogador.h"
 
 class Jogo {
@@ -19,6 +19,8 @@ class Jogo {
         float dt;
 
         Fase fase1;
+
+        Menus::MenuAbertura menuAbertura;
         //Fase fase2;
     public:
         Jogo();

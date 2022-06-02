@@ -19,6 +19,7 @@ namespace ElementosGraficos {
         sprite.setTexture(*temp);
         float sX = (float)tamanho.x / temp->getSize().x;
         float sY = (float)tamanho.y / temp->getSize().y;
+        sprite.setPosition(sf::Vector2f(posicao.x, posicao.y));
         sprite.setScale(sX, sY);
     }
 

@@ -131,7 +131,7 @@ void Fase::atualizar(const float dt) {
     renderizar();
 
     // Atualiza a view para a posicao do jogador
-    pGrafico->atualizaView(jogador1);
+    pGrafico->atualizaView(jogador1->getPosicao());
     
     // Processa simulação de efeito Parallax
     atualizarBackground();

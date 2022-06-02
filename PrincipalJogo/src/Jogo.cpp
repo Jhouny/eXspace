@@ -4,7 +4,8 @@ Jogo::Jogo():
     pGrafico(Gerenciadores::Grafico::getInstancia()),
     pEventos(Gerenciadores::Eventos::getInstancia()),
     jogador1(),
-    fase1(1, &jogador1)
+    fase1(1, &jogador1),
+    menuAbertura()
 {
     temporizador.restart();
     dt = 0;
@@ -26,11 +27,14 @@ void Jogo::executar() {
             temporizador.restart();
         } //
         else {
-            fase1.atualizar(dt);
+            //fase1.atualizar(dt);
+            menuAbertura.atualizar(dt);
             dt -= TICK_RATE;
         }
-
-        fase1.renderizar();
+        
+        menuAbertura.renderizar();
+        //cout << "pos: " << menuAbertura.fundo.getPosition().x << " " << menuAbertura.fundo.getPosition().y << endl;
+        //fase1.renderizar();
 
         pGrafico->display();
     }

@@ -1,11 +1,12 @@
 #include "../../include/ElementosGraficos/Botao.h"
 
 namespace ElementosGraficos {
-    Botao::Botao(Coordenada tam, Coordenada pos):
-        ElementoGrafico(tam, pos, TEX_BOTAO_NEUTRO, ID::botao),
-        ativo(false)
+    Botao::Botao(Coordenada tam, Coordenada pos, std::string titulo):
+        ElementoGrafico(tam, Coordenada(pos.x-tam.x/2.f, pos.y-tam.y/2.f), TEX_BOTAO_NEUTRO, ID::botao),
+        ativo(false),
+        texto(tam, pos, titulo)
     {
-
+        atualizarTextura();
     }
 
     Botao::~Botao() {
@@ -14,6 +15,9 @@ namespace ElementosGraficos {
 
     void Botao::ativar() {
         ativo = true;
+    }
+    void Botao::desativar(){
+        ativo = false;
     }
 
     void Botao::atualizarTextura() {

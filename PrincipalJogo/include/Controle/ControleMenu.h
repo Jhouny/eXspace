@@ -3,10 +3,11 @@
 
 #include "Observador.h"
 
+namespace Menus{
+        class Menu;
+}
+
 namespace Controle{
-    namespace Menus{
-         class Menu;
-    }
 
     class ControleMenu: public Observador{
         private:
@@ -14,6 +15,8 @@ namespace Controle{
             std::map<std::string, bool> teclasPressionadas;
             std::string subir;
             std::string descer;
+            std::string entrar;
+
         public:
             ControleMenu(Menus::Menu* pM);
 
