@@ -5,6 +5,7 @@
 #include "../Gerenciadores/Grafico.h"
 
 #define FONTE_PADRAO "PrincipalJogo/assets/Fonts/BebasNeue-Regular.ttf"
+#define FONTE_ALTERNATIVA "PrincipalJogo/assets/Fonts/fast99.ttf"
 
 #define PROPORCAO 30/100.f
 
@@ -28,6 +29,7 @@ namespace ElementosGraficos {
             ~Texto();
 
             sf::Text* getTexto() { return &texto; }
+            void setTexto(const char* tex);
 
             void setPosicao(Coordenada pos);
             Coordenada getPosicao() const { return posicao; }
@@ -40,6 +42,8 @@ namespace ElementosGraficos {
 
             void setAlinhamento(Alinhamento al);
             void setFonte(const char* path);
+
+            void setCor(sf::Color C);
     };
 }
 

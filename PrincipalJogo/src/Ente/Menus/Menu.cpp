@@ -1,11 +1,14 @@
 #include "../../../include/Ente/Menus/Menu.h"
+#include "../../../include/ElementosGraficos/Texto.h"
 
 namespace Menus{  
     Menu::Menu():
         Ente(ID::menu),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        pControle(this)
+        pControle(this),
+        titulo(Coordenada(COMPRIMENTO,500.f),(COMPRIMENTO/2.f,100.f),"")
         {
+            titulo.setCor(sf::Color::Yellow);
             pBotao = NULL;        
         }
 
@@ -74,6 +77,10 @@ namespace Menus{
         cout<< "sY " << sY <<endl;
         
         fundo.setScale(sX, sY);
+    }
+
+    void Menu::setTitulo(const char* titu){
+        titulo.setTexto(titu);
     }
 
 }

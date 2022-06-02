@@ -3,8 +3,9 @@
 
 namespace Menus {
     MenuAbertura::MenuAbertura():
-        Menu()
+        Menu()        
     {
+        setTitulo("SPACE CONQUERORS");
         executar(0);
     }
 
@@ -13,11 +14,11 @@ namespace Menus {
     }
 
     void MenuAbertura::criaBotoes() {
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 100),"JOGAR");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350),"JOGAR");
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350),"PONTUAÇÃO");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 475),"PONTUAÇÃO");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600),"CONFIGURAÇÕES");
@@ -39,6 +40,7 @@ namespace Menus {
             pGrafico->draw((it->first)->getSprite(),false);
             pGrafico->draw((it->first)->getTexto());
         }
+        pGrafico->draw(titulo.getTexto());
     }
 
     void MenuAbertura::atualizar(const float dt){

@@ -11,6 +11,9 @@
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Controle/ControleMenu.h"
 
+namespace ElementosGraficos {
+    class Texto;
+}
 
 
 namespace Menus{
@@ -18,6 +21,7 @@ namespace Menus{
         protected:
             std::map<ElementosGraficos::Botao*, bool> botoesAtivos;
             std::map<ElementosGraficos::Botao*, bool>::iterator it;
+            ElementosGraficos::Texto titulo;
 
             //sf::Sprite fundo;
 
@@ -41,6 +45,8 @@ namespace Menus{
             void setFundoAleatorio();
 
             void setTexture(const char* path);
+
+            void setTitulo(const char* titu);
 
             virtual void criaBotoes() = 0;
 

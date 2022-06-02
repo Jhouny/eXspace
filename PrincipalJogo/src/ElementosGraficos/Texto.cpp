@@ -18,6 +18,10 @@ namespace ElementosGraficos {
         pGrafico = NULL;
     }
 
+    void Texto::setTexto(const char* tex){
+        texto.setString(tex);
+    }
+
     void Texto::setPosicao(Coordenada pos) {
         texto.setPosition(pos.x, pos.y);
         posicao = pos;
@@ -56,5 +60,9 @@ namespace ElementosGraficos {
     void Texto::setFonte(const char* path) {
         sf::Font* f = pGrafico->carregaFonte(path);
         texto.setFont(*f);
+    }
+
+    void Texto::setCor(sf::Color C){
+        texto.setFillColor(C);
     }
 }
