@@ -6,6 +6,7 @@ namespace ElementosGraficos {
         ativo(false),
         texto(tam, pos, titulo)
     {
+        
         atualizarTextura();
     }
 

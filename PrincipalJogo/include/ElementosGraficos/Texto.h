@@ -5,7 +5,7 @@
 #include "../Gerenciadores/Grafico.h"
 
 #define FONTE_PADRAO "PrincipalJogo/assets/Fonts/BebasNeue-Regular.ttf"
-#define FONTE_ALTERNATIVA "PrincipalJogo/assets/Fonts/fast99.ttf"
+#define FONTE_ALTERNATIVA "PrincipalJogo/assets/Fonts/Starjedi.ttf"
 
 #define PROPORCAO 30/100.f
 
@@ -43,6 +43,7 @@ namespace ElementosGraficos {
             void setAlinhamento(Alinhamento al);
             void setFonte(const char* path);
 
+            void setContorno(sf::Color C, float esp = 5.f);
             void setCor(sf::Color C);
     };
 }

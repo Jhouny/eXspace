@@ -6,10 +6,10 @@ namespace Menus{
         Ente(ID::menu),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
         pControle(this),
-        titulo(Coordenada(COMPRIMENTO,500.f),(COMPRIMENTO/2.f,100.f),"")
+        titulo(Coordenada(COMPRIMENTO,500.f),Coordenada(COMPRIMENTO/2.f,100.f),"")
         {
             titulo.setCor(sf::Color::Yellow);
-            pBotao = NULL;        
+            pBotao = NULL;
         }
 
     Menu::~Menu() {

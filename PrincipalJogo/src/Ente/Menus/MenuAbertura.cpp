@@ -6,6 +6,8 @@ namespace Menus {
         Menu()        
     {
         setTitulo("SPACE CONQUERORS");
+        getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         executar(0);
     }
 

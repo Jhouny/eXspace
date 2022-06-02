@@ -47,6 +47,7 @@ namespace Menus{
             void setTexture(const char* path);
 
             void setTitulo(const char* titu);
+            ElementosGraficos::Texto* getTitulo() { return &titulo; }
 
             virtual void criaBotoes() = 0;
 

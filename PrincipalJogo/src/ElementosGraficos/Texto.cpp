@@ -9,6 +9,8 @@ namespace ElementosGraficos {
     {
         setAlinhamento(Alinhamento::esquerda);
         setFonte(FONTE_PADRAO);
+        setCor(sf::Color(0,0,0));
+
         texto.setString(sf::String::fromUtf8(conteudo.begin(), conteudo.end()));
         texto.setPosition(sf::Vector2f(posicao.x - texto.getLocalBounds().width/2.f, posicao.y - (texto.getLocalBounds().top + texto.getLocalBounds().height/2.7f)));
         texto.setCharacterSize(tamanho.y * PROPORCAO);
@@ -60,6 +62,11 @@ namespace ElementosGraficos {
     void Texto::setFonte(const char* path) {
         sf::Font* f = pGrafico->carregaFonte(path);
         texto.setFont(*f);
+    }
+
+    void Texto::setContorno(sf::Color C, float esp) {
+        texto.setOutlineColor(C);
+        texto.setOutlineThickness(esp);
     }
 
     void Texto::setCor(sf::Color C){
