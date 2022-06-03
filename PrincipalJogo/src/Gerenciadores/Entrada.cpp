@@ -89,7 +89,7 @@ namespace Gerenciadores{
         lObservador.removeIndice(i);
     }
     void Entrada::teclaPressionada(sf::Keyboard::Key tecla){
-        for(int i = 0; i < lObservador.getTamanho(); i++){
+        for(int i = 0; i < lObservador.getTamanho(); i++) {
             lObservador[i]->compartilharTeclaPressionada(teclaString(tecla)); 
         }
     }

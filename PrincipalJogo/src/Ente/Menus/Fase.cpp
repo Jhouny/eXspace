@@ -7,14 +7,14 @@ namespace Menus{
         jogador1(jog1),
         jogador2(jog2),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        colisor()
+        colisor(),
+        nJog(1)
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
 
             //Define o ID do Menu fase:
-            setID( Estados::IdEstado::fase);
-
+            setID(Estados::IdEstado::fase);
 
 
             // Inclui os jogadores

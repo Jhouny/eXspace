@@ -22,6 +22,7 @@ namespace Controle {
     }
 
     void ControleJogador::compartilharTeclaPressionada(std::string tecla) {
+        cout << "entrouJogador" << endl;
         if(pJogador == NULL) {
             cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaPressionada()" << endl;
             exit(1);
@@ -47,6 +48,7 @@ namespace Controle {
             pJogador->atacar();
             pJogador->ataque(true);
         }
+        cout << "saiuJogador" << endl;
     }
 
     void ControleJogador::compartilharTeclaLiberada(std::string tecla) {
@@ -54,7 +56,7 @@ namespace Controle {
             cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaLiberada()" << endl;
             exit(1);
         }
-
+        
         if(tecla == pular) {
             teclasPressionadas[pular] = false;
             pJogador->pulo(false);

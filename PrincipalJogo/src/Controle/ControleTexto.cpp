@@ -18,19 +18,12 @@ namespace Controle{
 
     }
 
-    void ControleTexto::compartilharTeclaPressionada(std::string tecla){
-         if (tecla == "Enter" || 
-                tecla == "Right" || 
-                    tecla == "Left" || 
-                        tecla == "Up" || 
-                            tecla == "Down" || 
-                                tecla == "Escape" || 
-                                   tecla == "Control" || 
-                                        tecla == "Shift" || 
-                                            tecla == "RControl" || 
-                                                tecla == "RShift" || 
-                                                    tecla == "Tab"||
-                                                        tecla == "Unknown") {
+    void ControleTexto::compartilharTeclaPressionada(std::string tecla) {
+        cout << "entrouTexto" << endl;
+        if (tecla == "Enter" || tecla == "Right" || tecla == "Left" || 
+            tecla == "Up" || tecla == "Down" || tecla == "Escape" || 
+            tecla == "Control" || tecla == "Shift" || tecla == "RControl" || 
+            tecla == "RShift" || tecla == "Tab"|| tecla == "Unknown") {
             return;
         }
         if(contador <= tamMax){
@@ -45,6 +38,7 @@ namespace Controle{
                 contador++;             
             }
         }
+        cout << "saiuTexto" << endl;
     }
 
     void ControleTexto::compartilharTeclaLiberada(std::string tecla){ //Precisa?
