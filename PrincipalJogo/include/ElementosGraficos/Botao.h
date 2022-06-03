@@ -29,6 +29,8 @@ namespace ElementosGraficos {
             void ativar();
             void desativar();
 
+            void trocarNome();
+
             bool getAtivo() const { return ativo; }
 
             void atualizarTextura();

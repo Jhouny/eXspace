@@ -55,7 +55,12 @@ namespace Menus{
     void Menu::entrar(){
         if(relogio.getElapsedTime().asSeconds() > 0.1){
             getAtivo();
-            getMaquina()->setEstadoAtual((it->first)->getFuncao());
+            if((it->first)->getFuncao()==Estados::IdEstado::selecionarFase || (it->first)->getFuncao()==Estados::IdEstado::selecionarJogadores ){
+                (it->first)->trocarNome();
+            }
+            else
+                getMaquina()->setEstadoAtual((it->first)->getFuncao());
+
         }
 
     }

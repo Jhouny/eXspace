@@ -7,7 +7,8 @@ namespace Menus{
         setID( Estados::IdEstado::menuJogar);
         setTitulo("JOGAR");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
-        getTitulo()->setContorno(sf::Color(0,0,0), 5);
+        getTitulo()->setCor(sf::Color(0,0,0,230));
+        getTitulo()->setContorno(sf::Color::Yellow);
         executar(0);
 
     }
@@ -21,12 +22,12 @@ namespace Menus{
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450), Estados::IdEstado::pontuacao, "FASE UM");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450), Estados::IdEstado::selecionarFase, "FASE UM");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
         
 
         
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::pontuacao, "UM JOGADOR");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::selecionarJogadores, "UM JOGADOR");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
 
         

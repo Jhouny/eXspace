@@ -22,11 +22,14 @@ namespace ElementosGraficos {
             Coordenada posicao;
             sf::Text texto;
             Gerenciadores::Grafico *pGrafico;
+            bool estati;
 
         public:
-            Texto(Coordenada tam, Coordenada pos, std::string conteudo);
+            Texto(Coordenada tam, Coordenada pos, std::string conteudo, bool est = true);
 
             ~Texto();
+            
+            bool getEstatico()  { return estati; }
 
             sf::Text* getTexto() { return &texto; }
             void setTexto(const char* tex);

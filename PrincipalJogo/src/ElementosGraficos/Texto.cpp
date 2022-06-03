@@ -1,11 +1,12 @@
 #include "../../include/ElementosGraficos/Texto.h"
 
 namespace ElementosGraficos {
-    Texto::Texto(Coordenada tam, Coordenada pos, std::string conteudo):
+    Texto::Texto(Coordenada tam, Coordenada pos, std::string conteudo, bool est):
         tamanho(tam),
         posicao(pos),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        texto()
+        texto(), 
+        estati(est)
     {
         setAlinhamento(Alinhamento::esquerda);
         setFonte(FONTE_PADRAO);

@@ -36,6 +36,7 @@ namespace Controle{
     }
             
     void ControleMenu::compartilharTeclaLiberada(std::string tecla){
+        cout<<"tecla:"<< tecla <<endl;
         if(this->getAtivo()) {
             if(tecla == subir){
                 teclasPressionadas[subir] = false;

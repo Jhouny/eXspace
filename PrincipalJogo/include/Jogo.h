@@ -7,6 +7,7 @@
 #include "Ente/Menus/MenuPontuacao.h"
 #include "Ente/Menus/Fase.h"
 #include "Ente/Menus/MenuJogar.h"
+#include "Ente/Menus/MenuGameOver.h"
 #include "Controle/ControleJogador.h"
 #include "Estados/MaquinaEstados.h"
 
