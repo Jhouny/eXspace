@@ -27,6 +27,8 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuPontuacao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuJogar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Mercurio.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Netuno.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Grafico.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Colisoes.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Gerenciadores\\Entrada.cpp",

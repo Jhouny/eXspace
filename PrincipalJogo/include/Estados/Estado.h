@@ -24,7 +24,7 @@ namespace Estados {
     };
 
     class Estado {
-        private:
+        protected:
             Estado* anterior;  // Define o menu anterior para poder retornar
             IdEstado id;
             Menus::Menu* pMenu;

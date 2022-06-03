@@ -16,40 +16,31 @@
 
 namespace Menus{
     class Fase: public Menu {
-        private:
+        protected:
             ListaEntidades lEntidades;
 
-            Gerenciadores::Grafico* pGrafico;
             Gerenciadores::Colisor colisor;
-
-            int nivel;
-            int nJog;
 
             Jogador *jogador1;
             Jogador *jogador2;
 
             Plataforma* pBase;
             InimigoTerrestre* pIni;
-            
-            sf::Sprite fundo;
-            
+                    
         public:
-            Fase(int ni = 1, Jogador* jog1 = NULL, Jogador* jog2 = NULL);
+            Fase(Jogador* jog1 = NULL, Jogador* jog2 = NULL);
             
             ~Fase();
             
-            void geraPlataformas(); //nao conseguimos implementar 
-            void geraObstaculos(); //nao conseguimos implementar 
-            void geraInimigos(); //nao conseguimos implementar 
-            
-            void setJogador1(Jogador *jog) { jogador1 = jog; }
-            void setJogador2(Jogador *jog) { jogador2 = jog; }
-            
+            virtual void geraPlataformas() = 0;
+            virtual void geraObstaculos() = 0;
+            virtual void geraInimigos() = 0;
+
             void atualizaEntidades(const float dt);
 
             void renderizar();
 
-            void criaBotoes(){}
+            void criaBotoes() {}
 
             void setTexture(const char* path);
             

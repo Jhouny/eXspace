@@ -1,14 +1,12 @@
 #include "../../../include/Ente/Menus/Fase.h"
+#include "../../../include/Estados/MaquinaEstados.h"
 
 namespace Menus{
-    Fase::Fase(int ni,Jogador* jog1, Jogador* jog2):
+    Fase::Fase(Jogador* jog1, Jogador* jog2):
         Menu(),
-        nivel(ni),
         jogador1(jog1),
         jogador2(jog2),
-        pGrafico(Gerenciadores::Grafico::getInstancia()),
-        colisor(),
-        nJog(1)
+        colisor()
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
@@ -18,7 +16,7 @@ namespace Menus{
 
 
             // Inclui os jogadores
-            if(nJog == 2) {
+            if(jogador2 != NULL) {
                 jogador2->setVelocidade(Coordenada(15,0));
                 jogador2->setFase(this);
                 incluir(static_cast<Entidade*>(jogador2));
@@ -71,7 +69,7 @@ namespace Menus{
     }
 
     void Fase::geraInimigos() {    
-        for(int i = 0; i < 4*nivel; i++) {
+        for(int i = 0; i < 4; i++) {
             pIni = new InimigoTerrestre();
             pIni->setPosicao(Coordenada(rand() % 4400, 100));
             pIni->setJogador(jogador1);
@@ -94,7 +92,7 @@ namespace Menus{
     }
 
     void Fase::gameOver() {
-        pGrafico->terminar();
+        pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
     }
 
     void Fase::incluir(Entidade* l) {

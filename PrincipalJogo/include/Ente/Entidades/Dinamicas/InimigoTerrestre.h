@@ -2,7 +2,7 @@
 #define _INIMIGO_TERRESTRE_
 #include "../Inimigo.h"
 
-#define TEX_INIMIGO_TERRESTRE "PrincipalJogo/assets/Texturas/Entidades/Jogador/1 Biker/Still.png"
+#define TEX_INIMIGO_TERRESTRE "PrincipalJogo/assets/Texturas/Inimigos/InimigoTerrestre/5/Still.png"
 
 class InimigoTerrestre: public Inimigo {
     private:

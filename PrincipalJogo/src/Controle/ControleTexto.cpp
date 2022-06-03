@@ -19,7 +19,6 @@ namespace Controle{
     }
 
     void ControleTexto::compartilharTeclaPressionada(std::string tecla) {
-        cout << "entrouTexto" << endl;
         if (tecla == "Enter" || tecla == "Right" || tecla == "Left" || 
             tecla == "Up" || tecla == "Down" || tecla == "Escape" || 
             tecla == "Control" || tecla == "Shift" || tecla == "RControl" || 
@@ -30,15 +29,15 @@ namespace Controle{
             if(tecla == "Space"){
                 nome += " ";
                 contador++;
-            } else if(tecla == apagar && contador >=0 ){
-                nome.erase(contador--);
+            } else if(tecla == apagar){
+                if(contador >=0)
+                    nome.erase(contador--);
             }
             else{
                 nome += tecla;
                 contador++;             
             }
         }
-        cout << "saiuTexto" << endl;
     }
 
     void ControleTexto::compartilharTeclaLiberada(std::string tecla){ //Precisa?
