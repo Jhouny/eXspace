@@ -32,6 +32,8 @@ Jogo::Jogo():
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
+
+    // Define o menu de abertura
     setEstadoAtual(Estados::IdEstado::menuAbertura);
 
     executar();

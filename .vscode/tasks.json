@@ -35,6 +35,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Controle\\ControleMenu.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\ElementoGrafico.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Botao.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoAlternador.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Texto.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Estados\\Estado.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Estados\\MaquinaEstados.cpp",
@@ -53,9 +54,7 @@
                 "-lgdi32",
                 "-DSFML_STATIC"
             ],
-            "options": {
-                //"cwd": "${fileDirname}"
-            },
+            "options": {},
             "problemMatcher": [
                 "$gcc"
             ],

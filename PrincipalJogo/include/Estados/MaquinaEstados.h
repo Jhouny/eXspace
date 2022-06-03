@@ -18,6 +18,8 @@ namespace Estados {
 
         void setEstadoAtual(IdEstado id);
 
+        void setEstadoAnterior();
+
         Estado* getEstadoAtual() { return estadoAtual; }
 
         void atualizarEstadoAtual(const float dt);

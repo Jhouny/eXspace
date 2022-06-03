@@ -20,6 +20,7 @@ namespace Menus{
             // Inclui os jogadores
             if(nJog == 2) {
                 jogador2->setVelocidade(Coordenada(15,0));
+                jogador2->setFase(this);
                 incluir(static_cast<Entidade*>(jogador2));
             }
 

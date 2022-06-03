@@ -45,6 +45,8 @@ namespace ElementosGraficos {
 
             void setContorno(sf::Color C, float esp = 5.f);
             void setCor(sf::Color C);
+
+            void operator=(Texto* tex);
     };
 }
 

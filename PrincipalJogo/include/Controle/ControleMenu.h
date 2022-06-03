@@ -16,6 +16,7 @@ namespace Controle{
             std::string subir;
             std::string descer;
             std::string entrar;
+            std::string voltar;
 
         public:
             ControleMenu(Menus::Menu* pM);

@@ -3,12 +3,14 @@
 
 #include "Menu.h"
 #include "../../ElementosGraficos/Botao.h"
+#include "../../ElementosGraficos/BotaoAlternador.h"
 
 namespace Menus{
     class MenuJogar:public Menu{
         private:
         public:
             MenuJogar();
+
             ~MenuJogar();
             
             void criaBotoes();

@@ -55,9 +55,20 @@ namespace Menus{
     void Menu::entrar(){
         if(relogio.getElapsedTime().asSeconds() > 0.1){
             getAtivo();
-            getMaquina()->setEstadoAtual((it->first)->getFuncao());
+            ElementosGraficos::BotaoAlternador* tmp = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
+            if(tmp == NULL)
+                getMaquina()->setEstadoAtual((it->first)->getFuncao());
+            else
+                tmp->proximo();
+            reiniciarRelogio();
         }
+    }
 
+    void Menu::voltar() {
+        if(relogio.getElapsedTime().asSeconds() > 0.1){
+            getMaquina()->setEstadoAnterior();
+            reiniciarRelogio(); 
+        }
     }
 
     void Menu::setFundoAleatorio() {

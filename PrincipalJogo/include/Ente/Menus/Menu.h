@@ -13,6 +13,7 @@
 #include "../Ente.h"
 #include "../../Auxiliares/Lista.h "
 #include "../../ElementosGraficos/Botao.h"
+#include "../../ElementosGraficos/BotaoAlternador.h"
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Controle/ControleMenu.h"
 #include "../../Estados/Estado.h"
@@ -51,6 +52,8 @@ namespace Menus{
             void reiniciarRelogio(){ relogio.restart(); }
 
             void entrar();
+
+            void voltar();
 
             void setFundoAleatorio();
 

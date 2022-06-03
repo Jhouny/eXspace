@@ -29,6 +29,12 @@ namespace Estados {
         }
     }
 
+    void MaquinaEstados::setEstadoAnterior() {
+        if(estadoAtual->getAnterior() != NULL) {
+            setEstadoAtual(estadoAtual->getAnterior()->getID());
+        }
+    }
+
     void MaquinaEstados::atualizarEstadoAtual(const float dt) {
         estadoAtual->atualizar(dt);
     }

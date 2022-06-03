@@ -72,4 +72,13 @@ namespace ElementosGraficos {
     void Texto::setCor(sf::Color C){
         texto.setFillColor(C);
     }
+
+    void Texto::operator=(Texto* tex) {
+        tamanho = tex->getTamanho();
+        posicao = tex->getPosicao();
+        std::string conteudo = tex->getTexto()->getString().toAnsiString();
+        texto.setString(sf::String::fromUtf8(conteudo.begin(), conteudo.end()));
+        texto.setPosition(sf::Vector2f(posicao.x - texto.getLocalBounds().width/2.f, posicao.y - (texto.getLocalBounds().top + texto.getLocalBounds().height/2.7f)));
+        texto.setCharacterSize(tamanho.y * PROPORCAO);
+    }
 }

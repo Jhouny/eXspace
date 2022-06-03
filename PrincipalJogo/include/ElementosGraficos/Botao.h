@@ -7,33 +7,34 @@
 
 #define TEX_BOTAO_ATIVO "PrincipalJogo/assets/Texturas/Botoes/botao3.png"
 #define TEX_BOTAO_NEUTRO "PrincipalJogo/assets/Texturas/Botoes/botao4.png"
-#define FONT_TEXTO "PrincipalJogo/assets/Fonts/Starjedi.ttf"
 
 
 namespace ElementosGraficos {
     class Botao: public ElementoGrafico {
-        private:
+        protected:
             bool ativo;
             Texto texto;
+            std::string teste;  //Por algum motivo precisa disso para o BotaoAlternador funcionar
             Estados::IdEstado funcao;
 
         public:
             Botao(Coordenada tam, Coordenada pos, Estados::IdEstado func, std::string titulo = "" );
 
             ~Botao();
-
-            sf::Text* getTexto() { return texto.getTexto(); }
             
             Estados::IdEstado getFuncao() const { return funcao; }
 
             void ativar();
+
             void desativar();
 
             bool getAtivo() const { return ativo; }
 
-            void atualizarTextura();
+            sf::Text* getTexto() { return texto.getTexto(); }
+            
+            virtual void atualizarTextura();
 
-            void executar();
+            virtual void executar();
     };
 
 } // namespace ElementosGraficos 
