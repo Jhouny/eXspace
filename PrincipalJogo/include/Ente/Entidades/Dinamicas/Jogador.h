@@ -7,10 +7,12 @@
 
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
 
-class Fase;
+namespace Menus{
+    class Fase;
+}
 class Jogador: public Personagem {
     private:
-        Fase* pFase;
+        Menus::Fase* pFase;
         Projetil* proj;
         Controle::ControleJogador pControle;
         bool viradoFrente;
@@ -22,9 +24,9 @@ class Jogador: public Personagem {
         ~Jogador();
         void estaVivo();
 
-        void setFase(Fase* fase){ 
+        void setFase(Menus::Fase* fase){ 
             if(fase)
-                pFase=fase;
+                pFase = fase;
         }
 
         float getSegundos() {

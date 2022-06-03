@@ -1,5 +1,7 @@
 #include "../include/Jogo.h"
 
+
+
 Jogo::Jogo():
     MaquinaEstados(),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
@@ -21,6 +23,15 @@ Jogo::Jogo():
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuJogar());
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
+
+    pTemp = static_cast<Estados::Estado*>(new Menus::Fase(1,&jogador1));
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
     setEstadoAtual(Estados::IdEstado::menuAbertura);
 
     executar();

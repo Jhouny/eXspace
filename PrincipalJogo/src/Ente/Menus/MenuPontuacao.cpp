@@ -6,10 +6,10 @@ namespace Menus{
         Menu()
         {
         setID(Estados::IdEstado::pontuacao);
-        
+        /*
         setTitulo("PONTUAÇÃO");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);*/
         
         executar(0);
     }
@@ -31,17 +31,42 @@ namespace Menus{
     }
 
     void MenuPontuacao::criaTextos(){
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,100),Coordenada(100,50),"Posicao:");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(COMPRIMENTO/7.f,50),"Posicao:");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,100),Coordenada((float)COMPRIMENTO/2.f,50),"Nome:");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f,50),"Nome:");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,100),Coordenada(900,50),"Pontuação:");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(COMPRIMENTO/1.f-COMPRIMENTO/5.f,50),"Pontuação: ");
+        pTexto->setCor(sf::Color::Yellow);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        incluir(pTexto);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,150),"1");
+        pTexto->setCor(sf::Color::Yellow);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        incluir(pTexto);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,250),"2");
+        pTexto->setCor(sf::Color::Yellow);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        incluir(pTexto);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,350),"3");
+        pTexto->setCor(sf::Color::Yellow);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        incluir(pTexto);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,450),"4");
+        pTexto->setCor(sf::Color::Yellow);
+        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        incluir(pTexto);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,550),"5");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
@@ -67,7 +92,7 @@ namespace Menus{
 
     void MenuPontuacao::executar(const float dt){
         criaBotoes();
-        //criaTextos();
+        criaTextos();
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));

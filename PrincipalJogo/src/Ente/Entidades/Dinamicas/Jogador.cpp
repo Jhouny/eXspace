@@ -1,6 +1,6 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 #include "../../../../include/Ente/Entidades/Inimigo.h"
-#include "../../../../include/Ente/Fase/Fase.h"
+#include "../../../../include/Ente/Menus/Fase.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
 
 #define PULO_Y -256000 * TICK_RATE

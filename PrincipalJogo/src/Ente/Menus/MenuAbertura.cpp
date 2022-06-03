@@ -8,7 +8,8 @@ namespace Menus {
         setID( Estados::IdEstado::menuAbertura);
         setTitulo("SPACE CONQUERORS");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        getTitulo()->setCor(sf::Color(0,0,0,230));
+        getTitulo()->setContorno(sf::Color::Yellow ,5);
         executar(0);
     }
 
@@ -19,7 +20,7 @@ namespace Menus {
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), Estados::IdEstado::configuracoes, "CONFIGURAÇÕES");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
        
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::jogar, "JOGAR");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::menuJogar, "JOGAR");
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
         

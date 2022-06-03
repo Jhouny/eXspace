@@ -5,7 +5,6 @@
 #include "../Ente.h"
 #include "../../Gerenciadores/Grafico.h"
 
-
 class Entidade: public Ente {
     protected:
         Coordenada posicao;  // Posicao do canto superior esquerdo do elemento

@@ -12,7 +12,7 @@ namespace Estados {
 
     enum IdEstado {
         indefinido = -1,
-        jogar,
+        menuJogar,
         pontuacao,
         configuracoes,
         menuAbertura,
