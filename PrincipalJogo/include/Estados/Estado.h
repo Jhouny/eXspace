@@ -16,7 +16,10 @@ namespace Estados {
         pontuacao,
         configuracoes,
         menuAbertura,
+        menuGameOver,
         fase,
+        selecionarFase,
+        selecionarJogadores,
         salvar
     };
 

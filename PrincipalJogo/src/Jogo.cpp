@@ -33,8 +33,15 @@ Jogo::Jogo():
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
+
     // Define o menu de abertura
     setEstadoAtual(Estados::IdEstado::menuAbertura);
+
+    
 
     executar();
 }

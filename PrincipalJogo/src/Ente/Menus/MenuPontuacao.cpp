@@ -46,34 +46,34 @@ namespace Menus{
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,150),"1");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,150),"1º");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,250),"2");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,250),"2º");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,350),"3");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,350),"3º");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,450),"4");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,450),"4º");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,550),"5");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,550),"5º");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);
     }
 
     void MenuPontuacao::atualizar(const float dt){
-         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
+        for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             (it->first)->executar();
         }
     }

@@ -28,6 +28,8 @@ namespace ElementosGraficos {
 
             void desativar();
 
+            void trocarNome();
+
             bool getAtivo() const { return ativo; }
 
             sf::Text* getTexto() { return texto.getTexto(); }
