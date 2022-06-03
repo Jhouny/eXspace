@@ -14,11 +14,11 @@
 
 #define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
-class Fase: public Ente{
+class Fase: public Ente {
     private:
         ListaEntidades lEntidades;
 
-        Gerenciadores::Grafico* pGrafico;  //pGrafico(Gerenciadores::Grafico::getInstancia())
+        Gerenciadores::Grafico* pGrafico;
         Gerenciadores::Colisor colisor;
 
         int nivel;
