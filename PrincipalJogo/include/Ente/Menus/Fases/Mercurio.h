@@ -7,16 +7,12 @@ namespace Menus{
     class Mercurio: public Fase {
         private:
         public:
-            Mercurio();
+            Mercurio(Jogador* jog1, Jogador* jog2 = NULL);
             ~Mercurio();
             void geraPlataformas(); 
             void geraObstaculos(); 
             void geraInimigos();
-
-
-
-
-
+            void executar(const float dt);
     };
 }
 

@@ -35,7 +35,7 @@ namespace ElementosGraficos {
 
             ID getID() const { return id; }
 
-            virtual void ativar() = 0;
+            virtual void ativar() {};
 
             virtual void executar() = 0;
     };

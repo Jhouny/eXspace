@@ -1,25 +1,26 @@
 #ifndef _PONTO_H_
 #define _PONTO_H_
 
-#define TEX_PONTO_PREENCHIDO ""
-#define TEX_PONTO_VAZIO ""
+#include "ElementoGrafico.h"
+
+#define TEX_PONTO_VAZIO "PrincipalJogo/assets/Texturas/InimigoAbatido/inimigo_abatido_vazio.png"
 
 namespace ElementosGraficos {
-    class Ponto {
-        private:
+    class Ponto: public ElementoGrafico {
+        protected:
             bool preenchido;
         public:
-            Ponto();
+            Ponto(Coordenada tam, Coordenada pos);
 
             ~Ponto();
 
-            void preenchido();
+            void preencher();
 
-            void vazio();
+            void limpar();
 
-            void atualizarTextura();
+            virtual void atualizarTextura() = 0;
 
-            void executar();
+            virtual void executar();
         };    
 } // namespace ElementosGraficos 
 

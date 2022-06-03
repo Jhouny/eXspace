@@ -3,7 +3,7 @@
 
 #include "../Fase.h"
 #include "../../Entidades/Dinamicas/Chefe.h" 
-
+/*
 namespace Menus{
     class Netuno: public Fase {
         private:
@@ -19,5 +19,5 @@ namespace Menus{
 
     };
 }
-
+*/
 #endif

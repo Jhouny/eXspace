@@ -27,7 +27,7 @@ Jogo::Jogo():
     pTemp->cegar();
     inserirEstado(pTemp);
 
-    pTemp = static_cast<Estados::Estado*>(new Menus::Fase(1, jogador1));
+    pTemp = static_cast<Estados::Estado*>(new Menus::Mercurio(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);

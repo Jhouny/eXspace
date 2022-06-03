@@ -52,7 +52,7 @@ namespace Menus{
 
             void gameOver();
 
-            void executar(const float dt);
+            virtual void executar(const float dt) = 0;
     };
 }
 

@@ -10,10 +10,7 @@ namespace Menus{
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
-
             //Define o ID do Menu fase:
-            setID(Estados::IdEstado::fase);
-
 
             // Inclui os jogadores
             if(jogador2 != NULL) {
@@ -25,57 +22,20 @@ namespace Menus{
             jogador1->setVelocidade(Coordenada(10.5, 0));
             jogador1->setFase(this);
             incluir(static_cast<Entidade*>(jogador1));
-
-            // Cria todas as entidades
-            executar(0);
     }
 
     Fase::~Fase() {}
 
-    void Fase::geraPlataformas() {
-        pBase = new Plataforma(Coordenada(1000, 32), Coordenada(0, ALTURA - 100.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(1000, 32), Coordenada(1200, ALTURA - 100.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(1000, 32), Coordenada(1400, ALTURA - 100.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(2000, 32), Coordenada(2400, ALTURA - 100.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(400, ALTURA - 300.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(750, ALTURA - 300.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(1000, ALTURA - 400.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(1400, ALTURA - 500.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(1800, ALTURA - 450.f));
-        incluir(static_cast<Entidade*>(pBase));
-        
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(2200, ALTURA -400.f));
-        incluir(static_cast<Entidade*>(pBase));
-    }
+    
 
-    void Fase::geraObstaculos() {
-
-    }
-
-    void Fase::geraInimigos() {    
+    /*void Fase::geraInimigos() {    
         for(int i = 0; i < 4; i++) {
             pIni = new InimigoTerrestre();
             pIni->setPosicao(Coordenada(rand() % 4400, 100));
             pIni->setJogador(jogador1);
             incluir(static_cast<Entidade*>(pIni));
         }
-    }
+    }*/
 
     void Fase::setTexture(const char* path) {
         sf::Texture *temp = pGrafico->loadTexture(path);
@@ -143,16 +103,5 @@ namespace Menus{
 
         // Remove as entidades inativas
         colisor.remove(); 
-    }
-
-    void Fase::executar(const float dt) {
-        geraInimigos();
-        geraPlataformas();
-
-        // Seta tamanho da view
-        pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
-        pGrafico->setMinimap(Coordenada (4000,ALTURA));
-        pGrafico->setMinimapViewport();
-        pGrafico->atualizaMinimap(Coordenada(2000,360));
     }
 }
