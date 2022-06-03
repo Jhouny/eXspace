@@ -10,6 +10,7 @@
 #include "../../ElementosGraficos/Botao.h"
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Controle/ControleMenu.h"
+#include "../../Estados/Estado.h"
 
 namespace ElementosGraficos {
     class Texto;
@@ -17,19 +18,21 @@ namespace ElementosGraficos {
 
 
 namespace Menus{
-    class Menu: public Ente{
+    class Menu: public Ente, public Estados::Estado {
         protected:
             std::map<ElementosGraficos::Botao*, bool> botoesAtivos;
             std::map<ElementosGraficos::Botao*, bool>::iterator it;
             ElementosGraficos::Texto titulo;
 
-            //sf::Sprite fundo;
+            Estados::IdEstado idEst;
+
+            sf::Sprite fundo;
+            sf::Clock relogio;
 
             Gerenciadores::Grafico* pGrafico;
             Controle::ControleMenu pControle;
             ElementosGraficos::Botao* pBotao;
         public:
-            sf::Sprite fundo;
             Menu();
 
             ~Menu();
@@ -40,6 +43,8 @@ namespace Menus{
 
             void descerSelecao();
 
+            void reiniciarRelogio(){ relogio.restart(); }
+
             void entrar();
 
             void setFundoAleatorio();
@@ -48,6 +53,10 @@ namespace Menus{
 
             void setTitulo(const char* titu);
             ElementosGraficos::Texto* getTitulo() { return &titulo; }
+
+            void ativarControle();
+
+            void desativarControle();
 
             virtual void criaBotoes() = 0;
 

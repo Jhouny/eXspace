@@ -5,7 +5,7 @@
 #include "../../ElementosGraficos/Botao.h"
 
 namespace Menus {
-    class MenuAbertura: public Menu{
+    class MenuAbertura: public Menu {
         private:            
         public:
             MenuAbertura();

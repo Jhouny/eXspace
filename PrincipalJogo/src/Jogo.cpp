@@ -1,15 +1,27 @@
 #include "../include/Jogo.h"
 
 Jogo::Jogo():
+    MaquinaEstados(),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
-    pEventos(Gerenciadores::Eventos::getInstancia()),
-    jogador1(),
-    fase1(1, &jogador1),
-    menuAbertura(),
-    menuPontuacao()
+    pEventos(Gerenciadores::Eventos::getInstancia())
+    //jogador1()
 {
     temporizador.restart();
     dt = 0;
+
+    // Adiciona os Menus e Fases
+    Estados::Estado* pTemp;
+    
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuAbertura());
+    pTemp->setMaquina(this);
+    inserirEstado(pTemp);
+
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuPontuacao());
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
+
+    setEstadoAtual(Estados::IdEstado::menuAbertura);
 
     executar();
 }
@@ -28,14 +40,10 @@ void Jogo::executar() {
             temporizador.restart();
         } //
         else {
-            //fase1.atualizar(dt);
-            menuPontuacao.atualizar(dt);
+            atualizarEstadoAtual(dt);
             dt -= TICK_RATE;
         }
-        
-        menuPontuacao.renderizar();
-        //cout << "pos: " << menuAbertura.fundo.getPosition().x << " " << menuAbertura.fundo.getPosition().y << endl;
-        //fase1.renderizar();
+        renderizarEstadoAtual();
 
         pGrafico->display();
     }

@@ -4,18 +4,20 @@
 namespace Menus{
     MenuPontuacao::MenuPontuacao():
         Menu()
-    {
-        /*setTitulo("PONTUAÇÃO");
+        {
+        setID(Estados::IdEstado::pontuacao);
+        
+        setTitulo("PONTUAÇÃO");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
-        */
+        
         executar(0);
     }
 
     MenuPontuacao::~MenuPontuacao() {}
 
     void MenuPontuacao::criaBotoes(){
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(1030.f,570.f),"VOLTAR"); //VOLTA PARA O MENU
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(1100.f, 650.f),Estados::IdEstado::menuAbertura,"VOLTAR"); //VOLTA PARA O MENU
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));        
     }
@@ -52,6 +54,7 @@ namespace Menus{
     }
 
     void MenuPontuacao::renderizar(){
+        pGrafico->draw(&fundo, false);
         int i;
         for(i = 0; i < lTextos.getTamanho(); i++ ){
             pGrafico->draw(lTextos[i]->getTexto());
@@ -64,7 +67,7 @@ namespace Menus{
 
     void MenuPontuacao::executar(const float dt){
         criaBotoes();
-        criaTextos();
+        //criaTextos();
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));

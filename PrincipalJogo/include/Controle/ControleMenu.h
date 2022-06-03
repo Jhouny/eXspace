@@ -9,7 +9,7 @@ namespace Menus{
 
 namespace Controle{
 
-    class ControleMenu: public Observador{
+    class ControleMenu: public Observador {
         private:
             Menus::Menu* pMenu;
             std::map<std::string, bool> teclasPressionadas;
@@ -27,10 +27,6 @@ namespace Controle{
             void compartilharTeclaLiberada(std::string tecla);
 
             void setMenu(Menus::Menu* menu);
-            
-
-
-
     };
 }
 

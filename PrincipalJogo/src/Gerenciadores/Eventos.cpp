@@ -24,6 +24,7 @@ namespace Gerenciadores {
     }
 
     void Eventos::checarEventos() {
+        
         while(pWindow->pollEvent(evento)) {
             if(evento.type == sf::Event::Closed)
                 pGrafico->terminar();

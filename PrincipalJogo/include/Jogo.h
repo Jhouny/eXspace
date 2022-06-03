@@ -7,8 +7,9 @@
 #include "Ente/Menus/MenuAbertura.h"
 #include "Ente/Menus/MenuPontuacao.h"
 #include "Controle/ControleJogador.h"
+#include "Estados/MaquinaEstados.h"
 
-class Jogo {
+class Jogo: public Estados::MaquinaEstados {
     private:
         Jogador jogador1;
         Jogador jogador2;
@@ -19,10 +20,10 @@ class Jogo {
         sf::Clock temporizador;
         float dt;
 
-        Fase fase1;
+        /*Fase fase1;
 
         Menus::MenuAbertura menuAbertura;
-        Menus::MenuPontuacao menuPontuacao;
+        Menus::MenuPontuacao menuPontuacao;*/
         //Fase fase2;
     public:
         Jogo();

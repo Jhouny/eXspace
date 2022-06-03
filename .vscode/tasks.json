@@ -35,6 +35,8 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\ElementoGrafico.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Botao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Texto.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Estados\\Estado.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Estados\\MaquinaEstados.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Jogo.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\main.cpp",
                 "-o",
@@ -51,7 +53,7 @@
                 "-DSFML_STATIC"
             ],
             "options": {
-                "cwd": "${fileDirname}"
+                //"cwd": "${fileDirname}"
             },
             "problemMatcher": [
                 "$gcc"

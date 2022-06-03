@@ -1,4 +1,5 @@
 #include "../../include/Estados/MaquinaEstados.h"
+#include "../../include/Ente/Menus/Menu.h"
 
 namespace Estados {
     MaquinaEstados::MaquinaEstados():
@@ -17,7 +18,15 @@ namespace Estados {
     }
 
     void MaquinaEstados::setEstadoAtual(IdEstado id) {
-        estadoAtual = mapaEstados[id];
+        Estado* temp = estadoAtual;
+        if(mapaEstados[id]) {
+            if(temp)
+                temp->cegar();
+            estadoAtual = mapaEstados[id];
+            estadoAtual->setAnterior(temp);
+            estadoAtual->getMenu()->reiniciarRelogio();
+            estadoAtual->observar();
+        }
     }
 
     void MaquinaEstados::atualizarEstadoAtual(const float dt) {

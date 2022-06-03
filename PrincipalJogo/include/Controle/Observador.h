@@ -8,6 +8,7 @@ namespace Controle {
         protected:
             int id;
             Gerenciadores::Entrada* pEntrada;
+            bool ativo;
         public:
             static int cont;  // Contadora de IDs
 
@@ -16,6 +17,12 @@ namespace Controle {
             virtual ~Observador();
 
             int getID() const { return id; }
+
+            void ativar() { ativo = true; }
+
+            void desativar() { ativo = false; }
+
+            bool getAtivo() { return ativo; }
 
             virtual void compartilharTeclaPressionada(std::string tecla) = 0;
 

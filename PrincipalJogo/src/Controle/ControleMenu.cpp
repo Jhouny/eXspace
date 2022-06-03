@@ -19,29 +19,34 @@ namespace Controle{
     }
 
     void ControleMenu::compartilharTeclaPressionada(std::string tecla){
-        if(tecla == subir){
-            teclasPressionadas[subir] = true;
-            pMenu->subirSelecao();
+        if(this->getAtivo()) {
+            if(tecla == subir){
+                teclasPressionadas[subir] = true;
+                pMenu->subirSelecao();
+            }
+            if(tecla == descer){
+                teclasPressionadas[descer] = true;
+                pMenu->descerSelecao();
+            }
+            if(tecla == entrar){
+                teclasPressionadas[entrar] = true;
+                pMenu->entrar();
+            }
         }
-        if(tecla == descer){
-            teclasPressionadas[descer] = true;
-            pMenu->descerSelecao();
-        }
-        if(tecla == entrar){
-            teclasPressionadas[entrar] = true;
-            pMenu->entrar();
-        }
-
     }
             
     void ControleMenu::compartilharTeclaLiberada(std::string tecla){
-         if(tecla == subir){
-            teclasPressionadas[subir] = false;
+        if(this->getAtivo()) {
+            if(tecla == subir){
+                teclasPressionadas[subir] = false;
+            }
+            if(tecla == descer){
+                teclasPressionadas[descer] = false;
+            }
+            if(tecla == entrar){
+                teclasPressionadas[entrar] = false;
+            }
         }
-        if(tecla == descer){
-            teclasPressionadas[descer] = false;
-        }
-
     }
 
     void ControleMenu::setMenu(Menus::Menu* menu){

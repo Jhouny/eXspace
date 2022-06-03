@@ -1,13 +1,16 @@
 #include "../../../include/Ente/Menus/Menu.h"
 #include "../../../include/ElementosGraficos/Texto.h"
+#include "../../../include/Estados/MaquinaEstados.h"
 
 namespace Menus{  
     Menu::Menu():
         Ente(ID::menu),
+        Estados::Estado(this),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
         pControle(this),
         titulo(Coordenada(COMPRIMENTO,500.f),Coordenada(COMPRIMENTO/2.f,100.f),"")
         {
+            
             titulo.setCor(sf::Color::Yellow);
             pBotao = NULL;
         }
@@ -25,12 +28,12 @@ namespace Menus{
         getAtivo();
         it->second = false;
         (it->first)->desativar();
-        if(it == botoesAtivos.begin()){
+        if(it == botoesAtivos.begin()) {
             it = botoesAtivos.end(); 
-            it--;
-        } else {
-            it--; 
         }
+
+
+        it--; 
         (it->first)->ativar();
         it->second = true;       
     }
@@ -39,7 +42,7 @@ namespace Menus{
         getAtivo();
         it->second = false;
         (it->first)->desativar();
-        if(it == --botoesAtivos.end()){
+        if(it == --botoesAtivos.end()) {
             it = botoesAtivos.begin();
             it->second = true; 
         } else {
@@ -49,21 +52,22 @@ namespace Menus{
         it->second = true;
     }
 
-    void Menu::entrar() {}
+    void Menu::entrar(){
+        if(relogio.getElapsedTime().asSeconds() > 0.1){
+            getAtivo();
+            getMaquina()->setEstadoAtual((it->first)->getFuncao());
+        }
+
+    }
 
     void Menu::setFundoAleatorio() {
-        int val = rand() % 3;
-        switch(val) {
-            case 0:
-                setTexture(TEX_FUNDO_UM);
-                break;
-            case 1:
-                setTexture(TEX_FUNDO_DOIS);
-                break;
-            case 2:
-                setTexture(TEX_FUNDO_TRES);
-                break;
-        }
+        int val = rand() % 100;
+        if(val <= 25)
+            setTexture(TEX_FUNDO_UM);
+        else if( val > 25 && val <= 50) 
+            setTexture(TEX_FUNDO_DOIS);
+        else
+            setTexture(TEX_FUNDO_TRES);
         
     }
 
@@ -73,8 +77,6 @@ namespace Menus{
 
         float sX = (float)COMPRIMENTO/temp->getSize().x;
         float sY = (float)ALTURA/temp->getSize().y;
-        cout<< "sX " << sX <<endl;
-        cout<< "sY " << sY <<endl;
         
         fundo.setScale(sX, sY);
     }
@@ -83,4 +85,11 @@ namespace Menus{
         titulo.setTexto(titu);
     }
 
+    void Menu::ativarControle() {
+        pControle.ativar();
+    }
+
+    void Menu::desativarControle(){
+        pControle.desativar();
+    }
 }
