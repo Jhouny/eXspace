@@ -61,14 +61,36 @@ namespace Menus{
     }
 
     void Menu::setFundoAleatorio() {
-        int val = rand() % 100;
-        if(val <= 25)
+        int val = rand() % 9;
+        switch (val) {
+        case 0:
             setTexture(TEX_FUNDO_UM);
-        else if( val > 25 && val <= 50) 
+            break;
+        case 2:
             setTexture(TEX_FUNDO_DOIS);
-        else
+            break;
+        case 3:
             setTexture(TEX_FUNDO_TRES);
-        
+            break;
+        case 4:
+            setTexture(TEX_FUNDO_QUATRO);
+            break;
+        case 5:
+            setTexture(TEX_FUNDO_CINCO);
+            break;
+        case 6:
+            setTexture(TEX_FUNDO_SEIS);
+            break;
+        case 7:
+            setTexture(TEX_FUNDO_SETE);
+            break;
+        case 8:
+            setTexture(TEX_FUNDO_OITO);
+            break;
+        default:
+            setTexture(TEX_FUNDO_OITO);
+            break;
+        }
     }
 
     void Menu::setTexture(const char* path){

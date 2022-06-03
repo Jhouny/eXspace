@@ -2,8 +2,13 @@
 #define _MENU_H_
 
 #define TEX_FUNDO_UM "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo1.jpg"
-#define TEX_FUNDO_DOIS "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo2.jpg"
-#define TEX_FUNDO_TRES "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo3.jpg"
+#define TEX_FUNDO_DOIS "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo3.jpg"
+#define TEX_FUNDO_TRES "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo4.jpg"
+#define TEX_FUNDO_QUATRO "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo5.jpg"
+#define TEX_FUNDO_CINCO "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo6.jpg"
+#define TEX_FUNDO_SEIS "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo7.jpg"
+#define TEX_FUNDO_SETE "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo8.jpg"
+#define TEX_FUNDO_OITO "PrincipalJogo/assets/Texturas/Backgrounds/Menu/fundo9.jpg"
 
 #include "../Ente.h"
 #include "../../Auxiliares/Lista.h "

@@ -14,7 +14,7 @@ using namespace std;
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
-
+#include <time.h>
 
 #define COMPRIMENTO 1280
 #define ALTURA 720
@@ -22,6 +22,5 @@ using namespace std;
 #define FPS 128
 #define TICK_RATE 1.f/FPS
 #define GRAVIDADE 6400 * TICK_RATE
-
 
 #endif
