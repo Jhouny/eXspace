@@ -4,8 +4,8 @@ namespace Menus{
     Netuno::Netuno(Jogador* jog1, Jogador* jog2):
         Fase(jog1,jog2)
     {
-        
-        executar();
+
+        executar(0);
 
     }
 
@@ -86,6 +86,20 @@ namespace Menus{
     }
 
     void Netuno::geraInimigos(){
+        int i;
+        for(i = 0; i < 3; i++) {
+            pIni = new InimigoTerrestre();
+            pIni->setPosicao(Coordenada((rand() % 1250)+4500 , 100));
+            pIni->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIni));
+        }
+
+        for(i = 0; i < 3; i++) {
+            pIni = new InimigoTerrestre();
+            pIni->setPosicao(Coordenada((rand() % 1250)+6250 , 100));
+            pIni->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIni));
+        }
 
 
     }
