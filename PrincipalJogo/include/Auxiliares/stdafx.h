@@ -4,6 +4,7 @@
 #include "Coordenada.h"
 
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <list>
 #include <map>

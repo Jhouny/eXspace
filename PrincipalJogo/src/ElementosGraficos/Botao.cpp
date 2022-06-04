@@ -20,17 +20,7 @@ namespace ElementosGraficos {
     void Botao::desativar(){
         ativo = false;
     }
-
-    void Botao::trocarNome(){
-        if(this->getFuncao()==Estados::IdEstado::selecionarFase){
-            texto.setTexto("FASE DOIS");            
-        }
-        else{
-            texto.setTexto("JOGADOR 2");
-        }
-    }
-
-    void Botao::atualizarTextura() {
+        void Botao::atualizarTextura() {
         if(ativo)
             setTexture(TEX_BOTAO_ATIVO);
         else

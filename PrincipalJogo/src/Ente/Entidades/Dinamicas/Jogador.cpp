@@ -11,7 +11,8 @@
 
 Jogador::Jogador():
     Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
-    pControle(this)
+    pControle(this),
+    pontuacao(0)
     {
         setJump(true);
         estaPulando = false;
@@ -82,10 +83,14 @@ void Jogador::parar() {
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
+    //colisao com a lava
     if(outraEntidade->getID() == ID::lava){
         Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
         this->receberDano(tmp->getDano());
+        velocidade*0.5;
     }
+
+
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
         Coordenada p = this->getPosicao();
         Coordenada v = this->getVelocidade();

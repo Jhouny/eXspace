@@ -15,6 +15,7 @@ class Jogador: public Personagem {
         Menus::Fase* pFase;
         Projetil* proj;
         Controle::ControleJogador pControle;
+        float pontuacao;
         bool viradoFrente;
         bool estaPulando;
         bool estaAtirando;
@@ -38,6 +39,7 @@ class Jogador: public Personagem {
         }
 
         void setVida(int vi){ vida = vi; }
+        void setPontuacao(float ponto) { pontuacao = ponto; }
 
         // Fisica
         void atacar();

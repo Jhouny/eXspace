@@ -23,6 +23,7 @@ namespace Menus{
 
         pBase = new Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
         incluir(static_cast<Entidade*>(pBase));
+
         //plataformas normais:
 
         pBase = new Plataforma(Coordenada(400, 32), Coordenada(0, ALTURA - 100.f));
@@ -58,8 +59,6 @@ namespace Menus{
         pBase = new Plataforma(Coordenada(150, 32), Coordenada(4800, ALTURA -400.f));
         incluir(static_cast<Entidade*>(pBase));
 
-        pBase = new Plataforma(Coordenada(150, 32), Coordenada(5100, ALTURA - 200.f));
-        incluir(static_cast<Entidade*>(pBase));
 
         pBase = new Plataforma(Coordenada(500, 32), Coordenada(5250, ALTURA -400.f));
         incluir(static_cast<Entidade*>(pBase));
@@ -93,8 +92,6 @@ namespace Menus{
 
         pBase = new Plataforma(Coordenada(600, 32), Coordenada(9400, ALTURA - 200.f));
         incluir(static_cast<Entidade*>(pBase));     
-        
-
     } 
 
     void Mercurio:: geraObstaculos(){
@@ -102,10 +99,35 @@ namespace Menus{
         pLava = new Lava(Coordenada(2000, 32), Coordenada(400, ALTURA-100.f));
         incluir(static_cast<Entidade*>(pLava)); 
 
+        pLava = new Lava(Coordenada(1250,32),Coordenada(4000,100.f));
+        incluir(static_cast<Entidade*> (pLava));
+
+        pLava = new Lava(Coordenada(1250,32),Coordenada(5750,100.f));
+        incluir(static_cast<Entidade*> (pLava));
+        
     } 
 
     void Mercurio::geraInimigos() {
+        int i;
+        for(i = 0; i < 3; i++) {
+            pIni = new InimigoTerrestre();
+            pIni->setPosicao(Coordenada(rand() % (4000-2400)+2400 , 100));
+            pIni->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIni));
+        }
+        for(i = 0; i < 3; i++) {
+            pIni = new InimigoTerrestre();
+            pIni->setPosicao(Coordenada(rand() % (500)+5250 , 100));
+            pIni->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIni));
+        }
 
+        for(i = 0; i < 3; i++) {
+            pIni = new InimigoTerrestre();
+            pIni->setPosicao(Coordenada(rand() % (500)+8700 , 100));
+            pIni->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIni));
+        }
     }
 
     void Mercurio::executar(const float dt) {
@@ -113,7 +135,7 @@ namespace Menus{
 
         geraPlataformas();
         geraObstaculos();
-        geraInimigos();
+        //geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (4000,ALTURA));
