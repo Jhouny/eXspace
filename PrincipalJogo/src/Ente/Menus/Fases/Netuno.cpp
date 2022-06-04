@@ -106,6 +106,8 @@ namespace Menus{
 
 
     void Netuno::executar(const float dt){
+        resetarEstadoOriginal();    
+
         geraInimigos();
         geraObstaculos();
         geraPlataformas();

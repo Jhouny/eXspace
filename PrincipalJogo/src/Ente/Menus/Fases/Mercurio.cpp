@@ -14,7 +14,7 @@ namespace Menus{
 
     void Mercurio::geraPlataformas() {
         //plataforma da lava:
-        pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,100.f));
+        pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,ALTURA- 100.f));
         incluir(static_cast<Entidade*> (pBase));
 
         pBase = new Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
@@ -95,7 +95,7 @@ namespace Menus{
         pLava = new Lava(Coordenada(2000, 32), Coordenada(400, ALTURA-100.f),true);
         incluir(static_cast<Entidade*>(pLava)); 
 
-        pLava = new Lava(Coordenada(3000,32),Coordenada(4000,100.f),true);
+        pLava = new Lava(Coordenada(3000,32),Coordenada(4000,ALTURA-100.f),true);
         incluir(static_cast<Entidade*> (pLava));
 
        
