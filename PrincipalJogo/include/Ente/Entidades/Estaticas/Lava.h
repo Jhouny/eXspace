@@ -4,16 +4,19 @@
 #include "Obstaculo.h"
 
 #define TEX_LAVA "PrincipalJogo/assets/Texturas/Lava/Lava.png"
+#define TEX_LAVA_GELADA "PrincipalJogo/assets/Texturas/Lava/lava de gelo.png"
 
 
 class Lava: public Obstaculo {
     private:
         float dano;
+        bool lavaNormal;
     public:
-        Lava(Coordenada tam, Coordenada pos);
+        Lava(Coordenada tam, Coordenada pos, bool lNormal);
         float getDano(){ return dano; }
 
         ~Lava();
+
         
         void executar();
 };

@@ -4,7 +4,7 @@ namespace Menus{
     Mercurio::Mercurio(Jogador* jog1,Jogador* jog2 ):
     Fase(jog1,jog2)
     {
-        setID(Estados::IdEstado::fase);
+        setID(Estados::IdEstado::mercurio);
         setTexture(TEX_BACKGROUND);
     }
 
@@ -15,11 +15,8 @@ namespace Menus{
     void Mercurio::geraPlataformas() {
         
         //plataforma da lava:
-        pBase = new Plataforma(Coordenada(1250, 32), Coordenada(4000, ALTURA -68.f));
-        incluir(static_cast<Entidade*>(pBase)); 
-
-        pBase = new Plataforma(Coordenada(1250, 32), Coordenada(5750, ALTURA -68.f));
-        incluir(static_cast<Entidade*>(pBase));
+         pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,100.f));
+        incluir(static_cast<Entidade*> (pLava));
 
         pBase = new Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
         incluir(static_cast<Entidade*>(pBase));
@@ -96,14 +93,13 @@ namespace Menus{
 
     void Mercurio:: geraObstaculos(){
 
-        pLava = new Lava(Coordenada(2000, 32), Coordenada(400, ALTURA-100.f));
+        pLava = new Lava(Coordenada(2000, 32), Coordenada(400, ALTURA-100.f),true);
         incluir(static_cast<Entidade*>(pLava)); 
 
-        pLava = new Lava(Coordenada(1250,32),Coordenada(4000,100.f));
+        pLava = new Lava(Coordenada(3000,32),Coordenada(4000,100.f),true);
         incluir(static_cast<Entidade*> (pLava));
 
-        pLava = new Lava(Coordenada(1250,32),Coordenada(5750,100.f));
-        incluir(static_cast<Entidade*> (pLava));
+       
         
     } 
 

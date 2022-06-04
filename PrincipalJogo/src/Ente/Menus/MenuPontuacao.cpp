@@ -31,17 +31,8 @@ namespace Menus{
     }
 
     void MenuPontuacao::criaTextos(){
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(COMPRIMENTO/7.f,50),"Posicao:");
-        pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
-        incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f,50),"Nome:");
-        pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
-        incluir(pTexto);
-
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(COMPRIMENTO/1.f-COMPRIMENTO/5.f,50),"Pontuação: ");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f,50),"Pontuação: ");
         pTexto->setCor(sf::Color::Yellow);
         getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
         incluir(pTexto);

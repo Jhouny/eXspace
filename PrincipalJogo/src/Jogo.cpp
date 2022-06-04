@@ -16,7 +16,6 @@ Jogo::Jogo():
     // Menu principal de abertura do jogo 
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuAbertura());
     pTemp->setMaquina(this);
-    pTemp->cegar();
     inserirEstado(pTemp);
 
     // Pontuação dos jogadores
@@ -34,6 +33,7 @@ Jogo::Jogo():
     // Fase mercúrio
     pTemp = static_cast<Estados::Estado*>(new Menus::Mercurio(jogador1));
     pTemp->setMaquina(this);
+    pTemp->cegar();
     inserirEstado(pTemp);
 
     // Menu fim de jogo
@@ -45,7 +45,7 @@ Jogo::Jogo():
     /*  =================================================  */
 
     // Define o menu de abertura
-    setEstadoAtual(Estados::IdEstado::fase);
+    setEstadoAtual(Estados::IdEstado::menuAbertura);
 
     executar();
 }

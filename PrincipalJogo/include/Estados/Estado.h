@@ -17,7 +17,8 @@ namespace Estados {
         configuracoes,
         menuAbertura,
         menuGameOver,
-        fase,
+        mercurio,
+        netuno,
         selecionarFase,
         selecionarJogadores,
         salvar
