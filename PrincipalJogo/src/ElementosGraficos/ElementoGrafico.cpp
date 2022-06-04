@@ -22,5 +22,5 @@ namespace ElementosGraficos {
         sprite.setPosition(sf::Vector2f(posicao.x, posicao.y));
         sprite.setScale(sX, sY);
     }
-
+    
 } // namespace ElementosGraficos

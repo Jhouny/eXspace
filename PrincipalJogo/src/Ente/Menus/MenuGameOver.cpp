@@ -12,14 +12,13 @@ namespace Menus{
     {
         setID( Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
+
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
         getTitulo()->setCor(sf::Color(0,0,0,230));
         getTitulo()->setContorno(sf::Color::Yellow ,5);
+
         pControle.desativar();
         executar(0);
-
-
-
     }
 
     MenuGameOver::~MenuGameOver() {}
@@ -74,7 +73,7 @@ namespace Menus{
 
     void MenuGameOver::atualizar(const float dt){
         Estado* tmp = static_cast<Estado*>(this);
-        if(pMaq->getEstadoAtual()== tmp) {
+        if(pMaq->getEstadoAtual() == tmp) {
             pControle.ativar();
         }
 

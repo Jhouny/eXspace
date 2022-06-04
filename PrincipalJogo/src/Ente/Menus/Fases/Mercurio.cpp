@@ -6,8 +6,6 @@ namespace Menus{
     {
         setID(Estados::IdEstado::fase);
         setTexture(TEX_BACKGROUND);
-        
-        executar(0);
     }
 
     Mercurio::~Mercurio(){
@@ -110,11 +108,13 @@ namespace Menus{
 
     }
 
-    void Mercurio::executar(const float dt){
-        // Seta tamanho da view
+    void Mercurio::executar(const float dt) {
+        resetarEstadoOriginal();
+
         geraPlataformas();
         geraObstaculos();
         geraInimigos();
+
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (4000,ALTURA));
         pGrafico->setMinimapViewport();

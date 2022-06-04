@@ -31,6 +31,12 @@ class ListaEntidades{
             le.removeIndice(ind);
         }
 
+        void clear() {
+            while(getTamanho() > 0) {
+                removeIndice(0);
+            }
+        }
+
         Entidade* operator[](int ind) {
             return le[ind];
         }

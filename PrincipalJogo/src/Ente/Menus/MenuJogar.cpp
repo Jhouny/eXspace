@@ -45,7 +45,7 @@ namespace Menus{
     void MenuJogar::renderizar(){
         pGrafico->draw(&fundo, false);
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
-            pGrafico->draw((it->first)->getSprite(),false);
+            pGrafico->draw((it->first)->getSprite(), false);
             pGrafico->draw((it->first)->getTexto());
         }
         pGrafico->draw(titulo.getTexto());

@@ -24,6 +24,10 @@ namespace Gerenciadores {
         public:
             ~Grafico();
 
+            Coordenada getViewBounds() {
+                return Coordenada(view.getCenter().x, view.getCenter().y);
+            }
+
             static Grafico* getInstancia();
 
             void draw(sf::RectangleShape* shape, bool map = true);

@@ -10,32 +10,39 @@ Jogo::Jogo():
     temporizador.restart();
     dt = 0;
 
-    // Adiciona os Menus e Fases
+    /*  ==========  Adiciona os Menus e Fases  ==========  */
     Estados::Estado* pTemp;
     
+    // Menu principal de abertura do jogo 
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuAbertura());
     pTemp->setMaquina(this);
     inserirEstado(pTemp);
 
+    // Pontuação dos jogadores
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuPontuacao());
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    //Menu de configurações de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuJogar());
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    // Fase mercúrio
     pTemp = static_cast<Estados::Estado*>(new Menus::Mercurio(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    // Menu fim de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
+
+    /*  =================================================  */
 
     // Define o menu de abertura
     setEstadoAtual(Estados::IdEstado::menuAbertura);
@@ -60,7 +67,8 @@ void Jogo::executar() {
             atualizarEstadoAtual(dt);
             dt -= TICK_RATE;
         }
-
+        //cout << "Coord: " << endl;
+        //pGrafico->getViewBounds().print();
         renderizarEstadoAtual();
 
         pGrafico->display();

@@ -82,7 +82,6 @@ void Jogador::parar() {
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-    cout << "vida: " << vida << endl;
     if(outraEntidade->getID() == ID::lava){
         Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
         this->receberDano(tmp->getDano());

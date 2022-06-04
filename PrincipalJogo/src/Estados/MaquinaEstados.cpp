@@ -20,13 +20,15 @@ namespace Estados {
     void MaquinaEstados::setEstadoAtual(IdEstado id) {
         Estado* temp = estadoAtual;
         if(mapaEstados[id]) {
-            if(temp)
+            if(temp) {
                 temp->cegar();
+                estadoAtual->getMenu()->pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
+            }
             estadoAtual = mapaEstados[id];
             estadoAtual->setAnterior(temp);
             estadoAtual->getMenu()->reiniciarRelogio();
+            estadoAtual->getMenu()->executar(0);
             estadoAtual->observar();
-            estadoAtual->getMenu()->pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
         }
     }
 

@@ -42,17 +42,31 @@ namespace Menus{
     }
 
     void Fase::gameOver() {
+        resetarEstadoOriginal();
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
-
     }
 
     void Fase::resetarEstadoOriginal() {
-        jogador1->setVida(100);
-        jogador2->setVida(100);
-        jogador1->setPosicao(Coordenada(0,0));
-        jogador2->setPosicao(Coordenada(50,0));
-        atualizarBackground();
+        // Retira os elementos da lista
+        lEntidades.clear();
 
+        jogador1->setVelocidade(Coordenada(10.5, 0));
+        jogador1->setFase(this);
+        jogador1->setAtivo(true);
+        jogador1->setVida(100);
+        jogador1->setPosicao(Coordenada(0, 0));
+        incluir(static_cast<Entidade*>(jogador1));
+
+        if(jogador2 != NULL) {
+            jogador2->setVelocidade(Coordenada(10.5, 0));
+            jogador2->setFase(this);
+            jogador2->setAtivo(true);
+            jogador2->setVida(100);
+            jogador2->setPosicao(Coordenada(50,0));
+            incluir(static_cast<Entidade*>(jogador2));
+        }
+
+        fundo.setPosition(0, 0);
 
         // Resetar HUD
         visor.resetarVisor();
@@ -92,18 +106,18 @@ namespace Menus{
         visor.renderizar();
     }
 
-    void Fase::atualizar(const float dt) {    
+    void Fase::atualizar(const float dt) {
         // Verifica colisao entre Entidades Dinamicas e Estaticas
         colisor.ChecarColisoes();    
-        
-        // Processa o executar das entidades e remove entidades inativas
-        atualizaEntidades(dt);
 
         // Desenha na tela os elementos
         renderizar();
 
         // Atualiza a view para a posicao do jogador
         pGrafico->atualizaView(jogador1->getPosicao());
+
+        // Processa o executar das entidades e remove entidades inativas
+        atualizaEntidades(dt);
         
         // Processa simulação de efeito Parallax
         atualizarBackground();
