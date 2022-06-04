@@ -4,6 +4,7 @@
 #include "Menu.h"
 #include "../../Auxiliares/Lista.h"
 #include "../../Controle/ControleTexto.h"
+#include "../../Controle/ControleMenu.h"
 
 namespace ElementosGraficos{
     class Texto;
@@ -16,6 +17,7 @@ namespace Menus{
         Lista<ElementosGraficos::Texto> lTextos;
         ElementosGraficos::Texto* pTexto;
         Controle::ControleTexto pControleTexto;
+        Controle::ControleMenu pControleMenu; 
         public:
             MenuGameOver();
             ~MenuGameOver();
@@ -29,6 +31,10 @@ namespace Menus{
             void atualizar(const float dt);
 
             void incluir(ElementosGraficos::Texto *texto);
+
+            void ativarControle();
+
+            void desativarControle();
 
             void executar(const float dt);
     };

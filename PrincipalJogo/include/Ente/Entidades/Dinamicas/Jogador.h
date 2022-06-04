@@ -14,7 +14,7 @@ class Jogador: public Personagem {
     private:
         Menus::Fase* pFase;
         Projetil* proj;
-        Controle::ControleJogador pControle;
+        Controle::ControleJogador pControleJogador;
         float pontuacao;
         bool viradoFrente;
         bool estaPulando;
@@ -23,7 +23,8 @@ class Jogador: public Personagem {
     public:
         Jogador();
         ~Jogador();
-        void estaVivo();
+
+        bool estaVivo();
 
         void setFase(Menus::Fase* fase){ 
             if(fase)
@@ -54,6 +55,13 @@ class Jogador: public Personagem {
         void atualiza(const float dt);
         void atualizaAcel();
 
+        void ativarControle() {
+            pControleJogador.ativar();
+        }
+
+        void desativarControle() {
+            pControleJogador.desativar();
+        }
 
         void executar(const float dt);
 };

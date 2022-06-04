@@ -12,7 +12,8 @@ namespace Menus{
             Mercurio(Jogador* jog1, Jogador* jog2 = NULL);
             ~Mercurio();
             void geraPlataformas(); 
-            void geraObstaculos(); 
+            void geraObstaculos();
+
             void geraInimigos();
             void executar(const float dt);
     };

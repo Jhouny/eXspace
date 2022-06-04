@@ -2,7 +2,8 @@
 
 namespace Menus{
     MenuJogar::MenuJogar():
-        Menu()
+        Menu(),
+        pControleMenu(this)
     {
         setID( Estados::IdEstado::menuJogar);
         setTitulo("JOGAR");
@@ -17,7 +18,8 @@ namespace Menus{
     }
 
     void MenuJogar::criaBotoes(){
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::fase, "NOVO JOGO");
+        botoesAtivos.clear();
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::mercurio , "NOVO JOGO");
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
@@ -34,7 +36,14 @@ namespace Menus{
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
-    
+    void MenuJogar::ativarControle() {
+        pControleMenu.ativar();
+    }
+ 
+    void MenuJogar::desativarControle() {
+        pControleMenu.desativar();
+    }
+
     void MenuJogar::executar(const float dt){
         criaBotoes();
         setFundoAleatorio();

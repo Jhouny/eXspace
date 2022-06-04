@@ -11,10 +11,10 @@
 
 Jogador::Jogador():
     Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
-    pControle(this),
+    pControleJogador(this),
     pontuacao(0)
     {
-        setJump(true);
+        setJump(false);
         estaPulando = false;
         estaAtirando = false;
         viradoFrente = true;
@@ -29,11 +29,13 @@ Jogador::Jogador():
 
 Jogador::~Jogador() {}
 
-void Jogador::estaVivo() {
+bool Jogador::estaVivo() {
     Coordenada p = this->getPosicao();
     if(p.y > ALTURA + 300 || vida<=0) {
         vivo = false;
     }
+
+    return vivo;
 }
 
 void Jogador::atacar() {
@@ -63,8 +65,10 @@ void Jogador::esquerda() {
     velocidade.x = -1 * VELOCIDADE_JOGADOR;
 }
 
-void Jogador::pular() { 
+void Jogador::pular() {
+    cout << "pulo1" << endl;
     if(pulando == false) {
+        cout << "pulo2" << endl;
         //impede de dar double jump
         posicao.y -= 1;
         velocidade.y = PULO_Y;
@@ -77,17 +81,17 @@ void Jogador::pulo(bool estado) {
 }
 
 void Jogador::parar() {
-    velocidade.x = 0;
+    velocidade.x = 0; // Para instantaneamente
+    //velocidade.x *= 0.3;
 }
 
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     //colisao com a lava
-    if(outraEntidade->getID() == ID::lava){
+    if(outraEntidade->getID() == ID::lava) {
         Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
         this->receberDano(tmp->getDano());
-        velocidade*0.5;
     }
 
 
@@ -98,6 +102,7 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         if(this->getPosicao().y <= outraEntidade->getPosicao().y) {  // Se colidir em cima
             v.y = 0;  // Define a velocidade vertical para 0
             p.y = outraEntidade->getPosicao().y - this->getTamanho().y;  // Define a posição em cima da plataforma
+            cout << "jump false colisao plat" << endl;
             this->setJump(false);
 
         } else {  // Se colidir embaixo
@@ -128,6 +133,8 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
                 this->setPosicao(this->getPosicao().x, this->getPosicao().y);
             }                
         }
+        cout << "RGs: " << this->getRG() << "\t " << outraEntidade->getRG() << endl;
+        cout <<"ID: " << outraEntidade->getID() << intersecao.x << intersecao.y << endl;
         this->setJump(true); // Para não poder pular se encostar lateralmente
     }
 }
@@ -152,7 +159,7 @@ void Jogador::atualiza(const float dt) {
 }
 
 void Jogador::atualizaAcel() {
-    if(this->getPulo()) {
+    if(estaPulando) {
         this->setAceleracao(GRAVIDADE);
     }
 }
@@ -163,13 +170,5 @@ void Jogador::executar(const float dt) {
     
     // Aplica a aceleração na velocidade e a velocidade na posição 
     atualiza(dt);
-    
-    // Checa se o jogador esta vivo e o atualiza
-    estaVivo();
-
-    // Se o jogador morrer
-    if(!vivo) {
-        pFase->gameOver();  // Fecha a janela, mas no fim deveria dar um 'Game Over'
-    }
 }
 

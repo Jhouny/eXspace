@@ -3,8 +3,9 @@
 
 namespace Menus{
     MenuPontuacao::MenuPontuacao():
-        Menu()
-        {
+        Menu(),
+        pControleMenu(this)
+    {
         setID(Estados::IdEstado::pontuacao);
         /*
         setTitulo("PONTUAÇÃO");
@@ -17,6 +18,7 @@ namespace Menus{
     MenuPontuacao::~MenuPontuacao() {}
 
     void MenuPontuacao::criaBotoes(){
+        botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(1100.f, 650.f),Estados::IdEstado::menuAbertura,"VOLTAR"); //VOLTA PARA O MENU
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));        
@@ -24,13 +26,14 @@ namespace Menus{
 
     void MenuPontuacao::incluir(ElementosGraficos::Texto *texto){
         if(texto)
-            lTextos.push(texto);
+            lTextos.push_back(texto);
         else
             cout << "Ponteiro para texto esta nulo" << endl;
 
     }
 
-    void MenuPontuacao::criaTextos(){
+    void MenuPontuacao::criaTextos() {
+        lTextos.clear();
 
         pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f,50),"Pontuação: ");
         pTexto->setCor(sf::Color::Yellow);
@@ -69,10 +72,18 @@ namespace Menus{
         }
     }
 
+    void MenuPontuacao::ativarControle() {
+        pControleMenu.ativar();
+    }
+
+    void MenuPontuacao::desativarControle() {
+        pControleMenu.desativar();
+    }
+
     void MenuPontuacao::renderizar(){
         pGrafico->draw(&fundo, false);
         int i;
-        for(i = 0; i < lTextos.getTamanho(); i++ ){
+        for(i = 0; i < lTextos.size(); i++ ){
             pGrafico->draw(lTextos[i]->getTexto());
         }
          for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){

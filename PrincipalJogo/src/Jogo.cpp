@@ -9,6 +9,7 @@ Jogo::Jogo():
 {
     temporizador.restart();
     dt = 0;
+    estadoAtual = NULL;
 
     /*  ==========  Adiciona os Menus e Fases  ==========  */
     Estados::Estado* pTemp;
@@ -35,6 +36,12 @@ Jogo::Jogo():
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
+    
+    // Fase Netuno
+    pTemp = static_cast<Estados::Estado*>(new Menus::Netuno(jogador1));
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
 
     // Menu fim de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
@@ -51,7 +58,9 @@ Jogo::Jogo():
 }
  
  
-Jogo::~Jogo() { }
+Jogo::~Jogo() {
+
+ }
 
 
 void Jogo::executar() {

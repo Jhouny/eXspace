@@ -19,7 +19,7 @@ class Inimigo: public Personagem {
 
         void alarmado();
 
-        virtual void estaVivo() {};
+        virtual bool estaVivo() {};
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
         virtual void movimentar(const float dt) = 0;
         virtual void executar(const float dt) = 0;

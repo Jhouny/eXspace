@@ -20,12 +20,14 @@ InimigoTerrestre::InimigoTerrestre():
 
 InimigoTerrestre::~InimigoTerrestre() { }
 
-void InimigoTerrestre::estaVivo() {
+bool InimigoTerrestre::estaVivo() {
     Coordenada p = this->getPosicao();
     if(p.y > ALTURA + 300 || vida <= 0) {
         vivo = false;
         setAtivo(false);
     }
+
+    return vivo;
 }
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {

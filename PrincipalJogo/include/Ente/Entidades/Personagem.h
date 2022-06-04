@@ -29,12 +29,14 @@ class Personagem: public Entidade {
         void setAceleracao(float acel) { aceleracaoY = acel; }
         float getAceleracao() { return aceleracaoY; }
 
-        void setJump(bool estado) { pulando = estado; }
+        void setJump(bool estado) { 
+            pulando = estado;
+        }
         const bool getPulo() const { return pulando; }
 
         virtual void atacar() {};
 
-        virtual void estaVivo() = 0;
+        virtual bool estaVivo() = 0;
 
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;
 

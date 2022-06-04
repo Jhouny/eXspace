@@ -15,7 +15,7 @@
 #include "../../ElementosGraficos/Botao.h"
 #include "../../ElementosGraficos/BotaoAlternador.h"
 #include "../../Gerenciadores/Grafico.h"
-#include "../../Controle/ControleMenu.h"
+
 #include "../../Estados/Estado.h"
 
 namespace ElementosGraficos {
@@ -36,7 +36,6 @@ namespace Menus{
             sf::Clock relogio;
 
             
-            Controle::ControleMenu pControle;
             ElementosGraficos::Botao* pBotao;
         public:
             Gerenciadores::Grafico* pGrafico;
@@ -63,9 +62,9 @@ namespace Menus{
             void setTitulo(const char* titu);
             ElementosGraficos::Texto* getTitulo() { return &titulo; }
 
-            void ativarControle();
+            virtual void ativarControle() = 0;
 
-            void desativarControle();
+            virtual void desativarControle() = 0;
 
             virtual void criaBotoes() = 0;
 

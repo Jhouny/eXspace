@@ -19,29 +19,33 @@ namespace Controle{
     }
 
     void ControleTexto::compartilharTeclaPressionada(std::string tecla) {
-        if (tecla == "Enter" || tecla == "Right" || tecla == "Left" || 
-            tecla == "Up" || tecla == "Down" || tecla == "Escape" || 
-            tecla == "Control" || tecla == "Shift" || tecla == "RControl" || 
-            tecla == "RShift" || tecla == "Tab"|| tecla == "Unknown") {
-            return;
-        }
-        if(contador <= tamMax){
-            if(tecla == "Space"){
-                nome += " ";
-                contador++;
-            } else if(tecla == apagar){
+        if(this->getAtivo()) {
+            if (tecla == "Enter" || tecla == "Right" || tecla == "Left" || 
+                tecla == "Up" || tecla == "Down" || tecla == "Escape" || 
+                tecla == "Control" || tecla == "Shift" || tecla == "RControl" || 
+                tecla == "RShift" || tecla == "Tab"|| tecla == "Unknown") {
+                return;
+            }
+            if(tecla == apagar){
                 if(contador >=0)
                     nome.erase(contador--);
             }
-            else{
-                nome += tecla;
-                contador++;             
+            if(contador <= tamMax){
+                if(tecla == "Space"){
+                    nome += " ";
+                    contador++;
+                } else {
+                    nome += tecla;
+                    contador++;             
+                }
             }
         }
     }
 
-    void ControleTexto::compartilharTeclaLiberada(std::string tecla){ //Precisa?
-        
+    void ControleTexto::compartilharTeclaLiberada(std::string tecla) {
+        if(this->getAtivo()) {
+            
+        }
     }
     void ControleTexto::apagaNome(){
         nome = "";

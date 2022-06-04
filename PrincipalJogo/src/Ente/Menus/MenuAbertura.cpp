@@ -3,7 +3,8 @@
 
 namespace Menus {
     MenuAbertura::MenuAbertura():
-        Menu()
+        Menu(),
+        pControleMenu(this)
        {
         setID( Estados::IdEstado::menuAbertura);
         setTitulo("SPACE CONQUERORS");
@@ -16,8 +17,7 @@ namespace Menus {
     MenuAbertura::~MenuAbertura() {}
 
     void MenuAbertura::criaBotoes() {
-        
-        
+        botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), Estados::IdEstado::menuGameOver, "CONFIGURAÇÕES");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
        
@@ -27,9 +27,6 @@ namespace Menus {
         
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 475), Estados::IdEstado::pontuacao, "PONTUAÇÃO");
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
-        
-        
-
     }
 
     void MenuAbertura::executar(const float dt) {
@@ -37,7 +34,6 @@ namespace Menus {
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
-        
     }
 
     void MenuAbertura::renderizar() {
@@ -55,5 +51,14 @@ namespace Menus {
             (it->first)->executar();
         }
         
+    }
+
+    void MenuAbertura::ativarControle() {
+        pControleMenu.ativar();
+
+    }
+
+    void MenuAbertura::desativarControle(){
+        pControleMenu.desativar();
     }
 }

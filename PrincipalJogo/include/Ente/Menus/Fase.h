@@ -6,6 +6,7 @@
 #include "../../Gerenciadores/Colisoes.h"
 
 #include "../../ElementosGraficos/ElementosVisor.h"
+#include "../../Controle/ControleMenu.h"
 
 #include "Menu.h"
 #include "../Entidades/Dinamicas/InimigoTerrestre.h"
@@ -20,7 +21,7 @@
 namespace Menus{
     class Fase: public Menu {
         protected:
-            ListaEntidades lEntidades;
+            std::vector<Entidade*> lEntidades;
             ElementosGraficos::ElementosVisor visor;
 
             Gerenciadores::Colisor colisor;
@@ -32,6 +33,8 @@ namespace Menus{
 
             Plataforma* pBase;
             InimigoTerrestre* pIni;
+
+            Controle::ControleMenu pControleFase;
                     
         public:
             Fase(Jogador* jog1 = NULL, Jogador* jog2 = NULL);
@@ -59,6 +62,10 @@ namespace Menus{
             void atualizar(const float dt);
 
             void gameOver();
+
+            void ativarControle();
+
+            void desativarControle();
 
             virtual void executar(const float dt) = 0;
     };

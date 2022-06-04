@@ -4,7 +4,9 @@
 #define TEX_PONTUACAO ""
 
 #include "Menu.h"
+#include "../../Controle/ControleMenu.h"
 #include "../../Auxiliares/Lista.h"
+
 namespace ElementosGraficos{
     class Texto;
 }
@@ -12,11 +14,11 @@ namespace ElementosGraficos{
 namespace Menus{
     class MenuPontuacao: public Menu{
         private:
-            Lista<ElementosGraficos::Texto> lTextos;
+            std::vector<ElementosGraficos::Texto*> lTextos;
             ElementosGraficos::Texto* pTexto;
             int pontuacao[10];
 
-        
+            Controle::ControleMenu pControleMenu;
         public:
             MenuPontuacao();
 
@@ -29,6 +31,10 @@ namespace Menus{
             void atualizar(const float dt);
 
             void incluir(ElementosGraficos::Texto *texto);
+
+            void ativarControle();
+
+            void desativarControle();
 
             void renderizar();
 

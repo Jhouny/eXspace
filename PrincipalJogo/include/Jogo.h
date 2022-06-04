@@ -6,6 +6,7 @@
 #include "Ente/Menus/MenuAbertura.h"
 #include "Ente/Menus/MenuPontuacao.h"
 #include "Ente/Menus/Fases/Mercurio.h"
+#include "Ente/Menus/Fases/Netuno.h"
 #include "Ente/Menus/MenuJogar.h"
 #include "Ente/Menus/MenuGameOver.h"
 #include "Controle/ControleJogador.h"

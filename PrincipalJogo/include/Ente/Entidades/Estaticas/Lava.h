@@ -17,7 +17,6 @@ class Lava: public Obstaculo {
 
         ~Lava();
 
-        
         void executar();
 };
 

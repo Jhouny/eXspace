@@ -8,7 +8,8 @@
 namespace Menus{
     MenuGameOver::MenuGameOver():
         Menu(),
-        pControleTexto(this)
+        pControleTexto(this),
+        pControleMenu(this)
     {
         setID( Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
@@ -17,7 +18,6 @@ namespace Menus{
         getTitulo()->setCor(sf::Color(0,0,0,230));
         getTitulo()->setContorno(sf::Color::Yellow ,5);
 
-        pControle.desativar();
         executar(0);
     }
 
@@ -72,11 +72,6 @@ namespace Menus{
     }
 
     void MenuGameOver::atualizar(const float dt){
-        Estado* tmp = static_cast<Estado*>(this);
-        if(pMaq->getEstadoAtual() == tmp) {
-            pControle.ativar();
-        }
-
         //atualiza os botoes e suas respectivas texturas
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             (it->first)->executar();
@@ -90,6 +85,16 @@ namespace Menus{
             }
         }
 
+    }
+    void MenuGameOver::ativarControle(){
+        pControleMenu.ativar();
+        pControleTexto.ativar();
+
+    }
+
+    void MenuGameOver::desativarControle(){
+        pControleMenu.desativar();
+        pControleTexto.desativar();
     }
 
     void MenuGameOver::executar(const float dt){

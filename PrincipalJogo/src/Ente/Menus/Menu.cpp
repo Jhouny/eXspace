@@ -7,10 +7,8 @@ namespace Menus{
         Ente(ID::menu),
         Estados::Estado(this),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        pControle(this),
         titulo(Coordenada(COMPRIMENTO,500.f),Coordenada(COMPRIMENTO/2.f,100.f),"")
         {
-            
             titulo.setCor(sf::Color::Yellow);
             pBotao = NULL;
         }
@@ -116,13 +114,5 @@ namespace Menus{
 
     void Menu::setTitulo(const char* titu){
         titulo.setTexto(titu);
-    }
-
-    void Menu::ativarControle() {
-        pControle.ativar();
-    }
-
-    void Menu::desativarControle(){
-        pControle.desativar();
     }
 }

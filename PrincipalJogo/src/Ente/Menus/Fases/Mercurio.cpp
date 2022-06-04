@@ -13,10 +13,9 @@ namespace Menus{
     }
 
     void Mercurio::geraPlataformas() {
-        
         //plataforma da lava:
-         pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,100.f));
-        incluir(static_cast<Entidade*> (pLava));
+        pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,100.f));
+        incluir(static_cast<Entidade*> (pBase));
 
         pBase = new Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
         incluir(static_cast<Entidade*>(pBase));
@@ -128,10 +127,10 @@ namespace Menus{
 
     void Mercurio::executar(const float dt) {
         resetarEstadoOriginal();
-
+        
         geraPlataformas();
         geraObstaculos();
-        //geraInimigos();
+        geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (4000,ALTURA));

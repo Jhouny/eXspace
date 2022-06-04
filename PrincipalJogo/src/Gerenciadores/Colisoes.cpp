@@ -76,10 +76,9 @@ namespace Gerenciadores {
                 intersecao.y = fabs(centroEnt1.y - centroEnt2.y) - (ent1->getTamanho().y + ent2->getTamanho().y) / 2.0f;
 
                 // Se os elementos colidirem, chama a função apropriada
-                if(intersecao.x < 0 && intersecao.y < 0) {
+                if(intersecao.x < 0 && intersecao.y < 0 && (ent1->getRG() != ent2->getRG())) {
                     ent2->colisao(ent1, intersecao);
                     ent1->colisao(ent2, intersecao);
-                    
                 }
             }
         }

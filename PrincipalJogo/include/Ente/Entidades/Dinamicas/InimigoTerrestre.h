@@ -15,7 +15,7 @@ class InimigoTerrestre: public Inimigo {
         
         void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        void estaVivo();
+        bool estaVivo();
 
         void movimentar(const float dt);
 

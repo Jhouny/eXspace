@@ -4,7 +4,7 @@ namespace Menus{
     Netuno::Netuno(Jogador* jog1, Jogador* jog2):
         Fase(jog1,jog2)
     {
-
+        setID(Estados::IdEstado::netuno);
         executar(0);
 
     }

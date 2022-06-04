@@ -22,60 +22,64 @@ namespace Controle {
     }
 
     void ControleJogador::compartilharTeclaPressionada(std::string tecla) {
-        if(pJogador == NULL) {
-            cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaPressionada()" << endl;
-            exit(1);
-        }
-        
-        if(tecla == pular) {
-            teclasPressionadas[pular] = true;
-            pJogador->pular();
-            pJogador->pulo(true);
-        } 
+        if(this->getAtivo()){
+            if(pJogador == NULL) {
+                cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaPressionada()" << endl;
+                exit(1);
+            }
+            
+            if(tecla == pular) {
+                teclasPressionadas[pular] = true;
+                pJogador->pular();
+                pJogador->pulo(true);
+            } 
 
-        if(tecla == esquerda) {
-            teclasPressionadas[esquerda] = true;
-            pJogador->esquerda();
-        }
-        if(tecla == direita) {
-            teclasPressionadas[direita] = true;
-            pJogador->direita();
-        } 
+            if(tecla == esquerda) {
+                teclasPressionadas[esquerda] = true;
+                pJogador->esquerda();
+            }
+            if(tecla == direita) {
+                teclasPressionadas[direita] = true;
+                pJogador->direita();
+            } 
 
-        if(tecla == atacar) {
-            teclasPressionadas[atacar] = true;
-            pJogador->atacar();
-            pJogador->ataque(true);
+            if(tecla == atacar) {
+                teclasPressionadas[atacar] = true;
+                pJogador->atacar();
+                pJogador->ataque(true);
+            }
         }
     }
 
     void ControleJogador::compartilharTeclaLiberada(std::string tecla) {
-        if(pJogador == NULL) {
-            cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaLiberada()" << endl;
-            exit(1);
-        }
-        
-        if(tecla == pular) {
-            teclasPressionadas[pular] = false;
-            pJogador->pulo(false);
-        } 
-        if(tecla == esquerda) {
-            teclasPressionadas[esquerda] = false;
-            if(teclasPressionadas[direita])
-                pJogador->direita();
-            else
-                pJogador->parar();
-        } 
-        if(tecla == direita) {
-            teclasPressionadas[direita] = false;
-            if(teclasPressionadas[esquerda])
-                pJogador->esquerda();
-            else
-                pJogador->parar();
-        } 
-        if(tecla == atacar) {
-            teclasPressionadas[atacar] = false;
-            pJogador->ataque(false);
+        if(this->getAtivo()){
+            if(pJogador == NULL) {
+                cout << "ERRO: Ponteiro para jogador nao definido em ControleJogador::compartilharTeclaLiberada()" << endl;
+                exit(1);
+            }
+            
+            if(tecla == pular) {
+                teclasPressionadas[pular] = false;
+                pJogador->pulo(false);
+            } 
+            if(tecla == esquerda) {
+                teclasPressionadas[esquerda] = false;
+                if(teclasPressionadas[direita])
+                    pJogador->direita();
+                else
+                    pJogador->parar();
+            } 
+            if(tecla == direita) {
+                teclasPressionadas[direita] = false;
+                if(teclasPressionadas[esquerda])
+                    pJogador->esquerda();
+                else
+                    pJogador->parar();
+            } 
+            if(tecla == atacar) {
+                teclasPressionadas[atacar] = false;
+                pJogador->ataque(false);
+            }
         }
     }
 }

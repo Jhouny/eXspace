@@ -4,10 +4,12 @@
 #include "Menu.h"
 #include "../../ElementosGraficos/Botao.h"
 #include "../../ElementosGraficos/BotaoAlternador.h"
+#include "../../Controle/ControleMenu.h" 
 
 namespace Menus{
     class MenuJogar:public Menu{
         private:
+            Controle::ControleMenu pControleMenu;
         public:
             MenuJogar();
 
@@ -18,6 +20,10 @@ namespace Menus{
             void renderizar();
 
             void atualizar(const float dt);
+
+            void ativarControle();
+
+            void desativarControle();
 
             void executar(const float dt);
 

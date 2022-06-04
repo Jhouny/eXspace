@@ -3,10 +3,12 @@
 
 #include "Menu.h"
 #include "../../ElementosGraficos/Botao.h"
+#include "../../Controle/ControleMenu.h"
 
 namespace Menus {
     class MenuAbertura: public Menu {
-        private:            
+        private:           
+            Controle::ControleMenu pControleMenu; 
         public:
             MenuAbertura();
 
@@ -17,6 +19,10 @@ namespace Menus {
             void atualizar(const float dt);
 
             void renderizar();
+
+            void ativarControle();
+
+            void desativarControle();
 
             void executar(const float dt);
     };
