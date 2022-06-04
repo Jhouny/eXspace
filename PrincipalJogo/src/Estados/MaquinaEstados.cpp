@@ -26,6 +26,7 @@ namespace Estados {
             estadoAtual->setAnterior(temp);
             estadoAtual->getMenu()->reiniciarRelogio();
             estadoAtual->observar();
+            estadoAtual->getMenu()->pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
         }
     }
 

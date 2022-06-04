@@ -2,6 +2,8 @@
 #include "../../../../include/Ente/Entidades/Inimigo.h"
 #include "../../../../include/Ente/Menus/Fase.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../../../../include/Ente/Entidades/Estaticas/Lava.h"
+
 
 #define PULO_Y -256000 * TICK_RATE
 #define ATRITO 0.7
@@ -80,6 +82,11 @@ void Jogador::parar() {
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
+    cout << "vida: " << vida << endl;
+    if(outraEntidade->getID() == ID::lava){
+        Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
+        this->receberDano(tmp->getDano());
+    }
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
         Coordenada p = this->getPosicao();
         Coordenada v = this->getVelocidade();
@@ -158,7 +165,7 @@ void Jogador::executar(const float dt) {
 
     // Se o jogador morrer
     if(!vivo) {
-        pGrafico->terminar();  // Fecha a janela, mas no fim deveria dar um 'Game Over'
+        pFase->gameOver();  // Fecha a janela, mas no fim deveria dar um 'Game Over'
     }
 }
 

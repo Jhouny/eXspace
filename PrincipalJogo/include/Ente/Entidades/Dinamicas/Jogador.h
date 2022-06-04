@@ -37,6 +37,8 @@ class Jogador: public Personagem {
             clock.restart();
         }
 
+        void setVida(int vi){ vida = vi; }
+
         // Fisica
         void atacar();
         void direita();

@@ -1,10 +1,10 @@
 #include "../../include/ElementosGraficos/Coracao.h"
 
 namespace ElementosGraficos {
-    Coracao::Coracao(Coordenada tam, Coordenada pos):
-        Ponto(tam, pos)
+    Coracao::Coracao(Coordenada pos):
+        Ponto(TAMANHO_PADRAO_CORACAO, pos)
     {
-
+        pId = PontoID::coracao;
     }
 
     Coracao::~Coracao() {}

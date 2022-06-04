@@ -6,6 +6,7 @@ namespace Menus{
         Menu(),
         jogador1(jog1),
         jogador2(jog2),
+        visor(jogador1, jogador2),
         colisor()
         {
             // Define o plano de fundo
@@ -26,17 +27,6 @@ namespace Menus{
 
     Fase::~Fase() {}
 
-    
-
-    /*void Fase::geraInimigos() {    
-        for(int i = 0; i < 4; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada(rand() % 4400, 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
-        }
-    }*/
-
     void Fase::setTexture(const char* path) {
         sf::Texture *temp = pGrafico->loadTexture(path);
         fundo.setTexture(*temp);
@@ -53,6 +43,19 @@ namespace Menus{
 
     void Fase::gameOver() {
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
+
+    }
+
+    void Fase::resetarEstadoOriginal() {
+        jogador1->setVida(100);
+        jogador2->setVida(100);
+        jogador1->setPosicao(Coordenada(0,0));
+        jogador2->setPosicao(Coordenada(50,0));
+        atualizarBackground();
+
+
+        // Resetar HUD
+        visor.resetarVisor();
     }
 
     void Fase::incluir(Entidade* l) {
@@ -71,6 +74,8 @@ namespace Menus{
                 lEntidades.removeIndice(i);
             }
         }
+        
+        visor.atualizaPontuacao();
     }
 
     void Fase::renderizar() {
@@ -82,7 +87,9 @@ namespace Menus{
             ent = lEntidades[i];
             pGrafico->draw(ent->getSprite());
             //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
-        } 
+        }
+
+        visor.renderizar();
     }
 
     void Fase::atualizar(const float dt) {    

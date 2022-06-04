@@ -5,7 +5,7 @@ namespace ElementosGraficos {
         ElementoGrafico(tam, pos, TEX_PONTO_VAZIO),
         preenchido(false)
     {
-
+        pId = indef;
     }
 
     Ponto::~Ponto() {

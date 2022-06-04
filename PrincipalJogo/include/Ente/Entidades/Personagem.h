@@ -5,8 +5,8 @@
 
 class Personagem: public Entidade {
     protected:
-        int vida;
-        int dano;
+        float vida;
+        float dano;
         bool pulando;
         bool vivo;
         float aceleracaoY;
@@ -14,14 +14,14 @@ class Personagem: public Entidade {
         sf::Clock clock;
 
     public:
-        Personagem(Coordenada tam, Coordenada pos, bool estatico, int v = 100, int d = 20, ID id = vazio);
+        Personagem(Coordenada tam, Coordenada pos, bool estatico, float v = 100, float d = 20, ID id = vazio);
         ~Personagem();
 
-        const int getVida() const { return vida; }
+        const float getVida() const { return vida; }
 
-        void setDano(int d);
-        const int getDano() const { return dano; }
-        void receberDano(int d);
+        void setDano(float d);
+        const float getDano() const { return dano; }
+        void receberDano(float d);
 
         void setVelocidade(Coordenada v) { velocidade = v; }
         Coordenada getVelocidade() const { return velocidade; }

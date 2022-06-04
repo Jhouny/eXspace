@@ -2,31 +2,32 @@
 #define _MAQUINA_ESTADOS_H_
 
 #include "Estado.h"
+#include "../Gerenciadores/Grafico.h"
 
 namespace Estados {
     class MaquinaEstados {
-    private:
-        Estado* estadoAtual;
-        std::map<IdEstado, Estado*> mapaEstados;
+        protected:
+            Estado* estadoAtual;
+            std::map<IdEstado, Estado*> mapaEstados;
 
-    public:
-        MaquinaEstados();
+        public:
+            MaquinaEstados();
 
-        ~MaquinaEstados();
+            ~MaquinaEstados();
 
-        void inserirEstado(Estado* est);
+            void inserirEstado(Estado* est);
 
-        void setEstadoAtual(IdEstado id);
+            void setEstadoAtual(IdEstado id);
 
-        void setEstadoAnterior();
+            void setEstadoAnterior();
 
-        Estado* getEstadoAtual() { return estadoAtual; }
+            Estado* getEstadoAtual() { return estadoAtual; }
 
-        void atualizarEstadoAtual(const float dt);
+            void atualizarEstadoAtual(const float dt);
 
-        void renderizarEstadoAtual();
+            void renderizarEstadoAtual();
 
-        virtual void executar() = 0;
+            virtual void executar() = 0;
     };
 } // namespace Estados
 

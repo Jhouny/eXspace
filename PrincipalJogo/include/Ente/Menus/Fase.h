@@ -5,12 +5,15 @@
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Gerenciadores/Colisoes.h"
 
+#include "../../ElementosGraficos/ElementosVisor.h"
+
 #include "Menu.h"
 #include "../Entidades/Dinamicas/InimigoTerrestre.h"
 #include "../Entidades/Dinamicas/Chefe.h"
 #include "../Entidades/Dinamicas/Jogador.h"
 #include "../Entidades/Dinamicas/Projetil.h"
 #include "../Entidades/Estaticas/Plataforma.h"
+#include "../Entidades/Estaticas/Lava.h"
 
 #define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
@@ -18,8 +21,11 @@ namespace Menus{
     class Fase: public Menu {
         protected:
             ListaEntidades lEntidades;
+            ElementosGraficos::ElementosVisor visor;
 
             Gerenciadores::Colisor colisor;
+
+            Lava* pLava;
 
             Jogador *jogador1;
             Jogador *jogador2;
@@ -41,6 +47,8 @@ namespace Menus{
             void renderizar();
 
             void criaBotoes() {}
+
+            void resetarEstadoOriginal();
 
             void setTexture(const char* path);
             

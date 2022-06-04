@@ -3,8 +3,8 @@
 
 Jogo::Jogo():
     MaquinaEstados(),
-    pGrafico(Gerenciadores::Grafico::getInstancia()),
     pEventos(Gerenciadores::Eventos::getInstancia()),
+    pGrafico(Gerenciadores::Grafico::getInstancia()),
     jogador1(new Jogador())
 {
     temporizador.restart();
@@ -60,6 +60,7 @@ void Jogo::executar() {
             atualizarEstadoAtual(dt);
             dt -= TICK_RATE;
         }
+
         renderizarEstadoAtual();
 
         pGrafico->display();

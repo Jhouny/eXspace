@@ -3,9 +3,11 @@
 
 #include "../Fase.h"
 
+
 namespace Menus{
     class Mercurio: public Fase {
         private:
+    
         public:
             Mercurio(Jogador* jog1, Jogador* jog2 = NULL);
             ~Mercurio();
