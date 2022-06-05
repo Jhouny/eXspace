@@ -55,6 +55,8 @@ class Jogador: public Personagem {
         void atualiza(const float dt);
         void atualizaAcel();
 
+        void resetar();
+
         void ativarControle() {
             pControleJogador.ativar();
         }

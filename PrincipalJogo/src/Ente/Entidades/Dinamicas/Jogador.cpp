@@ -33,6 +33,8 @@ bool Jogador::estaVivo() {
     Coordenada p = this->getPosicao();
     if(p.y > ALTURA + 300 || vida<=0) {
         vivo = false;
+    } else {
+        vivo = true;
     }
 
     return vivo;
@@ -82,13 +84,32 @@ void Jogador::parar() {
     velocidade.x = 0; // Para instantaneamente
 }
 
+void Jogador::resetar() {
+    setPontuacao(0);
+    setPosicao(0,0);
+    setVida(100);
+
+    setJump(false);
+    estaPulando = false;
+    estaAtirando = false;
+    viradoFrente = true;
+    
+    velocidade.x = 0.f;
+    velocidade.y = 0.f;
+    aceleracaoY = 10;
+
+    pControleJogador.resetarTeclas();
+
+    // Define a textura
+    setTexture(TEX_JOGADOR);
+}
 
 // Checa com que tipo de objeto colidiu
 void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     //colisao com a lava
     if(outraEntidade->getID() == ID::lava) {
         Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
-        //this->receberDano(tmp->getDano());
+        this->receberDano(tmp->getDano());
     }
 
 

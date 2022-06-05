@@ -31,6 +31,8 @@ namespace Controle {
                 direita =  dir;
                 atacar = ata;
             }
+
+            void resetarTeclas();
     };
 } 
 

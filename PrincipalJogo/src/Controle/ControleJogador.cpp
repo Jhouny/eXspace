@@ -82,4 +82,11 @@ namespace Controle {
             }
         }
     }
+
+    void ControleJogador::resetarTeclas() {
+        teclasPressionadas[pular] = false;
+        teclasPressionadas[esquerda] = false;
+        teclasPressionadas[direita] = false;
+        teclasPressionadas[atacar] = false;
+    }
 }

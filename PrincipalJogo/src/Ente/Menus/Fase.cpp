@@ -16,12 +16,12 @@ namespace Menus{
 
             // Inclui os jogadores
             if(jogador2 != NULL) {
-                jogador2->setVelocidade(Coordenada(15,0));
+                jogador2->setVelocidade(Coordenada(0,0));
                 jogador2->setFase(this);
                 incluir(static_cast<Entidade*>(jogador2));
             }
 
-            jogador1->setVelocidade(Coordenada(10.5, 0));
+            jogador1->setVelocidade(Coordenada(0, 0));
             jogador1->setFase(this);
             incluir(static_cast<Entidade*>(jogador1));
     }
@@ -61,24 +61,13 @@ namespace Menus{
     void Fase::resetarEstadoOriginal() {
         // Retira os elementos da lista
         lEntidades.clear();
-
-        jogador1->setJump(false);
-        jogador1->pulo(false);
-        jogador1->ataque(false);
-        jogador1->setVelocidade(Coordenada(0, 0));
-        jogador1->setFase(this);
-        jogador1->setAtivo(true);
-        jogador1->setVida(100);
-        jogador1->setPosicao(Coordenada(0, 100));
+        
+        jogador1->resetar();
         incluir(static_cast<Entidade*>(jogador1));
 
         if(jogador2 != NULL) {
-            jogador2->setVelocidade(Coordenada(10.5, 0));
-            jogador2->setFase(this);
-            jogador2->setAtivo(true);
-            jogador2->setVida(100);
-            jogador2->setPosicao(Coordenada(50,0));
-            incluir(static_cast<Entidade*>(jogador2));
+            jogador2->resetar();
+            incluir(static_cast<Entidade*>(jogador1));
         }
 
         fundo.setPosition(0, 0);
@@ -95,7 +84,6 @@ namespace Menus{
 
     void Fase::atualizaEntidades(const float dt){
         Entidade* ent;
-        std::vector<Entidade*>::iterator it;
         for(it = lEntidades.begin(); it != lEntidades.end();) {
             ent = *it;
             ent->executar(dt);
@@ -113,7 +101,7 @@ namespace Menus{
         pGrafico->draw(&fundo, false);
 
         Entidade *ent;
-        std::vector<Entidade*>::iterator it;
+        cout << lEntidades.size() << endl;
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());

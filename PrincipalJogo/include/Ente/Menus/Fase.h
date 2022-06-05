@@ -21,7 +21,8 @@
 namespace Menus{
     class Fase: public Menu {
         protected:
-            std::vector<Entidade*> lEntidades;
+            std::list<Entidade*> lEntidades;
+            std::list<Entidade*>::iterator it;
             ElementosGraficos::ElementosVisor visor;
 
             Gerenciadores::Colisor colisor;
