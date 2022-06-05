@@ -17,7 +17,7 @@ class Inimigo: public Personagem {
         ~Inimigo();
         void setJogador(Jogador*pJog); //colocar em um vetor de duas posicoes 
 
-        void alarmado();
+        void alarmado(int dist);
 
         virtual bool estaVivo() {};
         virtual void colisao(Entidade* outraEntidade, Coordenada intersecao) = 0;

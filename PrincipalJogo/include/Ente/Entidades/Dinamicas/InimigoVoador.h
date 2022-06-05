@@ -4,13 +4,16 @@
 #include "../Inimigo.h"
 #include "Projetil.h"
 
+#define VELOCIDADE_PROJETIL 76800 * TICK_RATE * 2
+#define DISTANCIA_ALARME 500
+#define TEX_INIMIGO_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Inimigos/InimigoVoador/Still.png"
+
 namespace Menus{
     class Fase;
 }
 
 class InimigoVoador:public Inimigo{
     private:
-        Coordenada velocidade;
         Projetil* pProj;
         Menus::Fase* pFase;
 
@@ -26,14 +29,17 @@ class InimigoVoador:public Inimigo{
             clock.restart();
         }
 
+        void setFase(Menus::Fase* pF) { pFase = pF; }
+
         void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
         void atacar();
 
+        void atualiza(const float dt);
+
         void movimentar(const float dt);
 
         void executar(const float dt);
-
 };
 
 #endif

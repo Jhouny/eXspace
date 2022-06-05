@@ -2,7 +2,7 @@
 
 Projetil::Projetil(Coordenada pos, float vx, float vy, int d, ID id):
     Entidade(id,Coordenada(12,4),pos,false)
-     {
+{
         velocidade.x = vx;
         velocidade.y= vy;
         dano = d;

@@ -64,6 +64,7 @@ void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
             } else {
                 this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
             }
+            velocidade.x *= -1;  // Inverte a direção
         }
     }
 }
@@ -106,7 +107,7 @@ void InimigoTerrestre::movimentar(const float dt) {
 
 void InimigoTerrestre::executar(const float dt) {
     atualizaTexture();
-    alarmado();
+    alarmado(300);
     movimentar(dt);
     estaVivo();
     

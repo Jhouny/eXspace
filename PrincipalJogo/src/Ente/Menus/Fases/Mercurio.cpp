@@ -105,23 +105,31 @@ namespace Menus{
     void Mercurio::geraInimigos() {
         int i;
         for(i = 0; i < 3; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada(rand() % (4000-2400)+2400 , 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
+            pIniTerrestre = new InimigoTerrestre();
+            pIniTerrestre->setPosicao(Coordenada(rand() % (4000-2400)+2400 , 100));
+            pIniTerrestre->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIniTerrestre));
         }
         for(i = 0; i < 3; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada(rand() % (500)+5250 , 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
+            pIniTerrestre = new InimigoTerrestre();
+            pIniTerrestre->setPosicao(Coordenada(rand() % (500) + 5250 , 100));
+            pIniTerrestre->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIniTerrestre));
         }
 
         for(i = 0; i < 3; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada(rand() % (500) + 8700 , 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
+            pIniTerrestre = new InimigoTerrestre();
+            pIniTerrestre->setPosicao(Coordenada(rand() % (500) + 8700 , 100));
+            pIniTerrestre->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIniTerrestre));
+        }
+        Fase* tmp = static_cast<Fase*>(this);
+        for(i = 0; i < 3; i++) {
+            pIniVoador = new InimigoVoador();
+            pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 100));
+            pIniVoador->setJogador(jogador1);
+            pIniVoador->setFase(tmp);
+            incluir(static_cast<Entidade*>(pIniVoador));
         }
     }
 

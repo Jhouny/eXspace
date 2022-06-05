@@ -19,7 +19,7 @@ void Inimigo::setJogador(Jogador* pJog) {
     else
         cout << "ponteiro nulo" << endl;
 }
-void Inimigo::alarmado() {
+void Inimigo::alarmado(int dist) {
     Coordenada centroIni,  centroJog, intersecao;
     float diferenca;
     
@@ -34,7 +34,7 @@ void Inimigo::alarmado() {
 
     diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
     
-    if(fabs(diferenca) <= 300)
+    if(fabs(diferenca) <= dist)
         jogTaPerto = true;
     else
         jogTaPerto = false;

@@ -10,6 +10,7 @@ class Projetil: public Entidade {
     private:
         Coordenada velocidade;  
         int dano;
+
     public:
         Projetil(Coordenada pos, float vx = 30, float vy = 0, int d = 10, ID id = projetil);
         ~Projetil();

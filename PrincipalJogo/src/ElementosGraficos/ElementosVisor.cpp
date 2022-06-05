@@ -61,6 +61,7 @@ namespace ElementosGraficos {
             (*it)->executar(pJog1->getPosicao());
         }
 
+        // 
         int v = pJog1->getVida();
         int tam = vidaJog1.size();
         for(int i = 0; i < tam; i++) {

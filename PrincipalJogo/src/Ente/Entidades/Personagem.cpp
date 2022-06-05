@@ -21,7 +21,7 @@ void Personagem::receberDano(float d){
     if(vida > 0)
         vida -= d;
     else {
-        cout << "\nPersonagem ja esta morto" << endl;
+        cout << "\n Personagem (RG: " << getRG() << " ID: " << getID() << ") ja esta morto" << endl;
     }
 
 }

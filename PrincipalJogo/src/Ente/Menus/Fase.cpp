@@ -78,9 +78,14 @@ namespace Menus{
     }
 
     void Fase::incluir(Entidade* l) {
-        ID id = l->getID();
-        lEntidades.emplace_back(l);
-        colisor.push(l);
+        if(l){
+            for(it = lEntidades.begin(); it != lEntidades.end(); it++){
+                cout << (*it)->getID() << " ";
+            }
+            cout << endl;
+            lEntidades.emplace_back(l);
+            colisor.push(l);
+        }
     }
 
     void Fase::atualizaEntidades(const float dt){
@@ -105,7 +110,7 @@ namespace Menus{
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());
-            //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+            pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
         }
 
         visor.renderizar();
@@ -127,7 +132,7 @@ namespace Menus{
         // Processa simulação de efeito Parallax
         atualizarBackground();
 
-        cout << "vida: " << jogador1->getVida() << endl;
+        //cout << "Tamanho: " << lEntidades.size() << endl;
 
         if(!(jogador1->estaVivo())){
             gameOver();

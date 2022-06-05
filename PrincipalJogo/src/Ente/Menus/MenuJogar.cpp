@@ -19,7 +19,7 @@ namespace Menus{
 
     void MenuJogar::criaBotoes(){
         botoesAtivos.clear();
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::netuno , "NOVO JOGO");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::mercurio , "NOVO JOGO");
         pBotao->ativar();
         botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 

@@ -10,6 +10,7 @@
 
 #include "Menu.h"
 #include "../Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../Entidades/Dinamicas/InimigoVoador.h"
 #include "../Entidades/Dinamicas/Chefe.h"
 #include "../Entidades/Dinamicas/Jogador.h"
 #include "../Entidades/Dinamicas/Projetil.h"
@@ -35,7 +36,8 @@ namespace Menus{
             Jogador *jogador2;
 
             Plataforma* pBase;
-            InimigoTerrestre* pIni;
+            InimigoTerrestre* pIniTerrestre;
+            InimigoVoador* pIniVoador;
 
             Controle::ControleMenu pControleFase;
                     

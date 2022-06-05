@@ -90,17 +90,17 @@ namespace Menus{
     void Netuno::geraInimigos(){
         int i;
         for(i = 0; i < 3; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada((rand() % 1250)+4500 , 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
+            pIniTerrestre = new InimigoTerrestre();
+            pIniTerrestre->setPosicao(Coordenada((rand() % 1250)+4500 , 100));
+            pIniTerrestre->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIniTerrestre));
         }
 
         for(i = 0; i < 3; i++) {
-            pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada((rand() % 1250)+6250 , 100));
-            pIni->setJogador(jogador1);
-            incluir(static_cast<Entidade*>(pIni));
+            pIniTerrestre = new InimigoTerrestre();
+            pIniTerrestre->setPosicao(Coordenada((rand() % 1250)+6250 , 100));
+            pIniTerrestre->setJogador(jogador1);
+            incluir(static_cast<Entidade*>(pIniTerrestre));
         }
     }
 
