@@ -13,7 +13,6 @@ namespace Menus{
             ~Mercurio();
             void geraPlataformas(); 
             void geraObstaculos();
-
             void geraInimigos();
             void executar(const float dt);
     };

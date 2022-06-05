@@ -96,12 +96,14 @@ namespace Menus{
     void Fase::atualizaEntidades(const float dt){
         Entidade* ent;
         std::vector<Entidade*>::iterator it;
-        for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
+        for(it = lEntidades.begin(); it != lEntidades.end();) {
             ent = *it;
             ent->executar(dt);
-            if(!ent->getAtivo()) {
-                lEntidades.erase(it);
-            }
+
+            if(!ent->getAtivo())
+                it = lEntidades.erase(it);
+            else
+                it++;
         }
         
         visor.atualizaPontuacao();
@@ -125,20 +127,17 @@ namespace Menus{
         // Verifica colisao entre Entidades Dinamicas e Estaticas
         colisor.ChecarColisoes();    
 
-        // Desenha na tela os elementos
-        renderizar();
-
         // Atualiza a view para a posicao do jogador
         pGrafico->atualizaView(jogador1->getPosicao());
 
         // Processa o executar das entidades e remove entidades inativas
         atualizaEntidades(dt);
-        
+
+        // Desenha na tela os elementos
+        renderizar();
+
         // Processa simulação de efeito Parallax
         atualizarBackground();
-
-        // Remove as entidades inativas
-        colisor.remove();
 
         if(!(jogador1->estaVivo())){
             gameOver();

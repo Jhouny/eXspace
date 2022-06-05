@@ -19,11 +19,10 @@ namespace Gerenciadores {
     }
 
     void Colisor::remove() {
-        
             itDinamicas = enteDinamicas.begin();
             for(int i = 0; i < enteDinamicas.size(); i++) {
                 if(!(*itDinamicas)->getAtivo()){
-                enteDinamicas.erase(itDinamicas);
+                    enteDinamicas.erase(itDinamicas);
                 }
                 itDinamicas++;
             }

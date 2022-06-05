@@ -37,13 +37,15 @@ void Projetil::movimentar(const float dt) {
 }
 
 void Projetil::estaAtivo() {
-    if(this->getPosicao().x > 10000||this->getPosicao().x < 0 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
+    if(this->getPosicao().x > 12000||this->getPosicao().x < -1000 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
        setAtivo(false);
     }
 }
 
 void Projetil::executar(const float dt) {
     movimentar(dt);
+
     estaAtivo();
+
     atualizaTexture();
 }

@@ -29,8 +29,7 @@ namespace Controle{
             if(tecla == apagar){
                 if(contador >=0)
                     nome.erase(contador--);
-            }
-            if(contador <= tamMax){
+            } else if(contador <= tamMax){
                 if(tecla == "Space"){
                     nome += " ";
                     contador++;

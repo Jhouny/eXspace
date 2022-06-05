@@ -3,11 +3,12 @@
 Lava::Lava(Coordenada tam, Coordenada pos, bool lNormal):
     Obstaculo(tam, pos, true, true, ID::lava)
 {
-    if(lNormal)
+    if(lNormal == true)
         setTexture(TEX_LAVA, false);
-    else
+    else if(lNormal == false)
         setTexture(TEX_LAVA_GELADA,false);
-    dano = 0.7f;
+    
+    dano = 0.6f;
 }
 
 Lava::~Lava(){

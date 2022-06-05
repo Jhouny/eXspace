@@ -14,7 +14,7 @@ namespace Menus{
 
     void Mercurio::geraPlataformas() {
         //plataforma da lava:
-        pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,ALTURA- 100.f));
+        pBase = new Plataforma(Coordenada(3000,32),Coordenada(4000,ALTURA- 68.f));
         incluir(static_cast<Entidade*> (pBase));
 
         pBase = new Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
@@ -119,7 +119,7 @@ namespace Menus{
 
         for(i = 0; i < 3; i++) {
             pIni = new InimigoTerrestre();
-            pIni->setPosicao(Coordenada(rand() % (500)+8700 , 100));
+            pIni->setPosicao(Coordenada(rand() % (500) + 8700 , 100));
             pIni->setJogador(jogador1);
             incluir(static_cast<Entidade*>(pIni));
         }
