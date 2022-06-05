@@ -5,6 +5,8 @@ namespace ElementosGraficos {
         Ponto(TAMANHO_PADRAO_CORACAO, pos)
     {
         pId = PontoID::coracao;
+        id = ID::coracaoElGr;
+        setTexture(TEX_CORACAO_VAZIO);
     }
 
     Coracao::~Coracao() {}

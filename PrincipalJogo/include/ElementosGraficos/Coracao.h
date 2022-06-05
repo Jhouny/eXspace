@@ -3,7 +3,7 @@
 
 #include "Ponto.h"
 
-#define TEX_CORACAO_CHEIO "PrincipalJogo/assets/Texturas/Lava/lava.png"
+#define TEX_CORACAO_CHEIO "PrincipalJogo/assets/Texturas/Coracao/coracao_preenchido.png"
 #define TEX_CORACAO_VAZIO "PrincipalJogo/assets/Texturas/Coracao/coracao_vazio.png"
 
 #define TAMANHO_PADRAO_CORACAO Coordenada(20, 20)

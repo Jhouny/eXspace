@@ -60,6 +60,7 @@ namespace ElementosGraficos {
         for(it = vidaJog1.begin(); it != vidaJog1.end(); it++) {
             (*it)->atualizarTextura();
         }
+        
         for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
             (*it)->atualizarTextura();
         }
@@ -82,7 +83,6 @@ namespace ElementosGraficos {
         criaPontosEspacados(10, PontoID::coracao);
 
         criaPontosEspacados(6, PontoID::inimigoAbatido);
-
     }
 } // namespace ElementosGraficos 
 

@@ -8,7 +8,8 @@
 namespace ElementosGraficos {
     enum ID {
         vazio = 0,
-        botao
+        botao,
+        coracaoElGr
     };
 
     class ElementoGrafico {
@@ -31,7 +32,7 @@ namespace ElementosGraficos {
             void setTamanho(Coordenada tam) { tamanho = tam; }
 
             sf::Sprite* getSprite() { return &sprite; }
-            void setTexture(const char* path);
+            virtual void setTexture(const char* path);
 
             ID getID() const { return id; }
 
