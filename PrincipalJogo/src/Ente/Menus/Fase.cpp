@@ -7,7 +7,7 @@ namespace Menus{
         jogador1(jog1),
         jogador2(jog2),
         pControleFase(this),
-        visor(jogador1, jogador2),
+        visor(jog1, jog2),
         colisor()
         {
             // Define o plano de fundo
@@ -61,6 +61,7 @@ namespace Menus{
     void Fase::resetarEstadoOriginal() {
         // Retira os elementos da lista
         lEntidades.clear();
+        colisor.resetar();
         
         jogador1->resetar();
         incluir(static_cast<Entidade*>(jogador1));
@@ -93,7 +94,7 @@ namespace Menus{
             else
                 it++;
         }
-        
+
         visor.atualizaPontuacao();
     }
 
@@ -101,7 +102,6 @@ namespace Menus{
         pGrafico->draw(&fundo, false);
 
         Entidade *ent;
-        cout << lEntidades.size() << endl;
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());
@@ -126,6 +126,8 @@ namespace Menus{
 
         // Processa simulação de efeito Parallax
         atualizarBackground();
+
+        cout << "vida: " << jogador1->getVida() << endl;
 
         if(!(jogador1->estaVivo())){
             gameOver();

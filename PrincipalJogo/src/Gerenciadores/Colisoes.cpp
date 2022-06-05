@@ -29,7 +29,11 @@ namespace Gerenciadores {
             
     }
 
-    
+    void Colisor::resetar() {
+        enteDinamicas.clear();
+        enteEstaticas.clear();
+    }
+
     void Colisor::ChecarColisoes() {
         Entidade *ent1, *ent2;
         Coordenada centroEnt1, centroEnt2, intersecao;

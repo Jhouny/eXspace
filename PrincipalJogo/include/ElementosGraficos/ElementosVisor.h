@@ -5,8 +5,8 @@
 #include "Coracao.h"
 #include "InimigoAbatido.h"
 
-#define PADDING_BORDA 30
-#define ESPACAMENTO_PONTOS 5
+#define PADDING_BORDA 25
+#define ESPACAMENTO_PONTOS 6
 
 namespace ElementosGraficos {
     class ElementosVisor {
@@ -15,6 +15,9 @@ namespace ElementosGraficos {
 
             Jogador* pJog1;
             Jogador* pJog2;
+
+            Coracao* pCor;
+            InimigoAbatido* pIni;
 
             std::vector<Coracao*> vidaJog1;
             std::vector<Coracao*> vidaJog2;

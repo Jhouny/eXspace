@@ -1,20 +1,20 @@
 #include "../../include/ElementosGraficos/Coracao.h"
 
 namespace ElementosGraficos {
-    Coracao::Coracao(Coordenada pos):
-        Ponto(TAMANHO_PADRAO_CORACAO, pos)
-    {
+    Coracao::Coracao(Coordenada pos, Jogador* jog):
+        Ponto(TAMANHO_PADRAO_CORACAO, pos, jog)
+    {   
+        preencher();  // Coração começa preenchido 
         pId = PontoID::coracao;
-        id = ID::coracaoElGr;
-        setTexture(TEX_CORACAO_VAZIO);
+        atualizarTextura();
     }
 
     Coracao::~Coracao() {}
 
     void Coracao::atualizarTextura() {
         if(preenchido)
-            setTexture(TEX_CORACAO_CHEIO);
+            setTextura(TEX_CORACAO_CHEIO);
         else
-            setTexture(TEX_CORACAO_VAZIO);
+            setTextura(TEX_CORACAO_VAZIO);
     }
 }

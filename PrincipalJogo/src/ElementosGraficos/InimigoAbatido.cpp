@@ -1,18 +1,19 @@
 #include "../../include/ElementosGraficos/InimigoAbatido.h"
 
 namespace ElementosGraficos {
-    InimigoAbatido::InimigoAbatido(Coordenada pos):
-        Ponto(TAMANHO_PADRAO_INIMIGO_ABATIDO, pos)
+    InimigoAbatido::InimigoAbatido(Coordenada pos, Jogador* jog):
+        Ponto(TAMANHO_PADRAO_INIMIGO_ABATIDO, pos, jog)
     {
         pId = PontoID::inimigoAbatido;
+        atualizarTextura();
     }
 
     InimigoAbatido::~InimigoAbatido() {}
 
     void InimigoAbatido::atualizarTextura() {
         if(preenchido)
-            setTexture(TEX_INIMIGO_ABATIDO_CHEIO);
+            setTextura(TEX_INIMIGO_ABATIDO_CHEIO);
         else
-            setTexture(TEX_INIMIGO_ABATIDO_VAZIO);
+            setTextura(TEX_INIMIGO_ABATIDO_VAZIO);
     }
 }

@@ -19,6 +19,7 @@ Jogador::Jogador():
         estaAtirando = false;
         viradoFrente = true;
         
+        setPosicao(Coordenada(100,100));
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;

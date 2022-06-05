@@ -2,7 +2,9 @@
 
 namespace ElementosGraficos {
     ElementosVisor::ElementosVisor(Jogador* jog1, Jogador* jog2):
-        pGrafico(Gerenciadores::Grafico::getInstancia())
+        pGrafico(Gerenciadores::Grafico::getInstancia()),
+        pJog1(jog1),
+        pJog2(jog2)
     {
         executar();
     }
@@ -17,24 +19,22 @@ namespace ElementosGraficos {
         switch (pID) {
         case PontoID::coracao:
             for(i = 0; i < n; i++) {
-                Coracao* pElem = new Coracao(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 40));
-                pElem->preencher();
-                vidaJog1.emplace_back(pElem);
+                pCor = new Coracao(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 40), pJog1);
+                vidaJog1.emplace_back(pCor);
             }
 
             if(pJog2 != NULL) {
                 for(i = 0; i < n; i++) {
-                    Coracao* pElem = new Coracao(Coordenada(COMPRIMENTO - PADDING_BORDA - i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 40));
-                    pElem->preencher();
-                    vidaJog2.emplace_back(pElem);
+                    pCor = new Coracao(Coordenada(COMPRIMENTO - PADDING_BORDA - i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 40), pJog1);
+                    vidaJog2.emplace_back(pCor);
                 }
             }
             break;
         
         case PontoID::inimigoAbatido:
             for(i = 0; i < n; i++) {
-                InimigoAbatido* pElem = new InimigoAbatido(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 80));
-                inimigosAbatidos.emplace_back(pElem);
+                pIni = new InimigoAbatido(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_INIMIGO_ABATIDO.x + ESPACAMENTO_PONTOS), 80), pJog1);
+                inimigosAbatidos.emplace_back(pIni);
             }
             break;
         }
@@ -58,16 +58,25 @@ namespace ElementosGraficos {
     void ElementosVisor::atualizaPontuacao() {
         std::vector<Coracao*>::iterator it;
         for(it = vidaJog1.begin(); it != vidaJog1.end(); it++) {
-            (*it)->atualizarTextura();
+            (*it)->executar(pJog1->getPosicao());
         }
-        
-        for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
-            (*it)->atualizarTextura();
+
+        int v = pJog1->getVida();
+        int tam = vidaJog1.size();
+        for(int i = 0; i < tam; i++) {
+            if(v < 100*i/(float)tam)
+                vidaJog1[i]->limpar();
+        }
+
+        if(pJog2 != NULL) {
+            for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
+                (*it)->executar(pJog2->getPosicao());
+            }
         }
 
         std::vector<InimigoAbatido*>::iterator it2;
         for(it2 = inimigosAbatidos.begin(); it2 != inimigosAbatidos.end(); it2++) {
-            (*it2)->atualizarTextura();
+            (*it2)->executar(pJog1->getPosicao());
         }
     }
 

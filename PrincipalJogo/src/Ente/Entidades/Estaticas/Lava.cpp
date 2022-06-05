@@ -8,7 +8,7 @@ Lava::Lava(Coordenada tam, Coordenada pos, bool lNormal):
     else if(lNormal == false)
         setTexture(TEX_LAVA_GELADA,false);
     
-    dano = 0.6f;
+    dano = 0.4f;
 }
 
 Lava::~Lava(){

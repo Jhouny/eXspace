@@ -1,7 +1,9 @@
 #ifndef _PONTO_H_
 #define _PONTO_H_
 
-#include "ElementoGrafico.h"
+#include "../Auxiliares/stdafx.h"
+#include "../Gerenciadores/Grafico.h"
+#include "../Ente/Entidades/Dinamicas/Jogador.h"
 
 #define TEX_PONTO_VAZIO "PrincipalJogo/assets/Texturas/InimigoAbatido/inimigo_abatido_vazio.png"
 
@@ -11,12 +13,21 @@ namespace ElementosGraficos {
         coracao,
         inimigoAbatido
     };
-    class Ponto: public ElementoGrafico {
+    class Ponto {
         protected:
+            Coordenada tamanho;
+            Coordenada posicao;
+            Coordenada posicaoRelativa;
+            Jogador* ref;  // A qual jogador se posicionar
+
+            sf::Sprite sprite;
+
+            Gerenciadores::Grafico* pGrafico;
+
             bool preenchido;
             PontoID pId;
         public:
-            Ponto(Coordenada tam, Coordenada pos);
+            Ponto(Coordenada tam, Coordenada pos, Jogador* jog);
 
             ~Ponto();
 
@@ -26,9 +37,15 @@ namespace ElementosGraficos {
 
             void limpar();
 
+            sf::Sprite* getSprite() { return &sprite; }
+
+            void setTextura(const char* path);
+
+            void atualizaPosicao(Coordenada pos);
+
             virtual void atualizarTextura() = 0;
 
-            virtual void executar();
+            virtual void executar(Coordenada pos);
         };    
 } // namespace ElementosGraficos 
 

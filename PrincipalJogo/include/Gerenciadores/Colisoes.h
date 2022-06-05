@@ -16,6 +16,8 @@ namespace Gerenciadores {
             void push(Entidade* ente);
             void remove();
 
+            void resetar();
+
             void ChecarColisoes();
     };
 }

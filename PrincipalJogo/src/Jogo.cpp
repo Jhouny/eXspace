@@ -76,8 +76,7 @@ void Jogo::executar() {
             atualizarEstadoAtual(dt);
             dt -= TICK_RATE;
         }
-        //cout << "Coord: " << endl;
-        //pGrafico->getViewBounds().print();
+
         renderizarEstadoAtual();
 
         pGrafico->display();

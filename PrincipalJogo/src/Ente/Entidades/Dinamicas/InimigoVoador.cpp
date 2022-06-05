@@ -1,6 +1,6 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoVoador.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
-#include "../../Menus/Fase.h"
+#include "../../../../include/Ente/Menus/Fase.h"
 
 #define VELOCIDADE_JOGADOR 76800 * TICK_RATE 
 

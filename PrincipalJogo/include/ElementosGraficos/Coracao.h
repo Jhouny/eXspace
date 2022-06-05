@@ -6,13 +6,13 @@
 #define TEX_CORACAO_CHEIO "PrincipalJogo/assets/Texturas/Coracao/coracao_preenchido.png"
 #define TEX_CORACAO_VAZIO "PrincipalJogo/assets/Texturas/Coracao/coracao_vazio.png"
 
-#define TAMANHO_PADRAO_CORACAO Coordenada(20, 20)
+#define TAMANHO_PADRAO_CORACAO Coordenada(25, 25)
 
 namespace ElementosGraficos {
     class Coracao: public Ponto {
         private:
         public:
-            Coracao(Coordenada pos);
+            Coracao(Coordenada pos, Jogador* jog);
 
             ~Coracao();
 
