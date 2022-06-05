@@ -9,7 +9,8 @@ namespace Menus{
     MenuGameOver::MenuGameOver():
         Menu(),
         pControleTexto(this),
-        pControleMenu(this)
+        pControleMenu(this),
+        nome("")
     {
         setID( Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
@@ -82,6 +83,7 @@ namespace Menus{
             if(!(lTextos[i]->ElementosGraficos::Texto::getEstatico())){
                 lTextos[i]->setTexto(pControleTexto.getNome()); //ControleTexto!!
                 lTextos[i]->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 450));
+                nome = pControleTexto.getNomeString();
             }
         }
 

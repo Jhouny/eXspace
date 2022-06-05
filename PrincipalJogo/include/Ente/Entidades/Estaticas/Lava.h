@@ -13,9 +13,9 @@ class Lava: public Obstaculo {
         bool lavaNormal;
     public:
         Lava(Coordenada tam, Coordenada pos, bool lNormal);
-        float getDano(){ return dano; }
-
         ~Lava();
+
+        float getDano(){ return dano; }
 
         void executar();
 };

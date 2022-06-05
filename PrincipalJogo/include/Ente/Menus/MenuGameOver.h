@@ -18,6 +18,9 @@ namespace Menus{
         ElementosGraficos::Texto* pTexto;
         Controle::ControleTexto pControleTexto;
         Controle::ControleMenu pControleMenu; 
+
+        std::string nome;
+
         public:
             MenuGameOver();
             ~MenuGameOver();
@@ -25,6 +28,8 @@ namespace Menus{
             void criaBotoes();
 
             void criaTextos();
+
+            std::string getNome(){ return nome; }
 
             void renderizar();
 

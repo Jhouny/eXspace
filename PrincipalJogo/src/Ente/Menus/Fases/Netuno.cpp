@@ -1,4 +1,6 @@
 #include "../../../../include/Ente/Menus/Fases/Netuno.h"
+#define TEX_PAREDE "PrincipalJogo/assets/Texturas/Plataforma/1 Tiles/Tile_12.png"
+
 
 namespace Menus{
     Netuno::Netuno(Jogador* jog1, Jogador* jog2):
@@ -41,6 +43,10 @@ namespace Menus{
         incluir(static_cast<Entidade*>(pBase)); 
 
         pBase = new Plataforma(Coordenada(1800, 32), Coordenada(7500, ALTURA -68.f));
+        incluir(static_cast<Entidade*>(pBase)); 
+
+        pBase = new Plataforma(Coordenada(32, ALTURA/2.f), Coordenada(2800, ALTURA/2.f));
+        pBase->setTexture(TEX_PAREDE);
         incluir(static_cast<Entidade*>(pBase)); 
 
         

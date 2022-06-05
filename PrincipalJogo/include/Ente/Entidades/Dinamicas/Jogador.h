@@ -10,11 +10,13 @@
 namespace Menus{
     class Fase;
 }
+
 class Jogador: public Personagem {
     private:
         Menus::Fase* pFase;
         Projetil* proj;
         Controle::ControleJogador pControleJogador;
+
         float pontuacao;
         bool viradoFrente;
         bool estaPulando;

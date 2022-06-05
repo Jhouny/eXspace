@@ -25,6 +25,8 @@ namespace Menus{
             std::list<Entidade*>::iterator it;
             ElementosGraficos::ElementosVisor visor;
 
+            int pontuacao;
+
             Gerenciadores::Colisor colisor;
 
             Lava* pLava;
@@ -41,6 +43,9 @@ namespace Menus{
             Fase(Jogador* jog1 = NULL, Jogador* jog2 = NULL);
             
             ~Fase();
+            
+            void setPontuacao(int acres) { pontuacao+= acres; }
+            int getPontuacao(){ return pontuacao; }
             
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;

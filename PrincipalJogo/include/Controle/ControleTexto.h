@@ -27,6 +27,8 @@ namespace Controle{
 
             const char* getNome(){ return nome.c_str() ;}
 
+            std::string getNomeString() { return nome;}
+
             void apagaNome();
     };
 
