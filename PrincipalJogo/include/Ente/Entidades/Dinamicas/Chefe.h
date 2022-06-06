@@ -3,6 +3,9 @@
 
 #include "../Inimigo.h"
 #include  "Projetil.h "
+
+#define TAM_PROJETIL_CHEFE Coordenada(12, 12)
+
 namespace Menus{
     class Fase;
 }

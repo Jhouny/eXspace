@@ -6,6 +6,7 @@
 #include "../../../Controle/ControleJogador.h"
 
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
+#define TAM_PROJETIL_JOGADOR Coordenada(12,4)
 
 namespace Menus{
     class Fase;
