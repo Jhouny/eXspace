@@ -10,6 +10,7 @@ class Projetil: public Entidade {
     private:
         Coordenada velocidade;  
         int dano;
+        Entidade* entOrigem; //para sebaer da onde foi originado o projetil!!
 
     public:
         Projetil(Coordenada pos, float vx = 30, float vy = 0, int d = 10, ID id = projetil);
@@ -18,6 +19,8 @@ class Projetil: public Entidade {
         void setVelocidade(float vx, float vy);
         const Coordenada getVelocidade() const { return velocidade; } 
         void setDirecao(){ velocidade.x *= -1;}
+        void setEntOrigem(Entidade* ent){ if(ent) entOrigem=ent; }
+        Entidade* getOrigem(){ return entOrigem; }
 
         void setDano(int d);
         const int getDano() const { return dano; }

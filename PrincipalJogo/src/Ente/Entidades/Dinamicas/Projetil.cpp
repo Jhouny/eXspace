@@ -23,7 +23,7 @@ void Projetil::setDano(int d) {
 }
 
 void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
-    this->setAtivo(false);
+    //this->setAtivo(false);
 }
 
 // Muda a posição da ENTIDADE
@@ -45,7 +45,7 @@ void Projetil::estaAtivo() {
 void Projetil::executar(const float dt) {
     movimentar(dt);
 
-    estaAtivo();
+    //estaAtivo();
 
     atualizaTexture();
 }

@@ -22,7 +22,6 @@ namespace Menus{
             }
 
             jogador1->setVelocidade(Coordenada(0, 0));
-            jogador1->setFase(this);
             incluir(static_cast<Entidade*>(jogador1));
     }
 
@@ -79,10 +78,7 @@ namespace Menus{
 
     void Fase::incluir(Entidade* l) {
         if(l){
-            for(it = lEntidades.begin(); it != lEntidades.end(); it++){
-                cout << (*it)->getID() << " ";
-            }
-            cout << endl;
+            
             lEntidades.emplace_back(l);
             colisor.push(l);
         }

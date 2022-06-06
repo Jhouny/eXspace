@@ -47,9 +47,9 @@ void Jogador::atacar() {
             proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 20, this->getPosicao().y + this->getTamanho().y/2.f - 3), VELOCIDADE_JOGADOR*3);
         else
             proj = new Projetil(Coordenada(this->getPosicao().x  - 32.5, this->getPosicao().y + this->getTamanho().y/2.f - 3), -VELOCIDADE_JOGADOR*3);
-        
+        proj->setEntOrigem(static_cast<Entidade*>(this));
         cout << "RG" << proj->getRG()<< endl;
-        pFase->incluir(static_cast<Entidade*>(proj));
+        pFase->incluir(static_cast<Entidade*>(proj)); 
         this->reiniciarClock();
         cout << "Saiu" << endl;
     }
@@ -112,6 +112,13 @@ void Jogador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
     if(outraEntidade->getID() == ID::lava) {
         Lava *tmp = dynamic_cast<Lava*>(outraEntidade);
         this->receberDano(tmp->getDano());
+    }
+    if(outraEntidade->getID()==ID::projetil){
+        Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+        Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
+        if(tmp2 == NULL){
+            this->receberDano(tmp->getDano());
+        }
     }
 
 

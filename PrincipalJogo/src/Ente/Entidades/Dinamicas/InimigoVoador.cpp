@@ -19,9 +19,13 @@ InimigoVoador::~InimigoVoador(){
 }
 
 void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao){
-    if(outraEntidade->getID() == ID::projetil){
+    
+    if(outraEntidade->getID()==ID::projetil){
         Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-        this->receberDano(tmp->getDano());
+        InimigoVoador *tmp2 = dynamic_cast<InimigoVoador*>(tmp->getOrigem()); 
+        if(tmp2 == NULL){ // se não for originario do mesmo 
+            this->receberDano(tmp->getDano());
+        }
     }
 
 }
@@ -53,7 +57,7 @@ void InimigoVoador::atacar() {
         else { //jogador esta na esquerda
             pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano);
         }
-
+        pProj->setEntOrigem(static_cast<Entidade*>(this));
         pFase->incluir(static_cast<Entidade*>(pProj));
         this->reiniciarClock();
     }

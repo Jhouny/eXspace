@@ -31,9 +31,12 @@ bool InimigoTerrestre::estaVivo() {
 }
 
 void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-    if(outraEntidade->getID() == ID::projetil) {
-            Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+    if(outraEntidade->getID()==ID::projetil){
+        Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
+        InimigoTerrestre *tmp2 = dynamic_cast<InimigoTerrestre*>(tmp->getOrigem()); 
+        if(tmp2 == NULL){ // se não for originario do mesmo 
             this->receberDano(tmp->getDano());
+        }
     }
     
     if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {

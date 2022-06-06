@@ -2,8 +2,10 @@
 
 namespace Menus{
     Mercurio::Mercurio(Jogador* jog1,Jogador* jog2 ):
-    Fase(jog1,jog2)
+        Fase(jog1,jog2)
     {
+        
+        jogador1->setFase(static_cast<Fase*>(this));
         setID(Estados::IdEstado::mercurio);
         setTexture(TEX_BACKGROUND);
     }
