@@ -6,9 +6,11 @@ namespace Menus::Fases {
     Netuno::Netuno(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         Fase(jog1,jog2)
     {
-        jogador1->setFase(static_cast<Fases::Fase*>(this));
+        jogador1->resetar();
+        jogador1->setFase(static_cast<Fase*>(this));
         if(jogador2 != NULL) 
-            jogador2->setFase(static_cast<Fases::Fase*>(this));
+            jogador2->setFase(static_cast<Fase*>(this));
+        
         setID(Estados::IdEstado::netuno);
         setTexture(TEX_FUNDO_NETUNO);
     }
@@ -87,7 +89,6 @@ namespace Menus::Fases {
 
         pLava = new Entidades::Obstaculos::Lava(Coordenada(1800, 32), Coordenada(7500, ALTURA - 100.f), false);
         incluir(static_cast<Entidades::Entidade*>(pLava)); 
-
     }
 
     void Netuno::geraInimigos(){

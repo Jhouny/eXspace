@@ -112,7 +112,7 @@ namespace Entidades::Personagens {
             Entidades::Obstaculos::Lava *tmp = dynamic_cast<Entidades::Obstaculos::Lava*>(outraEntidade);
             this->receberDano(tmp->getDano());
         }
-        if(outraEntidade->getID()==ID::projetil){
+        if(outraEntidade->getID()==ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
             Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
             if(tmp2 == NULL){
@@ -150,7 +150,7 @@ namespace Entidades::Personagens {
                 Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
                 // Reduz a vida do jogador 
                 this->receberDano(tmp->getDano());
-                //cout << "vida: " << vida << endl;
+                
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
 

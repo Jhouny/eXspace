@@ -23,6 +23,7 @@ namespace Menus::Fases {
             }
 
             jogador1->setVelocidade(Coordenada(0, 0));
+            jogador1->setFase(this);
             incluir(static_cast<Entidades::Entidade*>(jogador1));
     }
 
@@ -64,10 +65,12 @@ namespace Menus::Fases {
         colisor.resetar();
         
         jogador1->resetar();
+        jogador1->setFase(this);
         incluir(static_cast<Entidades::Entidade*>(jogador1));
 
         if(jogador2 != NULL) {
             jogador2->resetar();
+            jogador2->setFase(this);
             incluir(static_cast<Entidades::Entidade*>(jogador1));
         }
 

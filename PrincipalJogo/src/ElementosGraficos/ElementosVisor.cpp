@@ -44,7 +44,6 @@ namespace ElementosGraficos {
                     inimigosAbatidos.emplace_back(pIni);
                 }
             }
-            
             break;
         }
     }

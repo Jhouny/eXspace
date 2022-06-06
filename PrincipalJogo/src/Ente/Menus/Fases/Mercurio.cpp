@@ -4,15 +4,17 @@ namespace Menus::Fases {
     Mercurio::Mercurio(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 ):
         Fase(jog1,jog2)
     {
-        jogador1->setFase(static_cast<Fase*>(this));
+        jogador1->resetar();
+        jogador1->setFase(static_cast<Fases::Fase*>(this));
         if(jogador2 != NULL) 
-            jogador2->setFase(static_cast<Fase*>(this));
+            jogador2->setFase(static_cast<Fases::Fase*>(this));
+        
         setID(Estados::IdEstado::mercurio);
         setTexture(TEX_FUNDO_MERCURIO);
     }
 
     Mercurio::~Mercurio(){
-        //pChefe=NULL;
+        
     }
 
     void Mercurio::geraPlataformas() {
@@ -94,15 +96,11 @@ namespace Menus::Fases {
     } 
 
     void Mercurio:: geraObstaculos(){
-
         pLava = new Entidades::Obstaculos::Lava(Coordenada(2000, 32), Coordenada(400, ALTURA-100.f),true);
         incluir(static_cast<Entidades::Entidade*>(pLava)); 
 
         pLava = new Entidades::Obstaculos::Lava(Coordenada(3000,32),Coordenada(4000,ALTURA-100.f),true);
         incluir(static_cast<Entidades::Entidade*> (pLava));
-
-       
-        
     } 
 
     void Mercurio::geraInimigos() {
