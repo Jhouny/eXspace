@@ -13,6 +13,11 @@ namespace Menus::Fases {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
 
+            pBase = NULL;
+            pChegada = NULL;
+            pIniTerrestre = NULL;
+            pIniVoador = NULL;
+            pLava = NULL;
             numInimigos = 0;
 
             // Inclui os jogadores
@@ -47,6 +52,10 @@ namespace Menus::Fases {
 
     void Fase::gameOver() {
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
+    }
+
+    void Fase::proximaFase() {
+        pMaq->setEstadoAtual(Estados::IdEstado::netuno);
     }
 
     void Fase::ativarControle() {
@@ -130,6 +139,8 @@ namespace Menus::Fases {
         // Atualiza a view para a posicao do jogador
         pGrafico->atualizaView(jogador1->getPosicao());
 
+        pGrafico->atualizaMinimap(jogador1->getPosicao());
+
         // Processa o executar das entidades e remove entidades inativas
         atualizaEntidades(dt);
 
@@ -143,6 +154,10 @@ namespace Menus::Fases {
 
         if(!(jogador1->estaVivo())){
             gameOver();
+        } else if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
+            // Menu transição
+            proximaFase();
+            cout << "troca fase" << endl;
         }
     }
 }

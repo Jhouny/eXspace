@@ -110,7 +110,7 @@ namespace Entidades::Personagens {
         //colisao com a lava
         if(outraEntidade->getID() == ID::lava) {
             Entidades::Obstaculos::Lava *tmp = dynamic_cast<Entidades::Obstaculos::Lava*>(outraEntidade);
-            this->receberDano(tmp->getDano());
+            //this->receberDano(tmp->getDano());
         }
         if(outraEntidade->getID()==ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
@@ -149,7 +149,7 @@ namespace Entidades::Personagens {
             } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
                 Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
                 // Reduz a vida do jogador 
-                this->receberDano(tmp->getDano());
+                //this->receberDano(tmp->getDano());
                 
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);

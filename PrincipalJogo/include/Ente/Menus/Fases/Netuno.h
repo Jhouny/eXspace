@@ -2,9 +2,9 @@
 #define _NETUNO_H_
 
 #include "Fase.h"
-#include "../../Entidades/Dinamicas/Chefe.h" 
+#include "../../Entidades/Dinamicas/Chefe.h"
 
-#define TEX_FUNDO_NETUNO "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_3/game_background_3. 2.png" 
+#define TEX_FUNDO_NETUNO "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/fundo6.jpg" 
 
 namespace Menus::Fases {
     class Netuno: public Fase {
@@ -18,8 +18,6 @@ namespace Menus::Fases {
             void geraObstaculos(); 
             void geraInimigos();
             void executar(const float dt);
-
-
     };
 }
 

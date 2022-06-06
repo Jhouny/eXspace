@@ -37,6 +37,7 @@ namespace Menus::Fases {
 
             Entidades::Obstaculos::Lava* pLava;
             Entidades::Obstaculos::Plataforma* pBase;
+             Entidades::Obstaculos::Plataforma* pChegada;
             Entidades::Personagens::InimigoTerrestre* pIniTerrestre;
             Entidades::Personagens::InimigoVoador* pIniVoador;
 
@@ -71,6 +72,8 @@ namespace Menus::Fases {
             void atualizar(const float dt);
 
             void gameOver();
+
+            void proximaFase();
 
             void ativarControle();
 

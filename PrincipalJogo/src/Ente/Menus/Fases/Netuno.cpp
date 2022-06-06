@@ -51,16 +51,16 @@ namespace Menus::Fases {
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(32, ALTURA/2.f), Coordenada(2800, ALTURA/2.f));
-        pBase->setTexture(TEX_PAREDE);
+        pBase->setTexture(TEX_PAREDE,false);
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
         
 
         /*segunda parte*/
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(4500, ALTURA/2.f - 200.f)); //plataforma de inimigos
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(4500, ALTURA/2.f )); //plataforma de inimigos
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(6000, ALTURA/2.f - 200.f)); //plataforma de inimigos
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(6000, ALTURA/2.f )); //plataforma de inimigos
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
         //parte parkour
@@ -119,8 +119,6 @@ namespace Menus::Fases {
         pGrafico->setMinimap(Coordenada (4000,ALTURA));
         pGrafico->setMinimapViewport();
         pGrafico->atualizaMinimap(Coordenada(2000,360));
-
-        
     }
 
 }

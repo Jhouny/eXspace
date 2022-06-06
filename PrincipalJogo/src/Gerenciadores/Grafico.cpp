@@ -14,16 +14,9 @@ namespace Gerenciadores {
 
     Grafico::Grafico():
         window(new sf::RenderWindow(sf::VideoMode(COMPRIMENTO, ALTURA), "NULL")),
-        event(new sf::Event)//,
-       // cameraPrincipal(new sf::View),
-        //cameraSecundaria(new sf::View)
+        event(new sf::Event)
+       
     {
-        // Define a posição e tamanho iniciais da camera
-        /*cameraPrincipal->setCenter(sf::Vector2f(COMPRIMENTO / 2.f , ALTURA / 2.f));        
-        cameraPrincipal->setSize(sf::Vector2f(COMPRIMENTO, ALTURA));  
-        cameraSecundaria->setCenter(sf::Vector2f(COMPRIMENTO / 2.f , ALTURA / 2.f));        
-        cameraSecundaria->setSize(sf::Vector2f(COMPRIMENTO, ALTURA));        
-        window->setView(*cameraPrincipal);*/
     }
 
     Grafico::~Grafico() {
@@ -63,7 +56,7 @@ namespace Gerenciadores {
     }
 
     void Grafico::atualizaMinimap(Coordenada p){
-        minimap.setCenter(p.x,p.y);
+        minimap.setCenter(p.x,ALTURA/2.f);
     }
 
     
