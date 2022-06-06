@@ -1,8 +1,8 @@
-#include "../../../include/Ente/Menus/Fase.h"
-#include "../../../include/Estados/MaquinaEstados.h"
+#include "../../../../include/Ente/Menus/Fases/Fase.h"
+#include "../../../../include/Estados/MaquinaEstados.h"
 
-namespace Menus{
-    Fase::Fase(Jogador* jog1, Jogador* jog2):
+namespace Menus::Fases {
+    Fase::Fase(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         Menu(),
         jogador1(jog1),
         jogador2(jog2),
@@ -19,11 +19,11 @@ namespace Menus{
             if(jogador2 != NULL) {
                 jogador2->setVelocidade(Coordenada(0,0));
                 jogador2->setFase(this);
-                incluir(static_cast<Entidade*>(jogador2));
+                incluir(static_cast<Entidades::Entidade*>(jogador2));
             }
 
             jogador1->setVelocidade(Coordenada(0, 0));
-            incluir(static_cast<Entidade*>(jogador1));
+            incluir(static_cast<Entidades::Entidade*>(jogador1));
     }
 
     Fase::~Fase() {
@@ -64,11 +64,11 @@ namespace Menus{
         colisor.resetar();
         
         jogador1->resetar();
-        incluir(static_cast<Entidade*>(jogador1));
+        incluir(static_cast<Entidades::Entidade*>(jogador1));
 
         if(jogador2 != NULL) {
             jogador2->resetar();
-            incluir(static_cast<Entidade*>(jogador1));
+            incluir(static_cast<Entidades::Entidade*>(jogador1));
         }
 
         fundo.setPosition(0, 0);
@@ -77,7 +77,7 @@ namespace Menus{
         visor.resetarVisor();
     }
 
-    void Fase::incluir(Entidade* l) {
+    void Fase::incluir(Entidades::Entidade* l) {
         lEntidades.emplace_back(l);
         colisor.push(l);
         if(l->getID() == ID::inimigoTerrestre || l->getID() == ID::inimigoVoador || 
@@ -88,7 +88,7 @@ namespace Menus{
     }
 
     void Fase::atualizaEntidades(const float dt){
-        Entidade* ent;
+        Entidades::Entidade* ent;
         for(it = lEntidades.begin(); it != lEntidades.end();) {
             ent = *it;
             ent->executar(dt);
@@ -110,7 +110,7 @@ namespace Menus{
     void Fase::renderizar() {
         pGrafico->draw(&fundo, false);
 
-        Entidade *ent;
+        Entidades::Entidade *ent;
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());

@@ -13,8 +13,8 @@ namespace ElementosGraficos {
         private:
             Gerenciadores::Grafico* pGrafico;
 
-            Jogador* pJog1;
-            Jogador* pJog2;
+            Entidades::Personagens::Jogador* pJog1;
+            Entidades::Personagens::Jogador* pJog2;
 
             Coracao* pCor;
             InimigoAbatido* pIni;
@@ -24,7 +24,7 @@ namespace ElementosGraficos {
             std::vector<InimigoAbatido*> inimigosAbatidos;
             
         public:
-            ElementosVisor(Jogador* jog1, Jogador* jog2 = NULL);
+            ElementosVisor(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 = NULL);
             
             ~ElementosVisor();
 

@@ -9,38 +9,40 @@
 #define TEX_INIMIGO_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Inimigos/InimigoVoador/Still.png"
 #define TAM_PROJETIL_INI_VOADOR Coordenada(12,12)
 
-namespace Menus{
+namespace Menus::Fases{
     class Fase;
 }
 
-class InimigoVoador:public Inimigo{
-    private:
-        Projetil* pProj;
-        Menus::Fase* pFase;
+namespace Entidades::Personagens {
+    class InimigoVoador:public Inimigo{
+        private:
+            Projetil* pProj;
+            Menus::Fases::Fase* pFase;
 
-    public:
-        InimigoVoador();
-        ~InimigoVoador();
+        public:
+            InimigoVoador();
+            ~InimigoVoador();
 
-        float getSegundos() {
-            return clock.getElapsedTime().asSeconds();
-        }
+            float getSegundos() {
+                return clock.getElapsedTime().asSeconds();
+            }
 
-        void reiniciarClock() {
-            clock.restart();
-        }
+            void reiniciarClock() {
+                clock.restart();
+            }
 
-        void setFase(Menus::Fase* pF) { pFase = pF; }
+            void setFase(Menus::Fases::Fase* pF) { pFase = pF; }
 
-        void colisao(Entidade* outraEntidade, Coordenada intersecao);
+            void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        void atacar();
+            void atacar();
 
-        void atualiza(const float dt);
+            void atualiza(const float dt);
 
-        void movimentar(const float dt);
+            void movimentar(const float dt);
 
-        void executar(const float dt);
-};
+            void executar(const float dt);
+    };
+}
 
 #endif

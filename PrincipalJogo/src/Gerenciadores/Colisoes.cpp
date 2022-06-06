@@ -9,7 +9,7 @@ namespace Gerenciadores {
         
     }
 
-    void Colisor::push(Entidade* ente){
+    void Colisor::push(Entidades::Entidade* ente){
         if(ente->getEstatico()){
             enteEstaticas.push_back(ente);
         }
@@ -35,7 +35,7 @@ namespace Gerenciadores {
     }
 
     void Colisor::ChecarColisoes() {
-        Entidade *ent1, *ent2;
+        Entidades::Entidade *ent1, *ent2;
         Coordenada centroEnt1, centroEnt2, intersecao;
 
         // Colisões de elementos Dinamicos com Estáticos

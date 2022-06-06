@@ -6,7 +6,7 @@
 
 class ListaEntidades{
     public:
-        Lista<Entidade> le;
+        Lista<Entidades::Entidade> le;
 
         ListaEntidades(){}
         ~ListaEntidades(){}
@@ -15,7 +15,7 @@ class ListaEntidades{
         const int getTamanho() { return le.getTamanho(); }
 
         // Adiciona um elemento
-        void push(Entidade* ent) {
+        void push(Entidades::Entidade* ent) {
             if(ent) {
                 le.push(ent);
             }
@@ -37,7 +37,7 @@ class ListaEntidades{
             }
         }
 
-        Entidade* operator[](int ind) {
+        Entidades::Entidade* operator[](int ind) {
             return le[ind];
         }
 

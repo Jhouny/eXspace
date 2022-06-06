@@ -1,7 +1,7 @@
 #include "../../include/ElementosGraficos/ElementosVisor.h"
 
 namespace ElementosGraficos {
-    ElementosVisor::ElementosVisor(Jogador* jog1, Jogador* jog2):
+    ElementosVisor::ElementosVisor(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         pGrafico(Gerenciadores::Grafico::getInstancia()),
         pJog1(jog1),
         pJog2(jog2)

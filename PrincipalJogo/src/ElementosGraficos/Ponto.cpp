@@ -1,7 +1,7 @@
 #include "../../include/ElementosGraficos/Ponto.h"
 
 namespace ElementosGraficos {
-    Ponto::Ponto(Coordenada tam, Coordenada pos, Jogador* jog):
+    Ponto::Ponto(Coordenada tam, Coordenada pos, Entidades::Personagens::Jogador* jog):
         tamanho(tam),
         posicao(pos),
         pGrafico(Gerenciadores::Grafico::getInstancia()),

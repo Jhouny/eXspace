@@ -2,20 +2,21 @@
 #define _CONTROLE_JOGADOR_H_
 
 #include "Observador.h"
-
-class Jogador;
+namespace Entidades::Personagens {
+    class Jogador;
+}
 
 namespace Controle {
     class ControleJogador: public Observador  {
         private:
-            Jogador* pJogador;
+            Entidades::Personagens::Jogador* pJogador;
             std::map<std::string, bool> teclasPressionadas;
             std::string pular;
             std::string esquerda;
             std::string direita;
             std::string atacar;
         public:
-            ControleJogador(Jogador* pJog);
+            ControleJogador(Entidades::Personagens::Jogador* pJog);
 
             ~ControleJogador();
 
@@ -23,7 +24,7 @@ namespace Controle {
 
             void compartilharTeclaLiberada(std::string tecla);
 
-            void setJogador(Jogador* pJog) { pJogador = pJog; }
+            void setJogador(Entidades::Personagens::Jogador* pJog) { pJogador = pJog; }
 
             void setTeclas(std::string pu, std::string esq, std::string dir, std::string ata) {
                 pular = pu;

@@ -6,33 +6,34 @@
 
 #define TEX_PROJETIL "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png"
 
-class Projetil: public Entidade {
-    private:
-        Coordenada velocidade;  
-        int dano;
-        Entidade* entOrigem; //para sebaer da onde foi originado o projetil!!
-        std::string textura;
+namespace Entidades {
+    class Projetil: public Entidade {
+        private:
+            Coordenada velocidade;  
+            int dano;
+            Entidade* entOrigem; //para sebaer da onde foi originado o projetil!!
+            std::string textura;
 
-    public:
-        Projetil(Coordenada pos, Coordenada tam, float vx = 30, float vy = 0, int d = 10, const char* path = TEX_PROJETIL, ID id = projetil);
-        ~Projetil();
+        public:
+            Projetil(Coordenada pos, Coordenada tam, float vx = 30, float vy = 0, int d = 10, const char* path = TEX_PROJETIL, ID id = projetil);
+            ~Projetil();
 
-        void setVelocidade(float vx, float vy);
-        const Coordenada getVelocidade() const { return velocidade; } 
-        void setDirecao(){ velocidade.x *= -1;}
-        void setEntOrigem(Entidade* ent){ if(ent) entOrigem=ent; }
-        Entidade* getOrigem(){ return entOrigem; }
+            void setVelocidade(float vx, float vy);
+            const Coordenada getVelocidade() const { return velocidade; } 
+            void setDirecao(){ velocidade.x *= -1;}
+            void setEntOrigem(Entidade* ent){ if(ent) entOrigem=ent; }
+            Entidade* getOrigem(){ return entOrigem; }
 
-        void setDano(int d);
-        const int getDano() const { return dano; }
+            void setDano(int d);
+            const int getDano() const { return dano; }
 
-        void colisao(Entidade* outraEntidade, Coordenada intersecao);
+            void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
-        void estaAtivo();
+            void estaAtivo();
 
-        void movimentar(const float dt);
+            void movimentar(const float dt);
 
-        void executar(const float dt);
-};
-
+            void executar(const float dt);
+    };
+}
 #endif

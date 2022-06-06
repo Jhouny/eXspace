@@ -5,7 +5,7 @@ Jogo::Jogo():
     MaquinaEstados(),
     pEventos(Gerenciadores::Eventos::getInstancia()),
     pGrafico(Gerenciadores::Grafico::getInstancia()),
-    jogador1(new Jogador())
+    jogador1(new Entidades::Personagens::Jogador())
 {
     temporizador.restart();
     dt = 0;
@@ -32,13 +32,13 @@ Jogo::Jogo():
     inserirEstado(pTemp);
 
     // Fase mercúrio
-    pTemp = static_cast<Estados::Estado*>(new Menus::Mercurio(jogador1));
+    pTemp = static_cast<Estados::Estado*>(new Menus::Fases::Mercurio(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
     // Fase Netuno
-    pTemp = static_cast<Estados::Estado*>(new Menus::Netuno(jogador1));
+    pTemp = static_cast<Estados::Estado*>(new Menus::Fases::Netuno(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);

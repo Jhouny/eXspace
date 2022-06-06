@@ -6,19 +6,18 @@
 #define TEX_LAVA "PrincipalJogo/assets/Texturas/Lava/Lava.png"
 #define TEX_LAVA_GELADA "PrincipalJogo/assets/Texturas/Lava/lava de gelo.png"
 
+namespace Entidades::Obstaculos{
+    class Lava: public Obstaculo {
+        private:
+            float dano;
+            bool lavaNormal;
+        public:
+            Lava(Coordenada tam, Coordenada pos, bool lNormal);
+            ~Lava();
 
-class Lava: public Obstaculo {
-    private:
-        float dano;
-        bool lavaNormal;
-    public:
-        Lava(Coordenada tam, Coordenada pos, bool lNormal);
-        ~Lava();
+            float getDano(){ return dano; }
 
-        float getDano(){ return dano; }
-
-        void executar();
-};
-
-
+            void executar();
+    };
+}
 #endif

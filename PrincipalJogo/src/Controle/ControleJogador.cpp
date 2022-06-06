@@ -2,7 +2,7 @@
 #include "../../include/Ente/Entidades/Dinamicas/Jogador.h"
 
 namespace Controle {
-    ControleJogador::ControleJogador(Jogador* pJog):
+    ControleJogador::ControleJogador(Entidades::Personagens::Jogador* pJog):
         Observador(),
         pJogador(pJog),
         teclasPressionadas(),

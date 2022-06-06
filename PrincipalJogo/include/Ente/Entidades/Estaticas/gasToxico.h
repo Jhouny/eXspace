@@ -2,20 +2,20 @@
 #define _GAS_TOXICO_H_
 #include "Obstaculo.h"
 #define TEX_GAS ""
+namespace Entidades::Obstaculos{
+    class GasToxico: public Obstaculo{
+        private:
+            float dano;
+        public:
+            GasToxico(Coordenada tam, Coordenada pos);
+            ~GasToxico();
 
-class GasToxico: public Obstaculo{
-    private:
-        float dano;
-    public:
-        GasToxico(Coordenada tam, Coordenada pos);
-        ~GasToxico();
+            float getDano(){ return dano; }
 
-        float getDano(){ return dano; }
+            void executar();
 
-        void executar();
-
-};
-
+    };
+}
 
 
 #endif

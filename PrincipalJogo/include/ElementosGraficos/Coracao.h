@@ -12,7 +12,7 @@ namespace ElementosGraficos {
     class Coracao: public Ponto {
         private:
         public:
-            Coracao(Coordenada pos, Jogador* jog);
+            Coracao(Coordenada pos, Entidades::Personagens::Jogador* jog);
 
             ~Coracao();
 

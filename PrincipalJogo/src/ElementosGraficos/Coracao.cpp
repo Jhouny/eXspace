@@ -1,7 +1,7 @@
 #include "../../include/ElementosGraficos/Coracao.h"
 
 namespace ElementosGraficos {
-    Coracao::Coracao(Coordenada pos, Jogador* jog):
+    Coracao::Coracao(Coordenada pos, Entidades::Personagens::Jogador* jog):
         Ponto(TAMANHO_PADRAO_CORACAO, pos, jog)
     {   
         preencher();  // Coração começa preenchido 

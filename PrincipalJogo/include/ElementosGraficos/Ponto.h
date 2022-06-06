@@ -18,7 +18,7 @@ namespace ElementosGraficos {
             Coordenada tamanho;
             Coordenada posicao;
             Coordenada posicaoRelativa;
-            Jogador* ref;  // A qual jogador se posicionar
+            Entidades::Personagens::Jogador* ref;  // A qual jogador se posicionar
 
             sf::Sprite sprite;
 
@@ -27,7 +27,7 @@ namespace ElementosGraficos {
             bool preenchido;
             PontoID pId;
         public:
-            Ponto(Coordenada tam, Coordenada pos, Jogador* jog);
+            Ponto(Coordenada tam, Coordenada pos, Entidades::Personagens::Jogador* jog);
 
             ~Ponto();
 

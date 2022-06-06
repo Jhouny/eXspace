@@ -2,7 +2,8 @@
 #define _BOTAO_SALVAR_H_
 #include "Botao.h"
 
-#include"../Ente/Menus/Fase.h"
+#include"../Ente/Menus/Fases/Fase.h"
+
 #define PONTUACAO_PATH ""
 namespace Menus{
     class MenuGameOver;
@@ -11,7 +12,7 @@ namespace Menus{
 namespace ElementosGraficos{
     class BotaoSalvar:public Botao{
         private:
-            Menus::Fase* pFase;
+            Menus::Fases::Fase* pFase;
             Menus::MenuGameOver* pMenuGameOver;
         public:
             BotaoSalvar(Coordenada tam, Coordenada pos);

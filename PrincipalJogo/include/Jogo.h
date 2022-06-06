@@ -15,8 +15,8 @@
 
 class Jogo: public Estados::MaquinaEstados {
     private:
-        Jogador* jogador1;
-        Jogador* jogador2;
+        Entidades::Personagens::Jogador* jogador1;
+        Entidades::Personagens::Jogador* jogador2;
         
         Gerenciadores::Grafico* pGrafico;
         Gerenciadores::Eventos* pEventos;

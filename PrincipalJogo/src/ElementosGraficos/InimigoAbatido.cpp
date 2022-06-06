@@ -1,7 +1,7 @@
 #include "../../include/ElementosGraficos/InimigoAbatido.h"
 
 namespace ElementosGraficos {
-    InimigoAbatido::InimigoAbatido(Coordenada pos, Jogador* jog):
+    InimigoAbatido::InimigoAbatido(Coordenada pos, Entidades::Personagens::Jogador* jog):
         Ponto(TAMANHO_PADRAO_INIMIGO_ABATIDO, pos, jog)
     {
         pId = PontoID::inimigoAbatido;
