@@ -21,19 +21,24 @@ namespace Menus{
         botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::mercurio , "NOVO JOGO");
         pBotao->ativar();
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        pBotaoJogar = pBotao;
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450), Estados::IdEstado::indefinido, "FASE UM");
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
-        
-        ElementosGraficos::BotaoAlternador* pBA = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550));
-        pBA->inserirEscolha("UM JOGADOR");
-        pBA->inserirEscolha("DOIS JOGADORES");
+        ElementosGraficos::BotaoAlternador* pBA = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450));
+        pBA->inserirEscolha("FASE UM", static_cast<int>(Estados::IdEstado::mercurio));
+        pBA->inserirEscolha("FASE DOIS", static_cast<int>(Estados::IdEstado::netuno));
+        pBA->setAlvo(pBotaoJogar);
         pBA->setAtivo(0);
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));        
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));  
+        
+        pBA = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550));
+        pBA->inserirEscolha("UM JOGADOR", 1);
+        pBA->inserirEscolha("DOIS JOGADORES", 2);
+        pBA->setAtivo(0);
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));        
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::indefinido, "CARREGAR JOGO");
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuJogar::ativarControle() {

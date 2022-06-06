@@ -19,14 +19,14 @@ namespace Menus {
     void MenuAbertura::criaBotoes() {
         botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), Estados::IdEstado::menuGameOver, "CONFIGURAÇÕES");
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
        
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::menuJogar, "JOGAR");
         pBotao->ativar();
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
         
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 475), Estados::IdEstado::pontuacao, "PONTUAÇÃO");
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuAbertura::executar(const float dt) {

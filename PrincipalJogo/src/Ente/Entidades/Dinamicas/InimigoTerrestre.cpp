@@ -95,13 +95,17 @@ void InimigoTerrestre::movimentar(const float dt) {
     
     // Se jogador estiver proximo, siga-o
     if(jogTaPerto) {
-
-        if(coordIni.x < coordJog.x){
+        setTexture(TEX_INIMIGO_TERRESTRE_ALARMADO);
+        if(coordIni.x < coordJog.x)
             v.x = VELOCIDADE * 2;
-        }
-        else{
+        else
             v.x = VELOCIDADE * (-2);
-        }
+    } else {
+        setTexture(TEX_INIMIGO_TERRESTRE);
+        if(v.x > 0)
+            v.x = VELOCIDADE;
+        else
+            v.x = -1 * VELOCIDADE;
     }
 
     this->setPosicao(coordIni);
@@ -109,10 +113,10 @@ void InimigoTerrestre::movimentar(const float dt) {
 }
 
 void InimigoTerrestre::executar(const float dt) {
-    atualizaTexture();
     alarmado(300);
     movimentar(dt);
     estaVivo();
+    atualizaTexture();  // Deve estar abaixo do movimentar(dt)
     
     if(!vivo) {
         this->setAtivo(false);

@@ -23,6 +23,7 @@ namespace ElementosGraficos {
             ~Botao();
             
             Estados::IdEstado getFuncao() const { return funcao; }
+            void setFuncao(const Estados::IdEstado func) { funcao = func;}
 
             void ativar();
 

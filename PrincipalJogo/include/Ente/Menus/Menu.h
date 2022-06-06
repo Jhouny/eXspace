@@ -26,8 +26,11 @@ namespace ElementosGraficos {
 namespace Menus{
     class Menu: public Ente, public Estados::Estado {
         protected:
-            std::map<ElementosGraficos::Botao*, bool> botoesAtivos;
-            std::map<ElementosGraficos::Botao*, bool>::iterator it;
+            //std::map<ElementosGraficos::Botao*, bool> botoesAtivos;
+            //std::map<ElementosGraficos::Botao*, bool>::iterator it;
+            std::vector<std::pair<ElementosGraficos::Botao*, bool>> botoesAtivos;
+            std::vector<std::pair<ElementosGraficos::Botao*, bool>>::iterator it;
+
             ElementosGraficos::Texto titulo;
 
             Estados::IdEstado idEst;

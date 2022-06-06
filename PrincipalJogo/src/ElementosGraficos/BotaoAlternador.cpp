@@ -14,27 +14,37 @@ namespace ElementosGraficos {
     }
 
     void BotaoAlternador::setAtivo(int ind) {
-        texto = escolha[ind];
+        texto = escolha[ind].first;
         indice = ind;
     }
 
-    void BotaoAlternador::inserirEscolha(std::string conteudo) {
+    void BotaoAlternador::inserirEscolha(std::string conteudo, int num) {
         Texto* temp = new Texto(getTamanho(), Coordenada(getPosicao().x + getTamanho().x/2.f, getPosicao().y + getTamanho().y/2.f), conteudo);
-        escolha.emplace_back(temp);
+        escolha.emplace_back(std::pair<Texto*, int>(temp, num));
     }
 
     void BotaoAlternador::proximo() {
         indice++;
         if(indice >= escolha.size())
             indice = 0;
-        texto = escolha[indice];
+        texto = escolha[indice].first;
+
+        if(alvo != NULL) {
+            Estados::IdEstado n = static_cast<Estados::IdEstado>(escolha[indice].second);
+            alvo->setFuncao(n);
+        }
     }
 
     void BotaoAlternador::anterior() {
         indice--;
         if(indice < 0)
             indice = escolha.size();
-        texto = escolha[indice];
+        texto = escolha[indice].first;
+
+        if(alvo != NULL) {
+            Estados::IdEstado n = static_cast<Estados::IdEstado>(escolha[indice].second);
+            alvo->setFuncao(n);
+        }
     }
 
     void BotaoAlternador::atualizarTextura() {

@@ -27,11 +27,11 @@ namespace Menus{
     void MenuGameOver::criaBotoes(){
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::menuAbertura, "SALVAR");
         pBotao->ativar();
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuAbertura, "VOLTAR");
         
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuGameOver::criaTextos(){

@@ -10,6 +10,7 @@ namespace Menus{
     class MenuJogar:public Menu{
         private:
             Controle::ControleMenu pControleMenu;
+            ElementosGraficos::Botao* pBotaoJogar;
         public:
             MenuJogar();
 

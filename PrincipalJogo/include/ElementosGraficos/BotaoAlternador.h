@@ -10,15 +10,18 @@ namespace ElementosGraficos {
     class BotaoAlternador: public Botao {
         private:
             int indice;
-            std::vector<Texto*> escolha;
+            std::vector<std::pair<Texto*, int>> escolha;
+            Botao* alvo;
         public:
             BotaoAlternador(Coordenada tam, Coordenada pos);
 
             ~BotaoAlternador();
 
+            void setAlvo(Botao* pb) { alvo = pb;}
+
             void setAtivo(int ind);
 
-            void inserirEscolha(std::string conteudo);
+            void inserirEscolha(std::string conteudo, int num);
 
             void proximo();
 

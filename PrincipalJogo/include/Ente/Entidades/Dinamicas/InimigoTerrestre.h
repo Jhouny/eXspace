@@ -3,6 +3,8 @@
 #include "../Inimigo.h"
 
 #define TEX_INIMIGO_TERRESTRE "PrincipalJogo/assets/Texturas/Entidades/Inimigos/InimigoTerrestre/Still.png"
+#define TEX_INIMIGO_TERRESTRE_ALARMADO "PrincipalJogo/assets/Texturas/Entidades/Inimigos/InimigoTerrestre/Alarmado.png"
+
 
 class InimigoTerrestre: public Inimigo {
     private:

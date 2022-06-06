@@ -6,6 +6,9 @@ namespace Menus{
     Netuno::Netuno(Jogador* jog1, Jogador* jog2):
         Fase(jog1,jog2)
     {
+        jogador1->setFase(static_cast<Fase*>(this));
+        if(jogador2 != NULL) 
+            jogador2->setFase(static_cast<Fase*>(this));
         setID(Estados::IdEstado::netuno);
         setTexture(TEX_FUNDO_NETUNO);
     }

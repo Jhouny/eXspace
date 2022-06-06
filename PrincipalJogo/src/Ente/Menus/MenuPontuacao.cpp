@@ -21,7 +21,7 @@ namespace Menus{
         botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(1100.f, 650.f),Estados::IdEstado::menuAbertura,"VOLTAR"); //VOLTA PARA O MENU
         pBotao->ativar();
-        botoesAtivos.insert(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));        
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));        
     }
 
     void MenuPontuacao::incluir(ElementosGraficos::Texto *texto){
