@@ -32,10 +32,19 @@ namespace ElementosGraficos {
             break;
         
         case PontoID::inimigoAbatido:
-            for(i = 0; i < n; i++) {
-                pIni = new InimigoAbatido(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_INIMIGO_ABATIDO.x + ESPACAMENTO_PONTOS), 80), pJog1);
-                inimigosAbatidos.emplace_back(pIni);
+            if(inimigosAbatidos.size() == 0) {
+                for(i = 0; i < n; i++) {
+                    pIni = new InimigoAbatido(Coordenada(PADDING_BORDA + i*(TAMANHO_PADRAO_INIMIGO_ABATIDO.x + ESPACAMENTO_PONTOS), 80), pJog1);
+                    inimigosAbatidos.emplace_back(pIni);
+                }
+            } else {
+                Coordenada ult = (*inimigosAbatidos.rbegin())->getPosicao();
+                for(i = 1; i <= n; i++) {
+                    pIni = new InimigoAbatido(Coordenada(ult.x + i*(TAMANHO_PADRAO_INIMIGO_ABATIDO.x + ESPACAMENTO_PONTOS), 80), pJog1);
+                    inimigosAbatidos.emplace_back(pIni);
+                }
             }
+            
             break;
         }
     }
@@ -55,7 +64,7 @@ namespace ElementosGraficos {
         }
     }
 
-    void ElementosVisor::atualizaPontuacao() {
+    void ElementosVisor::atualizaPontuacao(int numIni) {
         std::vector<Coracao*>::iterator it;
         for(it = vidaJog1.begin(); it != vidaJog1.end(); it++) {
             (*it)->executar(pJog1->getPosicao());
@@ -68,13 +77,16 @@ namespace ElementosGraficos {
             if(v < 100*i/(float)tam)
                 vidaJog1[i]->limpar();
         }
-
+        
         if(pJog2 != NULL) {
             for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
                 (*it)->executar(pJog2->getPosicao());
             }
         }
 
+        for(int i = numIni; i < inimigosAbatidos.size(); i++) {
+            inimigosAbatidos[inimigosAbatidos.size() - i - 1]->preencher();
+        }
         std::vector<InimigoAbatido*>::iterator it2;
         for(it2 = inimigosAbatidos.begin(); it2 != inimigosAbatidos.end(); it2++) {
             (*it2)->executar(pJog1->getPosicao());
@@ -92,7 +104,7 @@ namespace ElementosGraficos {
     void ElementosVisor::executar() {
         criaPontosEspacados(10, PontoID::coracao);
 
-        criaPontosEspacados(6, PontoID::inimigoAbatido);
+        //criaPontosEspacados(6, PontoID::inimigoAbatido);
     }
 } // namespace ElementosGraficos 
 

@@ -33,6 +33,8 @@ namespace ElementosGraficos {
 
             PontoID getPontoID() const { return pId; }
 
+            Coordenada getPosicao() const { return posicao; }
+
             void preencher();
 
             void limpar();
