@@ -12,7 +12,8 @@ namespace Menus{
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
-            //Define o ID do Menu fase:
+
+            numInimigos = 0;
 
             // Inclui os jogadores
             if(jogador2 != NULL) {
@@ -77,10 +78,12 @@ namespace Menus{
     }
 
     void Fase::incluir(Entidade* l) {
-        if(l){
-            
-            lEntidades.emplace_back(l);
-            colisor.push(l);
+        lEntidades.emplace_back(l);
+        colisor.push(l);
+        if(l->getID() == ID::inimigoTerrestre || l->getID() == ID::inimigoVoador || 
+            l->getID() == ID::chefe) {
+            visor.criaPontosEspacados(1, ElementosGraficos::PontoID::inimigoAbatido);
+            numInimigos++;
         }
     }
 
@@ -90,13 +93,18 @@ namespace Menus{
             ent = *it;
             ent->executar(dt);
 
-            if(!ent->getAtivo())
+            if(!ent->getAtivo()) {
                 it = lEntidades.erase(it);
-            else
+                if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
+                    ent->getID() == ID::chefe) {
+                    numInimigos--;
+                }
+            } else {
                 it++;
+            }
         }
 
-        visor.atualizaPontuacao();
+        visor.atualizaPontuacao(numInimigos);
     }
 
     void Fase::renderizar() {

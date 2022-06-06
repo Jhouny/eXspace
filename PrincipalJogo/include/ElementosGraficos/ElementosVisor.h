@@ -30,7 +30,7 @@ namespace ElementosGraficos {
 
             void criaPontosEspacados(int n, PontoID pID); // Cria n pontos de um tipo
 
-            void atualizaPontuacao();
+            void atualizaPontuacao(int numIni);
 
             void resetarVisor();
 

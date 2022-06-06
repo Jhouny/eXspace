@@ -53,10 +53,10 @@ void InimigoVoador::atacar() {
         veloc.y = VELOCIDADE_PROJETIL * direcao.y/hip;
 
         if(direcao.x > 0) { //jogador esta na direita
-            pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+            pProj = new Projetil(Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), TAM_PROJETIL_INI_VOADOR, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
         }      
         else { //jogador esta na esquerda
-            pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+            pProj = new Projetil(Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), TAM_PROJETIL_INI_VOADOR, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
         }
         pProj->setEntOrigem(static_cast<Entidade*>(this));
         pFase->incluir(static_cast<Entidade*>(pProj));

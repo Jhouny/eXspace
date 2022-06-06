@@ -27,14 +27,15 @@ namespace Menus{
             ElementosGraficos::ElementosVisor visor;
 
             int pontuacao;
+            int numInimigos;
 
             Gerenciadores::Colisor colisor;
 
-            Lava* pLava;
 
             Jogador *jogador1;
             Jogador *jogador2;
 
+            Lava* pLava;
             Plataforma* pBase;
             InimigoTerrestre* pIniTerrestre;
             InimigoVoador* pIniVoador;

@@ -1,10 +1,9 @@
 #include "../../../../include/Ente/Menus/Fases/Mercurio.h"
 
 namespace Menus{
-    Mercurio::Mercurio(Jogador* jog1,Jogador* jog2 ):
+    Mercurio::Mercurio(Jogador* jog1, Jogador* jog2 ):
         Fase(jog1,jog2)
     {
-        
         jogador1->setFase(static_cast<Fase*>(this));
         setID(Estados::IdEstado::mercurio);
         setTexture(TEX_FUNDO_MERCURIO);

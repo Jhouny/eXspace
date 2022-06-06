@@ -7,6 +7,7 @@
 #define VELOCIDADE_PROJETIL 76800 * TICK_RATE * 2
 #define DISTANCIA_ALARME 500
 #define TEX_INIMIGO_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Inimigos/InimigoVoador/Still.png"
+#define TAM_PROJETIL_INI_VOADOR Coordenada(12,12)
 
 namespace Menus{
     class Fase;

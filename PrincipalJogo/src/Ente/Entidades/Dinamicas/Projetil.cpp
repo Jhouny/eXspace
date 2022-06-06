@@ -1,13 +1,13 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
-Projetil::Projetil(Coordenada pos, float vx, float vy, int d,  const char* path, ID id):
-    Entidade(id,Coordenada(12,4),pos,false)
+Projetil::Projetil(Coordenada pos, Coordenada tam, float vx, float vy, int d,  const char* path, ID id):
+    Entidade(id,tam,pos,false)
 {
         velocidade.x = vx;
         velocidade.y= vy;
         dano = d;
-        strcpy(textura, path);
-        setTexture(textura);
+        textura = path;
+        setTexture(textura.c_str());
 }
 
 Projetil::~Projetil() {

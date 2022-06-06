@@ -30,19 +30,19 @@ Jogo::Jogo():
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
-
+    cout << "1" << endl;
     // Fase mercúrio
     pTemp = static_cast<Estados::Estado*>(new Menus::Mercurio(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
-    
+    cout << "1" << endl;
     // Fase Netuno
     pTemp = static_cast<Estados::Estado*>(new Menus::Netuno(jogador1));
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
-
+    cout << "1" << endl;
     // Menu fim de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
     pTemp->setMaquina(this);
@@ -64,6 +64,7 @@ Jogo::~Jogo() {
 
 
 void Jogo::executar() {
+    cout << "2" << endl;
     while(pGrafico->isOpened()) {
         pEventos->checarEventos();
         pGrafico->clear();
