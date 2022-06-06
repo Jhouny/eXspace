@@ -8,7 +8,7 @@ class Jogador;
 
 class Inimigo: public Personagem {
     protected:
-        Jogador* pJogador;// vetor de duas posicoes 
+        Jogador* pJogador; 
         // contador static int para vetor
         bool jogTaPerto;
     public:

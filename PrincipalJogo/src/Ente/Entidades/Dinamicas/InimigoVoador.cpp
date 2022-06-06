@@ -4,6 +4,7 @@
 
 #define DISTANCIA_ALARME 500
 
+#define TEX_PROJETIL_INI_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil_2.png"
 
 InimigoVoador::InimigoVoador():
     Inimigo(Coordenada(50,50),Coordenada(0,0),ID::inimigoVoador,false,150,15)
@@ -30,7 +31,7 @@ void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao){
 
 }
 void InimigoVoador::atacar() {
-    if(getSegundos() > 0.3 && jogTaPerto) {
+    if(getSegundos() > 1 && jogTaPerto) {
         Coordenada direcao;
         Coordenada veloc;
         Coordenada centroJog;
@@ -52,10 +53,10 @@ void InimigoVoador::atacar() {
         veloc.y = VELOCIDADE_PROJETIL * direcao.y/hip;
 
         if(direcao.x > 0) { //jogador esta na direita
-            pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano);
+            pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
         }      
         else { //jogador esta na esquerda
-            pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano);
+            pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
         }
         pProj->setEntOrigem(static_cast<Entidade*>(this));
         pFase->incluir(static_cast<Entidade*>(pProj));

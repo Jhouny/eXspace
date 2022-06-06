@@ -3,6 +3,7 @@
 
 #include "../Fase.h"
 
+#define TEX_FUNDO_MERCURIO "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_4/game_background_4_fx.png" 
 
 namespace Menus{
     class Mercurio: public Fase {

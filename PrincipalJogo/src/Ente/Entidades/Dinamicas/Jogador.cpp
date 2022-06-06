@@ -43,15 +43,15 @@ bool Jogador::estaVivo() {
 
 void Jogador::atacar() {
     if(this->getSegundos() > 0.15) {
+        cout << "A" << endl;
         if(viradoFrente)
-            proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 20, this->getPosicao().y + this->getTamanho().y/2.f - 3), VELOCIDADE_JOGADOR*3);
+            proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 3), VELOCIDADE_JOGADOR*3);
         else
-            proj = new Projetil(Coordenada(this->getPosicao().x  - 32.5, this->getPosicao().y + this->getTamanho().y/2.f - 3), -VELOCIDADE_JOGADOR*3);
+            proj = new Projetil(Coordenada(this->getPosicao().x  - 12.5, this->getPosicao().y + this->getTamanho().y/2.f - 3), -VELOCIDADE_JOGADOR*3);
+        cout << "B" << endl;
         proj->setEntOrigem(static_cast<Entidade*>(this));
-        cout << "RG" << proj->getRG()<< endl;
         pFase->incluir(static_cast<Entidade*>(proj)); 
         this->reiniciarClock();
-        cout << "Saiu" << endl;
     }
 }
 

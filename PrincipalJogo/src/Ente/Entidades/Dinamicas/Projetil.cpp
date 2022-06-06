@@ -1,12 +1,13 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Projetil.h"
 
-Projetil::Projetil(Coordenada pos, float vx, float vy, int d, ID id):
+Projetil::Projetil(Coordenada pos, float vx, float vy, int d,  const char* path, ID id):
     Entidade(id,Coordenada(12,4),pos,false)
 {
         velocidade.x = vx;
         velocidade.y= vy;
         dano = d;
-        setTexture(TEX_PROJETIL);
+        strcpy(textura, path);
+        setTexture(textura);
 }
 
 Projetil::~Projetil() {
@@ -23,7 +24,7 @@ void Projetil::setDano(int d) {
 }
 
 void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
-    //this->setAtivo(false);
+    this->setAtivo(false);
 }
 
 // Muda a posição da ENTIDADE
@@ -45,7 +46,7 @@ void Projetil::estaAtivo() {
 void Projetil::executar(const float dt) {
     movimentar(dt);
 
-    //estaAtivo();
+    estaAtivo();
 
     atualizaTexture();
 }

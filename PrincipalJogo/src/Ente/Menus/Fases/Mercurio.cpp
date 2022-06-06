@@ -7,7 +7,7 @@ namespace Menus{
         
         jogador1->setFase(static_cast<Fase*>(this));
         setID(Estados::IdEstado::mercurio);
-        setTexture(TEX_BACKGROUND);
+        setTexture(TEX_FUNDO_MERCURIO);
     }
 
     Mercurio::~Mercurio(){

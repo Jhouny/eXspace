@@ -4,6 +4,8 @@
 #include "../Fase.h"
 #include "../../Entidades/Dinamicas/Chefe.h" 
 
+#define TEX_FUNDO_NETUNO "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_3/game_background_3. 2.png" 
+
 namespace Menus{
     class Netuno: public Fase {
         private:

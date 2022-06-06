@@ -7,7 +7,7 @@ namespace Menus{
         Fase(jog1,jog2)
     {
         setID(Estados::IdEstado::netuno);
-
+        setTexture(TEX_FUNDO_NETUNO);
     }
 
     Netuno::~Netuno(){

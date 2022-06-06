@@ -106,7 +106,7 @@ namespace Menus{
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());
-            pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+            //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
         }
 
         visor.renderizar();
