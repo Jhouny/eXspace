@@ -5,7 +5,7 @@
 namespace Menus::Fases {
     Netuno::Netuno(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         Fase(jog1,jog2)
-    {
+    {  
         jogador1->resetar();
         jogador1->setFase(static_cast<Fase*>(this));
         if(jogador2 != NULL) 
