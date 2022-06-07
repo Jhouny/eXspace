@@ -5,7 +5,7 @@ namespace Menus{
         Menu(),
         pControleMenu(this)
     {
-        setID( Estados::IdEstado::menuJogar);
+        setID(Estados::IdEstado::menuJogar);
         setTitulo("JOGAR");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
         getTitulo()->setCor(sf::Color(0,0,0,230));

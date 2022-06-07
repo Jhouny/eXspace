@@ -43,6 +43,11 @@ Jogo::Jogo():
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    // Menu de transição entre fases terminadas com êxito
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuTransicao());
+    pTemp->setMaquina(this);
+    inserirEstado(pTemp);
+
     // Menu fim de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
     pTemp->setMaquina(this);

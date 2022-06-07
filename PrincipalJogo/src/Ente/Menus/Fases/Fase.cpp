@@ -55,7 +55,7 @@ namespace Menus::Fases {
     }
 
     void Fase::proximaFase() {
-        pMaq->setEstadoAtual(Estados::IdEstado::netuno);
+        pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao);
     }
 
     void Fase::ativarControle() {
@@ -157,7 +157,6 @@ namespace Menus::Fases {
         } else if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
             // Menu transição
             proximaFase();
-            cout << "troca fase" << endl;
         }
     }
 }

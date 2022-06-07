@@ -9,6 +9,7 @@
 #include "Ente/Menus/Fases/Netuno.h"
 #include "Ente/Menus/MenuJogar.h"
 #include "Ente/Menus/MenuGameOver.h"
+#include "Ente/Menus/MenuTransicao.h"
 #include "Controle/ControleJogador.h"
 #include "Estados/MaquinaEstados.h"
 
