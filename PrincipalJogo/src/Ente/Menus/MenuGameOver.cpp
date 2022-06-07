@@ -27,15 +27,14 @@ namespace Menus{
     void MenuGameOver::criaBotoes(){
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::menuAbertura, "SALVAR");
         pBotao->ativar();
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuAbertura, "VOLTAR");
-        
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuGameOver::criaTextos(){
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(0,0),"Digite seu nome:");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(100,0),"Digite seu nome:");
         pTexto->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 300));
         pTexto->setCor(sf::Color(0,0,0,230));
         pTexto->setContorno(sf::Color::Yellow, 5);
@@ -43,7 +42,7 @@ namespace Menus{
 
         pTexto = new ElementosGraficos::Texto(Coordenada(400,150), Coordenada(COMPRIMENTO/2.f,450),"", false);
         pTexto->setCor(sf::Color(0,0,0,230));
-        pTexto->setContorno(sf::Color::Yellow, 5);
+        pTexto->setContorno(sf::Color::Yellow, 2);
         incluir(pTexto);
         
 

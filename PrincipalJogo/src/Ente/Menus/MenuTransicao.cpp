@@ -29,7 +29,7 @@ namespace Menus{
 
     void MenuTransicao::criaBotoes() {
         botoesAtivos.clear();
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450), origem, "JOGAR NOVAMENTE");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), origem, "JOGAR NOVAMENTE");
         pBotao->ativar();
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
 
@@ -40,7 +40,7 @@ namespace Menus{
         else if(origem == Estados::IdEstado::netuno)
             prox = Estados::IdEstado::mercurio;
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), prox, "PROXIMA FASE");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), prox, "PROXIMA FASE");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
     }
 
