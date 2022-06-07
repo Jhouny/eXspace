@@ -2,6 +2,8 @@
 #define _CONTROLE_TEXTO_H_
 #include "Observador.h"
 
+
+
 namespace Menus{
     class MenuGameOver;
 }

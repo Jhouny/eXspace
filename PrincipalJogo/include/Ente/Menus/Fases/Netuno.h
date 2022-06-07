@@ -12,7 +12,7 @@ namespace Menus::Fases {
         //Entidades::Personagens::Chefe* pChefe;
             
         public:
-            Netuno(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 = NULL);
+            Netuno(/*MenuGameOver* men,*/ Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 = NULL);
             ~Netuno();
             void geraPlataformas(); 
             void geraObstaculos(); 

@@ -1,10 +1,11 @@
 #include "../../../../include/Ente/Menus/Fases/Netuno.h"
+#include "../../../../include/Ente/Menus/MenuGameOver.h"
 #define TEX_PAREDE "PrincipalJogo/assets/Texturas/Plataforma/1 Tiles/Tile_12.png"
 
 
 namespace Menus::Fases {
-    Netuno::Netuno(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
-        Fase(jog1,jog2)
+    Netuno::Netuno(/*Menus::MenuGameOver* men,*/Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
+        Fase(/*men,*/jog1,jog2)
     {
         jogador1->resetar();
         jogador1->setFase(static_cast<Fase*>(this));

@@ -14,6 +14,7 @@
 #include "../../Auxiliares/Lista.h "
 #include "../../ElementosGraficos/Botao.h"
 #include "../../ElementosGraficos/BotaoAlternador.h"
+#include "../../ElementosGraficos/BotaoSalvar.h"
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Estados/Estado.h"
 
@@ -37,6 +38,7 @@ namespace Menus{
 
             
             ElementosGraficos::Botao* pBotao;
+
         public:
             Gerenciadores::Grafico* pGrafico;
             Menu();

@@ -1,24 +1,29 @@
 #include "../../../../include/Ente/Menus/Fases/Fase.h"
 #include "../../../../include/Estados/MaquinaEstados.h"
-
+#include "../../../../include/Ente/Menus/MenuGameOver.h"
 namespace Menus::Fases {
-    Fase::Fase(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
+    Fase::Fase(/*Menus::MenuGameOver* men,*/Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         Menu(),
         jogador1(jog1),
         jogador2(jog2),
         pControleFase(this),
         visor(jog1, jog2),
-        colisor()
+        colisor(),
+        pontuacao(0)/*,
+        pMenuGameOver(men)*/
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
 
+            // Aterra ponteiros por segurança
             pBase = NULL;
             pChegada = NULL;
             pIniTerrestre = NULL;
             pIniVoador = NULL;
             pLava = NULL;
+            //pMenuGameOver = NULL;
             numInimigos = 0;
+
 
             // Inclui os jogadores
             if(jogador2 != NULL) {
@@ -51,6 +56,8 @@ namespace Menus::Fases {
     }
 
     void Fase::gameOver() {
+        //seta a pontucao antes de "apagar"
+        /*pMenuGameOver->setPont( pontuacao );*/
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
     }
 
@@ -72,7 +79,7 @@ namespace Menus::Fases {
         // Retira os elementos da lista
         lEntidades.clear();
         colisor.resetar();
-        
+        pontuacao = 0;
         jogador1->resetar();
         jogador1->setFase(this);
         incluir(static_cast<Entidades::Entidade*>(jogador1));
@@ -109,6 +116,7 @@ namespace Menus::Fases {
                 it = lEntidades.erase(it);
                 if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
                     ent->getID() == ID::chefe) {
+                    setPontuacao(100);
                     numInimigos--;
                 }
             } else {

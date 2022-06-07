@@ -22,7 +22,8 @@ namespace Estados {
         netuno,
         selecionarFase,
         selecionarJogadores,
-        salvar
+        salvar,
+        alternar
     };
 
     class Estado {

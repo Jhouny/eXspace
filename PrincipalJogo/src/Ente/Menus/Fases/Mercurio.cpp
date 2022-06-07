@@ -1,8 +1,8 @@
 #include "../../../../include/Ente/Menus/Fases/Mercurio.h"
-
+#include "../../../../include/Ente/Menus/MenuGameOver.h"
 namespace Menus::Fases {
-    Mercurio::Mercurio(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 ):
-        Fase(jog1,jog2)
+    Mercurio::Mercurio(/*MenuGameOver* men,*/Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 ):
+        Fase(/*men,*/jog1,jog2)
     {
         jogador1->resetar();
         jogador1->setFase(static_cast<Fases::Fase*>(this));

@@ -54,11 +54,25 @@ namespace Menus{
         if(relogio.getElapsedTime().asSeconds() > 0.1){
             getAtivo();
             ElementosGraficos::BotaoAlternador* tmp = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
+            
+
             if(tmp == NULL)
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
             else
                 tmp->proximo();
             reiniciarRelogio();
+            /*if((it->first)->getFuncao() == Estados::IdEstado::salvar){
+                ElementosGraficos::BotaoSalvar* save = dynamic_cast<ElementosGraficos::BotaoSalvar*>(it->first);
+                save->salvar();                
+            }
+            else if((it->first)->getFuncao() == Estados::IdEstado::alternar){
+                ElementosGraficos::BotaoAlternador* alt = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
+                alt->proximo();
+            }
+            else{
+                getMaquina()->setEstadoAtual((it->first)->getFuncao());
+            }
+            reiniciarRelogio();*/
         }
     }
 

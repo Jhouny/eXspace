@@ -25,9 +25,9 @@ namespace Menus{
     MenuGameOver::~MenuGameOver() {}
 
     void MenuGameOver::criaBotoes(){
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::menuAbertura, "SALVAR");
-        pBotao->ativar();
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        pBotaoSalvar = new ElementosGraficos::BotaoSalvar(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), "SALVAR", this);
+        pBotaoSalvar->ativar();
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoSalvar), true));
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuAbertura, "VOLTAR");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));

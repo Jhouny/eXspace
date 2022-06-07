@@ -46,6 +46,7 @@ Jogo::Jogo():
     // Menu de transição entre fases terminadas com êxito
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuTransicao());
     pTemp->setMaquina(this);
+    pTemp->cegar();
     inserirEstado(pTemp);
 
     // Menu fim de jogo
@@ -53,7 +54,8 @@ Jogo::Jogo():
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
-
+    /*Menus::MenuGameOver* gmOver = dynamic_cast<Menus::MenuGameOver*>(pTemp);*/
+    
     /*  =================================================  */
 
     // Define o menu de abertura

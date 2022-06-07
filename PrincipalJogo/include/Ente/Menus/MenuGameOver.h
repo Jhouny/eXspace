@@ -6,6 +6,7 @@
 #include "../../Controle/ControleTexto.h"
 #include "../../Controle/ControleMenu.h"
 
+
 namespace ElementosGraficos{
     class Texto;
 }
@@ -15,12 +16,17 @@ namespace Menus{
     class MenuGameOver: public Menu{
         private:
         Lista<ElementosGraficos::Texto> lTextos;
+
         ElementosGraficos::Texto* pTexto;
+        ElementosGraficos::BotaoSalvar* pBotaoSalvar;
+
+        Entidades::Personagens::Jogador* pJog1;
+
         Controle::ControleTexto pControleTexto;
         Controle::ControleMenu pControleMenu; 
 
         std::string nome;
-
+        int pontuacao;    
         public:
             MenuGameOver();
             ~MenuGameOver();
@@ -30,6 +36,8 @@ namespace Menus{
             void criaTextos();
 
             std::string getNome(){ return nome; }
+            void setPont(int pont);
+            int getPontuacao () const { return pontuacao; }
 
             void renderizar();
 

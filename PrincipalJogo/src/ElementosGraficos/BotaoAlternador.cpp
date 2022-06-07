@@ -2,7 +2,7 @@
 
 namespace ElementosGraficos {
     BotaoAlternador::BotaoAlternador(Coordenada tam, Coordenada pos):
-        Botao(tam, pos, Estados::IdEstado::indefinido),
+        Botao(tam, pos, Estados::IdEstado::alternar),
         escolha(),
         indice(0)
     {
