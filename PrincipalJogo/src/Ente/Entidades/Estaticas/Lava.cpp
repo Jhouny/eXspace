@@ -14,8 +14,4 @@ namespace Entidades::Obstaculos {
     Lava::~Lava(){
 
     }
-
-    void Lava::executar(){
-
-    }
 }

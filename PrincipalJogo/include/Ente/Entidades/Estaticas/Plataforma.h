@@ -10,9 +10,8 @@ namespace Entidades::Obstaculos{
         private:
         public:
             Plataforma(Coordenada tam, Coordenada pos, ID id = plataforma);
-            ~Plataforma();
-            void executar();
             
+            ~Plataforma();            
     };
 }
 

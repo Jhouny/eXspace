@@ -121,7 +121,7 @@ namespace Entidades::Personagens {
         }
 
 
-        if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
+        if(intersecao.x <= intersecao.y && (outraEntidade->getID() == ID::plataforma||outraEntidade->getID() == ID::rocha)) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
             Coordenada p = this->getPosicao();
             Coordenada v = this->getVelocidade();
             
@@ -140,7 +140,7 @@ namespace Entidades::Personagens {
 
         } else if(intersecao.y <= intersecao.x) {
 
-            if(outraEntidade->getID() == ID::plataforma){ // Se está do lado, não deixa atravessar o objeto
+            if(outraEntidade->getID() == ID::plataforma || outraEntidade->getID() == ID::rocha){ // Se está do lado, não deixa atravessar o objeto
                 if (this->getPosicao().x < outraEntidade->getPosicao().x) {
                     this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
                 } else {

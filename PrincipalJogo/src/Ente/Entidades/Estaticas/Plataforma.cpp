@@ -7,6 +7,4 @@ namespace Entidades::Obstaculos {
     }
 
     Plataforma::~Plataforma() { }
-
-    void Plataforma::executar() { }
 }

@@ -59,11 +59,11 @@ namespace Gerenciadores {
         minimap.setCenter(p.x,ALTURA/2.f);
     }
 
-    
-    void Grafico::setMinimapViewport(){
-        minimap.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
+    void Grafico::setMinimapViewport() {
+        float comp = 0.3f;
+        float alt = comp * 1.5 * ((float)ALTURA / COMPRIMENTO);
+        minimap.setViewport(sf::FloatRect(1.f - comp, 0.f, comp, alt));
     }
-
 
     void Grafico::clear() {
         window->clear();

@@ -89,6 +89,13 @@ namespace Menus::Fases {
 
         pLava = new Entidades::Obstaculos::Lava(Coordenada(1800, 32), Coordenada(7500, ALTURA - 100.f), false);
         incluir(static_cast<Entidades::Entidade*>(pLava)); 
+
+        int numInstancias= (rand() % 4) + 3;  // Cria entre 3 e 6 instancias
+        for (int i = 0; i < numInstancias; i++) {
+            pRocha = new Entidades::Obstaculos::Rocha(&lEntidades);
+            incluir(static_cast<Entidades::Entidade*> (pRocha));
+        }
+
     }
 
     void Netuno::geraInimigos(){
@@ -106,14 +113,16 @@ namespace Menus::Fases {
             pIniTerrestre->setJogador(jogador1);
             incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
         }
+
+        
     }
 
     void Netuno::executar(const float dt){
         resetarEstadoOriginal();    
 
-        geraInimigos();
-        geraObstaculos();
         geraPlataformas();
+        geraObstaculos();
+        geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (4000,ALTURA));

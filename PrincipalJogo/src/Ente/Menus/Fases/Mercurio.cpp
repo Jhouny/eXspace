@@ -107,6 +107,12 @@ namespace Menus::Fases {
 
         pLava = new Entidades::Obstaculos::Lava(Coordenada(3000,32),Coordenada(4000,ALTURA-100.f),true);
         incluir(static_cast<Entidades::Entidade*> (pLava));
+
+        int numInstancias= (rand() % 4) + 3;  // Cria entre 3 e 6 instancias
+        for (int i = 0; i < numInstancias; i++) {
+            pRocha = new Entidades::Obstaculos::Rocha(&lEntidades);
+            incluir(static_cast<Entidades::Entidade*> (pRocha));
+        }
     } 
 
     void Mercurio::geraInimigos() {
@@ -151,7 +157,7 @@ namespace Menus::Fases {
         geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
-        pGrafico->setMinimap(Coordenada (4000,ALTURA));
+        pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));  
         pGrafico->setMinimapViewport();
         pGrafico->atualizaMinimap(Coordenada(2000,360));
     }

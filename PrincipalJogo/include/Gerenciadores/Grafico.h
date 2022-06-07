@@ -40,11 +40,10 @@ namespace Gerenciadores {
                 view.setSize(t.x,t.y);
             }
 
-            void setMinimap(Coordenada t){ //nova
+            void setMinimap(Coordenada t) {
                 minimap.setSize(t.x,t.y);
             }
-            void setMinimapViewport(); //nova
-            //minimapView.setViewport(sf::FloatRect(0.75f, 0.f, 0.25f, 0.25f));
+            void setMinimapViewport();
 
             void setRotate();//nova
 

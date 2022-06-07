@@ -16,6 +16,7 @@
 #include "../../Entidades/Dinamicas/Projetil.h"
 #include "../../Entidades/Estaticas/Plataforma.h"
 #include "../../Entidades/Estaticas/Lava.h"
+#include "../../Entidades/Estaticas/Rocha.h"
 
 #define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
@@ -36,6 +37,7 @@ namespace Menus::Fases {
             Entidades::Personagens::Jogador *jogador2;
 
             Entidades::Obstaculos::Lava* pLava;
+            Entidades::Obstaculos::Rocha* pRocha;
             Entidades::Obstaculos::Plataforma* pBase;
              Entidades::Obstaculos::Plataforma* pChegada;
             Entidades::Personagens::InimigoTerrestre* pIniTerrestre;
