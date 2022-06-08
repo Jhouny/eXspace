@@ -9,16 +9,16 @@ namespace ElementosGraficos{
 
     BotaoSalvar::~BotaoSalvar(){ }
 
-    void BotaoSalvar::salvar(){
+    void BotaoSalvar::salvar() {
         std::ofstream outFile;
-        outFile.open(PONTUACAO_PATH,std::ios::out);
-        if(outFile){
-            
-            outFile << pMenuGameOver->getNome().c_str() << endl;
-        }
-        outFile.close();
-
         
+        outFile.open(PONTUACAO_PATH,std::ios_base::app); 
+        if(outFile) {
+            
+            outFile << pMenuGameOver->getNome().c_str() << ";";
+        }
+        outFile << endl;
+        outFile.close();    
     
 
 

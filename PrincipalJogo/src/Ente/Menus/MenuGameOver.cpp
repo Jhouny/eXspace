@@ -97,7 +97,6 @@ namespace Menus{
         for(int i = 0; i < lTextos.size(); i++ ){
             if(!(lTextos[i]->getEstatico())) {
                 lTextos[i]->setTexto(pControleTexto.getNome()); //ControleTexto!!
-                //lTextos[i]->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 450));
                 nome = pControleTexto.getNomeString();
             }
         }
