@@ -13,7 +13,7 @@
 #include "../Ente.h"
 #include "../../Auxiliares/Lista.h "
 #include "../../ElementosGraficos/Botao.h"
-#include "../../ElementosGraficos/BotaoAlternador.h"
+
 #include "../../Gerenciadores/Grafico.h"
 #include "../../Estados/Estado.h"
 

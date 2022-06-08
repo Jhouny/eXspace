@@ -1,8 +1,9 @@
 #include "../../../../include/Ente/Entidades/Estaticas/Rocha.h"
+#include "../../../../include/Ente/Entidades/Estaticas/Plataforma.h"
 
 namespace Entidades::Obstaculos{
     Rocha::Rocha(std::list<Entidades::Entidade*> *l):
-        Obstaculo(Coordenada(50,50),Coordenada(0,0),false,false,ID::rocha),
+        Obstaculo(Coordenada(50,40),Coordenada(0,0),false,false,ID::rocha),
         lista(l),
         posDefinida(false)
     {
@@ -26,7 +27,8 @@ namespace Entidades::Obstaculos{
         for(int i = 0; i < temp.size() && !posDefinida; i++) {
             Entidades::Entidade* ent = temp[i];
             if(ent->getID() == ID::plataforma) {
-                if(ent->getTamanho().x > this->getTamanho().x) {
+                Entidades::Obstaculos::Plataforma* pPlat = dynamic_cast<Entidades::Obstaculos::Plataforma*>(ent);
+                if(ent->getTamanho().x > this->getTamanho().x && pPlat->getNormal()) {
                     float px = ent->getPosicao().x + (rand() % (int)(ent->getTamanho().x - this->getTamanho().x));
                     float py = ent->getPosicao().y - this->getTamanho().y + 6;
                     setPosicao(Coordenada(px, py));

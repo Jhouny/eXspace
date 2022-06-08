@@ -10,7 +10,8 @@ namespace Menus{
         Menu(),
         pControleTexto(this),
         pControleMenu(this),
-        nome("")
+        nome(""),
+        pontuacao(0)
     {
         setID( Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
@@ -25,9 +26,9 @@ namespace Menus{
     MenuGameOver::~MenuGameOver() {}
 
     void MenuGameOver::criaBotoes(){
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), Estados::IdEstado::menuAbertura, "SALVAR");
-        pBotao->ativar();
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+        pBotaoSalvar = new ElementosGraficos::BotaoSalvar(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), this, "SALVAR");
+        pBotaoSalvar->ativar();
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotaoSalvar, true));
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuAbertura, "VOLTAR");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
@@ -46,6 +47,10 @@ namespace Menus{
         incluir(pTexto);
         
 
+    }
+
+    void MenuGameOver::setPontuacao(int pont){
+        pontuacao = pont;
     }
 
     void MenuGameOver::incluir(ElementosGraficos::Texto *texto){

@@ -1,6 +1,8 @@
 #include "../../../include/Ente/Menus/Menu.h"
 #include "../../../include/ElementosGraficos/Texto.h"
 #include "../../../include/Estados/MaquinaEstados.h"
+#include "../../../include/ElementosGraficos/BotaoAlternador.h"
+#include "../../../include/ElementosGraficos/BotaoSalvar.h"
 
 namespace Menus{  
     Menu::Menu():
@@ -53,12 +55,26 @@ namespace Menus{
     void Menu::entrar(){
         if(relogio.getElapsedTime().asSeconds() > 0.1){
             getAtivo();
-            ElementosGraficos::BotaoAlternador* tmp = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
+            /*ElementosGraficos::BotaoAlternador* tmp = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
             if(tmp == NULL)
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
             else
                 tmp->proximo();
+            reiniciarRelogio();*/
+            cout << "aqui" << endl;
+            if((it->first)->getFuncao() == Estados::IdEstado::salvar) {
+                ElementosGraficos::BotaoSalvar* save = dynamic_cast<ElementosGraficos::BotaoSalvar*>(it->first);
+                save->salvar();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::alternar){
+                ElementosGraficos::BotaoAlternador* alt = dynamic_cast <ElementosGraficos::BotaoAlternador*>(it->first);
+                alt->proximo();
+            } else {
+                cout << "entrou" << (it->first)->getFuncao() << endl;
+                getMaquina()->setEstadoAtual((it->first)->getFuncao());
+            }
             reiniciarRelogio();
+
+
         }
     }
 

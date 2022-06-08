@@ -110,6 +110,8 @@ namespace Menus::Fases {
                 if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
                     ent->getID() == ID::chefe) {
                     numInimigos--;
+                    jogador1->aumentaPontuacao(100);
+                    cout << "Pontuacao: " << jogador1->getPontuacao() << endl;
                 }
             } else {
                 it++;
@@ -126,7 +128,7 @@ namespace Menus::Fases {
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());
-            //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+            pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
         }
 
         visor.renderizar();

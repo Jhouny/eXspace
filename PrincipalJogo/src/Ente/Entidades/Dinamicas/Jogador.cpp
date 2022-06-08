@@ -85,8 +85,8 @@ namespace Entidades::Personagens {
         velocidade.x = 0; // Para instantaneamente
     }
 
-    void Jogador::resetar() {
-        setPontuacao(0);
+    void Jogador::resetar(int p) {
+        setPontuacao(p);
         setPosicao(0,0);
         setVida(100);
 
@@ -110,9 +110,13 @@ namespace Entidades::Personagens {
         //colisao com a lava
         if(outraEntidade->getID() == ID::lava) {
             Entidades::Obstaculos::Lava *tmp = dynamic_cast<Entidades::Obstaculos::Lava*>(outraEntidade);
-            //this->receberDano(tmp->getDano());
+            this->receberDano(tmp->getDano());
         }
-        if(outraEntidade->getID()==ID::projetil) {
+        else if(outraEntidade->getID() == ID::gasToxico) {
+            Entidades::Obstaculos::GasToxico *tmp = dynamic_cast<Entidades::Obstaculos::GasToxico*>(outraEntidade);
+            this->receberDano(tmp->getDano());
+        }
+        else if(outraEntidade->getID() == ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
             Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
             if(tmp2 == NULL){
@@ -121,7 +125,7 @@ namespace Entidades::Personagens {
         }
 
 
-        if(intersecao.x <= intersecao.y && (outraEntidade->getID() == ID::plataforma||outraEntidade->getID() == ID::rocha)) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
+        else if(intersecao.x <= intersecao.y && (outraEntidade->getID() == ID::plataforma ||outraEntidade->getID() == ID::rocha)) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
             Coordenada p = this->getPosicao();
             Coordenada v = this->getVelocidade();
             
@@ -139,17 +143,17 @@ namespace Entidades::Personagens {
             this->setPosicao(p);
 
         } else if(intersecao.y <= intersecao.x) {
-
             if(outraEntidade->getID() == ID::plataforma || outraEntidade->getID() == ID::rocha){ // Se está do lado, não deixa atravessar o objeto
                 if (this->getPosicao().x < outraEntidade->getPosicao().x) {
                     this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
                 } else {
                     this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
                 }
-            } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
+            }
+            else if(outraEntidade->getID() == ID::inimigoTerrestre) {
                 Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
                 // Reduz a vida do jogador 
-                //this->receberDano(tmp->getDano());
+                this->receberDano(tmp->getDano());
                 
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
@@ -158,7 +162,6 @@ namespace Entidades::Personagens {
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
                 }                
             }
-            this->setJump(true); // Para não poder pular se encostar lateralmente
         }
     }
 

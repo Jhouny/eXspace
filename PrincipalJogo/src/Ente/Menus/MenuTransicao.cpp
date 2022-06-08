@@ -5,7 +5,8 @@ namespace Menus{
     MenuTransicao::MenuTransicao():
         Menu(),
         pControleMenu(this),
-        origem(Estados::IdEstado::indefinido)
+        origem(Estados::IdEstado::indefinido),
+        pontuacaoPrev(0)
     {
         setID(Estados::IdEstado::menuTransicao);
         setTitulo("FASE CONCLUIDA");
@@ -56,6 +57,7 @@ namespace Menus{
     void MenuTransicao::atualizar(const float dt) {
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             (it->first)->executar();
+            cout << "func: " << (it->first)->getFuncao() << endl;
         }
     }
 

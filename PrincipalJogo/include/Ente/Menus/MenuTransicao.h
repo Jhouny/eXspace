@@ -14,6 +14,7 @@ namespace Menus{
 
             Controle::ControleMenu pControleMenu;
             Estados::IdEstado origem;
+            int pontuacaoPrev;
         public:
             MenuTransicao();
 
@@ -24,6 +25,9 @@ namespace Menus{
             void ativarControle();
 
             void desativarControle();
+
+            void setPontuacaoPrev(int p) { pontuacaoPrev = p; }
+            int getPontuacaoPrev() const { return pontuacaoPrev; }
 
             void criaBotoes();
 

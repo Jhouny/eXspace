@@ -9,13 +9,13 @@ namespace Menus{
     class MenuGameOver;
 }
 
-namespace ElementosGraficos{
+namespace ElementosGraficos {
     class BotaoSalvar:public Botao{
         private:
-            Menus::Fases::Fase* pFase;
             Menus::MenuGameOver* pMenuGameOver;
+            std::map<int, std::string> *mapPontuacao;
         public:
-            BotaoSalvar(Coordenada tam, Coordenada pos);
+            BotaoSalvar(Coordenada tam, Coordenada pos, Menus::MenuGameOver* pMenu, std::string nome = "");
             ~BotaoSalvar();
             void salvar();
 

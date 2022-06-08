@@ -25,7 +25,8 @@ namespace Entidades {
     }
 
     void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
-        this->setAtivo(false);
+        if(outraEntidade->getID() != ID::gasToxico)
+            this->setAtivo(false);
     }
 
     // Muda a posição da ENTIDADE

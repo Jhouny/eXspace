@@ -44,15 +44,15 @@ namespace Menus::Fases {
         incluir(static_cast<Entidades::Entidade*>(pBase)); //terminou
 
         /*plataformas para a lava*/
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(2800, 32), Coordenada(1500, ALTURA -68.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(2800, 32), Coordenada(1500, ALTURA -68.f),false);
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1800, 32), Coordenada(7500, ALTURA -68.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1800, 32), Coordenada(7500, ALTURA -68.f),false);
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(32, ALTURA/2.f), Coordenada(2800, ALTURA/2.f));
+        /*pBase = new Entidades::Obstaculos::Plataforma(Coordenada(32, ALTURA/2.f), Coordenada(2800, ALTURA/2.f),false);
         pBase->setTexture(TEX_PAREDE,false);
-        incluir(static_cast<Entidades::Entidade*>(pBase)); 
+        incluir(static_cast<Entidades::Entidade*>(pBase)); */
 
         
 
@@ -95,6 +95,11 @@ namespace Menus::Fases {
             pRocha = new Entidades::Obstaculos::Rocha(&lEntidades);
             incluir(static_cast<Entidades::Entidade*> (pRocha));
         }
+        int numInstanciasGas = (rand() % 5) + 3;  // Cria entre 3 e 7 instancias
+        for (int i = 0; i < numInstanciasGas; i++) {
+            pGas = new Entidades::Obstaculos::GasToxico(&lEntidades);
+            incluir(static_cast<Entidades::Entidade*> (pGas));
+        }
 
     }
 
@@ -113,7 +118,15 @@ namespace Menus::Fases {
             pIniTerrestre->setJogador(jogador1);
             incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
         }
-
+        
+        Fase* tmp = static_cast<Fase*>(this);
+        for(i = 0; i < 3; i++) {
+            pIniVoador = new Entidades::Personagens::InimigoVoador();
+            pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 100));
+            pIniVoador->setJogador(jogador1);
+            pIniVoador->setFase(tmp);
+            incluir(static_cast<Entidades::Entidade*>(pIniVoador));
+        }
         
     }
 

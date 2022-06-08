@@ -19,10 +19,10 @@ namespace Menus::Fases {
 
     void Mercurio::geraPlataformas() {
         //plataforma da lava:
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(3000,32),Coordenada(4000,ALTURA- 68.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(3000,32),Coordenada(4000,ALTURA- 68.f),false);
         incluir(static_cast<Entidades::Entidade*> (pBase));
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(2000, 32), Coordenada(400, ALTURA - 68.f),false);
         incluir(static_cast<Entidades::Entidade*>(pBase));
 
         //plataformas normais:
@@ -108,29 +108,35 @@ namespace Menus::Fases {
         pLava = new Entidades::Obstaculos::Lava(Coordenada(3000,32),Coordenada(4000,ALTURA-100.f),true);
         incluir(static_cast<Entidades::Entidade*> (pLava));
 
-        int numInstancias= (rand() % 4) + 3;  // Cria entre 3 e 6 instancias
-        for (int i = 0; i < numInstancias; i++) {
+        int numInstanciasRocha = (rand() % 4) + 3;  // Cria entre 3 e 6 instancias
+        for (int i = 0; i < numInstanciasRocha; i++) {
             pRocha = new Entidades::Obstaculos::Rocha(&lEntidades);
             incluir(static_cast<Entidades::Entidade*> (pRocha));
+        }
+
+        int numInstanciasGas = (rand() % 5) + 3;  // Cria entre 3 e 7 instancias
+        for (int i = 0; i < numInstanciasGas; i++) {
+            pGas = new Entidades::Obstaculos::GasToxico(&lEntidades);
+            incluir(static_cast<Entidades::Entidade*> (pGas));
         }
     } 
 
     void Mercurio::geraInimigos() {
         int i;
-        for(i = 0; i < 3; i++) {
+        for(i = 0; i < 2; i++) {
             pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
             pIniTerrestre->setPosicao(Coordenada(rand() % (4000-2400)+2400 , 100));
             pIniTerrestre->setJogador(jogador1);
             incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
         }
-        for(i = 0; i < 3; i++) {
+        for(i = 0; i < 2; i++) {
             pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
             pIniTerrestre->setPosicao(Coordenada(rand() % (500) + 5250 , 100));
             pIniTerrestre->setJogador(jogador1);
             incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
         }
 
-        for(i = 0; i < 3; i++) {
+        for(i = 0; i < 2; i++) {
             pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
             pIniTerrestre->setPosicao(Coordenada(rand() % (500) + 8700 , 100));
             pIniTerrestre->setJogador(jogador1);
@@ -157,7 +163,7 @@ namespace Menus::Fases {
         geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
-        pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));  
+        pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));
         pGrafico->setMinimapViewport();
         pGrafico->atualizaMinimap(Coordenada(2000,360));
     }

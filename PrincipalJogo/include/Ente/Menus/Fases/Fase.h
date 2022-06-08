@@ -17,6 +17,7 @@
 #include "../../Entidades/Estaticas/Plataforma.h"
 #include "../../Entidades/Estaticas/Lava.h"
 #include "../../Entidades/Estaticas/Rocha.h"
+#include "../../Entidades/Estaticas/GasToxico.h"
 
 #define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
@@ -27,7 +28,6 @@ namespace Menus::Fases {
             std::list<Entidades::Entidade*>::iterator it;
             ElementosGraficos::ElementosVisor visor;
 
-            int pontuacao;
             int numInimigos;
 
             Gerenciadores::Colisor colisor;
@@ -38,8 +38,9 @@ namespace Menus::Fases {
 
             Entidades::Obstaculos::Lava* pLava;
             Entidades::Obstaculos::Rocha* pRocha;
+            Entidades::Obstaculos::GasToxico* pGas;
             Entidades::Obstaculos::Plataforma* pBase;
-             Entidades::Obstaculos::Plataforma* pChegada;
+            Entidades::Obstaculos::Plataforma* pChegada;
             Entidades::Personagens::InimigoTerrestre* pIniTerrestre;
             Entidades::Personagens::InimigoVoador* pIniVoador;
 
@@ -50,8 +51,7 @@ namespace Menus::Fases {
             
             ~Fase();
             
-            void setPontuacao(int acres) { pontuacao+= acres; }
-            int getPontuacao(){ return pontuacao; }
+            void setPontuacao(int pont) { jogador1->setPontuacao(pont); }
             
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;

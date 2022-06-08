@@ -19,7 +19,7 @@ namespace Entidades::Personagens {
             Projetil* proj;
             Controle::ControleJogador pControleJogador;
 
-            float pontuacao;
+            int pontuacao;
             bool viradoFrente;
             bool estaPulando;
             bool estaAtirando;
@@ -44,7 +44,10 @@ namespace Entidades::Personagens {
             }
 
             void setVida(int vi){ vida = vi; }
+            
             void setPontuacao(float ponto) { pontuacao = ponto; }
+            int getPontuacao() const { return pontuacao; }
+            void aumentaPontuacao(int p) { pontuacao += p; }
 
             // Fisica
             void atacar();
@@ -59,7 +62,7 @@ namespace Entidades::Personagens {
             void atualiza(const float dt);
             void atualizaAcel();
 
-            void resetar();
+            void resetar(int p = 0);
 
             void ativarControle() {
                 pControleJogador.ativar();

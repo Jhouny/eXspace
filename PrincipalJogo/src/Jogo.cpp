@@ -13,7 +13,6 @@ Jogo::Jogo():
 
     /*  ==========  Adiciona os Menus e Fases  ==========  */
     Estados::Estado* pTemp;
-    
     // Menu principal de abertura do jogo 
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuAbertura());
     pTemp->setMaquina(this);

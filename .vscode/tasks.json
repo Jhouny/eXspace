@@ -41,6 +41,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\ElementoGrafico.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Botao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoAlternador.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoSalvar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Texto.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Ponto.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Coracao.cpp",
