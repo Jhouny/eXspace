@@ -40,9 +40,15 @@ namespace Entidades {
     }
 
     void Projetil::estaAtivo() {
-        if(this->getPosicao().x > 12000||this->getPosicao().x < -1000 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
-        setAtivo(false);
+        Coordenada limite =  pGrafico->getViewBounds();
+
+        if(this->getPosicao().x > limite.x + COMPRIMENTO/2.f || this->getPosicao().x < limite.x - COMPRIMENTO/2.f) {
+            setAtivo(false);
         }
+        else if(this->getPosicao().y > limite.y + ALTURA/2.f || this->getPosicao().x < limite.y - ALTURA/2.f) {
+            setAtivo(false);
+        }
+        
     }
 
     void Projetil::executar(const float dt) {

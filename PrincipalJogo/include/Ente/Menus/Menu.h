@@ -35,7 +35,6 @@ namespace Menus{
             sf::Sprite fundo;
             sf::Clock relogio;
 
-            
             ElementosGraficos::Botao* pBotao;
         public:
             Gerenciadores::Grafico* pGrafico;

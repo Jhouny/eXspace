@@ -16,9 +16,10 @@ namespace ElementosGraficos{
 namespace Menus{
     class MenuGameOver: public Menu{
         private:
-
-            Lista<ElementosGraficos::Texto> lTextos;
+            std::vector<ElementosGraficos::Texto*> lTextos;
             ElementosGraficos::Texto* pTexto;
+            ElementosGraficos::Texto* pTextoNome;
+            ElementosGraficos::Texto* pTextoPontuacao;
             ElementosGraficos::BotaoSalvar* pBotaoSalvar;
             Controle::ControleTexto pControleTexto;
             Controle::ControleMenu pControleMenu; 
@@ -49,6 +50,8 @@ namespace Menus{
             void incluir(ElementosGraficos::Texto *texto);
 
             void ativarControle();
+
+            void leArquivoPontuacao(const char* path);
 
             void desativarControle();
 

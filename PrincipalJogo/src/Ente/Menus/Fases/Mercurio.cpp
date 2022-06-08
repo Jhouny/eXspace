@@ -157,6 +157,7 @@ namespace Menus::Fases {
 
     void Mercurio::executar(const float dt) {
         resetarEstadoOriginal();
+        jogador1->setPontuacao(pontuacaoIni);
         
         geraPlataformas();
         geraObstaculos();

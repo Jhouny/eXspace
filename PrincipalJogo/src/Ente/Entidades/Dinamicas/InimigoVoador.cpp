@@ -73,6 +73,13 @@ namespace Entidades::Personagens {
         }
     }
 
+    bool InimigoVoador::estaVivo(){
+        if(vida <= 0) {
+            setAtivo(false);
+            return false;
+        }
+        return true;
+    }
 
     void InimigoVoador::movimentar(const float dt){
         

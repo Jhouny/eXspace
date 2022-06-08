@@ -42,7 +42,7 @@ namespace Menus{
             prox = Estados::IdEstado::mercurio;
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), prox, "PROXIMA FASE");
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuTransicao::renderizar() {
@@ -57,7 +57,6 @@ namespace Menus{
     void MenuTransicao::atualizar(const float dt) {
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             (it->first)->executar();
-            cout << "func: " << (it->first)->getFuncao() << endl;
         }
     }
 

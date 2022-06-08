@@ -29,6 +29,7 @@ namespace Menus::Fases {
             ElementosGraficos::ElementosVisor visor;
 
             int numInimigos;
+            int pontuacaoIni;
 
             Gerenciadores::Colisor colisor;
 
@@ -51,7 +52,7 @@ namespace Menus::Fases {
             
             ~Fase();
             
-            void setPontuacao(int pont) { jogador1->setPontuacao(pont); }
+            void setPontuacao(const int pont) { pontuacaoIni = pont; }
             
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;

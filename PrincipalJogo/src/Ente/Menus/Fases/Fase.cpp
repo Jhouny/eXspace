@@ -8,7 +8,8 @@ namespace Menus::Fases {
         jogador2(jog2),
         pControleFase(this),
         visor(jog1, jog2),
-        colisor()
+        colisor(),
+        pontuacaoIni(0)
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
@@ -51,11 +52,11 @@ namespace Menus::Fases {
     }
 
     void Fase::gameOver() {
-        pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
+        pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver, jogador1->getPontuacao());
     }
 
     void Fase::proximaFase() {
-        pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao);
+        pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao, jogador1->getPontuacao());
     }
 
     void Fase::ativarControle() {
@@ -72,6 +73,7 @@ namespace Menus::Fases {
         // Retira os elementos da lista
         lEntidades.clear();
         colisor.resetar();
+        numInimigos = 0;
         
         jogador1->resetar();
         jogador1->setFase(this);
@@ -128,7 +130,7 @@ namespace Menus::Fases {
         for(it = lEntidades.begin(); it != lEntidades.end(); it++) {
             ent = *it;
             pGrafico->draw(ent->getSprite());
-            pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
+            //pGrafico->draw(ent->getShape());  // Fantasma shape para debuggar posicoes relativas e colisoes
         }
 
         visor.renderizar();

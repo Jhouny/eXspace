@@ -43,7 +43,7 @@ namespace Entidades::Personagens {
     }
 
     void Jogador::atacar() {
-        if(this->getSegundos() > 0.15) {
+        if(this->getSegundos() > 0.05) {
             if(viradoFrente)
                 proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 3), TAM_PROJETIL_JOGADOR, VELOCIDADE_JOGADOR*3);
             else
