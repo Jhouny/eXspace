@@ -21,9 +21,12 @@ namespace Menus{
             ElementosGraficos::Texto* pTextoNome;
             ElementosGraficos::Texto* pTextoPontuacao;
             ElementosGraficos::BotaoSalvar* pBotaoSalvar;
+
             Controle::ControleTexto pControleTexto;
             Controle::ControleMenu pControleMenu; 
-            std::map<int,std::string> mapaPontucao;
+
+            std::multimap<int,std::string> mapaPontuacao;
+            std::multimap<int,std::string>::iterator itPont;
 
             std::string nome;
             int pontuacao;
@@ -41,7 +44,11 @@ namespace Menus{
 
             void setPontuacao(int pont);
 
+            int getPontuacao() const { return pontuacao; }
+
             std::string getNome(){ return nome; }
+
+            std::multimap<int,std::string>* getMap(){ return &mapaPontuacao; }
 
             void renderizar();
 
@@ -51,7 +58,7 @@ namespace Menus{
 
             void ativarControle();
 
-            void leArquivoPontuacao(const char* path);
+            void leArquivoPontuacao();
 
             void desativarControle();
 

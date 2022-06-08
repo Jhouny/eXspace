@@ -4,7 +4,7 @@
 
 #include"../Ente/Menus/Fases/Fase.h"
 
-#define PONTUACAO_PATH ""
+#define PONTUACAO_PATH "PrincipalJogo/saves/pontuacao.txt"
 namespace Menus{
     class MenuGameOver;
 }
@@ -13,7 +13,7 @@ namespace ElementosGraficos {
     class BotaoSalvar:public Botao{
         private:
             Menus::MenuGameOver* pMenuGameOver;
-            std::map<int, std::string> *mapPontuacao;
+            std::multimap<int, std::string> mapPontuacao;
         public:
             BotaoSalvar(Coordenada tam, Coordenada pos, Menus::MenuGameOver* pMenu, std::string nome = "");
             ~BotaoSalvar();

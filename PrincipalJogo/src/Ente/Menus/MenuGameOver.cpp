@@ -113,13 +113,31 @@ namespace Menus{
         pControleTexto.desativar();
     }
 
-    void MenuGameOver::leArquivoPontuacao(const char* path){
-        
+    void MenuGameOver::leArquivoPontuacao(){
+        mapaPontuacao.clear();
+        std::ifstream recuperaPontuacao(PONTUACAO_PATH,ios::in);
+        if(!recuperaPontuacao){
+            cerr << "Arquivo não pode ser aberto"<< endl;
+            return;
+        }
+        while(!recuperaPontuacao.eof()){
+            std::string pontu;
+            std::string name;
+            for(int i = 0; i < 10; i++){
+                std::getline(recuperaPontuacao,pontu);
+                std::getline(recuperaPontuacao,name);
+                if(pontu.length()>0){
+                    mapaPontuacao.insert(std::pair<int ,std::string >(std::stoi(pontu),name));        
+                }
+            }
+        }
     }
 
     void MenuGameOver::executar(const float dt){
         criaBotoes();
         criaTextos();
+        leArquivoPontuacao();
+
         
         // Reseta o conteúdo dos textos
         pTextoPontuacao->setConteudo(std::to_string(pontuacao));  

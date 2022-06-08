@@ -113,7 +113,6 @@ namespace Menus::Fases {
                     ent->getID() == ID::chefe) {
                     numInimigos--;
                     jogador1->aumentaPontuacao(100);
-                    cout << "Pontuacao: " << jogador1->getPontuacao() << endl;
                 }
             } else {
                 it++;
