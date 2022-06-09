@@ -122,6 +122,30 @@ namespace Menus::Fases {
 
     void Mercurio::geraInimigos() {
         int i;
+        for(i = 0; i < 6; i++){
+            std::vector<Entidades::Entidade*> temp(lEntidades.begin(), lEntidades.end());  // Copia os elementos da lista para um vetor temporário
+            std::random_shuffle(temp.begin(), temp.end());  // Aleatoriza a posicao dos elementos do vetor
+            for(int i = 0; i < temp.size() ; i++) {
+            Entidades::Entidade* ent = temp[i];
+            if(ent->getID() == ID::plataforma) {
+                Entidades::Obstaculos::Plataforma* pPlat = dynamic_cast<Entidades::Obstaculos::Plataforma*>(ent);
+                if((ent->getPosicao().x > 1000 || ent->getPosicao().x< 9000) && pPlat->getNormal()) {
+                    Coordenada pos;
+
+                    pos.x = ent->getPosicao().x + (rand() % (int)(ent->getTamanho().x - 50));
+                    pos.y= ent->getPosicao().y + 50;
+                    pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
+                    pIniTerrestre->setPosicao(pos);
+                    pIniTerrestre->setJogador(jogador1);
+                }
+            }
+        }
+        temp.clear();
+        }
+
+
+
+
         for(i = 0; i < 2; i++) {
             pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
             pIniTerrestre->setPosicao(Coordenada(rand() % (4000-2400)+2400 , 100));
