@@ -21,9 +21,9 @@ namespace Entidades {
 
             void setPosicao(float x, float y);
             void setPosicao(Coordenada pos);
-            
+
             void setTexture(const char* path, bool esticar = true);
-            void atualizaTexture();
+            void atualizaTexture(Coordenada vel);
 
             sf::Sprite* getSprite() { return &sprite; }
             sf::RectangleShape* getShape() { return &shape; }

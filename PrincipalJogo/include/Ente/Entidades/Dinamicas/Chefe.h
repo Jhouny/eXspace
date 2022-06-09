@@ -5,7 +5,7 @@
 #include  "Projetil.h "
 #define TEX_CHEFE "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.still.png"
 #define TEX_CHEFE_ALARMADO "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.alarmado.png"
-#define TAM_PROJETIL_CHEFE Coordenada(12, 12)
+#define TAM_PROJETIL_CHEFE Coordenada(30, 30)
 
 namespace Menus::Fases {
     class Fase;
@@ -29,6 +29,8 @@ namespace Entidades::Personagens {
             void reiniciarClock() {
                 clock.restart();    
             }
+
+            bool estaVivo();
 
             void setFase(Menus::Fases::Fase* pF) { pFase = pF; }
 

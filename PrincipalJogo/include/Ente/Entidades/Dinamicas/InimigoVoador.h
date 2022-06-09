@@ -18,10 +18,12 @@ namespace Entidades::Personagens {
         private:
             Projetil* pProj;
             Menus::Fases::Fase* pFase;
-
+            float pontoMedio;
         public:
             InimigoVoador();
             ~InimigoVoador();
+
+            void randomizarOscilacao();
 
             float getSegundos() {
                 return clock.getElapsedTime().asSeconds();

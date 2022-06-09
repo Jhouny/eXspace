@@ -83,7 +83,6 @@ namespace Gerenciadores {
 
     
     sf::Texture* Grafico::loadTexture(const char* path) {
-        
         std::map<const char*, sf::Texture*>::iterator it = mapaTexturas.begin();
         while (it != mapaTexturas.end()) {
             if (!strcmp(it->first, path))

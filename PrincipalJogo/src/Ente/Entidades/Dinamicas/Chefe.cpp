@@ -3,13 +3,13 @@
 #include "../../../../include/Ente/Entidades/Dinamicas/Jogador.h"
 #include "../../../../include/Ente/Menus/Fases/Fase.h"
 
-#define TEX_PROJETIL_INI_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil_2.png"
+#define TEX_PROJETIL_CHEFE "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil_2.png"
 #define DISTANCIA_ALARMADO_PROJ COMPRIMENTO/2.f
-#define DISTANCIA_ALARMADO COMPRIMENTO/4.f
+#define DISTANCIA_ALARMADO COMPRIMENTO/3.f
 #define VELOCIDADE 19600 * TICK_RATE
 namespace Entidades::Personagens {
     Chefe::Chefe():
-        Inimigo(Coordenada(300,300),Coordenada(100,100),ID::chefe,false,300,30),
+        Inimigo(Coordenada(252,208),Coordenada(100,100),ID::chefe,false,300,30),
         danoColisao(60)
     {
         this->setVelocidade(Coordenada(0,0));
@@ -18,19 +18,24 @@ namespace Entidades::Personagens {
 
         jogTaPerto = false;
         alarmadoProj = false;
-
+        
+        //this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/2.f, 0));
         this->setTexture(TEX_CHEFE);
     }
     Chefe::~Chefe(){
 
     }
 
-
+    bool Chefe::estaVivo() {
+        if(vida <= 0) {
+            this->setAtivo(false);
+        }
+    }
 
     void Chefe::colisao(Entidade* outraEntidade, Coordenada intersecao){
-        if(outraEntidade->getID()==ID::projetil){
+        if(outraEntidade->getID() == ID::projetil){
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            InimigoVoador *tmp2 = dynamic_cast<InimigoVoador*>(tmp->getOrigem()); 
+            Chefe *tmp2 = dynamic_cast<Chefe*>(tmp->getOrigem());
             if(tmp2 == NULL){ // se não for originario do mesmo 
                 this->receberDano(tmp->getDano());
             }
@@ -54,8 +59,9 @@ namespace Entidades::Personagens {
 
     void Chefe::atacar(){
         //se o jogador estiver perto, mas nem tanto, atira 3 projeteis em direção dele
-        if(getSegundos() > 0.6 && !jogTaPerto && alarmadoProj) {
+        if(getSegundos() > 0.8 && !jogTaPerto && alarmadoProj) {
             this->setTexture(TEX_CHEFE);
+            velocidade.x = 0;
             Coordenada direcao;
             Coordenada veloc;
             Coordenada centroJog;
@@ -63,7 +69,7 @@ namespace Entidades::Personagens {
             centroJog.y = pJogador->getPosicao().y  +  pJogador->getTamanho().y/2.f;
             
             direcao.x = centroJog.x - posicao.x;
-            direcao.y = centroJog.y - posicao.y;
+            direcao.y = centroJog.y - (posicao.y + tamanho.y/2.f);
 
             if(direcao.x > 0) {
                 direcao.x = centroJog.x - (posicao.x + tamanho.x + 1);
@@ -77,24 +83,12 @@ namespace Entidades::Personagens {
             veloc.y = VELOCIDADE_PROJETIL * direcao.y/hip;
 
             if(direcao.x > 0) { //jogador esta na direita
-                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
-                pProj->setEntOrigem(static_cast<Entidade*>(this));
-                pFase->incluir(static_cast<Entidade*>(pProj));
-                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/4.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
-                pProj->setEntOrigem(static_cast<Entidade*>(this));
-                pFase->incluir(static_cast<Entidade*>(pProj));
-                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/4.f + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_CHEFE);
                 pProj->setEntOrigem(static_cast<Entidade*>(this));
                 pFase->incluir(static_cast<Entidade*>(pProj));
             }      
             else { //jogador esta na esquerda
-                pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
-                pProj->setEntOrigem(static_cast<Entidade*>(this));
-                pFase->incluir(static_cast<Entidade*>(pProj));
-                pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/4.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
-                pProj->setEntOrigem(static_cast<Entidade*>(this));
-                pFase->incluir(static_cast<Entidade*>(pProj));
-                pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/4.f + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj = new Projetil (Coordenada(posicao.x - 25, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_CHEFE);
                 pProj->setEntOrigem(static_cast<Entidade*>(this));
                 pFase->incluir(static_cast<Entidade*>(pProj));
             }
@@ -137,9 +131,6 @@ namespace Entidades::Personagens {
         else
             alarmadoProj = false;
     }
-
-
-
   
     void Chefe::movimentar(const float dt){
         Coordenada coordChefe, v;
@@ -149,8 +140,6 @@ namespace Entidades::Personagens {
         coordChefe.y += v.y * dt;
         coordChefe.x += v.x * dt;
         this->setPosicao(coordChefe);
-        
-
     }
 
 
@@ -158,6 +147,8 @@ namespace Entidades::Personagens {
         alarmadoProjetil(DISTANCIA_ALARMADO_PROJ);
         alarmado(DISTANCIA_ALARMADO);
         atacar();
-
+        atualizaTexture(velocidade);
+        movimentar(dt);
+        estaVivo();
     }
 }

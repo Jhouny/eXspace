@@ -10,18 +10,16 @@ namespace Entidades::Personagens {
     InimigoVoador::InimigoVoador():
         Inimigo(Coordenada(50,50),Coordenada(0,0),ID::inimigoVoador,false,150,15)
     {   
-        velocidade.x = -1;
+        velocidade.x = 1;
         setTexture(TEX_INIMIGO_VOADOR);
+        setAceleracao(GRAVIDADE);
+    }
+
+    InimigoVoador::~InimigoVoador() {
 
     }
 
-    InimigoVoador::~InimigoVoador(){
-
-
-    }
-
-    void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao){
-        
+    void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         if(outraEntidade->getID()==ID::projetil){
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
             InimigoVoador *tmp2 = dynamic_cast<InimigoVoador*>(tmp->getOrigem()); 
@@ -81,12 +79,26 @@ namespace Entidades::Personagens {
         return true;
     }
 
-    void InimigoVoador::movimentar(const float dt){
+    void InimigoVoador::randomizarOscilacao() {
+        pontoMedio = posicao.y + (rand()%40) + 50;
+    }
+
+    void InimigoVoador::movimentar(const float dt) {
+        if(posicao.y < pontoMedio && getAceleracao() < 0)  // Acima do ponto mais alto
+            setAceleracao(2 * GRAVIDADE);
+        else if(posicao.y > pontoMedio && getAceleracao() > 0)  // Abaixo do ponto mais baixo
+            setAceleracao(-2 * GRAVIDADE);
         
+        velocidade.y += getAceleracao()*dt;
+        Coordenada pos = getPosicao();
+        pos.x += velocidade.x * dt;
+        pos.y += velocidade.y * dt;
+        setPosicao(pos);
     }
 
     void InimigoVoador::executar(const float dt){
-        atualizaTexture();
+        atualizaTexture(velocidade);
+        movimentar(dt);
 
         atacar();
 

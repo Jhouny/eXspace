@@ -19,6 +19,8 @@ namespace Entidades::Personagens {
 
             bool estaVivo();
 
+            void atacar();
+
             void movimentar(const float dt);
 
             void executar(const float dt);

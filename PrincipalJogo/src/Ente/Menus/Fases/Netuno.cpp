@@ -122,16 +122,16 @@ namespace Menus::Fases {
         Fase* tmp = static_cast<Fase*>(this);
         for(i = 0; i < 3; i++) {
             pIniVoador = new Entidades::Personagens::InimigoVoador();
-            pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 100));
+            pIniVoador->setPosicao(Coordenada(rand() % (6200) + 1800, 100));
             pIniVoador->setJogador(jogador1);
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
         }
 
         pChefe = new Entidades::Personagens::Chefe();
-        pChefe->setPosicao(Coordenada(9400,ALTURA-100.f));
+        pChefe->setPosicao(Coordenada(10000,ALTURA-100.f));
         pChefe->setJogador(jogador1);
-        pIniVoador->setFase(tmp);
+        pChefe->setFase(tmp);
         incluir(static_cast<Entidades::Entidade*>(pChefe));
         
     }
@@ -145,7 +145,7 @@ namespace Menus::Fases {
         geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
-        pGrafico->setMinimap(Coordenada (4000,ALTURA));
+        pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));
         pGrafico->setMinimapViewport();
         pGrafico->atualizaMinimap(Coordenada(2000,360));
     }

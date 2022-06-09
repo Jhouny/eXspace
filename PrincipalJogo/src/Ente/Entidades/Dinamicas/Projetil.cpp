@@ -56,6 +56,6 @@ namespace Entidades {
 
         estaAtivo();
 
-        atualizaTexture();
+        atualizaTexture(velocidade);
     }
 }

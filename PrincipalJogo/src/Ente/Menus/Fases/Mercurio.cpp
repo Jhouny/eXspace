@@ -94,11 +94,10 @@ namespace Menus::Fases {
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(600, 32), Coordenada(9400, ALTURA - 200.f));
         incluir(static_cast<Entidades::Entidade*>(pBase));
 
-        pChegada = new Entidades::Obstaculos::Plataforma(Coordenada(250,240), Coordenada(9700, ALTURA - 500.f));
+        pChegada = new Entidades::Obstaculos::Plataforma(Coordenada(250,240), Coordenada(9700, ALTURA - 430.f));
         pChegada->setTexture("PrincipalJogo/assets/Texturas/Entidades/nave.png");
-        pChegada->getSprite()->setPosition(sf::Vector2f(9700, ALTURA - 500.f));
+        pChegada->getSprite()->setPosition(sf::Vector2f(9700, ALTURA - 430.f));
         incluir(static_cast<Entidades::Entidade*>(pChegada)); 
-
     } 
 
     void Mercurio:: geraObstaculos(){
@@ -146,6 +145,7 @@ namespace Menus::Fases {
         for(i = 0; i < 3; i++) {
             pIniVoador = new Entidades::Personagens::InimigoVoador();
             pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 100));
+            pIniVoador->randomizarOscilacao();  // Tem que estar depois do setPosicao()
             pIniVoador->setJogador(jogador1);
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));

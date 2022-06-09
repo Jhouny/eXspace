@@ -11,7 +11,7 @@
 
 namespace Entidades::Personagens {
     Jogador::Jogador():
-        Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
+        Personagem(Coordenada(46, 64), Coordenada(9000,0), false, 100, 20, ID::jogador),
         pControleJogador(this),
         pontuacao(0)
         {
@@ -20,12 +20,13 @@ namespace Entidades::Personagens {
             estaAtirando = false;
             viradoFrente = true;
             
-            setPosicao(Coordenada(100,100));
             velocidade.x = 0.f;
             velocidade.y = 0.f;
             aceleracaoY = 10;
 
+
             // Define a textura
+            this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
             setTexture(TEX_JOGADOR);
     }
 
@@ -87,7 +88,7 @@ namespace Entidades::Personagens {
 
     void Jogador::resetar(int p) {
         setPontuacao(p);
-        setPosicao(0,0);
+        setPosicao(9000,0);
         setVida(100);
 
         setJump(false);
@@ -110,17 +111,17 @@ namespace Entidades::Personagens {
         //colisao com a lava
         if(outraEntidade->getID() == ID::lava) {
             Entidades::Obstaculos::Lava *tmp = dynamic_cast<Entidades::Obstaculos::Lava*>(outraEntidade);
-            this->receberDano(tmp->getDano());
+            //this->receberDano(tmp->getDano());
         }
         else if(outraEntidade->getID() == ID::gasToxico) {
             Entidades::Obstaculos::GasToxico *tmp = dynamic_cast<Entidades::Obstaculos::GasToxico*>(outraEntidade);
-            this->receberDano(tmp->getDano());
+            //this->receberDano(tmp->getDano());
         }
         else if(outraEntidade->getID() == ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
             Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
             if(tmp2 == NULL){
-                this->receberDano(tmp->getDano());
+                //this->receberDano(tmp->getDano());
             }
         }
 
@@ -153,7 +154,7 @@ namespace Entidades::Personagens {
             else if(outraEntidade->getID() == ID::inimigoTerrestre) {
                 Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
                 // Reduz a vida do jogador 
-                this->receberDano(tmp->getDano());
+                //this->receberDano(tmp->getDano());
                 
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
@@ -192,7 +193,7 @@ namespace Entidades::Personagens {
 
     void Jogador::executar(const float dt) {
         //seta as sprites
-        atualizaTexture();
+        atualizaTexture(velocidade);
         
         // Aplica a aceleração na velocidade e a velocidade na posição 
         atualiza(dt);
