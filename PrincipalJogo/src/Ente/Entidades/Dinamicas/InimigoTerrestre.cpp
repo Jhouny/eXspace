@@ -91,6 +91,13 @@ namespace Entidades::Personagens {
         Coordenada coordJog, coordIni;
         coordIni = this->getPosicao();
         coordJog = pJogador->getPosicao();
+
+        if(temporizador.getElapsedTime().asSeconds() > 3) {  // A cada três segundos roda uma chance para inverter a direção
+            int chance = rand() % 100;
+            if(chance < 10 && !jogTaPerto)  // Chance de 10%
+                velocidade.x *= -1;
+            temporizador.restart();
+        }
         
         // Se estiver na borda da plataforma e (jogador não esta perto ou jogador está acima do inimigo) inverte a direção
         if(pPlataforma && (!jogTaPerto || coordJog.y < coordIni.y - 100)) {

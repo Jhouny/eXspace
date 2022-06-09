@@ -10,6 +10,7 @@ namespace Entidades::Personagens {
         private:
             Coordenada velocidade;
             Entidade* pPlataforma;
+            sf::Clock temporizador;
         public:
             InimigoTerrestre();
             ~InimigoTerrestre();
