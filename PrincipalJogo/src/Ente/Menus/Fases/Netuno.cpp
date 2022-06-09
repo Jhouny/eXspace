@@ -127,6 +127,12 @@ namespace Menus::Fases {
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
         }
+
+        pChefe = new Entidades::Personagens::Chefe();
+        pChefe->setPosicao(Coordenada(9400,ALTURA-100.f));
+        pChefe->setJogador(jogador1);
+        pIniVoador->setFase(tmp);
+        incluir(static_cast<Entidades::Entidade*>(pChefe));
         
     }
 

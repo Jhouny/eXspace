@@ -3,7 +3,8 @@
 
 #include "../Inimigo.h"
 #include  "Projetil.h "
-
+#define TEX_CHEFE "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.still.png"
+#define TEX_CHEFE_ALARMADO "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.alarmado.png"
 #define TAM_PROJETIL_CHEFE Coordenada(12, 12)
 
 namespace Menus::Fases {
@@ -14,6 +15,7 @@ namespace Entidades::Personagens {
         private:
             Projetil* pProj;
             Menus::Fases::Fase* pFase;
+            int danoColisao;
             Entidade* pPlataforma;
             bool alarmadoProj;
 
@@ -33,8 +35,6 @@ namespace Entidades::Personagens {
             void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
             void atacar();
-
-            void atualiza(const float dt);
 
             void alarmadoProjetil(int dist);
 

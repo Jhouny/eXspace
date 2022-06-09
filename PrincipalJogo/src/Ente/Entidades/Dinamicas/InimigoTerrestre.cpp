@@ -30,7 +30,7 @@ namespace Entidades::Personagens {
 
         return vivo;
     }
-
+    //Colisao do inimigoTerrestre
     void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
         if(outraEntidade->getID()==ID::projetil){
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);

@@ -4,15 +4,22 @@
 #include "../../../../include/Ente/Menus/Fases/Fase.h"
 
 #define TEX_PROJETIL_INI_VOADOR "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil_2.png"
-#define DISTANCIA_ALARMADO_PROJ 1000
-#define DISTANCIA_ALARMADO 500
-
+#define DISTANCIA_ALARMADO_PROJ COMPRIMENTO/2.f
+#define DISTANCIA_ALARMADO COMPRIMENTO/4.f
+#define VELOCIDADE 19600 * TICK_RATE
 namespace Entidades::Personagens {
     Chefe::Chefe():
-        Inimigo(Coordenada(300,300),Coordenada(100,100),ID::chefe,false)
+        Inimigo(Coordenada(300,300),Coordenada(100,100),ID::chefe,false,300,30),
+        danoColisao(60)
     {
+        this->setVelocidade(Coordenada(0,0));
+        this->setAceleracao(GRAVIDADE);
+        this->setEstatico(false); //nao precisa
+
+        jogTaPerto = false;
         alarmadoProj = false;
 
+        this->setTexture(TEX_CHEFE);
     }
     Chefe::~Chefe(){
 
@@ -46,7 +53,9 @@ namespace Entidades::Personagens {
     }
 
     void Chefe::atacar(){
+        //se o jogador estiver perto, mas nem tanto, atira 3 projeteis em direção dele
         if(getSegundos() > 0.6 && !jogTaPerto && alarmadoProj) {
+            this->setTexture(TEX_CHEFE);
             Coordenada direcao;
             Coordenada veloc;
             Coordenada centroJog;
@@ -69,17 +78,45 @@ namespace Entidades::Personagens {
 
             if(direcao.x > 0) { //jogador esta na direita
                 pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
+                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/4.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
+                pProj = new Projetil (Coordenada(posicao.x + tamanho.x + 1, posicao.y + tamanho.y/4.f + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
             }      
             else { //jogador esta na esquerda
                 pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
+                pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/4.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
+                pProj = new Projetil (Coordenada(posicao.x - 12.5, posicao.y + tamanho.y/4.f + tamanho.y/2.f), TAM_PROJETIL_CHEFE, veloc.x, veloc.y, dano, TEX_PROJETIL_INI_VOADOR);
+                pProj->setEntOrigem(static_cast<Entidade*>(this));
+                pFase->incluir(static_cast<Entidade*>(pProj));
             }
-            pProj->setEntOrigem(static_cast<Entidade*>(this));
-            pFase->incluir(static_cast<Entidade*>(pProj));
             this->reiniciarClock();
+        }
+        //caso o jogador estiver perto, persegui-lo
+        else if(jogTaPerto) {
+            this->setTexture(TEX_CHEFE_ALARMADO);
+            Coordenada coordJog, coordChefe, v;
+            coordChefe = this->getPosicao();
+            coordJog = pJogador->getPosicao();
+            v = this->getVelocidade();
+            v.y += this->getAceleracao();
+            
+            if(coordChefe.x < coordJog.x)
+                v.x = VELOCIDADE ;
+            else
+                v.x = VELOCIDADE * (-1);
+            this->setVelocidade(v);
         }
 
     }
-
     void Chefe::alarmadoProjetil(int dist){
         Coordenada centroIni,  centroJog, intersecao;
         float diferenca;
@@ -99,15 +136,20 @@ namespace Entidades::Personagens {
             alarmadoProj = true;
         else
             alarmadoProj = false;
-
     }
 
 
-    void Chefe::atualiza(const float dt){
 
-    }
-
+  
     void Chefe::movimentar(const float dt){
+        Coordenada coordChefe, v;
+        coordChefe = this->getPosicao();
+        v = this->getVelocidade();
+        v.y += this->getAceleracao();
+        coordChefe.y += v.y * dt;
+        coordChefe.x += v.x * dt;
+        this->setPosicao(coordChefe);
+        
 
     }
 
