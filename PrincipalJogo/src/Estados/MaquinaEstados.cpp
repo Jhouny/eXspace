@@ -1,6 +1,7 @@
 #include "../../include/Estados/MaquinaEstados.h"
 #include "../../include/Ente/Menus/Menu.h"
 #include "../../include/Ente/Menus/MenuTransicao.h"
+#include "../../include/Ente/Menus/MenuPausa.h"
 #include "../../include/Ente/Menus/MenuGameOver.h"
 #include "../../include/Ente/Menus/Fases/Netuno.h"
 
@@ -54,6 +55,29 @@ namespace Estados {
             }
 
             estadoAtual->executar(0);
+            estadoAtual->getMenu()->reiniciarRelogio();
+            estadoAtual->observar();
+        }
+    }
+
+    void MaquinaEstados::setEstadoAtual(IdEstado id, std::list<Entidades::Entidade*> *lEnt) {
+        Estado* temp = estadoAtual;
+        if(id == IdEstado::menuPausa && mapaEstados[id]) {
+            estadoAtual = mapaEstados[id];
+            temp->cegar();  // Faz o estado anterior deixar de reagir à Entrada do usuário
+
+            Menus::MenuPausa* pausa = dynamic_cast<Menus::MenuPausa*>(estadoAtual);
+            pausa->setFaseID(temp->getID());
+            pausa->setLista(lEnt);
+
+            estadoAtual->setAnterior(temp);
+            estadoAtual->getMenu()->pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));  // Reseta a view para o centro da tela
+            estadoAtual->executar(0);
+            estadoAtual->getMenu()->reiniciarRelogio();
+            estadoAtual->observar();
+        } else if(temp->getID() == IdEstado::menuPausa && mapaEstados[id]) {
+            estadoAtual = mapaEstados[id];
+            temp->cegar();  // Faz o estado anterior deixar de reagir à Entrada do usuário
             estadoAtual->getMenu()->reiniciarRelogio();
             estadoAtual->observar();
         }

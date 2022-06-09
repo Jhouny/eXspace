@@ -24,6 +24,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Menu.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuAbertura.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuPontuacao.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuPausa.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuJogar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuTransicao.cpp",

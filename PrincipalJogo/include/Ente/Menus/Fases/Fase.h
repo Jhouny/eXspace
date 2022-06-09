@@ -78,6 +78,8 @@ namespace Menus::Fases {
 
             void proximaFase();
 
+            void pausarFase();
+
             void ativarControle();
 
             void desativarControle();

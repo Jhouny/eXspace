@@ -10,6 +10,7 @@
 #include "Ente/Menus/MenuJogar.h"
 #include "Ente/Menus/MenuGameOver.h"
 #include "Ente/Menus/MenuTransicao.h"
+#include "Ente/Menus/MenuPausa.h"
 #include "Controle/ControleJogador.h"
 #include "Estados/MaquinaEstados.h"
 

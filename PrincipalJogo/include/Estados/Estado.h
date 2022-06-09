@@ -17,12 +17,14 @@ namespace Estados {
         configuracoes,
         menuAbertura,
         menuGameOver,
+        menuPausa,
         menuTransicao,
         mercurio,
         netuno,
         selecionarFase,
         selecionarJogadores,
-        salvar,
+        salvarPontuacao,
+        salvarJogo,
         alternar
     };
 

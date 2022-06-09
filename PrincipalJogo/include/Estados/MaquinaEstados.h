@@ -4,6 +4,10 @@
 #include "Estado.h"
 #include "../Gerenciadores/Grafico.h"
 
+namespace Entidades {
+    class Entidade;
+}
+
 namespace Estados {
     class MaquinaEstados {
         protected:
@@ -19,6 +23,7 @@ namespace Estados {
             void inserirEstado(Estado* est);
 
             void setEstadoAtual(IdEstado id, int pontos = 0);
+            void setEstadoAtual(IdEstado id, std::list<Entidades::Entidade*> *lEnt);
 
             void setEstadoAnterior();
 

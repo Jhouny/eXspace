@@ -8,12 +8,12 @@
 namespace Menus{
     MenuGameOver::MenuGameOver():
         Menu(),
-        pControleTexto(this),
+        pControleTexto(static_cast<Menu*>(this)),
         pControleMenu(this),
         nome(""),
         pontuacao(0)
     {
-        setID( Estados::IdEstado::menuGameOver);
+        setID(Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
 
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 50.f));
@@ -96,7 +96,7 @@ namespace Menus{
         //atualiza os texto que podem ser modificados
         for(int i = 0; i < lTextos.size(); i++ ){
             if(!(lTextos[i]->getEstatico())) {
-                lTextos[i]->setTexto(pControleTexto.getNome()); //ControleTexto!!
+                lTextos[i]->setTexto(pControleTexto.getNome());
                 nome = pControleTexto.getNomeString();
             }
         }
@@ -137,7 +137,6 @@ namespace Menus{
         criaBotoes();
         criaTextos();
         leArquivoPontuacao();
-
         
         // Reseta o conteúdo dos textos
         pTextoPontuacao->setConteudo(std::to_string(pontuacao));  

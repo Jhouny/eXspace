@@ -36,6 +36,7 @@ namespace Menus{
 
         public:
             MenuGameOver();
+
             ~MenuGameOver();
 
             void criaBotoes();
@@ -56,10 +57,9 @@ namespace Menus{
 
             void incluir(ElementosGraficos::Texto *texto);
 
-            void ativarControle();
-
             void leArquivoPontuacao();
 
+            void ativarControle();
             void desativarControle();
 
             void executar(const float dt);

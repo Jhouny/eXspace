@@ -59,6 +59,10 @@ namespace Menus::Fases {
         pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao, jogador1->getPontuacao());
     }
 
+    void Fase::pausarFase() {
+        pMaq->setEstadoAtual(Estados::IdEstado::menuPausa, &lEntidades);
+    }
+
     void Fase::ativarControle() {
         jogador1->ativarControle();
         pControleFase.ativar();
