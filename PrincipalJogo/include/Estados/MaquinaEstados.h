@@ -9,6 +9,7 @@ namespace Estados {
         protected:
             Estado* estadoAtual;
             std::map<IdEstado, Estado*> mapaEstados;
+            sf::Clock tempo;
 
         public:
             MaquinaEstados();

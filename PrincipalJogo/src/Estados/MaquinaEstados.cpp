@@ -7,7 +7,8 @@
 namespace Estados {
     MaquinaEstados::MaquinaEstados():
         estadoAtual(NULL),
-        mapaEstados()
+        mapaEstados(),
+        tempo()
     {
 
     }
@@ -53,15 +54,15 @@ namespace Estados {
             }
 
             estadoAtual->executar(0);
-            estadoAtual->setAnterior(temp);
             estadoAtual->getMenu()->reiniciarRelogio();
             estadoAtual->observar();
         }
     }
 
     void MaquinaEstados::setEstadoAnterior() {
-        if(estadoAtual->getAnterior() != NULL) {
+        if(estadoAtual->getAnterior() != NULL && tempo.getElapsedTime().asSeconds() > 0.2) {
             setEstadoAtual(estadoAtual->getAnterior()->getID());
+            tempo.restart();
         }
     }
 

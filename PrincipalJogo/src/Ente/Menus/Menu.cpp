@@ -71,7 +71,7 @@ namespace Menus{
     }
 
     void Menu::voltar() {
-        if(relogio.getElapsedTime().asSeconds() > 0.1){
+        if(relogio.getElapsedTime().asSeconds() > 0.3) {
             getMaquina()->setEstadoAnterior();
             reiniciarRelogio(); 
         }

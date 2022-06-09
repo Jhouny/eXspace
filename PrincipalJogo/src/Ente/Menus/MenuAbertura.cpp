@@ -18,7 +18,7 @@ namespace Menus {
 
     void MenuAbertura::criaBotoes() {
         botoesAtivos.clear();
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), Estados::IdEstado::menuGameOver, "CONFIGURAÇÕES");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 600), Estados::IdEstado::menuAbertura, "CONFIGURAÇÕES");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
        
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::menuJogar, "JOGAR");

@@ -20,35 +20,41 @@ Jogo::Jogo():
 
     // Pontuação dos jogadores
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuPontuacao());
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuAbertura]);
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
     //Menu de configurações de jogo
     pTemp = static_cast<Estados::Estado*>(new Menus::MenuJogar());
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuAbertura]);
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
+    
+    // Menu de transição entre fases terminadas com êxito
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuTransicao());
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuJogar]);
+    pTemp->setMaquina(this);
+    inserirEstado(pTemp);
+
+    // Menu fim de jogo
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuJogar]);
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
     // Fase mercúrio
     pTemp = static_cast<Estados::Estado*>(new Menus::Fases::Mercurio(jogador1));
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuJogar]);
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
 
     // Fase Netuno
     pTemp = static_cast<Estados::Estado*>(new Menus::Fases::Netuno(jogador1));
-    pTemp->setMaquina(this);
-    pTemp->cegar();
-    inserirEstado(pTemp);
-
-    // Menu de transição entre fases terminadas com êxito
-    pTemp = static_cast<Estados::Estado*>(new Menus::MenuTransicao());
-    pTemp->setMaquina(this);
-    inserirEstado(pTemp);
-
-    // Menu fim de jogo
-    pTemp = static_cast<Estados::Estado*>(new Menus::MenuGameOver());
+    pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuJogar]);
     pTemp->setMaquina(this);
     pTemp->cegar();
     inserirEstado(pTemp);
