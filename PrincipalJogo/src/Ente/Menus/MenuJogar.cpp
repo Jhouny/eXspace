@@ -27,14 +27,17 @@ namespace Menus{
         ElementosGraficos::BotaoAlternador* pBA = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450));
         pBA->inserirEscolha("FASE UM", static_cast<int>(Estados::IdEstado::mercurio));
         pBA->inserirEscolha("FASE DOIS", static_cast<int>(Estados::IdEstado::netuno));
-        pBA->setAlvo(pBotaoJogar);
+        pBA->setAlvo(pBotaoJogar, 0);
         pBA->setAtivo(0);
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));  
         
         pBA = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550));
-        pBA->inserirEscolha("UM JOGADOR", 1);
-        pBA->inserirEscolha("DOIS JOGADORES", 2);
+        pBA->inserirEscolha("UM JOGADOR", 0);
+        pBA->inserirEscolha("DOIS JOGADORES", 1);
+        pBA->setAlvo(pBotaoJogar, 1);
+        pBA->setMaquina(pMaq);
         pBA->setAtivo(0);
+        pBotaoJog = pBA;
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));        
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::indefinido, "CARREGAR JOGO");
@@ -54,7 +57,7 @@ namespace Menus{
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
-    }  
+    }
 
     void MenuJogar::renderizar(){
         pGrafico->draw(&fundo, false);

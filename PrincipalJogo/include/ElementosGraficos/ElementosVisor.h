@@ -19,6 +19,8 @@ namespace ElementosGraficos {
             Coracao* pCor;
             InimigoAbatido* pIni;
 
+            bool multiplayer;
+
             std::vector<Coracao*> vidaJog1;
             std::vector<Coracao*> vidaJog2;
             std::vector<InimigoAbatido*> inimigosAbatidos;
@@ -27,6 +29,8 @@ namespace ElementosGraficos {
             ElementosVisor(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 = NULL);
             
             ~ElementosVisor();
+
+            void setMultiplayer(bool multi) { multiplayer = multi; }
 
             void criaPontosEspacados(int n, PontoID pID); // Cria n pontos de um tipo
 

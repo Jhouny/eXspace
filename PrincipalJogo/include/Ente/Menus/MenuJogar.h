@@ -11,6 +11,7 @@ namespace Menus{
         private:
             Controle::ControleMenu pControleMenu;
             ElementosGraficos::Botao* pBotaoJogar;
+            ElementosGraficos::BotaoAlternador* pBotaoJog;
         public:
             MenuJogar();
 

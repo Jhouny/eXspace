@@ -15,6 +15,9 @@ namespace Menus{
             Controle::ControleMenu pControleMenu;
             Estados::IdEstado origem;
             int pontuacaoPrev;
+
+            bool multiplayer;
+
         public:
             MenuTransicao();
 
@@ -28,6 +31,9 @@ namespace Menus{
 
             void setPontuacaoPrev(int p) { pontuacaoPrev = p; }
             int getPontuacaoPrev() const { return pontuacaoPrev; }
+
+            void setMultiplayer( bool multi) { multiplayer = multi; }
+            bool getMultiplayer() const{ return multiplayer; }
 
             void criaBotoes();
 

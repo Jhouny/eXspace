@@ -12,12 +12,16 @@ namespace ElementosGraficos {
             int indice;
             std::vector<std::pair<Texto*, int>> escolha;
             Botao* alvo;
+            int operacao;
+            Estados::MaquinaEstados* pMaq;
         public:
             BotaoAlternador(Coordenada tam, Coordenada pos);
 
             ~BotaoAlternador();
 
-            void setAlvo(Botao* pb) { alvo = pb;}
+            void setMaquina(Estados::MaquinaEstados* pm) { pMaq = pm; }
+
+            void setAlvo(Botao* pb, int op) { alvo = pb; operacao = op; }
 
             void setAtivo(int ind);
 

@@ -4,6 +4,7 @@
 #include "../../include/Ente/Menus/MenuPausa.h"
 #include "../../include/Ente/Menus/MenuGameOver.h"
 #include "../../include/Ente/Menus/Fases/Netuno.h"
+#include "../../include/Ente/Menus/Fases/Fase.h"
 
 namespace Estados {
     MaquinaEstados::MaquinaEstados():
@@ -36,6 +37,8 @@ namespace Estados {
                         Menus::MenuTransicao* menut = dynamic_cast<Menus::MenuTransicao*>(estadoAtual);
                         menut->setOrigem(temp->getID());
                         menut->setPontuacaoPrev(pontos);
+                        Menus::Fases::Fase* fase = dynamic_cast<Menus::Fases::Fase*>(temp); //passa para o menu de tran
+                        menut->setMultiplayer(fase->getMultiplayer());
                     }
                     else if(id == Estados::IdEstado::menuGameOver) {
                         Menus::MenuGameOver* menuG = dynamic_cast<Menus::MenuGameOver*>(estadoAtual);
@@ -49,6 +52,7 @@ namespace Estados {
                         Menus::MenuTransicao* menut = dynamic_cast<Menus::MenuTransicao*>(temp);
                         if(net != NULL && menut != NULL) {
                             net->setPontuacao(menut->getPontuacaoPrev());
+                            net->setMultiplayer(menut->getMultiplayer());
                         }
                     }
                 }

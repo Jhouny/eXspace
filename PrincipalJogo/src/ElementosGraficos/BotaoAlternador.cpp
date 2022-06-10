@@ -1,4 +1,7 @@
 #include "../../include/ElementosGraficos/BotaoAlternador.h"
+#include "../../include/Estados/MaquinaEstados.h"
+#include "../../include/Ente/Menus/Fases/Fase.h"
+
 
 namespace ElementosGraficos {
     BotaoAlternador::BotaoAlternador(Coordenada tam, Coordenada pos):
@@ -29,9 +32,17 @@ namespace ElementosGraficos {
             indice = 0;
         texto = escolha[indice].first;
 
-        if(alvo != NULL) {
+        if(alvo != NULL && operacao == 0) {
             Estados::IdEstado n = static_cast<Estados::IdEstado>(escolha[indice].second);
             alvo->setFuncao(n);
+        } else if(alvo != NULL && pMaq != NULL && operacao == 1) {
+            std::map<Estados::IdEstado, Estados::Estado*> *temp = pMaq->getMapaEstados();
+            std::map<Estados::IdEstado, Estados::Estado*>::iterator it3;
+            for(it3 = temp->begin(); it3 != temp->end() && (it3->second)->getID() != alvo->getFuncao(); it3++);
+            Menus::Fases::Fase* fase = dynamic_cast<Menus::Fases::Fase*>((it3->second));
+            if(fase != NULL) {
+                fase->setMultiplayer(escolha[indice].second);
+            }
         }
     }
 
@@ -40,10 +51,13 @@ namespace ElementosGraficos {
         if(indice < 0)
             indice = escolha.size();
         texto = escolha[indice].first;
-
-        if(alvo != NULL) {
+        
+        if(alvo != NULL && operacao == 0) {
             Estados::IdEstado n = static_cast<Estados::IdEstado>(escolha[indice].second);
             alvo->setFuncao(n);
+        } else if(alvo != NULL && pMaq != NULL && operacao == 1) {
+            std::map<Estados::IdEstado, Estados::Estado*> *temp = pMaq->getMapaEstados();
+            std::map<Estados::IdEstado, Estados::Estado*>::iterator it3;
         }
     }
 

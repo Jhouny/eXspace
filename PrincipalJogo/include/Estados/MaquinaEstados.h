@@ -20,6 +20,8 @@ namespace Estados {
 
             ~MaquinaEstados();
 
+            std::map<IdEstado, Estado*>* getMapaEstados() { return &mapaEstados; }
+
             void inserirEstado(Estado* est);
 
             void setEstadoAtual(IdEstado id, int pontos = 0);

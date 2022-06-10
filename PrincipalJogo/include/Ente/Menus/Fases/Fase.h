@@ -31,6 +31,8 @@ namespace Menus::Fases {
             int numInimigos;
             int pontuacaoIni;
 
+            bool multiplayer;
+
             Gerenciadores::Colisor colisor;
 
 
@@ -51,6 +53,9 @@ namespace Menus::Fases {
             Fase(Entidades::Personagens::Jogador* jog1 = NULL, Entidades::Personagens::Jogador* jog2 = NULL);
             
             ~Fase();
+
+            void setMultiplayer(bool multi) { multiplayer = multi; }
+            bool getMultiplayer()const { return multiplayer; }
             
             void setPontuacao(const int pont) { pontuacaoIni = pont; }
             

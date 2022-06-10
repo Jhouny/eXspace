@@ -9,6 +9,7 @@ namespace Menus::Fases {
         pControleFase(this),
         visor(jog1, jog2),
         colisor(),
+        multiplayer(false),
         pontuacaoIni(0)
         {
             // Define o plano de fundo
@@ -20,14 +21,13 @@ namespace Menus::Fases {
             pIniVoador = NULL;
             pLava = NULL;
             numInimigos = 0;
-
+        
             // Inclui os jogadores
             if(jogador2 != NULL) {
                 jogador2->setVelocidade(Coordenada(0,0));
                 jogador2->setFase(this);
                 jogador2->getControle()->setTeclas("Y","G","J","P");
                 incluir(static_cast<Entidades::Entidade*>(jogador2));
-                
             }
 
             jogador1->setVelocidade(Coordenada(0, 0));
@@ -54,6 +54,7 @@ namespace Menus::Fases {
     }
 
     void Fase::gameOver() {
+        multiplayer = false;
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver, jogador1->getPontuacao());
     }
 
@@ -87,10 +88,14 @@ namespace Menus::Fases {
         jogador1->setFase(this);
         incluir(static_cast<Entidades::Entidade*>(jogador1));
 
-        if(jogador2 != NULL) {
+        if(jogador2 != NULL && multiplayer)  {
             jogador2->resetar();
             jogador2->setFase(this);
+            visor.setMultiplayer(true);
             incluir(static_cast<Entidades::Entidade*>(jogador2));
+        } else {
+            jogador2->desativarControle();
+            visor.setMultiplayer(false);
         }
 
         fundo.setPosition(0, 0);
