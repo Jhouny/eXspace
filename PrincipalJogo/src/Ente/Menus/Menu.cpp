@@ -62,7 +62,7 @@ namespace Menus{
             if((it->first)->getFuncao() == Estados::IdEstado::salvarPontuacao) {
                 ElementosGraficos::BotaoSalvar* save = dynamic_cast<ElementosGraficos::BotaoSalvar*>(it->first);
                 save->salvar();
-            } else if((it->first)->getFuncao() == Estados::IdEstado::alternar){
+            } else if((it->first)->getFuncao() == Estados::IdEstado::alternar) {
                 ElementosGraficos::BotaoAlternador* alt = dynamic_cast <ElementosGraficos::BotaoAlternador*>(it->first);
                 alt->proximo();
             } else if((it->first)->getFuncao() == Estados::IdEstado::salvarJogo) {

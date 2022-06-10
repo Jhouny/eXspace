@@ -119,6 +119,7 @@ namespace Menus::Fases {
 
     void Fase::atualizaEntidades(const float dt){
         Entidades::Entidade* ent;
+        cout << "tam: " << lEntidades.size() << endl;
         for(it = lEntidades.begin(); it != lEntidades.end();) {
             ent = *it;
             ent->executar(dt);
@@ -149,6 +150,13 @@ namespace Menus::Fases {
         }
 
         visor.renderizar();
+    }
+
+    void Fase::geraEntidades(bool gIni) {
+        geraPlataformas();
+        geraObstaculos();
+        if(gIni)
+            geraInimigos();
     }
 
     void Fase::atualizar(const float dt) {

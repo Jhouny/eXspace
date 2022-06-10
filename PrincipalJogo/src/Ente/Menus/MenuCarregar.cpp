@@ -41,7 +41,9 @@ namespace Menus{
             std::map<Estados::IdEstado, Estados::Estado*> tmp = *(pMaq->getMapaEstados());
             pFase = dynamic_cast<Menus::Fases::Fase*>(tmp[idFase]);
             pFase->resetarEstadoOriginal();
+            pFase->setMultiplayer((bool)stoi(vecChar[1], NULL, 10));
             pFase->setPontuacao(stoi(vecChar[2], NULL, 10));
+            pFase->geraEntidades(false);
             return;
         }
 
@@ -50,7 +52,6 @@ namespace Menus{
         int rg = stoi(vecChar[1], NULL, 10);
         int v;
         float vx, vy;
-        cout << "id: " << id << endl;
         switch(id) {
             case ID::jogador: {  // Ignora o RG
                 pos.x = stof(vecChar[2], NULL);
@@ -63,12 +64,10 @@ namespace Menus{
                     jogador1->setPosicao(pos);
                     jogador1->setVida(v);
                     jogador1->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
-                    pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador1));
                 } else {
                     jogador2->setPosicao(pos);
                     jogador2->setVida(v);
                     jogador2->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
-                    pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador2));
                 }
                 break;
             }
@@ -91,12 +90,12 @@ namespace Menus{
                     tam = TAM_PROJETIL_JOGADOR;  // Default para projetil de jogador
 
                 Entidades::Projetil* proj = new Entidades::Projetil(pos, tam, vx, vy, dano, path);
-                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(proj));
+                pFase->incluir(static_cast<Entidades::Entidade*>(proj));
                 break;
             }
             case ID::inimigoTerrestre: {
                 pos.x = stof(vecChar[2], NULL);
-                pos.y = stof(vecChar[3], NULL);
+                pos.y = stof(vecChar[3], NULL) - 100.f;
                 v = stoi(vecChar[4], NULL, 10);
                 vx = stof(vecChar[5], NULL);
                 vy = stof(vecChar[6], NULL);
@@ -104,7 +103,8 @@ namespace Menus{
                 iniT->setPosicao(pos);
                 iniT->setVida(v);
                 iniT->setVelocidade(Coordenada(vx,vy));
-                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(iniT));
+                iniT->setJogador(jogador1);
+                pFase->incluir(static_cast<Entidades::Entidade*>(iniT));
                 break;
             }
             case ID::inimigoVoador: {
@@ -119,7 +119,9 @@ namespace Menus{
                 iniV->setVida(v);
                 iniV->setVelocidade(Coordenada(vx,vy));
                 iniV->setPontoMedio(pm);
-                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(iniV));
+                iniV->setJogador(jogador1);
+                iniV->setFase(pFase);
+                pFase->incluir(static_cast<Entidades::Entidade*>(iniV));
                 break;
             }
             case ID::chefe: {
@@ -131,8 +133,10 @@ namespace Menus{
                 Entidades::Personagens::Chefe* chefe = new Entidades::Personagens::Chefe();
                 chefe->setPosicao(pos);
                 chefe->setVida(v);
+                chefe->setFase(pFase);
                 chefe->setVelocidade(Coordenada(vx,vy));
-                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(chefe));
+                chefe->setJogador(jogador1);
+                pFase->incluir(static_cast<Entidades::Entidade*>(chefe));
                 break;
             }
         }

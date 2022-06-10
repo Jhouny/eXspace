@@ -9,7 +9,7 @@
             "name": "(gdb) Debug Main",
             "type": "cppdbg",
             "request": "launch",
-            "program": "${workspaceFolder}/PrincipalJogo/main.exe",
+            "program": "${workspaceFolder}/main.exe",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
