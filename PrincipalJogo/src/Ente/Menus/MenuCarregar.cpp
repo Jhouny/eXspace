@@ -176,6 +176,7 @@ namespace Menus{
         for(int i = 0; i < vectorCaminhos.size(); i++){
             pBotaoPath = new ElementosGraficos::BotaoPath(Coordenada(COMPRIMENTO/2.f, 300 + 120*i ));
             pBotaoPath->setPath(vectorCaminhos[i]);
+            pBotaoPath->setTitulo(vectorCaminhos[i]);
             if(i == 0) {
                 pBotaoPath->ativar();
                 botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoPath), true));
