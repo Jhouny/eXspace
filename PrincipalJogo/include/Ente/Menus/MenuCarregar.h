@@ -15,7 +15,8 @@ namespace Menus{
             std::vector<std::string> vectorCaminhos;
             Entidades::Personagens::Jogador* jogador1;
             Entidades::Personagens::Jogador* jogador2;
-            std::list<Entidades::Entidade> lEntes;
+
+            Menus::Fases::Fase* pFase;
             
         public:
             MenuCarregar( Entidades::Personagens::Jogador* jog1,Entidades::Personagens::Jogador* jog2);
@@ -27,7 +28,7 @@ namespace Menus{
 
             void carregarFase();
 
-            void lerTrecho(std::string in);
+            void carregarLinha(std::string in);
 
             void ativarControle();
 

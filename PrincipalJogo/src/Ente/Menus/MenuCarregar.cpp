@@ -8,7 +8,8 @@ namespace Menus{
         jogador1(jog1),
         jogador2(jog2),
         Menu(),
-        pControleMenu(this)
+        pControleMenu(this),
+        pFase(NULL)
     {
         setID(Estados::IdEstado::menuCarregar);
         setTitulo("CARREGAR JOGO:");
@@ -25,49 +26,115 @@ namespace Menus{
         }
     }
 
-    void MenuCarregar::lerTrecho(std::string in) {
+    void MenuCarregar::carregarLinha(std::string in) {
         char* ptr;
         std::vector<char*> vecChar;
         ptr = strtok((char*)in.c_str(), ";"); 
 
-        while(ptr != NULL){
+        while(ptr != NULL) {
             vecChar.emplace_back(ptr);
             ptr = strtok (NULL, ";");
         } 
 
-        Estados::IdEstado idFase = (Estados::IdEstado) strtol(vecChar[0], NULL, 10);  // 1o ID é de Fase (i.e. Estado)
-        cout << "id: " << idFase << endl;
-        std::map<Estados::IdEstado, Estados::Estado*> *temp = pMaq->getMapaEstados();
-        std::map<Estados::IdEstado, Estados::Estado*>::iterator it3;
-        for(it3 = temp->begin(); it3 != temp->end() && (it3->second)->getID() != idFase; it3++);
-            
-        Menus::Fases::Fase* pFase = dynamic_cast<Menus::Fases::Fase*>(it3->second);
+        if(pFase == NULL) {
+            Estados::IdEstado idFase = (Estados::IdEstado) strtol(vecChar[0], NULL, 10);  // 1o ID é de Fase (i.e. Estado)
+            std::map<Estados::IdEstado, Estados::Estado*> tmp = *(pMaq->getMapaEstados());
+            pFase = dynamic_cast<Menus::Fases::Fase*>(tmp[idFase]);
+            pFase->resetarEstadoOriginal();
+            pFase->setPontuacao(stoi(vecChar[2], NULL, 10));
+            return;
+        }
 
-        ID id = (ID) strtol(vecChar[0], NULL, 10);
+        Coordenada tam, pos;
+        ID id = (ID) stoi(vecChar[0], NULL, 10);
+        int rg = stoi(vecChar[1], NULL, 10);
+        int v;
+        float vx, vy;
+        cout << "id: " << id << endl;
         switch(id) {
-            case ID::jogador:  // Ignora o RG
-                float px = stof(vecChar[2], NULL);
-                float py = stof(vecChar[3], NULL);
-                jogador1->setPosicao(Coordenada(px, py));
-                int v = stoi(vecChar[4], NULL, 10);
-                jogador1->setVida(v);
-                float vx = stof(vecChar[5], NULL);
-                float vy = stof(vecChar[6], NULL);
-                jogador1->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
-                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador1));
-                break;
+            case ID::jogador: {  // Ignora o RG
+                pos.x = stof(vecChar[2], NULL);
+                pos.y = stof(vecChar[3], NULL);
+                v = stoi(vecChar[4], NULL, 10);
+                vx = stof(vecChar[5], NULL);
+                vy = stof(vecChar[6], NULL);
 
-            case ID::projetil:
+                if(rg == 0) {
+                    jogador1->setPosicao(pos);
+                    jogador1->setVida(v);
+                    jogador1->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
+                    pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador1));
+                } else {
+                    jogador2->setPosicao(pos);
+                    jogador2->setVida(v);
+                    jogador2->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
+                    pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador2));
+                }
                 break;
+            }
+            case ID::projetil: {
+                pos.x = stof(vecChar[2], NULL);
+                pos.y = stof(vecChar[3], NULL);
+                vx = stof(vecChar[4], NULL);
+                vy = stof(vecChar[5], NULL);
+                int dano = stoi(vecChar[6], NULL, 10);
+                ID orig = (ID) stoi(vecChar[7], NULL, 10);
+                char* path = vecChar[8];
 
-            case ID::inimigoTerrestre:
+                if(orig == ID::jogador)
+                    tam = TAM_PROJETIL_JOGADOR;
+                else if(orig == ID::inimigoVoador)
+                    tam = TAM_PROJETIL_INI_VOADOR;
+                else if(orig == ID::chefe)
+                    tam = TAM_PROJETIL_CHEFE;
+                else
+                    tam = TAM_PROJETIL_JOGADOR;  // Default para projetil de jogador
+
+                Entidades::Projetil* proj = new Entidades::Projetil(pos, tam, vx, vy, dano, path);
+                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(proj));
                 break;
-            
-            case ID::inimigoVoador:
+            }
+            case ID::inimigoTerrestre: {
+                pos.x = stof(vecChar[2], NULL);
+                pos.y = stof(vecChar[3], NULL);
+                v = stoi(vecChar[4], NULL, 10);
+                vx = stof(vecChar[5], NULL);
+                vy = stof(vecChar[6], NULL);
+                Entidades::Personagens::InimigoTerrestre* iniT = new Entidades::Personagens::InimigoTerrestre();
+                iniT->setPosicao(pos);
+                iniT->setVida(v);
+                iniT->setVelocidade(Coordenada(vx,vy));
+                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(iniT));
                 break;
-            
-            case ID::chefe:
+            }
+            case ID::inimigoVoador: {
+                pos.x = stof(vecChar[2], NULL);
+                pos.y = stof(vecChar[3], NULL);
+                v = stoi(vecChar[4], NULL, 10);
+                vx = stof(vecChar[5], NULL);
+                vy = stof(vecChar[6], NULL);
+                float pm = stof(vecChar[7], NULL);
+                Entidades::Personagens::InimigoVoador* iniV = new Entidades::Personagens::InimigoVoador();
+                iniV->setPosicao(pos);
+                iniV->setVida(v);
+                iniV->setVelocidade(Coordenada(vx,vy));
+                iniV->setPontoMedio(pm);
+                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(iniV));
                 break;
+            }
+            case ID::chefe: {
+                pos.x = stof(vecChar[2], NULL);
+                pos.y = stof(vecChar[3], NULL);
+                v = stoi(vecChar[4], NULL, 10);
+                vx = stof(vecChar[5], NULL);
+                vy = stof(vecChar[6], NULL);
+                Entidades::Personagens::Chefe* chefe = new Entidades::Personagens::Chefe();
+                chefe->setPosicao(pos);
+                chefe->setVida(v);
+                chefe->setVelocidade(Coordenada(vx,vy));
+                pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(chefe));
+                break;
+            }
         }
     }
 
@@ -78,15 +145,18 @@ namespace Menus{
             std::string arq = (dynamic_cast<ElementosGraficos::BotaoPath*>(it->first))->getPath();
             joguin.open(arq, std::ios::in);
             if(joguin) {
-                std::string entInf;
+                std::string entInf;                
                 
                 while(!joguin.eof()) {
                     std::getline(joguin, entInf);
-                    lerTrecho(entInf);
+                    if(entInf.size() > 0)
+                        carregarLinha(entInf);
                 }
+
+                pMaq->setEstadoAtual((static_cast<Estados::Estado*>(pFase))->getID());
             } else
                 throw (arq);
-            
+
         } catch (std::string path) {
             cerr << "Arquivo indisponivel: " << path << endl;
             exit(1);
@@ -104,7 +174,7 @@ namespace Menus{
     void MenuCarregar::criaBotoes() {
         botoesAtivos.clear();
         for(int i = 0; i < vectorCaminhos.size(); i++){
-            pBotaoPath = new ElementosGraficos::BotaoPath(Coordenada(COMPRIMENTO/2.f - 125.f, 150 + 100*i ));
+            pBotaoPath = new ElementosGraficos::BotaoPath(Coordenada(COMPRIMENTO/2.f, 300 + 120*i ));
             pBotaoPath->setPath(vectorCaminhos[i]);
             if(i == 0) {
                 pBotaoPath->ativar();
@@ -113,7 +183,6 @@ namespace Menus{
             else
                 botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoPath),false));
         }
-
     }
 
     void MenuCarregar::renderizar() {

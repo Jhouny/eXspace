@@ -19,6 +19,7 @@ namespace Entidades::Personagens {
             ~Personagem();
 
             const float getVida() const { return vida; }
+            void setVida(int v) { vida = v; }
 
             void setDano(float d);
             const float getDano() const { return dano; }

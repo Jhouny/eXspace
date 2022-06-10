@@ -71,10 +71,10 @@ namespace Menus{
             } else if(mPausa != NULL && (it->first)->getFuncao() == Estados::IdEstado::indefinido) {
                 mPausa->resumirJogo();
             } 
-            /*else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
+            else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
                 Menus::MenuCarregar* tmp = dynamic_cast<Menus::MenuCarregar*>(this);
                 tmp->carregarFase();
-            }*/ 
+            }
             else {
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
             }

@@ -95,7 +95,7 @@ namespace Menus {
 
                     Entidades::Projetil* proj = dynamic_cast<Entidades::Projetil*>(ent); // PROJETIL
                     if(proj != NULL) { 
-                        saida << proj->getVelocidade().x << ";" << proj->getVelocidade().y << ";" << proj->getOrigem()->getID() << ";" << proj->getTextura() << ";" << endl;
+                        saida << proj->getVelocidade().x << ";" << proj->getVelocidade().y << ";" << proj->getDano() << ";" << proj->getOrigem()->getID() << ";" << proj->getTextura() << ";" << endl;
                     }
                 }
                 saida.close();

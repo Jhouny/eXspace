@@ -151,7 +151,6 @@ namespace Menus::Fases {
     }
 
     void Netuno::executar(const float dt){
-        resetarEstadoOriginal();
         jogador1->setPontuacao(pontuacaoIni);
 
         geraPlataformas();

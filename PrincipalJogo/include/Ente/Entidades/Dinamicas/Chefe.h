@@ -22,6 +22,7 @@ namespace Entidades::Personagens {
         public:
             Chefe();
             ~Chefe();
+            
             float getSegundos() {
                 return clock.getElapsedTime().asSeconds();
             }

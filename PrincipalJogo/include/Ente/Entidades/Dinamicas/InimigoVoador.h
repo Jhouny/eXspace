@@ -34,6 +34,7 @@ namespace Entidades::Personagens {
             }
 
             float getPontoMedio()const { return pontoMedio; }
+            void setPontoMedio(float pm) { pontoMedio = pm; }
 
             void setFase(Menus::Fases::Fase* pF) { pFase = pF; }
 

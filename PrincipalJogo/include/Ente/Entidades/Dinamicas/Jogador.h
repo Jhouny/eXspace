@@ -45,8 +45,6 @@ namespace Entidades::Personagens {
             }
 
             Controle::ControleJogador* getControle() { return &pControleJogador; }
-
-            void setVida(int vi){ vida = vi; }
             
             void setPontuacao(float ponto) { pontuacao = ponto; }
             int getPontuacao() const { return pontuacao; }
