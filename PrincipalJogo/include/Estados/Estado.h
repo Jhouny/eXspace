@@ -25,7 +25,9 @@ namespace Estados {
         selecionarJogadores,
         salvarPontuacao,
         salvarJogo,
-        alternar
+        alternar,
+        carregar,
+        menuCarregar
     };
 
     class Estado {

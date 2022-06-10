@@ -27,6 +27,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuPausa.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuJogar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuTransicao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Fase.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Mercurio.cpp",
@@ -43,6 +44,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Botao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoAlternador.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoSalvar.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\BotaoPath.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Texto.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Ponto.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\ElementosGraficos\\Coracao.cpp",
@@ -63,6 +65,7 @@
                 "-lfreetype",
                 "-lwinmm",
                 "-lgdi32",
+                "-lstdc++fs",
                 "-DSFML_STATIC"
             ],
             "options": {},

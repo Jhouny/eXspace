@@ -17,7 +17,7 @@ namespace Menus{
 
     }
 
-    void MenuJogar::criaBotoes(){
+    void MenuJogar::criaBotoes() {
         botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::mercurio , "NOVO JOGO");
         pBotao->ativar();
@@ -40,7 +40,7 @@ namespace Menus{
         pBotaoJog = pBA;
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBA), false));        
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::indefinido, "CARREGAR JOGO");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuCarregar, "CARREGAR JOGO");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 

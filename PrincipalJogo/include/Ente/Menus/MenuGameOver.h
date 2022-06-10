@@ -14,7 +14,7 @@ namespace ElementosGraficos{
 
 
 namespace Menus{
-    class MenuGameOver: public Menu{
+    class MenuGameOver: public Menu {
         private:
             std::vector<ElementosGraficos::Texto*> lTextos;
             ElementosGraficos::Texto* pTexto;

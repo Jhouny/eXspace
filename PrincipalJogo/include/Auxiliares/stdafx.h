@@ -8,7 +8,10 @@
 #include <vector>
 #include <list>
 #include <map>
+#include <string>
+#include <experimental/filesystem>
 using namespace std;
+namespace fs = std::experimental::filesystem;
 
 #include "SFML/Graphics.hpp"
 
