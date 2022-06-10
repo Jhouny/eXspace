@@ -56,12 +56,18 @@ namespace Menus{
                 jogador1->setVelocidade(Coordenada(0,0));  // Seta o vetor Vel. para (0,0)
                 pFase->getLista()->emplace_back(static_cast<Entidades::Entidade*>(jogador1));
                 break;
-            case 2:
-                
-            case 4:
-            case 5:
-            case 6:
-            case 10:
+
+            case ID::projetil:
+                break;
+
+            case ID::inimigoTerrestre:
+                break;
+            
+            case ID::inimigoVoador:
+                break;
+            
+            case ID::chefe:
+                break;
         }
     }
 
