@@ -6,6 +6,7 @@
 #include "../../../Controle/ControleJogador.h"
 
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
+#define TEX_JOGADOR_2 "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/jogador2.png"
 #define TAM_PROJETIL_JOGADOR Coordenada(12,4)
 
 namespace Menus::Fases{
@@ -17,7 +18,7 @@ namespace Entidades::Personagens {
         private:
             Menus::Fases::Fase* pFase;
             Projetil* proj;
-            Controle::ControleJogador pControleJogador;
+            Controle::ControleJogador pControleJogador; 
 
             int pontuacao;
             bool viradoFrente;
@@ -42,6 +43,8 @@ namespace Entidades::Personagens {
             void reiniciarClock() {
                 clock.restart();
             }
+
+            Controle::ControleJogador* getControle() { return &pControleJogador; }
 
             void setVida(int vi){ vida = vi; }
             

@@ -30,6 +30,7 @@ namespace Entidades {
             
             Coordenada getPosicao() const { return posicao; }
             Coordenada getTamanho() const { return tamanho; }
+            void setTamanho(Coordenada tam) { tamanho = tam; }
 
             bool getAtivo() const { return ativo; }
             void setAtivo(bool at) { ativo = at; }

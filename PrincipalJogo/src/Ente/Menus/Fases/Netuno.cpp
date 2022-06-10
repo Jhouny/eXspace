@@ -105,28 +105,42 @@ namespace Menus::Fases {
 
     void Netuno::geraInimigos(){
         int i;
-        for(i = 0; i < 3; i++) {
-            pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
-            pIniTerrestre->setPosicao(Coordenada((rand() % 1250)+4500 , 100));
-            pIniTerrestre->setJogador(jogador1);
-            incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
+        bool achou ;
+        int numInstanciasIniTerrestre = (rand() % 4) + 3;  // randomiza numero de instancia de InimigoTerrestre (de 3 a 6)
+        std::vector<Entidades::Entidade*> temp(lEntidades.begin(), lEntidades.end());// Copia os elementos da lista para um vetor temporário
+        for(i = 0; i < numInstanciasIniTerrestre ; i++){
+            achou = false;
+            std::random_shuffle(temp.begin(), temp.end());  // Aleatoriza a posicao dos elementos do vetor
+            for(int i = 0; i < temp.size() && !achou ; i++) {
+                Entidades::Entidade* ent = temp[i];
+                if(ent->getID() == ID::plataforma) {
+                    Entidades::Obstaculos::Plataforma* pPlat = dynamic_cast<Entidades::Obstaculos::Plataforma*>(ent);
+                    if((ent->getPosicao().x > 1000 && ent->getPosicao().x < 9000) && pPlat->getNormal()) {
+                        Coordenada pos;
+                        pos.x = ent->getPosicao().x + (rand() % (int)(ent->getTamanho().x - 50));
+                        pos.y= ent->getPosicao().y - 60;
+                        pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
+                        pIniTerrestre->setPosicao(pos);
+                        pIniTerrestre->setJogador(jogador1);
+                        incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
+                        achou = true;
+                    }
+                } 
+            }
         }
+        temp.clear();
 
-        for(i = 0; i < 3; i++) {
-            pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
-            pIniTerrestre->setPosicao(Coordenada((rand() % 1250)+6250 , 100));
-            pIniTerrestre->setJogador(jogador1);
-            incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
-        }
-        
+
         Fase* tmp = static_cast<Fase*>(this);
-        for(i = 0; i < 3; i++) {
+        int numInstanciasIniVoador = (rand() % 4) + 3; // randomiza numero de instancia de InimigoVoador (de 3 a 6)
+        for(i = 0; i < numInstanciasIniVoador; i++) {
             pIniVoador = new Entidades::Personagens::InimigoVoador();
-            pIniVoador->setPosicao(Coordenada(rand() % (6200) + 1800, 100));
+            pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 200));
+            pIniVoador->randomizarOscilacao();  // Tem que estar depois do setPosicao()
             pIniVoador->setJogador(jogador1);
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
-        }
+        }        
 
         pChefe = new Entidades::Personagens::Chefe();
         pChefe->setPosicao(Coordenada(10000,ALTURA-100.f));
@@ -146,8 +160,7 @@ namespace Menus::Fases {
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));
-        pGrafico->setMinimapViewport();
-        pGrafico->atualizaMinimap(Coordenada(2000,360));
+        pGrafico->atualizaMinimap(Coordenada(2000,360)); //??
     }
 
 }

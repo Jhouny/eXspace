@@ -25,7 +25,9 @@ namespace Menus::Fases {
             if(jogador2 != NULL) {
                 jogador2->setVelocidade(Coordenada(0,0));
                 jogador2->setFase(this);
+                jogador2->getControle()->setTeclas("Y","G","J","P");
                 incluir(static_cast<Entidades::Entidade*>(jogador2));
+                
             }
 
             jogador1->setVelocidade(Coordenada(0, 0));
@@ -65,11 +67,13 @@ namespace Menus::Fases {
 
     void Fase::ativarControle() {
         jogador1->ativarControle();
+        jogador2->ativarControle();
         pControleFase.ativar();
     }
 
     void Fase::desativarControle() {
         jogador1->desativarControle();
+        jogador2->desativarControle();
         pControleFase.desativar();
     }
 
@@ -86,7 +90,7 @@ namespace Menus::Fases {
         if(jogador2 != NULL) {
             jogador2->resetar();
             jogador2->setFase(this);
-            incluir(static_cast<Entidades::Entidade*>(jogador1));
+            incluir(static_cast<Entidades::Entidade*>(jogador2));
         }
 
         fundo.setPosition(0, 0);

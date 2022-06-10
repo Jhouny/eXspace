@@ -8,10 +8,12 @@
 #define PULO_Y -256000 * TICK_RATE
 #define ATRITO 0.7
 #define VELOCIDADE_JOGADOR 76800 * TICK_RATE 
+#define POS_INICIAL Coordenada(100, 0)
+
 
 namespace Entidades::Personagens {
     Jogador::Jogador():
-        Personagem(Coordenada(46, 64), Coordenada(9000,0), false, 100, 20, ID::jogador),
+        Personagem(Coordenada(38, 68), POS_INICIAL, false, 100, 20, ID::jogador),
         pControleJogador(this),
         pontuacao(0)
         {
@@ -19,15 +21,23 @@ namespace Entidades::Personagens {
             estaPulando = false;
             estaAtirando = false;
             viradoFrente = true;
+
+            if(getRG() == 1) {  // Jogadores DEVEM ser as primeiras entidades!!
+                // Define a textura
+                this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
+                setTexture(TEX_JOGADOR);
+            } else {
+                // Define a textura
+                this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
+                setTamanho(Coordenada(54, 68));
+                setTexture(TEX_JOGADOR_2);
+            }
             
             velocidade.x = 0.f;
             velocidade.y = 0.f;
             aceleracaoY = 10;
 
 
-            // Define a textura
-            this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
-            setTexture(TEX_JOGADOR);
     }
 
     Jogador::~Jogador() {}
@@ -88,7 +98,7 @@ namespace Entidades::Personagens {
 
     void Jogador::resetar(int p) {
         setPontuacao(p);
-        setPosicao(9000,0);
+        setPosicao(POS_INICIAL);
         setVida(100);
 
         setJump(false);
@@ -103,7 +113,10 @@ namespace Entidades::Personagens {
         pControleJogador.resetarTeclas();
 
         // Define a textura
-        setTexture(TEX_JOGADOR);
+        if(getRG() == 1)
+            setTexture(TEX_JOGADOR);
+        else
+            setTexture(TEX_JOGADOR_2);
     }
 
     // Checa com que tipo de objeto colidiu

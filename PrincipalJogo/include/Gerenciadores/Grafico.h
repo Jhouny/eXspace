@@ -42,6 +42,7 @@ namespace Gerenciadores {
 
             void setMinimap(Coordenada t) {
                 minimap.setSize(t.x,t.y);
+                setMinimapViewport();
             }
             void setMinimapViewport();
 
