@@ -68,7 +68,7 @@ namespace Menus {
             if(!saida)
                 cout << "Erro ao abrir arquivo..." << endl;
             else {
-                saida << faseID << ";" << pFase->getMultiplayer() << ";" << pFase->getPontuacao() <<";" << endl << "~" << endl;
+                saida << faseID << ";" << pFase->getMultiplayer() << ";" << pFase->getPontuacao() << ";" << endl ;
 
                 std::list<Entidades::Entidade*>::iterator it2;
                 for(it2 = pListaEntidades->begin(); it2 != pListaEntidades->end(); it2++) {
@@ -78,14 +78,14 @@ namespace Menus {
                     if(ent->getEstatico()) {
                         continue;
                     }
-                    saida << ent->getID() << ";" << ent->getRG() << ";" << ent->getPosicao().x  << ";" << ent->getPosicao().y << ";";
+                    saida << ent->getID() << ";" << ent->getRG() << ";" << ent->getPosicao().x  << ";" << ent->getPosicao().y << ";";  // ENTIDADES
 
                     Entidades::Personagens::Personagem* psgn = dynamic_cast<Entidades::Personagens::Personagem*>(ent);
                     if(psgn != NULL) {
-                        saida << psgn->getVida() << ";" << psgn->getVelocidade().x << ";" << psgn->getVelocidade().y << ";" ;
+                        saida << psgn->getVida() << ";" << psgn->getVelocidade().x << ";" << psgn->getVelocidade().y << ";" ; // PERSONAGENS
 
                         switch (psgn->getID()) {
-                            case ID::inimigoVoador:
+                            case ID::inimigoVoador:  // INIMIGO VOADOR
                                 Entidades::Personagens::InimigoVoador* iniv = dynamic_cast<Entidades::Personagens::InimigoVoador*>(psgn);
                                 saida << iniv->getPontoMedio() << ";";
                                 break;
@@ -93,8 +93,8 @@ namespace Menus {
                         saida << endl;
                     }
 
-                    Entidades::Projetil* proj = dynamic_cast<Entidades::Projetil*>(ent);
-                    if(proj != NULL) {
+                    Entidades::Projetil* proj = dynamic_cast<Entidades::Projetil*>(ent); // PROJETIL
+                    if(proj != NULL) { 
                         saida << proj->getVelocidade().x << ";" << proj->getVelocidade().y << ";" << proj->getOrigem()->getID() << ";" << proj->getTextura() << ";" << endl;
                     }
                 }

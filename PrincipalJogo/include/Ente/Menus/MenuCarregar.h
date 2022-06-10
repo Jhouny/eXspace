@@ -5,6 +5,7 @@
 
 #include "../../ElementosGraficos/BotaoPath.h"
 #include "../../Controle/ControleMenu.h"
+#include "../Entidades/Dinamicas/Jogador.h"
 
 namespace Menus{
     class MenuCarregar: public Menu {
@@ -12,15 +13,21 @@ namespace Menus{
             ElementosGraficos::BotaoPath* pBotaoPath;
             Controle::ControleMenu pControleMenu;
             std::vector<std::string> vectorCaminhos;
+            Entidades::Personagens::Jogador* jogador1;
+            Entidades::Personagens::Jogador* jogador2;
+            std::list<Entidades::Entidade> lEntes;
             
         public:
-            MenuCarregar();
+            MenuCarregar( Entidades::Personagens::Jogador* jog1,Entidades::Personagens::Jogador* jog2);
 
             ~MenuCarregar();
+            void getLista();
 
             void leCaminhoArquivos();
 
-            void executar();
+            void carregarFase();
+
+            void lerTrecho(std::string in);
 
             void ativarControle();
 

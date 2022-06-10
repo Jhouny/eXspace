@@ -17,6 +17,7 @@ namespace ElementosGraficos {
             void setTitulo(std::string cont);
 
             void setPath(std::string cont);
+            std::string getPath() const { return path; }
     };    
 }
 

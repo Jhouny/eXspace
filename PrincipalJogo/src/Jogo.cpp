@@ -52,6 +52,11 @@ Jogo::Jogo():
     pTemp->cegar();
     inserirEstado(pTemp);
 
+    pTemp = static_cast<Estados::Estado*>(new Menus::MenuCarregar(jogador1, jogador2));
+    pTemp->setMaquina(this);
+    pTemp->cegar();
+    inserirEstado(pTemp);
+
     // Fase mercúrio
     pTemp = static_cast<Estados::Estado*>(new Menus::Fases::Mercurio(jogador1, jogador2));
     pTemp->setAnterior(mapaEstados[Estados::IdEstado::menuJogar]);

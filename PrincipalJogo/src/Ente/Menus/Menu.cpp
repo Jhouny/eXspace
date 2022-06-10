@@ -1,5 +1,6 @@
 #include "../../../include/Ente/Menus/Menu.h"
 #include "../../../include/Ente/Menus/MenuPausa.h"
+#include "../../../include/Ente/Menus/MenuCarregar.h"
 #include "../../../include/ElementosGraficos/Texto.h"
 #include "../../../include/Estados/MaquinaEstados.h"
 #include "../../../include/ElementosGraficos/BotaoAlternador.h"
@@ -69,7 +70,12 @@ namespace Menus{
                 tmp->salvaEstado();
             } else if(mPausa != NULL && (it->first)->getFuncao() == Estados::IdEstado::indefinido) {
                 mPausa->resumirJogo();
-            } else {
+            } 
+            /*else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
+                Menus::MenuCarregar* tmp = dynamic_cast<Menus::MenuCarregar*>(this);
+                tmp->carregarFase();
+            }*/ 
+            else {
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
             }
             reiniciarRelogio();

@@ -168,7 +168,6 @@ namespace Menus::Fases {
         
         geraPlataformas();
         geraObstaculos();
-        geraInimigos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));

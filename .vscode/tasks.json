@@ -27,7 +27,7 @@
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuPausa.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuJogar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
-                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuGameOver.cpp",
+                "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuCarregar.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\MenuTransicao.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Fase.cpp",
                 "${workspaceFolder}\\PrincipalJogo\\src\\Ente\\Menus\\Fases\\Mercurio.cpp",

@@ -4,6 +4,7 @@
 #include "../../include/Ente/Menus/MenuPausa.h"
 #include "../../include/Ente/Menus/MenuGameOver.h"
 #include "../../include/Ente/Menus/Fases/Netuno.h"
+#include "../../include/Ente/Menus/Fases/Mercurio.h"
 #include "../../include/Ente/Menus/Fases/Fase.h"
 
 namespace Estados {
@@ -24,6 +25,7 @@ namespace Estados {
     }
 
     void MaquinaEstados::setEstadoAtual(IdEstado id) {
+        bool flagExec = false;
         Estado* temp = estadoAtual;
         if(mapaEstados[id]) {
             estadoAtual = mapaEstados[id];
@@ -56,9 +58,36 @@ namespace Estados {
                         }
                     }
                 }
+
+                
             }
 
             estadoAtual->executar(0);
+
+            if(temp != NULL) {
+                if(temp->getID() == Estados::IdEstado::menuJogar) {
+                    if(id == Estados::IdEstado::mercurio) {
+                        Menus::Fases::Mercurio* tmp = dynamic_cast<Menus::Fases::Mercurio*>(estadoAtual);
+                        if(tmp != NULL)
+                            tmp->geraInimigos();
+                    } else if(id == Estados::IdEstado::netuno) {
+                        Menus::Fases::Netuno* tmp = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
+                        if(tmp != NULL)
+                            tmp->geraInimigos();
+                    }
+                }
+
+                else if(temp->getID() == Estados::IdEstado::menuCarregar){
+                    if(id == Estados::IdEstado::mercurio || id == Estados::IdEstado::netuno){
+                        Menus::Fases::Fase* fase = dynamic_cast<Menus::Fases::Fase*> (estadoAtual);
+                        if(fase) {
+                            fase->setLista();
+                        }
+                    }
+
+                }
+            }
+
             estadoAtual->getMenu()->reiniciarRelogio();
             estadoAtual->observar();
         }

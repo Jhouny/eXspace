@@ -58,6 +58,8 @@ namespace Menus::Fases {
             
             void setPontuacao(const int pont) { pontuacaoIni = pont; }
             int getPontuacao() const { return pontuacaoIni; }
+
+            std::list<Entidades::Entidade*>* getLista(){ return &lEntidades; }
             
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;
