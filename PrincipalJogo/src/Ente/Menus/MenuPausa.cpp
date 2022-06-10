@@ -68,11 +68,35 @@ namespace Menus {
             if(!saida)
                 cout << "Erro ao abrir arquivo..." << endl;
             else {
+                saida << faseID << ";" << pFase->getMultiplayer() << ";" << pFase->getPontuacao() <<";" << endl << "~" << endl;
+
                 std::list<Entidades::Entidade*>::iterator it2;
                 for(it2 = pListaEntidades->begin(); it2 != pListaEntidades->end(); it2++) {
-                    Entidades::Entidade* ent = *it2;
                     // Ordem: ID, Posicao.x, Posicao.y
-                    saida << ent->getID() << ";" << ent->getPosicao().x  << ";" << ent->getPosicao().y << ";" << endl;
+                    Entidades::Entidade* ent = *it2;
+                   
+                    if(ent->getEstatico()) {
+                        continue;
+                    }
+                    saida << ent->getID() << ";" << ent->getRG() << ";" << ent->getPosicao().x  << ";" << ent->getPosicao().y << ";";
+
+                    Entidades::Personagens::Personagem* psgn = dynamic_cast<Entidades::Personagens::Personagem*>(ent);
+                    if(psgn != NULL) {
+                        saida << psgn->getVida() << ";" << psgn->getVelocidade().x << ";" << psgn->getVelocidade().y << ";" ;
+
+                        switch (psgn->getID()) {
+                            case ID::inimigoVoador:
+                                Entidades::Personagens::InimigoVoador* iniv = dynamic_cast<Entidades::Personagens::InimigoVoador*>(psgn);
+                                saida << iniv->getPontoMedio() << ";";
+                                break;
+                        }
+                        saida << endl;
+                    }
+
+                    Entidades::Projetil* proj = dynamic_cast<Entidades::Projetil*>(ent);
+                    if(proj != NULL) {
+                        saida << proj->getVelocidade().x << ";" << proj->getVelocidade().y << ";" << proj->getOrigem()->getID() << ";" << proj->getTextura() << ";" << endl;
+                    }
                 }
                 saida.close();
             }

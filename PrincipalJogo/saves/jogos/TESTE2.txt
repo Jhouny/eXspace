@@ -1,0 +1,14 @@
+7;0;200;
+~
+1;0;5636.15;-27.3237;100;0;-650;
+4;44;9095.22;470.402;100;100;50;
+4;45;8033.5;434.402;100;-100;50;
+4;46;8216.38;466.402;100;100;50;
+4;47;7834.11;402.402;100;100;50;
+4;48;8138.23;434.402;100;100;50;
+6;50;9566.24;159.105;150;-1;66.8854;155;
+6;51;7923.03;187.944;150;-1;9.96263;159;
+6;52;9113.24;167.543;150;-1;47.4031;154;
+6;53;3546.58;203.13;150;1;32.121;173;
+6;54;6803.03;168.126;150;-1;-78.7257;178;
+2;544;6263.27;141.942;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;2;545;6163.84;233.258;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;2;546;6063.52;251.953;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;2;547;5963.7;157.943;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;2;548;5863.5;82.6673;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;2;549;5763.1;26.8303;1800;0;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;

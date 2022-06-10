@@ -32,6 +32,7 @@ namespace Menus {
             ~MenuPausa();
             // AQUI!!! -/-
             void setFaseID(Estados::IdEstado id) { faseID = id; }
+            void setFase(Menus::Fases::Fase* fase) { pFase = fase; }
 
             void setLista(std::list<Entidades::Entidade*> *pLista) { pListaEntidades = pLista; }
 

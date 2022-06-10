@@ -23,7 +23,7 @@ namespace Entidades {
             void setDirecao(){ velocidade.x *= -1;}
             void setEntOrigem(Entidade* ent){ if(ent) entOrigem=ent; }
             Entidade* getOrigem(){ return entOrigem; }
-
+            std::string getTextura()const { return textura; }
             void setDano(int d);
             const int getDano() const { return dano; }
 

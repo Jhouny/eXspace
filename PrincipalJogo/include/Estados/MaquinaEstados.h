@@ -24,7 +24,7 @@ namespace Estados {
 
             void inserirEstado(Estado* est);
 
-            void setEstadoAtual(IdEstado id, int pontos = 0);
+            void setEstadoAtual(IdEstado id);
             void setEstadoAtual(IdEstado id, std::list<Entidades::Entidade*> *lEnt);
 
             void setEstadoAnterior();

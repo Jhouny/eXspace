@@ -13,7 +13,7 @@
 
 namespace Entidades::Personagens {
     Jogador::Jogador():
-        Personagem(Coordenada(38, 68), POS_INICIAL, false, 100, 20, ID::jogador),
+        Personagem(Coordenada(54, 68), POS_INICIAL, false, 100, 20, ID::jogador),
         pControleJogador(this),
         pontuacao(0)
         {
@@ -22,14 +22,13 @@ namespace Entidades::Personagens {
             estaAtirando = false;
             viradoFrente = true;
 
-            if(getRG() == 1) {  // Jogadores DEVEM ser as primeiras entidades!!
+            if(getRG() == 0) {  // Jogadores DEVEM ser as primeiras entidades!!
                 // Define a textura
                 this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
                 setTexture(TEX_JOGADOR);
             } else {
                 // Define a textura
                 this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
-                setTamanho(Coordenada(54, 68));
                 setTexture(TEX_JOGADOR_2);
             }
             
@@ -113,7 +112,7 @@ namespace Entidades::Personagens {
         pControleJogador.resetarTeclas();
 
         // Define a textura
-        if(getRG() == 1)
+        if(getRG() == 0)
             setTexture(TEX_JOGADOR);
         else
             setTexture(TEX_JOGADOR_2);

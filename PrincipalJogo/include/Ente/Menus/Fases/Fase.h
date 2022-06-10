@@ -35,7 +35,6 @@ namespace Menus::Fases {
 
             Gerenciadores::Colisor colisor;
 
-
             Entidades::Personagens::Jogador *jogador1;
             Entidades::Personagens::Jogador *jogador2;
 
@@ -58,6 +57,7 @@ namespace Menus::Fases {
             bool getMultiplayer()const { return multiplayer; }
             
             void setPontuacao(const int pont) { pontuacaoIni = pont; }
+            int getPontuacao() const { return pontuacaoIni; }
             
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;

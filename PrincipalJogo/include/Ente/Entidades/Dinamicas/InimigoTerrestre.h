@@ -8,13 +8,11 @@
 namespace Entidades::Personagens {
     class InimigoTerrestre: public Inimigo {
         private:
-            Coordenada velocidade;
             Entidade* pPlataforma;
             sf::Clock temporizador;
         public:
             InimigoTerrestre();
             ~InimigoTerrestre();
-            
             
             void colisao(Entidade* outraEntidade, Coordenada intersecao);
 

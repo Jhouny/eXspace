@@ -33,6 +33,8 @@ namespace Entidades::Personagens {
                 clock.restart();
             }
 
+            float getPontoMedio()const { return pontoMedio; }
+
             void setFase(Menus::Fases::Fase* pF) { pFase = pF; }
 
             void colisao(Entidade* outraEntidade, Coordenada intersecao);

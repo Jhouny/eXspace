@@ -55,14 +55,17 @@ namespace Menus::Fases {
 
     void Fase::gameOver() {
         multiplayer = false;
-        pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver, jogador1->getPontuacao());
+        pontuacaoIni = jogador1->getPontuacao();
+        pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
     }
 
     void Fase::proximaFase() {
-        pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao, jogador1->getPontuacao());
+        pontuacaoIni = jogador1->getPontuacao();
+        pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao);
     }
 
     void Fase::pausarFase() {
+        pontuacaoIni = jogador1->getPontuacao();
         pMaq->setEstadoAtual(Estados::IdEstado::menuPausa, &lEntidades);
     }
 

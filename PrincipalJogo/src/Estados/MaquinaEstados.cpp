@@ -23,7 +23,7 @@ namespace Estados {
         mapaEstados.insert(std::pair<IdEstado, Estado*>(est->getID(), est));
     }
 
-    void MaquinaEstados::setEstadoAtual(IdEstado id, int pontos) {
+    void MaquinaEstados::setEstadoAtual(IdEstado id) {
         Estado* temp = estadoAtual;
         if(mapaEstados[id]) {
             estadoAtual = mapaEstados[id];
@@ -33,16 +33,16 @@ namespace Estados {
                 temp->getMenu()->pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));  // Reseta a view para o centro da tela
                 
                 if(temp->getID() == Estados::IdEstado::mercurio || temp->getID() == Estados::IdEstado::netuno) {
+                    Menus::Fases::Fase* fase = dynamic_cast<Menus::Fases::Fase*>(temp); //passa para o menu de tran
                     if(id == Estados::IdEstado::menuTransicao) {
                         Menus::MenuTransicao* menut = dynamic_cast<Menus::MenuTransicao*>(estadoAtual);
                         menut->setOrigem(temp->getID());
-                        menut->setPontuacaoPrev(pontos);
-                        Menus::Fases::Fase* fase = dynamic_cast<Menus::Fases::Fase*>(temp); //passa para o menu de tran
+                        menut->setPontuacaoPrev(fase->getPontuacao());
                         menut->setMultiplayer(fase->getMultiplayer());
                     }
                     else if(id == Estados::IdEstado::menuGameOver) {
                         Menus::MenuGameOver* menuG = dynamic_cast<Menus::MenuGameOver*>(estadoAtual);
-                        menuG->setPontuacao(pontos);
+                        menuG->setPontuacao(fase->getPontuacao());
                     }
                 }
 
@@ -72,6 +72,7 @@ namespace Estados {
 
             Menus::MenuPausa* pausa = dynamic_cast<Menus::MenuPausa*>(estadoAtual);
             pausa->setFaseID(temp->getID());
+            pausa->setFase(dynamic_cast<Menus::Fases::Fase*>(temp));
             pausa->setLista(lEnt);
 
             estadoAtual->setAnterior(temp);
