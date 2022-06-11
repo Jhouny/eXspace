@@ -64,6 +64,7 @@ namespace Menus::Fases {
             virtual void geraPlataformas() = 0;
             virtual void geraObstaculos() = 0;
             virtual void geraInimigos() = 0;
+            void geraEntidades(bool gIni = true);
 
             void atualizaEntidades(const float dt);
 

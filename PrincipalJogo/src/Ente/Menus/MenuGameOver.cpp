@@ -36,7 +36,7 @@ namespace Menus{
     }
 
     void MenuGameOver::criaTextos() {
-        lTextos.clear();
+        vTextos.clear();
         pTexto = new ElementosGraficos::Texto(Coordenada(400, 150),Coordenada(COMPRIMENTO/8.f, ALTURA/2.f + 200),"Digite seu nome:");
         pTexto->setCor(sf::Color(0,0,0,230));
         pTexto->setContorno(sf::Color::Yellow, 5);
@@ -66,7 +66,7 @@ namespace Menus{
 
     void MenuGameOver::incluir(ElementosGraficos::Texto *texto){
         if(texto)
-            lTextos.emplace_back(texto);
+            vTextos.emplace_back(texto);
         else
             cout << "Ponteiro para texto nulo"<< endl;
     }
@@ -75,8 +75,8 @@ namespace Menus{
         pGrafico->draw(&fundo, false);
         int i;
         //desenha Textos na tela
-        for(i = 0; i < lTextos.size(); i++ ){
-            pGrafico->draw(lTextos[i]->getTexto());
+        for(i = 0; i < vTextos.size(); i++ ){
+            pGrafico->draw(vTextos[i]->getTexto());
         }
         //desenha os botoes na tela
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
@@ -94,9 +94,9 @@ namespace Menus{
         }
 
         //atualiza os texto que podem ser modificados
-        for(int i = 0; i < lTextos.size(); i++ ){
-            if(!(lTextos[i]->getEstatico())) {
-                lTextos[i]->setTexto(pControleTexto.getNome());
+        for(int i = 0; i < vTextos.size(); i++ ){
+            if(!(vTextos[i]->getEstatico())) {
+                vTextos[i]->setTexto(pControleTexto.getNome());
                 nome = pControleTexto.getNomeString();
             }
         }

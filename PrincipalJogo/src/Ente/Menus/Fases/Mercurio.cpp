@@ -124,10 +124,10 @@ namespace Menus::Fases {
 
     void Mercurio::geraInimigos() {
         int i;
-        bool achou ;
+        bool achou;
         int numInstanciasIniTerrestre = (rand() % 4) + 3;  // randomiza numero de instancia de InimigoTerrestre (de 3 a 6)
         std::vector<Entidades::Entidade*> temp(lEntidades.begin(), lEntidades.end());// Copia os elementos da lista para um vetor temporário
-        for(i = 0; i < numInstanciasIniTerrestre ; i++){
+        for(i = 0; i < numInstanciasIniTerrestre ; i++) {
             achou = false;
             std::random_shuffle(temp.begin(), temp.end());  // Aleatoriza a posicao dos elementos do vetor
             for(int i = 0; i < temp.size() && !achou ; i++) {
@@ -143,6 +143,7 @@ namespace Menus::Fases {
                         pIniTerrestre->setJogador(jogador1);
                         incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
                         achou = true;
+                        
                     }
                 } 
             }
@@ -160,14 +161,10 @@ namespace Menus::Fases {
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
         }        
-   }
+    }
 
     void Mercurio::executar(const float dt) {
         jogador1->setPontuacao(pontuacaoIni);
-
-        geraPlataformas();
-        geraObstaculos();
-
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));
         pGrafico->atualizaMinimap(Coordenada(2000,360));

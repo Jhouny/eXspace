@@ -54,8 +54,6 @@ namespace Menus::Fases {
         pBase->setTexture(TEX_PAREDE,false);
         incluir(static_cast<Entidades::Entidade*>(pBase)); */
 
-        
-
         /*segunda parte*/
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(4500, ALTURA/2.f )); //plataforma de inimigos
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
@@ -152,9 +150,6 @@ namespace Menus::Fases {
 
     void Netuno::executar(const float dt){
         jogador1->setPontuacao(pontuacaoIni);
-
-        geraPlataformas();
-        geraObstaculos();
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));

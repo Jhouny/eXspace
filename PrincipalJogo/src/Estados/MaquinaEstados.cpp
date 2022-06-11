@@ -52,8 +52,10 @@ namespace Estados {
                         Menus::Fases::Netuno* net = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
                         Menus::MenuTransicao* menut = dynamic_cast<Menus::MenuTransicao*>(temp);
                         if(net != NULL && menut != NULL) {
+                            net->resetarEstadoOriginal();
                             net->setPontuacao(menut->getPontuacaoPrev());
                             net->setMultiplayer(menut->getMultiplayer());
+                            net->geraEntidades(true);
                         }
                     }
                 }
@@ -69,30 +71,16 @@ namespace Estados {
                         if(tmp != NULL) {
                             tmp->resetarEstadoOriginal();
                             tmp->setPontuacao(0);
-                            tmp->geraInimigos();
+                            tmp->geraEntidades(true);
                         }
                     } else if(id == Estados::IdEstado::netuno) {
                         Menus::Fases::Netuno* tmp = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
                         if(tmp != NULL) {
                             tmp->resetarEstadoOriginal();
                             tmp->setPontuacao(0);
-                            tmp->geraInimigos();
+                            tmp->geraEntidades(true);
                         }
                     }
-                }
-                
-                else if(temp->getID() == Estados::IdEstado::menuCarregar){
-                    if(id == Estados::IdEstado::mercurio) {
-                        Menus::Fases::Mercurio* tmp = dynamic_cast<Menus::Fases::Mercurio*>(estadoAtual);
-                        if(tmp != NULL) {
-                        }
-                    } else if(id == Estados::IdEstado::netuno) {
-                        Menus::Fases::Netuno* tmp = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
-                        if(tmp != NULL) {
-
-                        }
-                    }
-
                 }
             }
 
