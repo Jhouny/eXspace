@@ -16,13 +16,13 @@ namespace Menus {
 
             void criaBotoes();
 
-            void atualizar(const float dt);
-
             void renderizar();
 
             void ativarControle();
 
             void desativarControle();
+
+            void atualizar(const float dt);
 
             void executar(const float dt);
     };

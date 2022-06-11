@@ -16,7 +16,7 @@ namespace ElementosGraficos{
 namespace Menus{
     class MenuGameOver: public Menu {
         private:
-            std::vector<ElementosGraficos::Texto*> lTextos;
+            std::vector<ElementosGraficos::Texto*> vTextos;
             ElementosGraficos::Texto* pTexto;
             ElementosGraficos::Texto* pTextoNome;
             ElementosGraficos::Texto* pTextoPontuacao;
@@ -26,13 +26,10 @@ namespace Menus{
             Controle::ControleMenu pControleMenu; 
 
             std::multimap<int,std::string> mapaPontuacao;
-            std::multimap<int,std::string>::iterator itPont;
+            std::multimap<int,std::string>::iterator itPont; 
 
             std::string nome;
             int pontuacao;
-
-            Entidades::Personagens::Jogador* jogador1;
-            Entidades::Personagens::Jogador* jogador2;
 
         public:
             MenuGameOver();
@@ -51,16 +48,16 @@ namespace Menus{
 
             std::multimap<int,std::string>* getMap(){ return &mapaPontuacao; }
 
-            void renderizar();
-
-            void atualizar(const float dt);
-
             void incluir(ElementosGraficos::Texto *texto);
 
             void leArquivoPontuacao();
 
             void ativarControle();
             void desativarControle();
+
+            void renderizar();
+
+            void atualizar(const float dt);
 
             void executar(const float dt);
     };
