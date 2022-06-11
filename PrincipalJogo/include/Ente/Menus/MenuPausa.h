@@ -30,7 +30,7 @@ namespace Menus {
             MenuPausa();
 
             ~MenuPausa();
-            // AQUI!!! -/-
+
             void setFaseID(Estados::IdEstado id) { faseID = id; }
             void setFase(Menus::Fases::Fase* fase) { pFase = fase; }
 
