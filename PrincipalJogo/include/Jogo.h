@@ -27,11 +27,6 @@ class Jogo: public Estados::MaquinaEstados {
         sf::Clock temporizador;
         float dt;
 
-        /*Fase fase1;
-
-        Menus::MenuAbertura menuAbertura;
-        Menus::MenuPontuacao menuPontuacao;*/
-        //Fase fase2;
     public:
         Jogo();
 

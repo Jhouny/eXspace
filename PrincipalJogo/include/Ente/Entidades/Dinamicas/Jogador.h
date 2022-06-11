@@ -47,8 +47,8 @@ namespace Entidades::Personagens {
             Controle::ControleJogador* getControle() { return &pControleJogador; }
             
             void setPontuacao(float ponto) { pontuacao = ponto; }
-            int getPontuacao() const { return pontuacao; }
-            void aumentaPontuacao(int p) { pontuacao += p; }
+            int getPontuacao() const { return pontuacao; } //Precisa?
+            void aumentaPontuacao(ID identificacao);
 
             // Fisica
             void atacar();

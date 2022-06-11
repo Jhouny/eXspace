@@ -26,14 +26,14 @@ namespace Menus{
 
     void MenuPontuacao::incluir(ElementosGraficos::Texto *texto){
         if(texto)
-            lTextos.push_back(texto);
+            vTextos.push_back(texto);
         else
             cout << "Ponteiro para texto esta nulo" << endl;
 
     }
 
     void MenuPontuacao::criaTextos() {
-        lTextos.clear();
+        vTextos.clear();
 
         pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f-100.f,50),"Pontuação: ");
         pTexto->setCor(sf::Color (57,255,20));
@@ -102,8 +102,8 @@ namespace Menus{
     void MenuPontuacao::renderizar(){
         pGrafico->draw(&fundo, false);
         int i;
-        for(i = 0; i < lTextos.size(); i++ ){
-            pGrafico->draw(lTextos[i]->getTexto());
+        for(i = 0; i < vTextos.size(); i++ ){
+            pGrafico->draw(vTextos[i]->getTexto());
         }
          for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             pGrafico->draw((it->first)->getSprite(),false);

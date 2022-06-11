@@ -31,7 +31,7 @@ namespace Entidades::Personagens {
             void setAceleracao(float acel) { aceleracaoY = acel; }
             float getAceleracao() { return aceleracaoY; }
 
-            void setJump(bool estado) { 
+            void setJump(bool estado) { // Mudar
                 pulando = estado;
             }
             const bool getPulo() const { return pulando; }

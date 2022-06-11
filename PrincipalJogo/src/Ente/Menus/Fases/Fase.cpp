@@ -129,14 +129,14 @@ namespace Menus::Fases {
                 if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
                     ent->getID() == ID::chefe) {
                     numInimigos--;
-                    jogador1->aumentaPontuacao(100);
+                    jogador1->aumentaPontuacao(ent->getID());
+                } else {
+                    it++;
                 }
-            } else {
-                it++;
             }
-        }
 
         visor.atualizaPontuacao(numInimigos);
+        }
     }
 
     void Fase::renderizar() {

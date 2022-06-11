@@ -8,7 +8,7 @@
 namespace Entidades::Obstaculos{
     class GasToxico: public Obstaculo{
         private:
-            std::list<Entidades::Entidade*> *lista;  // Ponteiro para lista de entidades -> deve ser implementada antes das rochas
+            //std::list<Entidades::Entidade*> *lista;  // Ponteiro para lista de entidades -> deve ser implementada antes das rochas // precisa?
             float dano;
             bool posDefinida;  // Se ja tiver uma posição definida
         public:

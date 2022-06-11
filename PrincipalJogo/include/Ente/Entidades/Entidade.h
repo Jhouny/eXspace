@@ -13,7 +13,7 @@ namespace Entidades {
             sf::Sprite sprite;
             Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
             bool ativo;
-            bool estatico;
+            bool estatico; //Se a entidade se mexe ou não
 
         public:
             Entidade(ID id, Coordenada tam, Coordenada pos, bool estat); 

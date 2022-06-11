@@ -9,7 +9,8 @@
 namespace Menus{
     class MenuTransicao:public Menu{
         private:
-            std::vector<ElementosGraficos::Texto*> lTextos;
+            std::vector<ElementosGraficos::Texto*> vTextos; //porque tem?pTexto:Texto*
+            
             ElementosGraficos::Texto* pTexto;
 
             Controle::ControleMenu pControleMenu;

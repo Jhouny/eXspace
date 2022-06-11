@@ -18,16 +18,12 @@ namespace Menus{
     }
 
     void MenuJogar::criaBotoes() {
-        //Cria botões que mudam o estado atual:
+        //Cria botão de NOVO JOGO
         botoesAtivos.clear();
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 350), Estados::IdEstado::mercurio , "NOVO JOGO");
         pBotao->ativar();
         pBotaoJogar = pBotao;
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
-
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuCarregar, "CARREGAR JOGO");
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
-
         //Cria botões de escolha (Num jogadores e Fase)
         pBotaoAlternador = new ElementosGraficos::BotaoAlternador(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 450));
         pBotaoAlternador->inserirEscolha("FASE UM", static_cast<int>(Estados::IdEstado::mercurio));
@@ -42,7 +38,14 @@ namespace Menus{
         pBotaoAlternador->setAlvo(pBotaoJogar, 1);
         pBotaoAlternador->setMaquina(pMaq);
         pBotaoAlternador->setAtivo(0);
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoAlternador), false));        
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoAlternador), false));  
+
+
+        //Cria Botao de CARREGAR JOGO
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuCarregar, "CARREGAR JOGO");
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
+
+           
 
     }
 

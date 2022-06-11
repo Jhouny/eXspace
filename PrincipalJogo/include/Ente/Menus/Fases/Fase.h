@@ -59,11 +59,7 @@ namespace Menus::Fases {
             void setPontuacao(const int pont) { pontuacaoIni = pont; }
             int getPontuacao() const { return pontuacaoIni; }
 
-            std::list<Entidades::Entidade*>* getLista(){ return &lEntidades; }
             
-            virtual void geraPlataformas() = 0;
-            virtual void geraObstaculos() = 0;
-            virtual void geraInimigos() = 0;
             void geraEntidades(bool gIni = true);
 
             void atualizaEntidades(const float dt);
@@ -93,6 +89,12 @@ namespace Menus::Fases {
             void desativarControle();
 
             virtual void executar(const float dt) = 0;
+            
+            virtual void geraPlataformas() = 0;
+            
+            virtual void geraObstaculos() = 0;
+            
+            virtual void geraInimigos() = 0;
     };
 }
 

@@ -52,6 +52,20 @@ namespace Entidades::Personagens {
         return vivo;
     }
 
+     void Jogador::aumentaPontuacao(ID identificacao){
+        switch(identificacao){
+            case ID::inimigoTerrestre:
+                pontuacao+=100;
+                break;
+            case ID::inimigoVoador:
+                pontuacao+=150;
+                break;
+            case ID::chefe:
+                pontuacao+=1000;
+                break;
+        }
+     }
+
     void Jogador::atacar() {
         if(this->getSegundos() > 0.05) {
             if(viradoFrente)

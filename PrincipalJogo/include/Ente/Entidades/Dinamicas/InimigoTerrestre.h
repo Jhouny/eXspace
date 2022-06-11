@@ -9,7 +9,7 @@ namespace Entidades::Personagens {
     class InimigoTerrestre: public Inimigo {
         private:
             Entidade* pPlataforma;
-            sf::Clock temporizador;
+            sf::Clock temporizador; // Porque?
         public:
             InimigoTerrestre();
             ~InimigoTerrestre();

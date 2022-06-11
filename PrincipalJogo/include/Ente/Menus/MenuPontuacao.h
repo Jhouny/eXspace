@@ -14,7 +14,7 @@ namespace ElementosGraficos{
 namespace Menus{
     class MenuPontuacao: public Menu{
         private:
-            std::vector<ElementosGraficos::Texto*> lTextos;
+            std::vector<ElementosGraficos::Texto*> vTextos;
             ElementosGraficos::Texto* pTexto;
             ElementosGraficos::Texto* pTextoPontuacao;
 

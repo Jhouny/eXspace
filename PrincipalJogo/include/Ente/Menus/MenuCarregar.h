@@ -22,7 +22,6 @@ namespace Menus{
             MenuCarregar( Entidades::Personagens::Jogador* jog1,Entidades::Personagens::Jogador* jog2);
 
             ~MenuCarregar();
-            void getLista();
 
             void leCaminhoArquivos();
 
