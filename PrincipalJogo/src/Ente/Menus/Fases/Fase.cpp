@@ -130,13 +130,12 @@ namespace Menus::Fases {
                     ent->getID() == ID::chefe) {
                     numInimigos--;
                     jogador1->aumentaPontuacao(ent->getID());
-                } else {
-                    it++;
-                }
+                } 
+            } else {
+                it++;
             }
-
-        visor.atualizaPontuacao(numInimigos);
         }
+        visor.atualizaPontuacao(numInimigos);
     }
 
     void Fase::renderizar() {
