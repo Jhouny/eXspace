@@ -130,11 +130,16 @@ namespace Menus::Fases {
 
             if(!ent->getAtivo()) {
                 it = lEntidades.erase(it);
-                if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
-                    ent->getID() == ID::chefe) {
+                if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador) {
                     numInimigos--;
                     jogador1->aumentaPontuacao(ent->getID());
                 } 
+                else if(ent->getID() == ID::chefe){
+                    numInimigos--;
+                    jogador1->aumentaPontuacao(ent->getID());
+                    gameOver();
+
+                }
             } else {
                 it++;
             }
