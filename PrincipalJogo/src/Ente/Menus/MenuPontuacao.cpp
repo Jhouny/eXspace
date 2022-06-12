@@ -76,10 +76,10 @@ namespace Menus{
         for(int i = 0; i < 5; i++) {
             std::getline(recuperaPontuacao,pontuacao);
             std::getline(recuperaPontuacao,nome);
-            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(COMPRIMENTO/4.f,150),Coordenada (COMPRIMENTO/3.f,150+i*100),nome);
+            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(COMPRIMENTO/4.f,150),Coordenada (COMPRIMENTO/3.f,200+i*100),nome);
             pTextoPontuacao->setCor(sf::Color::Yellow);
             incluir(pTextoPontuacao);
-            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(2*(COMPRIMENTO)/3.f,150+i*100),pontuacao);
+            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(2*(COMPRIMENTO)/3.f,200+i*100),pontuacao);
             pTextoPontuacao->setCor(sf::Color::Yellow);
             incluir(pTextoPontuacao);
         }

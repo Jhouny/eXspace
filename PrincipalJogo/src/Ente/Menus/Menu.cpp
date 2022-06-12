@@ -66,16 +66,16 @@ namespace Menus{
                 ElementosGraficos::BotaoAlternador* alt = dynamic_cast <ElementosGraficos::BotaoAlternador*>(it->first);
                 alt->proximo();
             } else if((it->first)->getFuncao() == Estados::IdEstado::salvarJogo) {
-                Menus::MenuPausa* tmp = dynamic_cast<Menus::MenuPausa*>(this);  // So funciona se o IdEstado::salvarJogo so existir no MenuPausa.cpp
-                tmp->salvaEstado();
+                Menus::MenuPausa* menuPause = dynamic_cast<Menus::MenuPausa*>(this);  // So funciona se o IdEstado::salvarJogo so existir no MenuPausa.cpp
+                menuPause->salvaEstado();
             } else if(mPausa != NULL && (it->first)->getFuncao() == Estados::IdEstado::indefinido) {
                 mPausa->resumirJogo();
-            } 
-            else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
-                Menus::MenuCarregar* tmp = dynamic_cast<Menus::MenuCarregar*>(this);
-                tmp->carregarFase();
-            }
-            else {
+            } else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
+                Menus::MenuCarregar* menuCarr = dynamic_cast<Menus::MenuCarregar*>(this);
+                menuCarr->carregarFase();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::sair) {
+                pGrafico->terminar();                
+            } else {
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
             }
             reiniciarRelogio();

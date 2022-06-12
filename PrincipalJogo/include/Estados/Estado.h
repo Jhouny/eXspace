@@ -14,7 +14,7 @@ namespace Estados {
         indefinido = -1,
         menuJogar,
         pontuacao,
-        configuracoes,
+        sair,
         menuAbertura,
         menuGameOver,
         menuPausa,
