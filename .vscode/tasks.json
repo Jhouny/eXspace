@@ -62,6 +62,7 @@
                 "-lsfml-window-s",
                 "-lsfml-system-s",
                 "-lopengl32",
+                "-static-libgcc",
                 "-lfreetype",
                 "-lwinmm",
                 "-lgdi32",
