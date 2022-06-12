@@ -119,7 +119,6 @@ namespace Menus::Fases {
 
     void Fase::atualizaEntidades(const float dt){
         Entidades::Entidade* ent;
-        cout << "tam: " << lEntidades.size() << endl;
         for(it = lEntidades.begin(); it != lEntidades.end();) {
             ent = *it;
             ent->executar(dt);
@@ -180,8 +179,6 @@ namespace Menus::Fases {
 
         // Processa simulação de efeito Parallax
         atualizarBackground();
-
-        //cout << "Tamanho: " << lEntidades.size() << endl;
 
         if(!(jogador1->estaVivo())){
             gameOver();
