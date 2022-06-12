@@ -58,8 +58,6 @@
                 "${workspaceFolder}\\main.exe",
                 "-I\"${workspaceFolder}\\PrincipalJogo\\include\\SFML-2.5.1\\include\"",
                 "-L\"${workspaceFolder}\\PrincipalJogo\\include\\SFML-2.5.1\\lib\"",
-                "-static-libgcc",
-                "-static-libstdc++",
                 "-lsfml-graphics-s",
                 "-lsfml-window-s",
                 "-lsfml-system-s",
@@ -68,7 +66,12 @@
                 "-lwinmm",
                 "-lgdi32",
                 "-lstdc++fs",
-                "-DSFML_STATIC"
+                "-DSFML_STATIC",
+                "-static-libgcc",
+                "-static-libstdc++",
+                "-Bstatic",
+                "--whole-file",
+                "-lwinpthread"
             ],
             "options": {},
             "problemMatcher": [
