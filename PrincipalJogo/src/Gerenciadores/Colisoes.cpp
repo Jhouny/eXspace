@@ -37,7 +37,6 @@ namespace Gerenciadores {
     void Colisor::ChecarColisoes() {
         Entidades::Entidade *ent1, *ent2;
         Coordenada centroEnt1, centroEnt2, intersecao;
-        cout << "tam col: " << enteDinamicas.size() << endl;
         // Colisões de elementos Dinamicos com Estáticos
         for(itDinamicas=enteDinamicas.begin(); itDinamicas != enteDinamicas.end(); itDinamicas++) {
             ent1 = *itDinamicas;
