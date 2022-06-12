@@ -29,7 +29,7 @@ namespace Menus::Fases {
 
         //plataformas normais:
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(400, 32), Coordenada(0, ALTURA - 100.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(400, 32), Coordenada(0, ALTURA - 100.f),false);
         incluir(static_cast<Entidades::Entidade*>(pBase));
         
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(200, 32), Coordenada(500, ALTURA - 350.f));

@@ -44,7 +44,7 @@ namespace Menus::Fases {
         fundo.setTexture(*temp);
         float sX = (float)COMPRIMENTO/temp->getSize().x;
         float sY = (float)ALTURA/temp->getSize().y;
-        fundo.setScale(2*sX, sY);
+        fundo.setScale(2.5*sX, sY);
     }
 
     void Fase::atualizarBackground() {

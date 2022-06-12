@@ -23,7 +23,7 @@ namespace Menus::Fases {
 
     void Netuno::geraPlataformas() {
         //primeira parte
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(500, 32), Coordenada(0, ALTURA/2.f));
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(500, 32), Coordenada(0, ALTURA/2.f),false);
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(700, 32), Coordenada(800, ALTURA/2.f));
@@ -57,10 +57,10 @@ namespace Menus::Fases {
         incluir(static_cast<Entidades::Entidade*>(pBase)); */
 
         /*segunda parte*/
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(4500, ALTURA/2.f )); //plataforma de inimigos
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(4500, ALTURA/2.f )); 
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
-        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(6000, ALTURA/2.f )); //plataforma de inimigos
+        pBase = new Entidades::Obstaculos::Plataforma(Coordenada(1250, 32), Coordenada(6000, ALTURA/2.f )); 
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
 
         //parte parkour
