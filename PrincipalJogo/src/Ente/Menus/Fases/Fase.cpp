@@ -49,8 +49,13 @@ namespace Menus::Fases {
 
     void Fase::atualizarBackground() {
         // Simula o movimento relativo do background e jogador
-        float pX = 0.85 * jogador1->getPosicao().x - COMPRIMENTO/2.f;
-        fundo.setPosition(pX, 0);
+        if(jogador1->estaVivo()) {
+            float pX = 0.85 * jogador1->getPosicao().x - COMPRIMENTO/2.f;
+            fundo.setPosition(pX, 0);
+        } else if(jogador2->estaVivo() && !jogador1->estaVivo()) {
+            float pX = 0.85 * jogador2->getPosicao().x - COMPRIMENTO/2.f;
+            fundo.setPosition(pX, 0);
+        }
     }
 
     void Fase::gameOver() {
@@ -161,10 +166,14 @@ namespace Menus::Fases {
         // Verifica colisao entre Entidades Dinamicas e Estaticas
         colisor.ChecarColisoes();    
 
-        // Atualiza a view para a posicao do jogador
-        pGrafico->atualizaView(jogador1->getPosicao());
-
-        pGrafico->atualizaMinimap(jogador1->getPosicao());
+        // Atualiza a view para a posicao do jogador vivo
+        if(jogador1->estaVivo()) {
+            pGrafico->atualizaView(jogador1->getPosicao());
+            pGrafico->atualizaMinimap(jogador1->getPosicao());
+        } else if(jogador2->estaVivo() && !jogador1->estaVivo()) {
+            pGrafico->atualizaView(jogador2->getPosicao());
+            pGrafico->atualizaMinimap(jogador2->getPosicao());
+        }
 
         // Processa o executar das entidades e remove entidades inativas
         atualizaEntidades(dt);
@@ -175,11 +184,27 @@ namespace Menus::Fases {
         // Processa simulação de efeito Parallax
         atualizarBackground();
 
-        if(!(jogador1->estaVivo())){
-            gameOver();
-        } else if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
+        // Checa se os jogadores morreram
+        if(multiplayer) {
+            if((!jogador1->estaVivo()) && (!jogador2->estaVivo()))
+                gameOver();
+        } else {
+            if((!jogador1->estaVivo()))
+                gameOver();
+        }    
+        
+        // Se chegou ao final da fase
+        if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
             // Menu transição
             proximaFase();
+        }
+        if(multiplayer) {
+            if(!jogador1->estaVivo()) {
+                if(pChegada != NULL && jogador2->getPosicao().x + jogador2->getTamanho().x >= pChegada->getPosicao().x - 1) {
+                    // Menu transição
+                    proximaFase();
+                }
+            }
         }
     }
 }

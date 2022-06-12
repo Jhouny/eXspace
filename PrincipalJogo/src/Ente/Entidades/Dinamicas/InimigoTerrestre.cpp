@@ -13,7 +13,7 @@ namespace Entidades::Personagens {
         this->setAceleracao(GRAVIDADE);
         this->setEstatico(false);
 
-        pJogador=NULL;
+        pJogador2=NULL;
         pPlataforma=NULL;
 
         setTexture(TEX_INIMIGO_TERRESTRE);
@@ -69,7 +69,12 @@ namespace Entidades::Personagens {
     
     // Define a velocidade e textura de ataque
     void InimigoTerrestre::atacar() {
-        Coordenada coordJog = pJogador->getPosicao();
+        Coordenada coordJog;
+        if(pJogador1->estaVivo())
+            coordJog = pJogador1->getPosicao();
+        else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo())
+            coordJog = pJogador2->getPosicao();
+        
          // Se jogador estiver proximo, siga-o
         if(jogTaPerto) {
             setTexture(TEX_INIMIGO_TERRESTRE_ALARMADO);
@@ -90,7 +95,10 @@ namespace Entidades::Personagens {
     void InimigoTerrestre::movimentar(const float dt) {
         Coordenada coordJog, coordIni;
         coordIni = this->getPosicao();
-        coordJog = pJogador->getPosicao();
+        if(pJogador1->estaVivo())
+            coordJog = pJogador1->getPosicao();
+        else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo())
+            coordJog = pJogador2->getPosicao();
 
         if(temporizador.getElapsedTime().asSeconds() > 3) {  // A cada três segundos roda uma chance para inverter a direção
             int chance = rand() % 100;

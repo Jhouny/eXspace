@@ -2,6 +2,7 @@
 #include "../../../../include/Ente/Entidades/Inimigo.h"
 #include "../../../../include/Ente/Menus/Fases/Fase.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/Chefe.h"
 #include "../../../../include/Ente/Entidades/Estaticas/Lava.h"
 
 
@@ -13,7 +14,7 @@
 
 namespace Entidades::Personagens {
     Jogador::Jogador():
-        Personagem(Coordenada(54, 68), POS_INICIAL, false, 100, 20, ID::jogador),
+        Personagem(Coordenada(54, 68), POS_INICIAL, false, VIDA_MAX, 20, ID::jogador),
         pControleJogador(this),
         pontuacao(0)
         {
@@ -35,16 +36,16 @@ namespace Entidades::Personagens {
             velocidade.x = 0.f;
             velocidade.y = 0.f;
             aceleracaoY = 10;
-
-
     }
 
     Jogador::~Jogador() {}
 
     bool Jogador::estaVivo() {
         Coordenada p = this->getPosicao();
-        if(p.y > ALTURA + 300 || vida<=0) {
+        if(p.y > ALTURA + 300 || vida <= 0) {
+            vida = 0;
             vivo = false;
+            setAtivo(false);
         } else {
             vivo = true;
         }
@@ -112,13 +113,12 @@ namespace Entidades::Personagens {
     void Jogador::resetar(int p) {
         setPontuacao(p);
         setPosicao(POS_INICIAL);
-        setVida(100);
-
+        setVida(VIDA_MAX);
+        setAtivo(true);
         setJump(false);
         estaPulando = false;
         estaAtirando = false;
         viradoFrente = true;
-        
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;
@@ -176,11 +176,21 @@ namespace Entidades::Personagens {
                 } else {
                     this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
                 }
-            }
-            else if(outraEntidade->getID() == ID::inimigoTerrestre) {
+            } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
                 Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
                 // Reduz a vida do jogador 
                 this->receberDano(tmp->getDano());
+                
+                if (this->getPosicao().x < outraEntidade->getPosicao().x){
+                    this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+
+                } else {
+                    this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+                }                
+            } else if(outraEntidade->getID() == ID::chefe) {
+                Chefe *tmp = dynamic_cast<Chefe*>(outraEntidade);
+                // Reduz a vida do jogador 
+                this->receberDano(tmp->getDanoColisao());
                 
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
@@ -220,6 +230,9 @@ namespace Entidades::Personagens {
     void Jogador::executar(const float dt) {
         //seta as sprites
         atualizaTexture(velocidade);
+
+        // Checa se o jogador esta vivo
+        estaVivo();
         
         // Aplica a aceleração na velocidade e a velocidade na posição 
         atualiza(dt);

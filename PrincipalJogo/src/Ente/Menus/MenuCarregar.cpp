@@ -103,7 +103,8 @@ namespace Menus{
                 iniT->setPosicao(pos);
                 iniT->setVida(v);
                 iniT->setVelocidade(Coordenada(vx,vy));
-                iniT->setJogador(jogador1);
+                iniT->setJogador1(jogador1);
+                iniT->setJogador2(jogador2);
                 pFase->incluir(static_cast<Entidades::Entidade*>(iniT));
                 break;
             }
@@ -119,7 +120,8 @@ namespace Menus{
                 iniV->setVida(v);
                 iniV->setVelocidade(Coordenada(vx,vy));
                 iniV->setPontoMedio(pm);
-                iniV->setJogador(jogador1);
+                iniV->setJogador1(jogador1);
+                iniV->setJogador2(jogador2);
                 iniV->setFase(pFase);
                 pFase->incluir(static_cast<Entidades::Entidade*>(iniV));
                 break;
@@ -135,7 +137,8 @@ namespace Menus{
                 chefe->setVida(v);
                 chefe->setFase(pFase);
                 chefe->setVelocidade(Coordenada(vx,vy));
-                chefe->setJogador(jogador1);
+                chefe->setJogador1(jogador1);
+                chefe->setJogador2(jogador2);
                 pFase->incluir(static_cast<Entidades::Entidade*>(chefe));
                 break;
             }

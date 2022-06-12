@@ -140,7 +140,9 @@ namespace Menus::Fases {
                         pos.y= ent->getPosicao().y - 60;
                         pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
                         pIniTerrestre->setPosicao(pos);
-                        pIniTerrestre->setJogador(jogador1);
+                        pIniTerrestre->setJogador1(jogador1);
+                        if(multiplayer)
+                            pIniTerrestre->setJogador2(jogador2);
                         incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
                         achou = true;
                         
@@ -157,7 +159,9 @@ namespace Menus::Fases {
             pIniVoador = new Entidades::Personagens::InimigoVoador();
             pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 100));
             pIniVoador->randomizarOscilacao();  // Tem que estar depois do setPosicao()
-            pIniVoador->setJogador(jogador1);
+            pIniVoador->setJogador1(jogador1);
+            if(multiplayer)
+                pIniVoador->setJogador2(jogador2);
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
         }        

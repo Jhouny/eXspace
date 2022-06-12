@@ -30,6 +30,8 @@ namespace Entidades::Personagens {
             void reiniciarClock() {
                 clock.restart();    
             }
+            
+            int getDanoColisao(){ return danoColisao; }
 
             bool estaVivo();
 

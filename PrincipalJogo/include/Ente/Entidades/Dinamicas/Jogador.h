@@ -8,6 +8,7 @@
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
 #define TEX_JOGADOR_2 "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/jogador2.png"
 #define TAM_PROJETIL_JOGADOR Coordenada(12,4)
+#define VIDA_MAX 200
 
 namespace Menus::Fases{
     class Fase;

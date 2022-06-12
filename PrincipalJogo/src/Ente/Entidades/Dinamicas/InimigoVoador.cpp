@@ -34,9 +34,13 @@ namespace Entidades::Personagens {
             Coordenada direcao;
             Coordenada veloc;
             Coordenada centroJog;
-            centroJog.x = pJogador->getPosicao().x  +  pJogador->getTamanho().x/2.f;
-            centroJog.y = pJogador->getPosicao().y  +  pJogador->getTamanho().y/2.f;
-            
+            if(pJogador1->estaVivo()) {
+                centroJog.x = pJogador1->getPosicao().x  +  pJogador1->getTamanho().x/2.f;
+                centroJog.y = pJogador1->getPosicao().y  +  pJogador1->getTamanho().y/2.f;
+            } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+                centroJog.x = pJogador2->getPosicao().x  +  pJogador2->getTamanho().x/2.f;
+                centroJog.y = pJogador2->getPosicao().y  +  pJogador2->getTamanho().y/2.f;
+            }
             direcao.x = centroJog.x - posicao.x;
             direcao.y = centroJog.y - posicao.y;
 
@@ -64,10 +68,16 @@ namespace Entidades::Personagens {
     }
 
     void InimigoVoador::atualiza(const float dt) {
-        if(pJogador->getPosicao().x > posicao.x) {
-            velocidade.x = 1;
-        } else {
-            velocidade.x = -1;
+        if(pJogador1->estaVivo()) {
+            if(pJogador1->getPosicao().x > posicao.x)
+                velocidade.x = 1;
+            else
+                velocidade.x = -1;
+        } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+            if(pJogador2->getPosicao().x > posicao.x)
+                velocidade.x = 1;
+            else
+                velocidade.x = -1;
         }
     }
 

@@ -5,12 +5,12 @@
 
 #define TEX_PROJETIL_CHEFE "PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil_2.png"
 #define DISTANCIA_ALARMADO_PROJ COMPRIMENTO/2.f
-#define DISTANCIA_ALARMADO COMPRIMENTO/3.f
+#define DISTANCIA_ALARMADO COMPRIMENTO/4.f
 #define VELOCIDADE 19600 * TICK_RATE
 namespace Entidades::Personagens {
     Chefe::Chefe():
         Inimigo(Coordenada(252,208),Coordenada(100,100),ID::chefe,false,300,30),
-        danoColisao(60)
+        danoColisao(30)
     {
         this->setVelocidade(Coordenada(0,0));
         this->setAceleracao(GRAVIDADE);
@@ -19,7 +19,6 @@ namespace Entidades::Personagens {
         jogTaPerto = false;
         alarmadoProj = false;
         
-        //this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/2.f, 0));
         this->setTexture(TEX_CHEFE);
     }
     Chefe::~Chefe(){
@@ -65,11 +64,17 @@ namespace Entidades::Personagens {
             Coordenada direcao;
             Coordenada veloc;
             Coordenada centroJog;
-            centroJog.x = pJogador->getPosicao().x  +  pJogador->getTamanho().x/2.f;
-            centroJog.y = pJogador->getPosicao().y  +  pJogador->getTamanho().y/2.f;
+            if(pJogador1->estaVivo()) {
+                centroJog.x = pJogador1->getPosicao().x  +  pJogador1->getTamanho().x/2.f;
+                centroJog.y = pJogador1->getPosicao().y  +  pJogador1->getTamanho().y/2.f;
+            } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+                centroJog.x = pJogador2->getPosicao().x  +  pJogador2->getTamanho().x/2.f;
+                centroJog.y = pJogador2->getPosicao().y  +  pJogador2->getTamanho().y/2.f;
+            }
             
             direcao.x = centroJog.x - posicao.x;
             direcao.y = centroJog.y - (posicao.y + tamanho.y/2.f);
+            
 
             if(direcao.x > 0) {
                 direcao.x = centroJog.x - (posicao.x + tamanho.x + 1);
@@ -99,7 +104,11 @@ namespace Entidades::Personagens {
             this->setTexture(TEX_CHEFE_ALARMADO);
             Coordenada coordJog, coordChefe, v;
             coordChefe = this->getPosicao();
-            coordJog = pJogador->getPosicao();
+            if(pJogador1->estaVivo())
+                coordJog = pJogador1->getPosicao();
+            else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo())
+                coordJog = pJogador2->getPosicao();
+                
             v = this->getVelocidade();
             v.y += this->getAceleracao();
             
@@ -115,17 +124,30 @@ namespace Entidades::Personagens {
         Coordenada centroIni,  centroJog, intersecao;
         float diferenca;
         
-        centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
-        centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
-        
-        centroJog.x = pJogador->getPosicao().x + (pJogador->getTamanho().x)/2.f;
-        centroJog.y = pJogador->getPosicao().y + (pJogador->getTamanho().y)/2.f;;
-        
-        intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador->getTamanho().x)/2.f;
-        intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador->getTamanho().y)/2.f;
+        if(pJogador1->estaVivo()) {
+            centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
+            centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
+            
+            centroJog.x = pJogador1->getPosicao().x + (pJogador1->getTamanho().x)/2.f;
+            centroJog.y = pJogador1->getPosicao().y + (pJogador1->getTamanho().y)/2.f;;
+            
+            intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador1->getTamanho().x)/2.f;
+            intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador1->getTamanho().y)/2.f;
 
-        diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
-        
+            diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
+        } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+            centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
+            centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
+            
+            centroJog.x = pJogador2->getPosicao().x + (pJogador2->getTamanho().x)/2.f;
+            centroJog.y = pJogador2->getPosicao().y + (pJogador2->getTamanho().y)/2.f;;
+            
+            intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador2->getTamanho().x)/2.f;
+            intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador2->getTamanho().y)/2.f;
+
+            diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
+        }
+
         if(fabs(diferenca) <= dist)
             alarmadoProj = true;
         else

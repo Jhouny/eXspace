@@ -8,8 +8,10 @@ namespace Menus::Fases {
     {  
         jogador1->resetar();
         jogador1->setFase(static_cast<Fase*>(this));
-        if(jogador2 != NULL) 
+        if(jogador2 != NULL) {
+            jogador2->resetar();
             jogador2->setFase(static_cast<Fase*>(this));
+        }
         
         setID(Estados::IdEstado::netuno);
         setTexture(TEX_FUNDO_NETUNO);
@@ -19,7 +21,7 @@ namespace Menus::Fases {
 
     }
 
-    void Netuno::geraPlataformas(){
+    void Netuno::geraPlataformas() {
         //primeira parte
         pBase = new Entidades::Obstaculos::Plataforma(Coordenada(500, 32), Coordenada(0, ALTURA/2.f));
         incluir(static_cast<Entidades::Entidade*>(pBase)); 
@@ -119,7 +121,9 @@ namespace Menus::Fases {
                         pos.y= ent->getPosicao().y - 60;
                         pIniTerrestre = new Entidades::Personagens::InimigoTerrestre();
                         pIniTerrestre->setPosicao(pos);
-                        pIniTerrestre->setJogador(jogador1);
+                        pIniTerrestre->setJogador1(jogador1);
+                        if(multiplayer)
+                            pIniTerrestre->setJogador2(jogador2);
                         incluir(static_cast<Entidades::Entidade*>(pIniTerrestre));
                         achou = true;
                     }
@@ -133,16 +137,20 @@ namespace Menus::Fases {
         int numInstanciasIniVoador = (rand() % 4) + 3; // randomiza numero de instancia de InimigoVoador (de 3 a 6)
         for(i = 0; i < numInstanciasIniVoador; i++) {
             pIniVoador = new Entidades::Personagens::InimigoVoador();
-            pIniVoador->setPosicao(Coordenada(rand() % (8200) + 1800, 200));
+            pIniVoador->setPosicao(Coordenada(rand() % (6200) + 1800, 200));
             pIniVoador->randomizarOscilacao();  // Tem que estar depois do setPosicao()
-            pIniVoador->setJogador(jogador1);
+            pIniVoador->setJogador1(jogador1);
+            if(multiplayer)
+                pIniVoador->setJogador2(jogador2);
             pIniVoador->setFase(tmp);
             incluir(static_cast<Entidades::Entidade*>(pIniVoador));
         }        
 
         pChefe = new Entidades::Personagens::Chefe();
         pChefe->setPosicao(Coordenada(10000,ALTURA-100.f));
-        pChefe->setJogador(jogador1);
+        pChefe->setJogador1(jogador1);
+        if(multiplayer)
+                pChefe->setJogador2(jogador2);
         pChefe->setFase(tmp);
         incluir(static_cast<Entidades::Entidade*>(pChefe));
         
@@ -153,7 +161,7 @@ namespace Menus::Fases {
 
         pGrafico->setTamView(Coordenada(COMPRIMENTO,ALTURA));
         pGrafico->setMinimap(Coordenada (COMPRIMENTO*2,ALTURA*2));
-        pGrafico->atualizaMinimap(Coordenada(2000,360)); //??
+        pGrafico->atualizaMinimap(Coordenada(2000,360));
     }
 
 }

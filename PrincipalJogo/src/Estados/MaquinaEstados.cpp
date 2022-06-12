@@ -3,9 +3,11 @@
 #include "../../include/Ente/Menus/MenuTransicao.h"
 #include "../../include/Ente/Menus/MenuPausa.h"
 #include "../../include/Ente/Menus/MenuGameOver.h"
+#include "../../include/Ente/Menus/MenuJogar.h"
 #include "../../include/Ente/Menus/Fases/Netuno.h"
 #include "../../include/Ente/Menus/Fases/Mercurio.h"
 #include "../../include/Ente/Menus/Fases/Fase.h"
+
 
 namespace Estados {
     MaquinaEstados::MaquinaEstados():
@@ -52,23 +54,23 @@ namespace Estados {
                         Menus::Fases::Netuno* net = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
                         Menus::MenuTransicao* menut = dynamic_cast<Menus::MenuTransicao*>(temp);
                         if(net != NULL && menut != NULL) {
+                            net->setMultiplayer(menut->getMultiplayer());
                             net->resetarEstadoOriginal();
                             net->setPontuacao(menut->getPontuacaoPrev());
-                            net->setMultiplayer(menut->getMultiplayer());
                             net->geraEntidades(true);
                         }
                     }
                 }
-
-                
             }
 
 
             if(temp != NULL) {
                 if(temp->getID() == Estados::IdEstado::menuJogar) {
+                    Menus::MenuJogar* mj = dynamic_cast<Menus::MenuJogar*>(temp);
                     if(id == Estados::IdEstado::mercurio) {
                         Menus::Fases::Mercurio* tmp = dynamic_cast<Menus::Fases::Mercurio*>(estadoAtual);
                         if(tmp != NULL) {
+                            tmp->setMultiplayer(mj->getMultiplayer());
                             tmp->resetarEstadoOriginal();
                             tmp->setPontuacao(0);
                             tmp->geraEntidades(true);
@@ -76,6 +78,7 @@ namespace Estados {
                     } else if(id == Estados::IdEstado::netuno) {
                         Menus::Fases::Netuno* tmp = dynamic_cast<Menus::Fases::Netuno*>(estadoAtual);
                         if(tmp != NULL) {
+                            tmp->setMultiplayer(mj->getMultiplayer());
                             tmp->resetarEstadoOriginal();
                             tmp->setPontuacao(0);
                             tmp->geraEntidades(true);

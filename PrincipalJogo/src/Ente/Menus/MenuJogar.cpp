@@ -3,7 +3,8 @@
 namespace Menus{
     MenuJogar::MenuJogar():
         Menu(),
-        pControleMenu(this)
+        pControleMenu(this),
+        multiplayer(false)
     {
         setID(Estados::IdEstado::menuJogar);
         setTitulo("JOGAR");
@@ -44,9 +45,6 @@ namespace Menus{
         //Cria Botao de CARREGAR JOGO
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuCarregar, "CARREGAR JOGO");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
-
-           
-
     }
 
     void MenuJogar::ativarControle() {
@@ -62,6 +60,7 @@ namespace Menus{
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));
+        multiplayer = false;
     }
 
     void MenuJogar::renderizar(){
