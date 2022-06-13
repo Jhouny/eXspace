@@ -20,12 +20,11 @@ namespace Entidades::Personagens {
     }
 
     void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-        if(outraEntidade->getID()==ID::projetil){
+        if(outraEntidade->getID()==ID::projetil) {
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            InimigoVoador *tmp2 = dynamic_cast<InimigoVoador*>(tmp->getOrigem()); 
-            if(tmp2 == NULL){ // se não for originario do mesmo 
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::inimigoVoador)
                 this->receberDano(tmp->getDano());
-            }
         }
 
     }

@@ -7,7 +7,8 @@
 
 namespace Entidades::Personagens {
     InimigoTerrestre::InimigoTerrestre():
-        Inimigo(Coordenada(50,50),Coordenada(100,100),ID::inimigoTerrestre, false)
+        Inimigo(Coordenada(50,50),Coordenada(100,100),ID::inimigoTerrestre, false),
+        carga(false)    
     {   
         this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
         this->setAceleracao(GRAVIDADE);
@@ -32,12 +33,12 @@ namespace Entidades::Personagens {
     }
     //Colisao do inimigoTerrestre
     void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-        if(outraEntidade->getID()==ID::projetil){
+        if(outraEntidade->getID()==ID::projetil) {
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            InimigoTerrestre *tmp2 = dynamic_cast<InimigoTerrestre*>(tmp->getOrigem()); 
-            if(tmp2 == NULL){ // se não for originario do mesmo 
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::inimigoTerrestre)
                 this->receberDano(tmp->getDano());
-            }
+                
         } else if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {
             // Fixa o inimigo em cima da plataforma
             pPlataforma = outraEntidade;
@@ -122,11 +123,20 @@ namespace Entidades::Personagens {
         this->setPosicao(coordIni);
     }
 
+    void InimigoTerrestre::atualizaCarga() {
+        if(tempoCarga.getElapsedTime().asSeconds() > 3)
+            carga = true;
+    }
+
     void InimigoTerrestre::executar(const float dt) {
         alarmado(300);
         atacar();
-        atualizaTexture(velocidade);  // Deve estar acima do movimentar(dt)
         movimentar(dt);
+        atualizaCarga();
         estaVivo();
+        if(carga == false) {
+            setTexture(TEX_INIMIGO_TERRESTRE_DESCARREGADO);
+        }
+        atualizaTexture(velocidade);  // Deve estar acima do movimentar(dt)
     }
 }

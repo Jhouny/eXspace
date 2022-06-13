@@ -59,7 +59,6 @@ namespace Menus::Fases {
             void setPontuacao(const int pont) { pontuacaoIni = pont; }
             int getPontuacao() const { return pontuacaoIni; }
 
-            
             void geraEntidades(bool gIni = true);
 
             void atualizaEntidades(const float dt);

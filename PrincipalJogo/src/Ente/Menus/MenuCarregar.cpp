@@ -211,6 +211,7 @@ namespace Menus{
     }
 
     void MenuCarregar::executar(const float dt) {
+        pFase = NULL;  // Força a resetar a fase
         leCaminhoArquivos();
         criaBotoes();
         setFundoAleatorio();

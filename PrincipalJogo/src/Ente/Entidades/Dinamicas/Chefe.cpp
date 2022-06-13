@@ -34,10 +34,9 @@ namespace Entidades::Personagens {
     void Chefe::colisao(Entidade* outraEntidade, Coordenada intersecao){
         if(outraEntidade->getID() == ID::projetil){
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            Chefe *tmp2 = dynamic_cast<Chefe*>(tmp->getOrigem());
-            if(tmp2 == NULL){ // se não for originario do mesmo 
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::chefe)
                 this->receberDano(tmp->getDano());
-            }
         }
         else if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {
             pPlataforma = outraEntidade;

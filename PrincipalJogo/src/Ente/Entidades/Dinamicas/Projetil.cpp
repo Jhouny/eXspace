@@ -2,17 +2,18 @@
 
 namespace Entidades {
     Projetil::Projetil(Coordenada pos, Coordenada tam, float vx, float vy, int d,  const char* path, ID id):
-        Entidade(id,tam,pos,false)
+        Entidade(id,tam,pos,false),
+        entOrigem(NULL),
+        textura(path),
+        dano(d)
     {
-            velocidade.x = vx;
-            velocidade.y= vy;
-            dano = d;
-            textura = path;
-            setTexture(textura.c_str());
+        velocidade.x = vx;
+        velocidade.y= vy;
+        setTexture(textura.c_str());
     }
 
     Projetil::~Projetil() {
-        
+        entOrigem = NULL;
     }
 
     void Projetil::setVelocidade(float vx, float vy) {

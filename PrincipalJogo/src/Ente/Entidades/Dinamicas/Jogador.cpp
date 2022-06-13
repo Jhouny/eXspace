@@ -145,13 +145,10 @@ namespace Entidades::Personagens {
         }
         else if(outraEntidade->getID() == ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
-            if(tmp2 == NULL){
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::jogador)
                 this->receberDano(tmp->getDano());
-            }
         }
-
-
         else if(intersecao.x <= intersecao.y && (outraEntidade->getID() == ID::plataforma ||outraEntidade->getID() == ID::rocha)) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
             Coordenada p = this->getPosicao();
             Coordenada v = this->getVelocidade();
@@ -160,7 +157,6 @@ namespace Entidades::Personagens {
                 v.y = 0;  // Define a velocidade vertical para 0
                 p.y = outraEntidade->getPosicao().y - this->getTamanho().y;  // Define a posição em cima da plataforma
                 this->setJump(false);
-
             } else {  // Se colidir embaixo
                 v.y = -1 * v.y * ATRITO;
                 p.y = outraEntidade->getPosicao().y + outraEntidade->getTamanho().y;  // Define a posição em cima da plataforma
@@ -177,10 +173,13 @@ namespace Entidades::Personagens {
                     this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
                 }
             } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
-                Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
+                InimigoTerrestre *tmp = dynamic_cast<InimigoTerrestre*>(outraEntidade);
                 // Reduz a vida do jogador 
-                this->receberDano(tmp->getDano());
-                
+                if(tmp->getCarga()) {  // Se puder dar dano
+                    this->receberDano(tmp->getDano());
+                    tmp->setCarga(false);
+                    tmp->reiniciarClock();
+                }
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
 
