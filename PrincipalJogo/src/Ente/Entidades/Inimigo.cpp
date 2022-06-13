@@ -6,38 +6,64 @@ namespace Entidades::Personagens {
         Personagem(tam, pos, est, v, d, id),
         jogTaPerto(false)
     {
-        pJogador = NULL;
+        pJogador1 = NULL;
+        pJogador2 = NULL;
     }
 
 
-    Inimigo::~Inimigo(){
-        pJogador = NULL;
+    Inimigo::~Inimigo() {
+        pJogador1 = NULL;
+        pJogador2 = NULL;
     }
 
-    void Inimigo::setJogador(Jogador* pJog) {
+    void Inimigo::setJogador1(Jogador* pJog) {
         if(pJog)
-            pJogador = pJog;
+            pJogador1 = pJog;
         else
-            cout << "ponteiro nulo" << endl;
+            cout << "Ponteiro nulo" << endl;
     }
+    
+    void Inimigo::setJogador2(Jogador* pJog) {
+        pJogador2 = pJog;
+    }
+
     void Inimigo::alarmado(int dist) {
         Coordenada centroIni,  centroJog, intersecao;
-        float diferenca;
+        float diferenca = 0;
         
-        centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
-        centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
-        
-        centroJog.x = pJogador->getPosicao().x + (pJogador->getTamanho().x)/2.f;
-        centroJog.y = pJogador->getPosicao().y + (pJogador->getTamanho().y)/2.f;;
-        
-        intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador->getTamanho().x)/2.f;
-        intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador->getTamanho().y)/2.f;
+        if(pJogador1->estaVivo()) {
+            centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
+            centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
+            
+            centroJog.x = pJogador1->getPosicao().x + (pJogador1->getTamanho().x)/2.f;
+            centroJog.y = pJogador1->getPosicao().y + (pJogador1->getTamanho().y)/2.f;;
+            
+            intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador1->getTamanho().x)/2.f;
+            intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador1->getTamanho().y)/2.f;
 
-        diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
-        
-        if(fabs(diferenca) <= dist)
-            jogTaPerto = true;
-        else
-            jogTaPerto = false;
+            diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
+            if(fabs(diferenca) <= dist) {
+                jogTaPerto = true;
+            } else {
+                jogTaPerto = false;
+            }
+        }
+        else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+            centroIni.x = this->getPosicao().x + (this->getTamanho().x)/2.f;
+            centroIni.y = this->getPosicao().y + (this->getTamanho().y)/2.f;
+            
+            centroJog.x = pJogador2->getPosicao().x + (pJogador2->getTamanho().x)/2.f;
+            centroJog.y = pJogador2->getPosicao().y + (pJogador2->getTamanho().y)/2.f;;
+            
+            intersecao.x = fabs(centroJog.x - centroIni.x) - (this->getTamanho().x + pJogador2->getTamanho().x)/2.f;
+            intersecao.y = fabs(centroJog.y - centroIni.y) - (this->getTamanho().y + pJogador2->getTamanho().y)/2.f;
+
+            diferenca = sqrtf(intersecao.x*intersecao.x + intersecao.y*intersecao.y);
+            if(fabs(diferenca) <= dist) {
+                    jogTaPerto = true;
+            } else {
+                    jogTaPerto = false;
+            }
+        }
     }
 }

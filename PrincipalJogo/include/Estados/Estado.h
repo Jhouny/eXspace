@@ -14,16 +14,20 @@ namespace Estados {
         indefinido = -1,
         menuJogar,
         pontuacao,
-        configuracoes,
+        sair,
         menuAbertura,
         menuGameOver,
+        menuPausa,
         menuTransicao,
         mercurio,
         netuno,
         selecionarFase,
         selecionarJogadores,
-        salvar,
-        alternar
+        salvarPontuacao,
+        salvarJogo,
+        alternar,
+        carregar,
+        menuCarregar
     };
 
     class Estado {

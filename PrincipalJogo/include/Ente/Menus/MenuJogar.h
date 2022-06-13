@@ -11,10 +11,15 @@ namespace Menus{
         private:
             Controle::ControleMenu pControleMenu;
             ElementosGraficos::Botao* pBotaoJogar;
+            ElementosGraficos::BotaoAlternador* pBotaoAlternador;
+            bool multiplayer;
         public:
             MenuJogar();
 
             ~MenuJogar();
+
+            void setMultiplayer(bool mt) { multiplayer = mt; }
+            bool getMultiplayer() const { return multiplayer; }
             
             void criaBotoes();
 

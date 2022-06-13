@@ -1,0 +1,16 @@
+7;0;0;
+1;0;2839.82;552.397;94.1001;0;50;
+4;650;8045.3;434.397;100;-100;50;
+4;651;7893.73;402.397;100;-100;50;
+4;652;6595.16;320.397;100;100;50;
+4;653;3748.89;506.397;100;100;50;
+4;654;1318.13;420.397;20;100;50;
+6;655;8627.09;171.232;150;-1;0.00860409;160;
+6;656;4728.03;153.183;150;-1;-42.0476;183;
+6;657;8456.09;185.234;150;-1;10.7406;167;
+2;669;3452.44;583.416;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;
+2;670;3351.55;583.399;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;
+2;671;3251.55;583.393;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;
+2;672;3151.38;583.393;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;
+2;673;3051.78;583.391;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;
+2;674;2952.11;583.398;1800;0;5;1;PrincipalJogo/assets/Texturas/Entidades/Projetil/Projetil.png;

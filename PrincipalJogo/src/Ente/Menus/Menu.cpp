@@ -1,13 +1,17 @@
 #include "../../../include/Ente/Menus/Menu.h"
+#include "../../../include/Ente/Menus/MenuPausa.h"
+#include "../../../include/Ente/Menus/MenuCarregar.h"
 #include "../../../include/ElementosGraficos/Texto.h"
 #include "../../../include/Estados/MaquinaEstados.h"
+#include "../../../include/ElementosGraficos/BotaoAlternador.h"
+#include "../../../include/ElementosGraficos/BotaoSalvar.h"
 
 namespace Menus{  
     Menu::Menu():
         Ente(ID::menu),
         Estados::Estado(this),
         pGrafico(Gerenciadores::Grafico::getInstancia()),
-        titulo(Coordenada(COMPRIMENTO,500.f),Coordenada(COMPRIMENTO/2.f,100.f),"")
+        titulo(Coordenada(COMPRIMENTO,400.f),Coordenada(COMPRIMENTO/2.f,100.f),"")
         {
             titulo.setCor(sf::Color::Yellow);
             pBotao = NULL;
@@ -53,13 +57,27 @@ namespace Menus{
     void Menu::entrar(){
         if(relogio.getElapsedTime().asSeconds() > 0.1){
             getAtivo();
-            ElementosGraficos::BotaoAlternador* tmp = dynamic_cast<ElementosGraficos::BotaoAlternador*>(it->first);
-            
+            Menus::MenuPausa* mPausa = dynamic_cast<Menus::MenuPausa*>(this);
 
-            if(tmp == NULL)
+            if((it->first)->getFuncao() == Estados::IdEstado::salvarPontuacao) {
+                ElementosGraficos::BotaoSalvar* save = dynamic_cast<ElementosGraficos::BotaoSalvar*>(it->first);
+                save->salvar();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::alternar) {
+                ElementosGraficos::BotaoAlternador* alt = dynamic_cast <ElementosGraficos::BotaoAlternador*>(it->first);
+                alt->proximo();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::salvarJogo) {
+                Menus::MenuPausa* menuPause = dynamic_cast<Menus::MenuPausa*>(this);  // So funciona se o IdEstado::salvarJogo so existir no MenuPausa.cpp
+                menuPause->salvaEstado();
+            } else if(mPausa != NULL && (it->first)->getFuncao() == Estados::IdEstado::indefinido) {
+                mPausa->resumirJogo();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::carregar) {
+                Menus::MenuCarregar* tmp = dynamic_cast<Menus::MenuCarregar*>(this);
+                tmp->carregarFase();
+            } else if((it->first)->getFuncao() == Estados::IdEstado::sair){
+                pGrafico->terminar();
+            }   else {
                 getMaquina()->setEstadoAtual((it->first)->getFuncao());
-            else
-                tmp->proximo();
+            }
             reiniciarRelogio();
             /*if((it->first)->getFuncao() == Estados::IdEstado::salvar){
                 ElementosGraficos::BotaoSalvar* save = dynamic_cast<ElementosGraficos::BotaoSalvar*>(it->first);
@@ -77,8 +95,16 @@ namespace Menus{
     }
 
     void Menu::voltar() {
-        if(relogio.getElapsedTime().asSeconds() > 0.1){
-            getMaquina()->setEstadoAnterior();
+        if(relogio.getElapsedTime().asSeconds() > 0.3) {
+            Menus::Fases::Fase* temp = dynamic_cast<Menus::Fases::Fase*>(this);
+            Menus::MenuPausa* mPausa = dynamic_cast<Menus::MenuPausa*>(this);
+            if(temp != NULL) {
+                temp->pausarFase();
+            } else if(mPausa != NULL) {
+                mPausa->resumirJogo();
+            } else {
+                getMaquina()->setEstadoAnterior();
+            }
             reiniciarRelogio(); 
         }
     }

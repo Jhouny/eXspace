@@ -2,16 +2,19 @@
 #include "../../../../include/Ente/Entidades/Inimigo.h"
 #include "../../../../include/Ente/Menus/Fases/Fase.h"
 #include "../../../../include/Ente/Entidades/Dinamicas/InimigoTerrestre.h"
+#include "../../../../include/Ente/Entidades/Dinamicas/Chefe.h"
 #include "../../../../include/Ente/Entidades/Estaticas/Lava.h"
 
 
 #define PULO_Y -256000 * TICK_RATE
 #define ATRITO 0.7
 #define VELOCIDADE_JOGADOR 76800 * TICK_RATE 
+#define POS_INICIAL Coordenada(100, 0)
+
 
 namespace Entidades::Personagens {
     Jogador::Jogador():
-        Personagem(Coordenada(46, 64), Coordenada(0,0), false, 100, 20, ID::jogador),
+        Personagem(Coordenada(54, 68), POS_INICIAL, false, VIDA_MAX, 20, ID::jogador),
         pControleJogador(this),
         pontuacao(0)
         {
@@ -19,22 +22,30 @@ namespace Entidades::Personagens {
             estaPulando = false;
             estaAtirando = false;
             viradoFrente = true;
+
+            if(getRG() == 0) {  // Jogadores DEVEM ser as primeiras entidades!!
+                // Define a textura
+                this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
+                setTexture(TEX_JOGADOR);
+            } else {
+                // Define a textura
+                this->getSprite()->setOrigin(sf::Vector2f(tamanho.x/3.f, 0));
+                setTexture(TEX_JOGADOR_2);
+            }
             
-            setPosicao(Coordenada(100,100));
             velocidade.x = 0.f;
             velocidade.y = 0.f;
             aceleracaoY = 10;
-
-            // Define a textura
-            setTexture(TEX_JOGADOR);
     }
 
     Jogador::~Jogador() {}
 
     bool Jogador::estaVivo() {
         Coordenada p = this->getPosicao();
-        if(p.y > ALTURA + 300 || vida<=0) {
+        if(p.y > ALTURA + 300 || vida <= 0) {
+            vida = 0;
             vivo = false;
+            setAtivo(false);
         } else {
             vivo = true;
         }
@@ -42,8 +53,22 @@ namespace Entidades::Personagens {
         return vivo;
     }
 
+     void Jogador::aumentaPontuacao(ID identificacao){
+        switch(identificacao){
+            case ID::inimigoTerrestre:
+                pontuacao+=100;
+                break;
+            case ID::inimigoVoador:
+                pontuacao+=150;
+                break;
+            case ID::chefe:
+                pontuacao+=1000;
+                break;
+        }
+     }
+
     void Jogador::atacar() {
-        if(this->getSegundos() > 0.15) {
+        if(this->getSegundos() > 0.05) {
             if(viradoFrente)
                 proj = new Projetil(Coordenada(this->getPosicao().x + this->getTamanho().x + 1, this->getPosicao().y + this->getTamanho().y/2.f - 3), TAM_PROJETIL_JOGADOR, VELOCIDADE_JOGADOR*3);
             else
@@ -85,16 +110,15 @@ namespace Entidades::Personagens {
         velocidade.x = 0; // Para instantaneamente
     }
 
-    void Jogador::resetar() {
-        setPontuacao(0);
-        setPosicao(0,0);
-        setVida(100);
-
+    void Jogador::resetar(int p) {
+        setPontuacao(p);
+        setPosicao(POS_INICIAL);
+        setVida(VIDA_MAX);
+        setAtivo(true);
         setJump(false);
         estaPulando = false;
         estaAtirando = false;
         viradoFrente = true;
-        
         velocidade.x = 0.f;
         velocidade.y = 0.f;
         aceleracaoY = 10;
@@ -102,7 +126,10 @@ namespace Entidades::Personagens {
         pControleJogador.resetarTeclas();
 
         // Define a textura
-        setTexture(TEX_JOGADOR);
+        if(getRG() == 0)
+            setTexture(TEX_JOGADOR);
+        else
+            setTexture(TEX_JOGADOR_2);
     }
 
     // Checa com que tipo de objeto colidiu
@@ -110,18 +137,19 @@ namespace Entidades::Personagens {
         //colisao com a lava
         if(outraEntidade->getID() == ID::lava) {
             Entidades::Obstaculos::Lava *tmp = dynamic_cast<Entidades::Obstaculos::Lava*>(outraEntidade);
-            //this->receberDano(tmp->getDano());
+            this->receberDano(tmp->getDano());
         }
-        if(outraEntidade->getID()==ID::projetil) {
+        else if(outraEntidade->getID() == ID::gasToxico) {
+            Entidades::Obstaculos::GasToxico *tmp = dynamic_cast<Entidades::Obstaculos::GasToxico*>(outraEntidade);
+            this->receberDano(tmp->getDano());
+        }
+        else if(outraEntidade->getID() == ID::projetil) {
             Entidades::Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            Jogador *tmp2 = dynamic_cast<Jogador*>(tmp->getOrigem());
-            if(tmp2 == NULL){
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::jogador)
                 this->receberDano(tmp->getDano());
-            }
         }
-
-
-        if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
+        else if(intersecao.x <= intersecao.y && (outraEntidade->getID() == ID::plataforma ||outraEntidade->getID() == ID::rocha)) {  //Se intersectou antes no x que no Y (i.e. colidiu verticalmente com a plataforma)
             Coordenada p = this->getPosicao();
             Coordenada v = this->getVelocidade();
             
@@ -129,7 +157,6 @@ namespace Entidades::Personagens {
                 v.y = 0;  // Define a velocidade vertical para 0
                 p.y = outraEntidade->getPosicao().y - this->getTamanho().y;  // Define a posição em cima da plataforma
                 this->setJump(false);
-
             } else {  // Se colidir embaixo
                 v.y = -1 * v.y * ATRITO;
                 p.y = outraEntidade->getPosicao().y + outraEntidade->getTamanho().y;  // Define a posição em cima da plataforma
@@ -139,17 +166,30 @@ namespace Entidades::Personagens {
             this->setPosicao(p);
 
         } else if(intersecao.y <= intersecao.x) {
-
-            if(outraEntidade->getID() == ID::plataforma){ // Se está do lado, não deixa atravessar o objeto
+            if(outraEntidade->getID() == ID::plataforma || outraEntidade->getID() == ID::rocha){ // Se está do lado, não deixa atravessar o objeto
                 if (this->getPosicao().x < outraEntidade->getPosicao().x) {
                     this->setPosicao(this->getPosicao().x + intersecao.x, this->getPosicao().y);
                 } else {
                     this->setPosicao(this->getPosicao().x - intersecao.x, this->getPosicao().y);
                 }
             } else if(outraEntidade->getID() == ID::inimigoTerrestre) {
-                Inimigo *tmp = dynamic_cast<Inimigo*>(outraEntidade);
+                InimigoTerrestre *tmp = dynamic_cast<InimigoTerrestre*>(outraEntidade);
                 // Reduz a vida do jogador 
-                //this->receberDano(tmp->getDano());
+                if(tmp->getCarga()) {  // Se puder dar dano
+                    this->receberDano(tmp->getDano());
+                    tmp->setCarga(false);
+                    tmp->reiniciarClock();
+                }
+                if (this->getPosicao().x < outraEntidade->getPosicao().x){
+                    this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+
+                } else {
+                    this->setPosicao(this->getPosicao().x, this->getPosicao().y);
+                }                
+            } else if(outraEntidade->getID() == ID::chefe) {
+                Chefe *tmp = dynamic_cast<Chefe*>(outraEntidade);
+                // Reduz a vida do jogador 
+                this->receberDano(tmp->getDanoColisao());
                 
                 if (this->getPosicao().x < outraEntidade->getPosicao().x){
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
@@ -158,7 +198,6 @@ namespace Entidades::Personagens {
                     this->setPosicao(this->getPosicao().x, this->getPosicao().y);
                 }                
             }
-            this->setJump(true); // Para não poder pular se encostar lateralmente
         }
     }
 
@@ -189,7 +228,10 @@ namespace Entidades::Personagens {
 
     void Jogador::executar(const float dt) {
         //seta as sprites
-        atualizaTexture();
+        atualizaTexture(velocidade);
+
+        // Checa se o jogador esta vivo
+        estaVivo();
         
         // Aplica a aceleração na velocidade e a velocidade na posição 
         atualiza(dt);

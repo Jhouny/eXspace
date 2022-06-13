@@ -1,9 +1,9 @@
 #include "../../include/Controle/Controletexto.h"
-#include "../../include/Ente/Menus/MenuGameOver.h"
+#include "../../include/Ente/Menus/Menu.h"
 
 namespace Controle{
 
-    ControleTexto::ControleTexto(Menus::MenuGameOver* menu):
+    ControleTexto::ControleTexto(Menus::Menu* menu):
         Observador(),
         espaco("Space"),
         apagar("BackSpace"),

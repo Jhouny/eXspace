@@ -16,8 +16,6 @@ namespace Entidades::Obstaculos{
             ~Lava();
 
             float getDano(){ return dano; }
-
-            void executar();
     };
 }
 #endif

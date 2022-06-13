@@ -5,7 +5,8 @@ namespace Menus{
     MenuTransicao::MenuTransicao():
         Menu(),
         pControleMenu(this),
-        origem(Estados::IdEstado::indefinido)
+        origem(Estados::IdEstado::indefinido),
+        pontuacaoPrev(0)
     {
         setID(Estados::IdEstado::menuTransicao);
         setTitulo("FASE CONCLUIDA");
@@ -41,7 +42,7 @@ namespace Menus{
             prox = Estados::IdEstado::mercurio;
 
         pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), prox, "PROXIMA FASE");
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
     void MenuTransicao::renderizar() {

@@ -16,6 +16,8 @@
 #include "../../Entidades/Dinamicas/Projetil.h"
 #include "../../Entidades/Estaticas/Plataforma.h"
 #include "../../Entidades/Estaticas/Lava.h"
+#include "../../Entidades/Estaticas/Rocha.h"
+#include "../../Entidades/Estaticas/GasToxico.h"
 
 #define TEX_BACKGROUND "PrincipalJogo/assets/Texturas/Backgrounds/Fundo/PNG/game_background_1/game_background_1.png"
 
@@ -26,18 +28,21 @@ namespace Menus::Fases {
             std::list<Entidades::Entidade*>::iterator it;
             ElementosGraficos::ElementosVisor visor;
 
-            int pontuacao;
             int numInimigos;
+            int pontuacaoIni;
+
+            bool multiplayer;
 
             Gerenciadores::Colisor colisor;
-
 
             Entidades::Personagens::Jogador *jogador1;
             Entidades::Personagens::Jogador *jogador2;
 
             Entidades::Obstaculos::Lava* pLava;
+            Entidades::Obstaculos::Rocha* pRocha;
+            Entidades::Obstaculos::GasToxico* pGas;
             Entidades::Obstaculos::Plataforma* pBase;
-             Entidades::Obstaculos::Plataforma* pChegada;
+            Entidades::Obstaculos::Plataforma* pChegada;
             Entidades::Personagens::InimigoTerrestre* pIniTerrestre;
             Entidades::Personagens::InimigoVoador* pIniVoador;
 
@@ -47,13 +52,14 @@ namespace Menus::Fases {
             Fase(Entidades::Personagens::Jogador* jog1 = NULL, Entidades::Personagens::Jogador* jog2 = NULL);
             
             ~Fase();
+
+            void setMultiplayer(bool multi) { multiplayer = multi; }
+            bool getMultiplayer()const { return multiplayer; }
             
-            void setPontuacao(int acres) { pontuacao+= acres; }
-            int getPontuacao(){ return pontuacao; }
-            
-            virtual void geraPlataformas() = 0;
-            virtual void geraObstaculos() = 0;
-            virtual void geraInimigos() = 0;
+            void setPontuacao(const int pont) { pontuacaoIni = pont; }
+            int getPontuacao() const { return pontuacaoIni; }
+
+            void geraEntidades(bool gIni = true);
 
             void atualizaEntidades(const float dt);
 
@@ -75,11 +81,19 @@ namespace Menus::Fases {
 
             void proximaFase();
 
+            void pausarFase();
+
             void ativarControle();
 
             void desativarControle();
 
             virtual void executar(const float dt) = 0;
+            
+            virtual void geraPlataformas() = 0;
+            
+            virtual void geraObstaculos() = 0;
+            
+            virtual void geraInimigos() = 0;
     };
 }
 

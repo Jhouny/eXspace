@@ -8,14 +8,15 @@
 namespace Menus{
     MenuGameOver::MenuGameOver():
         Menu(),
-        pControleTexto(this),
+        pControleTexto(static_cast<Menu*>(this)),
         pControleMenu(this),
-        nome("")
+        nome(""),
+        pontuacao(0)
     {
-        setID( Estados::IdEstado::menuGameOver);
+        setID(Estados::IdEstado::menuGameOver);
         setTitulo("GAME OVER");
 
-        getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
+        getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 50.f));
         getTitulo()->setCor(sf::Color(0,0,0,230));
         getTitulo()->setContorno(sf::Color::Yellow ,5);
 
@@ -25,32 +26,47 @@ namespace Menus{
     MenuGameOver::~MenuGameOver() {}
 
     void MenuGameOver::criaBotoes(){
-        pBotaoSalvar = new ElementosGraficos::BotaoSalvar(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 550), "SALVAR", this);
+        botoesAtivos.clear();
+        pBotaoSalvar = new ElementosGraficos::BotaoSalvar(Coordenada(200, 100), Coordenada(COMPRIMENTO - 300.f, ALTURA/2.f - 0.f), this, "SALVAR");
         pBotaoSalvar->ativar();
-        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(static_cast<ElementosGraficos::Botao*>(pBotaoSalvar), true));
+        botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotaoSalvar, true));
 
-        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO/2.f, 650), Estados::IdEstado::menuAbertura, "VOLTAR");
+        pBotao = new ElementosGraficos::Botao(Coordenada(200, 100), Coordenada(COMPRIMENTO - 300.f, ALTURA/2.f + 200.f), Estados::IdEstado::menuAbertura, "VOLTAR");
         botoesAtivos.emplace_back(std::pair<ElementosGraficos::Botao*, bool>(pBotao, false));
     }
 
-    void MenuGameOver::criaTextos(){
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada(100,0),"Digite seu nome:");
-        pTexto->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 300));
+    void MenuGameOver::criaTextos() {
+        vTextos.clear();
+        pTexto = new ElementosGraficos::Texto(Coordenada(400, 150),Coordenada(COMPRIMENTO/8.f, ALTURA/2.f + 200),"Digite seu nome:");
         pTexto->setCor(sf::Color(0,0,0,230));
         pTexto->setContorno(sf::Color::Yellow, 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150), Coordenada(COMPRIMENTO/2.f,450),"", false);
+        pTextoNome = new ElementosGraficos::Texto(Coordenada(400, 150), Coordenada(COMPRIMENTO/8.f + 200.f, ALTURA/2.f + 180),"", false);
+        pTextoNome->setCor(sf::Color(0,0,0,230));
+        pTextoNome->setContorno(sf::Color::Yellow, 2);
+        incluir(pTextoNome);
+
+        pTexto = new ElementosGraficos::Texto(Coordenada(400, 150),Coordenada(COMPRIMENTO/8.f, ALTURA/2.f),"Pontos: ");
         pTexto->setCor(sf::Color(0,0,0,230));
-        pTexto->setContorno(sf::Color::Yellow, 2);
+        pTexto->setContorno(sf::Color::Yellow, 5);
         incluir(pTexto);
         
+        pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(400,150), Coordenada(COMPRIMENTO/8.f + 100, ALTURA/2.f - 20),"");
+        pTextoPontuacao->setCor(sf::Color(0,0,0,230));
+        pTextoPontuacao->setContorno(sf::Color::Yellow, 5);
+        incluir(pTextoPontuacao);
 
+    }
+
+    void MenuGameOver::setPontuacao(int pont){
+        pontuacao = pont;
+        pTextoPontuacao->setConteudo(std::to_string(pontuacao));  
     }
 
     void MenuGameOver::incluir(ElementosGraficos::Texto *texto){
         if(texto)
-            lTextos.push(texto);
+            vTextos.emplace_back(texto);
         else
             cout << "Ponteiro para texto nulo"<< endl;
     }
@@ -59,8 +75,8 @@ namespace Menus{
         pGrafico->draw(&fundo, false);
         int i;
         //desenha Textos na tela
-        for(i = 0; i < lTextos.getTamanho(); i++ ){
-            pGrafico->draw(lTextos[i]->getTexto());
+        for(i = 0; i < vTextos.size(); i++ ){
+            pGrafico->draw(vTextos[i]->getTexto());
         }
         //desenha os botoes na tela
         for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
@@ -78,10 +94,9 @@ namespace Menus{
         }
 
         //atualiza os texto que podem ser modificados
-        for(int i = 0; i < lTextos.getTamanho(); i++ ){
-            if(!(lTextos[i]->ElementosGraficos::Texto::getEstatico())){
-                lTextos[i]->setTexto(pControleTexto.getNome()); //ControleTexto!!
-                lTextos[i]->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 450));
+        for(int i = 0; i < vTextos.size(); i++ ){
+            if(!(vTextos[i]->getEstatico())) {
+                vTextos[i]->setTexto(pControleTexto.getNome());
                 nome = pControleTexto.getNomeString();
             }
         }
@@ -98,9 +113,37 @@ namespace Menus{
         pControleTexto.desativar();
     }
 
+    void MenuGameOver::leArquivoPontuacao(){
+        mapaPontuacao.clear();
+        std::ifstream recuperaPontuacao(PONTUACAO_PATH,ios::in);
+        if(!recuperaPontuacao){
+            cerr << "Arquivo não pode ser aberto"<< endl;
+            return;
+        }
+        while(!recuperaPontuacao.eof()){
+            std::string pontu;
+            std::string name;
+            for(int i = 0; i < 10; i++){
+                std::getline(recuperaPontuacao,pontu);
+                std::getline(recuperaPontuacao,name);
+                if(pontu.length()>0){
+                    mapaPontuacao.insert(std::pair<int ,std::string >(std::stoi(pontu),name));        
+                }
+            }
+        }
+    }
+
     void MenuGameOver::executar(const float dt){
         criaBotoes();
         criaTextos();
+        leArquivoPontuacao();
+        
+        // Reseta o conteúdo dos textos
+        pTextoPontuacao->setConteudo(std::to_string(pontuacao));  
+        pTextoNome->setConteudo("");
+        nome = "";
+        pControleTexto.apagaNome();
+        
         setFundoAleatorio();
         pGrafico->setTamView(Coordenada(COMPRIMENTO, ALTURA));
         pGrafico->atualizaView(Coordenada(COMPRIMENTO/2.f, ALTURA/2.f));

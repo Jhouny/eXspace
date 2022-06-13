@@ -10,24 +10,21 @@ namespace Entidades::Personagens {
     InimigoVoador::InimigoVoador():
         Inimigo(Coordenada(50,50),Coordenada(0,0),ID::inimigoVoador,false,150,15)
     {   
-        velocidade.x = -1;
+        velocidade.x = 1;
         setTexture(TEX_INIMIGO_VOADOR);
+        setAceleracao(GRAVIDADE);
+    }
+
+    InimigoVoador::~InimigoVoador() {
 
     }
 
-    InimigoVoador::~InimigoVoador(){
-
-
-    }
-
-    void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao){
-        
-        if(outraEntidade->getID()==ID::projetil){
+    void InimigoVoador::colisao(Entidade* outraEntidade, Coordenada intersecao) {
+        if(outraEntidade->getID()==ID::projetil) {
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            InimigoVoador *tmp2 = dynamic_cast<InimigoVoador*>(tmp->getOrigem()); 
-            if(tmp2 == NULL){ // se não for originario do mesmo 
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::inimigoVoador)
                 this->receberDano(tmp->getDano());
-            }
         }
 
     }
@@ -36,9 +33,13 @@ namespace Entidades::Personagens {
             Coordenada direcao;
             Coordenada veloc;
             Coordenada centroJog;
-            centroJog.x = pJogador->getPosicao().x  +  pJogador->getTamanho().x/2.f;
-            centroJog.y = pJogador->getPosicao().y  +  pJogador->getTamanho().y/2.f;
-            
+            if(pJogador1->estaVivo()) {
+                centroJog.x = pJogador1->getPosicao().x  +  pJogador1->getTamanho().x/2.f;
+                centroJog.y = pJogador1->getPosicao().y  +  pJogador1->getTamanho().y/2.f;
+            } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+                centroJog.x = pJogador2->getPosicao().x  +  pJogador2->getTamanho().x/2.f;
+                centroJog.y = pJogador2->getPosicao().y  +  pJogador2->getTamanho().y/2.f;
+            }
             direcao.x = centroJog.x - posicao.x;
             direcao.y = centroJog.y - posicao.y;
 
@@ -66,20 +67,47 @@ namespace Entidades::Personagens {
     }
 
     void InimigoVoador::atualiza(const float dt) {
-        if(pJogador->getPosicao().x > posicao.x) {
-            velocidade.x = 1;
-        } else {
-            velocidade.x = -1;
+        if(pJogador1->estaVivo()) {
+            if(pJogador1->getPosicao().x > posicao.x)
+                velocidade.x = 1;
+            else
+                velocidade.x = -1;
+        } else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo()) {
+            if(pJogador2->getPosicao().x > posicao.x)
+                velocidade.x = 1;
+            else
+                velocidade.x = -1;
         }
     }
 
+    bool InimigoVoador::estaVivo(){
+        if(vida <= 0) {
+            setAtivo(false);
+            return false;
+        }
+        return true;
+    }
 
-    void InimigoVoador::movimentar(const float dt){
+    void InimigoVoador::randomizarOscilacao() {
+        pontoMedio = posicao.y + (rand()%40) + 50;
+    }
+
+    void InimigoVoador::movimentar(const float dt) {
+        if(posicao.y < pontoMedio && getAceleracao() < 0)  // Acima do ponto mais alto
+            setAceleracao(2 * GRAVIDADE);
+        else if(posicao.y > pontoMedio && getAceleracao() > 0)  // Abaixo do ponto mais baixo
+            setAceleracao(-2 * GRAVIDADE);
         
+        velocidade.y += getAceleracao()*dt;
+        Coordenada pos = getPosicao();
+        pos.x += velocidade.x * dt;
+        pos.y += velocidade.y * dt;
+        setPosicao(pos);
     }
 
     void InimigoVoador::executar(const float dt){
-        atualizaTexture();
+        atualizaTexture(velocidade);
+        movimentar(dt);
 
         atacar();
 

@@ -6,7 +6,9 @@
 #include "../../../Controle/ControleJogador.h"
 
 #define TEX_JOGADOR "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/Still.png"
+#define TEX_JOGADOR_2 "PrincipalJogo/assets/Texturas/Entidades/Jogador/3 Cyborg/jogador2.png"
 #define TAM_PROJETIL_JOGADOR Coordenada(12,4)
+#define VIDA_MAX 200
 
 namespace Menus::Fases{
     class Fase;
@@ -17,9 +19,9 @@ namespace Entidades::Personagens {
         private:
             Menus::Fases::Fase* pFase;
             Projetil* proj;
-            Controle::ControleJogador pControleJogador;
+            Controle::ControleJogador pControleJogador; 
 
-            float pontuacao;
+            int pontuacao;
             bool viradoFrente;
             bool estaPulando;
             bool estaAtirando;
@@ -43,8 +45,11 @@ namespace Entidades::Personagens {
                 clock.restart();
             }
 
-            void setVida(int vi){ vida = vi; }
+            Controle::ControleJogador* getControle() { return &pControleJogador; }
+            
             void setPontuacao(float ponto) { pontuacao = ponto; }
+            int getPontuacao() const { return pontuacao; } //Precisa?
+            void aumentaPontuacao(ID identificacao);
 
             // Fisica
             void atacar();
@@ -59,7 +64,7 @@ namespace Entidades::Personagens {
             void atualiza(const float dt);
             void atualizaAcel();
 
-            void resetar();
+            void resetar(int p = 0);
 
             void ativarControle() {
                 pControleJogador.ativar();

@@ -9,7 +9,7 @@
 namespace Menus::Fases {
     class Netuno: public Fase {
         private:
-        //Entidades::Personagens::Chefe* pChefe;
+        Entidades::Personagens::Chefe* pChefe;
             
         public:
             Netuno(/*MenuGameOver* men,*/ Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2 = NULL);

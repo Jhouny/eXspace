@@ -3,8 +3,9 @@
 
 #include "../Inimigo.h"
 #include  "Projetil.h "
-
-#define TAM_PROJETIL_CHEFE Coordenada(12, 12)
+#define TEX_CHEFE "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.still.png"
+#define TEX_CHEFE_ALARMADO "PrincipalJogo/assets/Texturas/Entidades/Inimigos/Chefe/Carro.alarmado.png"
+#define TAM_PROJETIL_CHEFE Coordenada(30, 30)
 
 namespace Menus::Fases {
     class Fase;
@@ -14,12 +15,14 @@ namespace Entidades::Personagens {
         private:
             Projetil* pProj;
             Menus::Fases::Fase* pFase;
+            int danoColisao;
             Entidade* pPlataforma;
             bool alarmadoProj;
 
         public:
             Chefe();
             ~Chefe();
+            
             float getSegundos() {
                 return clock.getElapsedTime().asSeconds();
             }
@@ -27,14 +30,16 @@ namespace Entidades::Personagens {
             void reiniciarClock() {
                 clock.restart();    
             }
+            
+            int getDanoColisao(){ return danoColisao; }
+
+            bool estaVivo();
 
             void setFase(Menus::Fases::Fase* pF) { pFase = pF; }
 
             void colisao(Entidade* outraEntidade, Coordenada intersecao);
 
             void atacar();
-
-            void atualiza(const float dt);
 
             void alarmadoProjetil(int dist);
 

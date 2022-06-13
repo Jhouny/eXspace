@@ -1,0 +1,3 @@
+Sistema Operacional (S.O.) utilizado: Windows 10 x64
+Compilador e Versão: GNU g++ (i686-posix-dwarf-rev0, Built by MinGW-W64 project) 7.3.0 e GNU gdb (GDB) 8.1, i686-w64-mingw32
+Biblioteca gráfica: SFML v2.5.1

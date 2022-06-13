@@ -8,11 +8,13 @@
 namespace Entidades::Obstaculos{
     class Plataforma: public Obstaculo {
         private:
+            bool platafNormal;
         public:
-            Plataforma(Coordenada tam, Coordenada pos, ID id = plataforma);
-            ~Plataforma();
-            void executar();
+            Plataforma(Coordenada tam, Coordenada pos, bool platNormal = true, ID id = plataforma);
             
+            ~Plataforma();
+
+            bool getNormal() const { return platafNormal; }       
     };
 }
 

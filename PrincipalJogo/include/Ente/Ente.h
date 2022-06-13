@@ -17,7 +17,7 @@ enum ID {
     rocha,
     chefe,
     menu
-};
+};  // Se for adicionar algum novo, adicionar no final, não no meio!!
 
 class Ente {
     protected:

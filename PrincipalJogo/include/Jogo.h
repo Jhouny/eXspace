@@ -10,6 +10,8 @@
 #include "Ente/Menus/MenuJogar.h"
 #include "Ente/Menus/MenuGameOver.h"
 #include "Ente/Menus/MenuTransicao.h"
+#include "Ente/Menus/MenuCarregar.h"
+#include "Ente/Menus/MenuPausa.h"
 #include "Controle/ControleJogador.h"
 #include "Estados/MaquinaEstados.h"
 
@@ -25,11 +27,6 @@ class Jogo: public Estados::MaquinaEstados {
         sf::Clock temporizador;
         float dt;
 
-        /*Fase fase1;
-
-        Menus::MenuAbertura menuAbertura;
-        Menus::MenuPontuacao menuPontuacao;*/
-        //Fase fase2;
     public:
         Jogo();
 

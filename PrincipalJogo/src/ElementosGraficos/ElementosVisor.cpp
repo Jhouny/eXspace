@@ -4,7 +4,8 @@ namespace ElementosGraficos {
     ElementosVisor::ElementosVisor(Entidades::Personagens::Jogador* jog1, Entidades::Personagens::Jogador* jog2):
         pGrafico(Gerenciadores::Grafico::getInstancia()),
         pJog1(jog1),
-        pJog2(jog2)
+        pJog2(jog2),
+        multiplayer(false)
     {
         executar();
     }
@@ -23,7 +24,7 @@ namespace ElementosGraficos {
                 vidaJog1.emplace_back(pCor);
             }
 
-            if(pJog2 != NULL) {
+            if(pJog2 != NULL && multiplayer) {
                 for(i = 0; i < n; i++) {
                     pCor = new Coracao(Coordenada(COMPRIMENTO - PADDING_BORDA - i*(TAMANHO_PADRAO_CORACAO.x + ESPACAMENTO_PONTOS), 40), pJog1);
                     vidaJog2.emplace_back(pCor);
@@ -53,10 +54,12 @@ namespace ElementosGraficos {
         for(it = vidaJog1.begin(); it != vidaJog1.end(); it++) {
             pGrafico->draw((*it)->getSprite(), false);
         }
-        for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
-            pGrafico->draw((*it)->getSprite(), false);
+        if(pJog2 != NULL && multiplayer) {
+            for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
+                pGrafico->draw((*it)->getSprite(), false);
+            }
         }
-
+        
         std::vector<InimigoAbatido*>::iterator it2;
         for(it2 = inimigosAbatidos.begin(); it2 != inimigosAbatidos.end(); it2++) {
             pGrafico->draw((*it2)->getSprite(),false);
@@ -66,20 +69,34 @@ namespace ElementosGraficos {
     void ElementosVisor::atualizaPontuacao(int numIni) {
         std::vector<Coracao*>::iterator it;
         for(it = vidaJog1.begin(); it != vidaJog1.end(); it++) {
-            (*it)->executar(pJog1->getPosicao());
+            if(pJog1->estaVivo())
+                (*it)->executar(pJog1->getPosicao());
+            else if(pJog2->estaVivo() && !pJog1->estaVivo())
+                (*it)->executar(pJog2->getPosicao());
         }
 
-        // 
+        // Calcula vida do jogador 1
         int v = pJog1->getVida();
         int tam = vidaJog1.size();
         for(int i = 0; i < tam; i++) {
-            if(v < 100*i/(float)tam)
+            if(v <= VIDA_MAX*i/(float)tam)
                 vidaJog1[i]->limpar();
         }
+
+        // Calcula vida do jogador 2
+        v = pJog2->getVida();
+        tam = vidaJog2.size();
+        for(int i = 0; i < tam; i++) {
+            if(v <= VIDA_MAX*i/(float)tam)
+                vidaJog2[i]->limpar();
+        }
         
-        if(pJog2 != NULL) {
+        if(pJog2 != NULL && multiplayer) {
             for(it = vidaJog2.begin(); it != vidaJog2.end(); it++) {
-                (*it)->executar(pJog2->getPosicao());
+                if(pJog1->estaVivo())
+                    (*it)->executar(pJog1->getPosicao());
+                else if(pJog2->estaVivo() && !pJog1->estaVivo())
+                    (*it)->executar(pJog2->getPosicao());
             }
         }
 
@@ -88,7 +105,10 @@ namespace ElementosGraficos {
         }
         std::vector<InimigoAbatido*>::iterator it2;
         for(it2 = inimigosAbatidos.begin(); it2 != inimigosAbatidos.end(); it2++) {
-            (*it2)->executar(pJog1->getPosicao());
+            if(pJog1->estaVivo())
+                (*it2)->executar(pJog1->getPosicao());
+            else if(pJog2->estaVivo() && !pJog1->estaVivo())
+                (*it2)->executar(pJog2->getPosicao());
         }
     }
 
@@ -102,8 +122,6 @@ namespace ElementosGraficos {
 
     void ElementosVisor::executar() {
         criaPontosEspacados(10, PontoID::coracao);
-
-        //criaPontosEspacados(6, PontoID::inimigoAbatido);
     }
 } // namespace ElementosGraficos 
 

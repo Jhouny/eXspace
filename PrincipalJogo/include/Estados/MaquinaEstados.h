@@ -4,20 +4,28 @@
 #include "Estado.h"
 #include "../Gerenciadores/Grafico.h"
 
+namespace Entidades {
+    class Entidade;
+}
+
 namespace Estados {
     class MaquinaEstados {
         protected:
             Estado* estadoAtual;
             std::map<IdEstado, Estado*> mapaEstados;
+            sf::Clock tempo;
 
         public:
             MaquinaEstados();
 
             ~MaquinaEstados();
 
+            std::map<IdEstado, Estado*>* getMapaEstados() { return &mapaEstados; }
+
             void inserirEstado(Estado* est);
 
             void setEstadoAtual(IdEstado id);
+            void setEstadoAtual(IdEstado id, std::list<Entidades::Entidade*> *lEnt);
 
             void setEstadoAnterior();
 

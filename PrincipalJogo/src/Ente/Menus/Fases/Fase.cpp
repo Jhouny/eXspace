@@ -9,8 +9,8 @@ namespace Menus::Fases {
         pControleFase(this),
         visor(jog1, jog2),
         colisor(),
-        pontuacao(0)/*,
-        pMenuGameOver(men)*/
+        multiplayer(false),
+        pontuacaoIni(0)
         {
             // Define o plano de fundo
             setTexture(TEX_BACKGROUND);
@@ -23,12 +23,12 @@ namespace Menus::Fases {
             pLava = NULL;
             //pMenuGameOver = NULL;
             numInimigos = 0;
-
-
+        
             // Inclui os jogadores
             if(jogador2 != NULL) {
                 jogador2->setVelocidade(Coordenada(0,0));
                 jogador2->setFase(this);
+                jogador2->getControle()->setTeclas("Y","G","J","P");
                 incluir(static_cast<Entidades::Entidade*>(jogador2));
             }
 
@@ -46,32 +46,45 @@ namespace Menus::Fases {
         fundo.setTexture(*temp);
         float sX = (float)COMPRIMENTO/temp->getSize().x;
         float sY = (float)ALTURA/temp->getSize().y;
-        fundo.setScale(2*sX, sY);
+        fundo.setScale(2.5*sX, sY);
     }
 
     void Fase::atualizarBackground() {
         // Simula o movimento relativo do background e jogador
-        float pX = 0.85 * jogador1->getPosicao().x - COMPRIMENTO/2.f;
-        fundo.setPosition(pX, 0);
+        if(jogador1->estaVivo()) {
+            float pX = 0.85 * jogador1->getPosicao().x - COMPRIMENTO/2.f;
+            fundo.setPosition(pX, 0);
+        } else if(jogador2->estaVivo() && !jogador1->estaVivo()) {
+            float pX = 0.85 * jogador2->getPosicao().x - COMPRIMENTO/2.f;
+            fundo.setPosition(pX, 0);
+        }
     }
 
     void Fase::gameOver() {
-        //seta a pontucao antes de "apagar"
-        /*pMenuGameOver->setPont( pontuacao );*/
+        multiplayer = false;
+        pontuacaoIni = jogador1->getPontuacao();
         pMaq->setEstadoAtual(Estados::IdEstado::menuGameOver);
     }
 
     void Fase::proximaFase() {
+        pontuacaoIni = jogador1->getPontuacao();
         pMaq->setEstadoAtual(Estados::IdEstado::menuTransicao);
+    }
+
+    void Fase::pausarFase() {
+        pontuacaoIni = jogador1->getPontuacao();
+        pMaq->setEstadoAtual(Estados::IdEstado::menuPausa, &lEntidades);
     }
 
     void Fase::ativarControle() {
         jogador1->ativarControle();
+        jogador2->ativarControle();
         pControleFase.ativar();
     }
 
     void Fase::desativarControle() {
         jogador1->desativarControle();
+        jogador2->desativarControle();
         pControleFase.desativar();
     }
 
@@ -79,15 +92,20 @@ namespace Menus::Fases {
         // Retira os elementos da lista
         lEntidades.clear();
         colisor.resetar();
-        pontuacao = 0;
+        numInimigos = 0;
+        
         jogador1->resetar();
         jogador1->setFase(this);
         incluir(static_cast<Entidades::Entidade*>(jogador1));
 
-        if(jogador2 != NULL) {
+        if(jogador2 != NULL && multiplayer)  {
             jogador2->resetar();
             jogador2->setFase(this);
-            incluir(static_cast<Entidades::Entidade*>(jogador1));
+            visor.setMultiplayer(true);
+            incluir(static_cast<Entidades::Entidade*>(jogador2));
+        } else {
+            jogador2->desativarControle();
+            visor.setMultiplayer(false);
         }
 
         fundo.setPosition(0, 0);
@@ -114,16 +132,20 @@ namespace Menus::Fases {
 
             if(!ent->getAtivo()) {
                 it = lEntidades.erase(it);
-                if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador ||
-                    ent->getID() == ID::chefe) {
-                    setPontuacao(100);
+                if(ent->getID() == ID::inimigoTerrestre || ent->getID() == ID::inimigoVoador) {
                     numInimigos--;
+                    jogador1->aumentaPontuacao(ent->getID());
+                } 
+                else if(ent->getID() == ID::chefe){
+                    numInimigos--;
+                    jogador1->aumentaPontuacao(ent->getID());
+                    gameOver();
+
                 }
             } else {
                 it++;
             }
         }
-
         visor.atualizaPontuacao(numInimigos);
     }
 
@@ -140,14 +162,25 @@ namespace Menus::Fases {
         visor.renderizar();
     }
 
+    void Fase::geraEntidades(bool gIni) {
+        geraPlataformas();
+        geraObstaculos();
+        if(gIni)
+            geraInimigos();
+    }
+
     void Fase::atualizar(const float dt) {
         // Verifica colisao entre Entidades Dinamicas e Estaticas
         colisor.ChecarColisoes();    
 
-        // Atualiza a view para a posicao do jogador
-        pGrafico->atualizaView(jogador1->getPosicao());
-
-        pGrafico->atualizaMinimap(jogador1->getPosicao());
+        // Atualiza a view para a posicao do jogador vivo
+        if(jogador1->estaVivo()) {
+            pGrafico->atualizaView(jogador1->getPosicao());
+            pGrafico->atualizaMinimap(jogador1->getPosicao());
+        } else if(jogador2->estaVivo() && !jogador1->estaVivo()) {
+            pGrafico->atualizaView(jogador2->getPosicao());
+            pGrafico->atualizaMinimap(jogador2->getPosicao());
+        }
 
         // Processa o executar das entidades e remove entidades inativas
         atualizaEntidades(dt);
@@ -158,13 +191,27 @@ namespace Menus::Fases {
         // Processa simulação de efeito Parallax
         atualizarBackground();
 
-        //cout << "Tamanho: " << lEntidades.size() << endl;
-
-        if(!(jogador1->estaVivo())){
-            gameOver();
-        } else if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
+        // Checa se os jogadores morreram
+        if(multiplayer) {
+            if((!jogador1->estaVivo()) && (!jogador2->estaVivo()))
+                gameOver();
+        } else {
+            if((!jogador1->estaVivo()))
+                gameOver();
+        }    
+        
+        // Se chegou ao final da fase
+        if(pChegada != NULL && jogador1->getPosicao().x + jogador1->getTamanho().x >= pChegada->getPosicao().x - 1) {
             // Menu transição
             proximaFase();
+        }
+        if(multiplayer) {
+            if(!jogador1->estaVivo()) {
+                if(pChegada != NULL && jogador2->getPosicao().x + jogador2->getTamanho().x >= pChegada->getPosicao().x - 1) {
+                    // Menu transição
+                    proximaFase();
+                }
+            }
         }
     }
 }

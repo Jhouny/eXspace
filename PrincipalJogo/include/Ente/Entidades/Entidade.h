@@ -13,7 +13,7 @@ namespace Entidades {
             sf::Sprite sprite;
             Gerenciadores::Grafico *pGrafico;  // Ponteiro para o gerenciador grafico
             bool ativo;
-            bool estatico;
+            bool estatico; //Se a entidade se mexe ou não
 
         public:
             Entidade(ID id, Coordenada tam, Coordenada pos, bool estat); 
@@ -21,15 +21,16 @@ namespace Entidades {
 
             void setPosicao(float x, float y);
             void setPosicao(Coordenada pos);
-            
+
             void setTexture(const char* path, bool esticar = true);
-            void atualizaTexture();
+            void atualizaTexture(Coordenada vel);
 
             sf::Sprite* getSprite() { return &sprite; }
             sf::RectangleShape* getShape() { return &shape; }
             
             Coordenada getPosicao() const { return posicao; }
             Coordenada getTamanho() const { return tamanho; }
+            void setTamanho(Coordenada tam) { tamanho = tam; }
 
             bool getAtivo() const { return ativo; }
             void setAtivo(bool at) { ativo = at; }

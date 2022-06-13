@@ -2,17 +2,18 @@
 
 namespace Entidades {
     Projetil::Projetil(Coordenada pos, Coordenada tam, float vx, float vy, int d,  const char* path, ID id):
-        Entidade(id,tam,pos,false)
+        Entidade(id,tam,pos,false),
+        entOrigem(NULL),
+        textura(path),
+        dano(d)
     {
-            velocidade.x = vx;
-            velocidade.y= vy;
-            dano = d;
-            textura = path;
-            setTexture(textura.c_str());
+        velocidade.x = vx;
+        velocidade.y= vy;
+        setTexture(textura.c_str());
     }
 
     Projetil::~Projetil() {
-        
+        entOrigem = NULL;
     }
 
     void Projetil::setVelocidade(float vx, float vy) {
@@ -25,7 +26,8 @@ namespace Entidades {
     }
 
     void Projetil::colisao(Entidade* outraEntidade, Coordenada intersecao){
-        this->setAtivo(false);
+        if(outraEntidade->getID() != ID::gasToxico)
+            this->setAtivo(false);
     }
 
     // Muda a posição da ENTIDADE
@@ -39,9 +41,15 @@ namespace Entidades {
     }
 
     void Projetil::estaAtivo() {
-        if(this->getPosicao().x > 12000||this->getPosicao().x < -1000 || this->getPosicao().y > ALTURA || this->getPosicao().y < 0) {
-        setAtivo(false);
+        Coordenada limite =  pGrafico->getViewBounds();
+
+        if(this->getPosicao().x > limite.x + COMPRIMENTO/2.f || this->getPosicao().x < limite.x - COMPRIMENTO/2.f) {
+            setAtivo(false);
         }
+        else if(this->getPosicao().y > limite.y + ALTURA/2.f || this->getPosicao().x < limite.y - ALTURA/2.f) {
+            setAtivo(false);
+        }
+        
     }
 
     void Projetil::executar(const float dt) {
@@ -49,6 +57,6 @@ namespace Entidades {
 
         estaAtivo();
 
-        atualizaTexture();
+        atualizaTexture(velocidade);
     }
 }

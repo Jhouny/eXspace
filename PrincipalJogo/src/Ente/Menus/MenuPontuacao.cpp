@@ -26,44 +26,63 @@ namespace Menus{
 
     void MenuPontuacao::incluir(ElementosGraficos::Texto *texto){
         if(texto)
-            lTextos.push_back(texto);
+            vTextos.push_back(texto);
         else
             cout << "Ponteiro para texto esta nulo" << endl;
 
     }
 
     void MenuPontuacao::criaTextos() {
-        lTextos.clear();
+        vTextos.clear();
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f,50),"Pontuação: ");
-        pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,250),Coordenada((float)COMPRIMENTO/2.f-100.f,50),"Pontuação: ");
+        pTexto->setCor(sf::Color (57,255,20));
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,150),"1º");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,200),"1º");
         pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,250),"2º");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,300),"2º");
         pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,350),"3º");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,400),"3º");
         pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,450),"4º");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,500),"4º");
         pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
 
-        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,550),"5º");
+        pTexto = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(COMPRIMENTO/7.f,600),"5º");
         pTexto->setCor(sf::Color::Yellow);
-        getTitulo()->setContorno(sf::Color(200, 50, 50, 230), 5);
+        pTexto->setContorno(sf::Color(0,0,0,230), 5);
         incluir(pTexto);
+        
+        // Le a pontuação do arquivo salvo
+        std::ifstream recuperaPontuacao(PONTUACAO_PATH,ios::in);
+        if(!recuperaPontuacao){
+            cerr << "Arquivo de pontuação não pode ser aberto"<< endl;
+            return;
+        }
+        std::string nome;
+        std::string pontuacao;
+        for(int i = 0; i < 5; i++) {
+            std::getline(recuperaPontuacao,pontuacao);
+            std::getline(recuperaPontuacao,nome);
+            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(COMPRIMENTO/4.f,150),Coordenada (COMPRIMENTO/3.f,200+i*100),nome);
+            pTextoPontuacao->setCor(sf::Color::Yellow);
+            incluir(pTextoPontuacao);
+            pTextoPontuacao = new ElementosGraficos::Texto(Coordenada(400,150),Coordenada(2*(COMPRIMENTO)/3.f,200+i*100),pontuacao);
+            pTextoPontuacao->setCor(sf::Color::Yellow);
+            incluir(pTextoPontuacao);
+        }
     }
 
     void MenuPontuacao::atualizar(const float dt){
@@ -83,8 +102,8 @@ namespace Menus{
     void MenuPontuacao::renderizar(){
         pGrafico->draw(&fundo, false);
         int i;
-        for(i = 0; i < lTextos.size(); i++ ){
-            pGrafico->draw(lTextos[i]->getTexto());
+        for(i = 0; i < vTextos.size(); i++ ){
+            pGrafico->draw(vTextos[i]->getTexto());
         }
          for(it = botoesAtivos.begin(); it != botoesAtivos.end(); it++){
             pGrafico->draw((it->first)->getSprite(),false);

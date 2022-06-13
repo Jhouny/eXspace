@@ -5,7 +5,7 @@
 
 
 namespace Menus{
-    class MenuGameOver;
+    class Menu;
 }
 
 
@@ -15,11 +15,11 @@ namespace Controle{
             std::string nome;
             std::string espaco;
             std::string apagar;
-            Menus::MenuGameOver* pMenu;
+            Menus::Menu* pMenu;
             const int tamMax;
             int contador;
         public:
-            ControleTexto(Menus::MenuGameOver * menu);
+            ControleTexto(Menus::Menu * menu);
 
             ~ControleTexto();
 

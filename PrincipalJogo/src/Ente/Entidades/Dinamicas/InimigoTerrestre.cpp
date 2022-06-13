@@ -7,13 +7,14 @@
 
 namespace Entidades::Personagens {
     InimigoTerrestre::InimigoTerrestre():
-        Inimigo(Coordenada(50,50),Coordenada(100,100),ID::inimigoTerrestre, false)
+        Inimigo(Coordenada(50,50),Coordenada(100,100),ID::inimigoTerrestre, false),
+        carga(false)    
     {   
         this->setVelocidade(Coordenada((float)VELOCIDADE, 0.f));
         this->setAceleracao(GRAVIDADE);
         this->setEstatico(false);
 
-        pJogador=NULL;
+        pJogador2=NULL;
         pPlataforma=NULL;
 
         setTexture(TEX_INIMIGO_TERRESTRE);
@@ -30,28 +31,22 @@ namespace Entidades::Personagens {
 
         return vivo;
     }
-
+    //Colisao do inimigoTerrestre
     void InimigoTerrestre::colisao(Entidade* outraEntidade, Coordenada intersecao) {
-        if(outraEntidade->getID()==ID::projetil){
+        if(outraEntidade->getID()==ID::projetil) {
             Projetil *tmp = dynamic_cast<Projetil*>(outraEntidade);
-            InimigoTerrestre *tmp2 = dynamic_cast<InimigoTerrestre*>(tmp->getOrigem()); 
-            if(tmp2 == NULL){ // se não for originario do mesmo 
+            // Se o projetil não for nulo, se sua origem não for nula e se não vier do mesmo tipo de Entidade
+            if(tmp != NULL && tmp->getOrigem() != NULL && tmp->getOrigem()->getID() != ID::inimigoTerrestre)
                 this->receberDano(tmp->getDano());
-            }
-        }
-        
-        if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {
-            pPlataforma = outraEntidade;
+                
+        } else if(intersecao.x <= intersecao.y && outraEntidade->getID() == ID::plataforma) {
             // Fixa o inimigo em cima da plataforma
+            pPlataforma = outraEntidade;
             Coordenada p;
             p.x = this->getPosicao().x;
             p.y = outraEntidade->getPosicao().y - this->getTamanho().y;
+            velocidade.y = 0;
             this->setPosicao(p);
-            
-            Coordenada v = this->getVelocidade();
-            v.y = 0;
-            
-            this->setVelocidade(v);
 
         } else if(intersecao.y < intersecao.x && outraEntidade->getID() != ID::plataforma) {
             if(outraEntidade->getID() == ID::jogador) {
@@ -72,55 +67,76 @@ namespace Entidades::Personagens {
             }
         }
     }
-
+    
+    // Define a velocidade e textura de ataque
+    void InimigoTerrestre::atacar() {
+        Coordenada coordJog;
+        if(pJogador1->estaVivo())
+            coordJog = pJogador1->getPosicao();
+        else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo())
+            coordJog = pJogador2->getPosicao();
+        
+         // Se jogador estiver proximo, siga-o
+        if(jogTaPerto) {
+            setTexture(TEX_INIMIGO_TERRESTRE_ALARMADO);
+            if(posicao.x < coordJog.x)
+                velocidade.x = VELOCIDADE * 2;
+            else
+                velocidade.x = VELOCIDADE * (-2);
+        } else {
+            setTexture(TEX_INIMIGO_TERRESTRE);
+            if(velocidade.x > 0)
+                velocidade.x = VELOCIDADE;
+            else
+                velocidade.x = -1 * VELOCIDADE;
+        }
+    }
 
     // Movimenta o inimigo
     void InimigoTerrestre::movimentar(const float dt) {
-        Coordenada coordJog, coordIni, v;
+        Coordenada coordJog, coordIni;
         coordIni = this->getPosicao();
-        coordJog = pJogador->getPosicao();
-        
-        v = this->getVelocidade();
-        v.y += this->getAceleracao();
-        coordIni.y += v.y * dt;
+        if(pJogador1->estaVivo())
+            coordJog = pJogador1->getPosicao();
+        else if(pJogador2 != NULL && pJogador2->estaVivo() && !pJogador1->estaVivo())
+            coordJog = pJogador2->getPosicao();
+
+        if(temporizador.getElapsedTime().asSeconds() > 3) {  // A cada três segundos roda uma chance para inverter a direção
+            int chance = rand() % 100;
+            if(chance < 10 && !jogTaPerto)  // Chance de 10%
+                velocidade.x *= -1;
+            temporizador.restart();
+        }
         
         // Se estiver na borda da plataforma e (jogador não esta perto ou jogador está acima do inimigo) inverte a direção
         if(pPlataforma && (!jogTaPerto || coordJog.y < coordIni.y - 100)) {
-            if(this->getPosicao().x <= pPlataforma->getPosicao().x && v.x < 0)
-                v.x = VELOCIDADE;
-            else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && v.x > 0)
-                v.x = -1*VELOCIDADE;
-        }
-        
-        coordIni.x += v.x * dt;
-        
-        // Se jogador estiver proximo, siga-o
-        if(jogTaPerto) {
-            setTexture(TEX_INIMIGO_TERRESTRE_ALARMADO);
-            if(coordIni.x < coordJog.x)
-                v.x = VELOCIDADE * 2;
-            else
-                v.x = VELOCIDADE * (-2);
-        } else {
-            setTexture(TEX_INIMIGO_TERRESTRE);
-            if(v.x > 0)
-                v.x = VELOCIDADE;
-            else
-                v.x = -1 * VELOCIDADE;
+            if(this->getPosicao().x <= pPlataforma->getPosicao().x && velocidade.x < 0)
+                velocidade.x = VELOCIDADE;
+            else if((this->getPosicao().x + this->getTamanho().x >= pPlataforma->getPosicao().x + pPlataforma->getTamanho().x) && velocidade.x > 0)
+                velocidade.x = -1*VELOCIDADE;
         }
 
+        velocidade.y += this->getAceleracao();
+        coordIni.x += velocidade.x * dt;
+        coordIni.y += velocidade.y * dt;
+
         this->setPosicao(coordIni);
-        this->setVelocidade(v);
+    }
+
+    void InimigoTerrestre::atualizaCarga() {
+        if(tempoCarga.getElapsedTime().asSeconds() > 3)
+            carga = true;
     }
 
     void InimigoTerrestre::executar(const float dt) {
         alarmado(300);
+        atacar();
         movimentar(dt);
+        atualizaCarga();
         estaVivo();
-        atualizaTexture();  // Deve estar abaixo do movimentar(dt)
-        
-        if(!vivo) {
-            this->setAtivo(false);
+        if(carga == false) {
+            setTexture(TEX_INIMIGO_TERRESTRE_DESCARREGADO);
         }
+        atualizaTexture(velocidade);  // Deve estar acima do movimentar(dt)
     }
 }

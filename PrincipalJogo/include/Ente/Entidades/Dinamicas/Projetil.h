@@ -11,11 +11,11 @@ namespace Entidades {
         private:
             Coordenada velocidade;  
             int dano;
-            Entidade* entOrigem; //para sebaer da onde foi originado o projetil!!
+            Entidade* entOrigem; //para saber de onde/quem foi originado o projetil!!
             std::string textura;
 
         public:
-            Projetil(Coordenada pos, Coordenada tam, float vx = 30, float vy = 0, int d = 10, const char* path = TEX_PROJETIL, ID id = projetil);
+            Projetil(Coordenada pos, Coordenada tam, float vx = 30, float vy = 0, int d = 5, const char* path = TEX_PROJETIL, ID id = projetil);
             ~Projetil();
 
             void setVelocidade(float vx, float vy);
@@ -23,7 +23,7 @@ namespace Entidades {
             void setDirecao(){ velocidade.x *= -1;}
             void setEntOrigem(Entidade* ent){ if(ent) entOrigem=ent; }
             Entidade* getOrigem(){ return entOrigem; }
-
+            std::string getTextura()const { return textura; }
             void setDano(int d);
             const int getDano() const { return dano; }
 

@@ -1,7 +1,7 @@
 #ifndef _MENU_PONTUCAO_H_
 #define _MENU_PONTUCAO_H_
 
-#define TEX_PONTUACAO ""
+#define PONTUACAO_PATH "PrincipalJogo/saves/pontuacao.txt"
 
 #include "Menu.h"
 #include "../../Controle/ControleMenu.h"
@@ -14,9 +14,9 @@ namespace ElementosGraficos{
 namespace Menus{
     class MenuPontuacao: public Menu{
         private:
-            std::vector<ElementosGraficos::Texto*> lTextos;
+            std::vector<ElementosGraficos::Texto*> vTextos;
             ElementosGraficos::Texto* pTexto;
-            int pontuacao[10];
+            ElementosGraficos::Texto* pTextoPontuacao;
 
             Controle::ControleMenu pControleMenu;
         public:
