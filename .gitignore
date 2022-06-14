@@ -1,0 +1,5 @@
+.vs/
+.vscode/
+_pycache_/
+__pycache__/contadorLinhas.cpython-39.pyc
+contadorLinhas.py
