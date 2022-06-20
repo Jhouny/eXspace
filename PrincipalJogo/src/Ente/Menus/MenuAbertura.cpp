@@ -7,7 +7,7 @@ namespace Menus {
         pControleMenu(this)
        {
         setID( Estados::IdEstado::menuAbertura);
-        setTitulo("SPACE CONQUERORS");
+        setTitulo("XSP4CE");
         getTitulo()->setPosicao(Coordenada(COMPRIMENTO/2.f - getTitulo()->getTexto()->getLocalBounds().width/2.f, 100.f));
         getTitulo()->setCor(sf::Color(0,0,0,230));
         getTitulo()->setContorno(sf::Color::Yellow ,5);
